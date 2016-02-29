@@ -2,7 +2,9 @@
   "name": "all-contributors-cli",
   "version": "1.0.0",
   "description": "Tool to easily add recognition for new contributors",
-  "bin": "cli.js",
+  "bin": {
+    "all-contributors": "cli.js"
+  },
   "scripts": {
     "test": "ava lib/**/*.test.js",
     "test:w": "npm test -- --watch"

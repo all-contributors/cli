@@ -10,7 +10,8 @@ var getUserInfo = require('./lib/github');
 var defaultEmojis = require('./lib/emoji');
 var addContributor = require('./lib/addContributor');
 
-var defaultRCFile = '.all-contributorsrc';
+var cwd = process.cwd();
+var defaultRCFile = path.join(cwd, '.all-contributorsrc');
 
 var argv = require('yargs')
   .command('add', 'add a new contributor')
@@ -22,7 +23,7 @@ var argv = require('yargs')
     try {
       return JSON.parse(fs.readFileSync(configPath, 'utf-8'));
     } catch (error) {
-      if (configPath !== path.join(__dirname, defaultRCFile)) {
+      if (configPath !== defaultRCFile) {
         console.error(error.message);
         process.exit(1);
       }
@@ -35,7 +36,7 @@ var argv = require('yargs')
 argv.emoji = assign({}, defaultEmojis, argv.emoji);
 argv.username = argv._[1];
 argv.contributions = argv._[2].split(',');
-argv.file = path.join(__dirname, argv.file);
+argv.file = path.join(cwd, argv.file);
 
 getUserInfo(argv.username, function(error, user) {
   if (error) {

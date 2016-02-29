@@ -6,7 +6,9 @@ This is a tool to help automate adding contributor acknowledgements according to
 
 ```
 # Add new contributor <username>, who a contribution of type <contribution>
-all-contributors <username> <contribution>
+all-contributors add <username> <contribution>
+# Example:
+all-contributors add jfmengels code,doc
 ```
 Where:
 - `username` is the user's GitHub username
@@ -67,7 +69,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 
 Contributor | Contributions
 :---: | :---:
-[![Jeroen Engels](https://avatars.githubusercontent.com/u/3869412?v=3&s=100)<br />Jeroen Engels](https://github.com/jfmengels) | [📖💻⚠️](https://github.com/jfmengels/all-contributors-cli/commits?author=jfmengels)
+[![Jeroen Engels](https://avatars.githubusercontent.com/u/3869412?v=3&s=100)<br />Jeroen Engels](https://github.com/jfmengels) | [💻📖⚠️](https://github.com/jfmengels/all-contributors-cli/commits?author=jfmengels)
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
 Contributions of any kind welcome!

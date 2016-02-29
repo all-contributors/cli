@@ -59,3 +59,18 @@ These are the keys you can specify:
 - `owner`: Name of the user the project is hosted by. Example: `jfmengels/all-contributor-cli` --> `jfmengels`. By default will be parsed from the repo's homepage in `package.json` (TODO).
 - `project`: Name of the project. Example: `jfmengels/all-contributor-cli` --> `all-contributor-cli`. Default: Name of the project written in the `package.json` file (TODO).
 - `template`: Define your own contributor template. Please read the code to see what you can define (**warning**: not sure it will work well after several tries).
+
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+
+Contributor | Contributions
+:---: | :---:
+
+This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
+Contributions of any kind welcome!
+
+## LICENSE
+
+MIT

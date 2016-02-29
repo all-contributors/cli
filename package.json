@@ -33,10 +33,7 @@
   "all-contributors": {
     "projectOwner": "jfmengels",
     "projectName": "all-contributors-cli",
-    "imageSize": 100,
-    "emoji": {
-      "cheerful": ":smiley:"
-    }
+    "imageSize": 100
   },
   "devDependencies": {
     "ava": "^0.12.0"

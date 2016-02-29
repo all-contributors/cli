@@ -53,8 +53,8 @@ or creating a `all-contributors` updating the `package.json` file:
 ```
 
 These are the keys you can specify:
-- TODO `file`: File to write the list of contributors in. Default: 'README.md'
-- TODO `owner`: Name of the user the project is hosted by. Example: `jfmengels/all-contributor-cli` --> `jfmengels`. By default will be parsed from the repo's homepage in `package.json`.
-- TODO `project`: Name of the project. Default: Name of the project written in the `package.json` file.
-- TODO `imageSize`: Size (in px) of the user's avatar. Default: 100.
-- TODO `emoji`: Specify custom emoji, can override the existing override.
+- `file`: File to write the list of contributors in. Default: 'README.md'
+- `owner`: Name of the user the project is hosted by. Example: `jfmengels/all-contributor-cli` --> `jfmengels`. By default will be parsed from the repo's homepage in `package.json` (TODO).
+- `project`: Name of the project. Default: Name of the project written in the `package.json` file (TODO).
+- `imageSize`: Size (in px) of the user's avatar. Default: 100.
+- `emoji`: Specify custom emoji, can override the documented emojis.

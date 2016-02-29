@@ -19,7 +19,19 @@
   },
   "homepage": "https://github.com/jfmengels/all-contributors-cli#readme",
   "dependencies": {
+    "lodash.assign": "^4.0.4",
     "lodash.findindex": "^4.2.0",
-    "request": "^2.69.0"
+    "lodash.template": "^4.2.1",
+    "request": "^2.69.0",
+    "yargs": "^4.2.0"
+  },
+  "all-contributors": {
+    "file": "./fixture/some.md",
+    "projectOwner": "jfmengels",
+    "projectName": "all-contributors-cli",
+    "imageSize": 100,
+    "emoji": {
+      "cheerful": ":smiley:"
+    }
   }
 }

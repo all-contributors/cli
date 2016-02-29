@@ -5,35 +5,49 @@ This is a tool to help automate adding contributor acknowledgements according to
 ## Usage
 
 ```
+# Add new contributor <username>, who a contribution of type <contribution>
 all-contributors <username> <contribution>
 ```
 Where:
 - `username` is the user's GitHub username
-- `contribution` is a ';'-separated list of ways to contribute, from the following list ([see the specs](https://github.com/kentcdodds/all-contributors#emoji-key)):
-- code: 💻
-- plugin: 🔌
-- tool: 🔧
-- doc: 📖
-- question: ❓
-- test: ⚠️
-- bug: 🐛
-- example: 💡
-- blog: 📝
-- tutorial: ✅
-- video: 📹
-- talk: 📢
-- design: 🎨
+- `contribution` is a ','-separated list of ways to contribute, from the following list ([see the specs](https://github.com/kentcdodds/all-contributors#emoji-key)):
+  - code: 💻
+  - plugin: 🔌
+  - tool: 🔧
+  - doc: 📖
+  - question: ❓
+  - test: ⚠️
+  - bug: 🐛
+  - example: 💡
+  - blog: 📝
+  - tutorial: ✅
+  - video: 📹
+  - talk: 📢
+  - design: 🎨
+  - review: 👀
 
 ## Configuration
 
-You can configure the project by creating a `.all-contributors` JSON file.
+You can configure the project by creating a `.all-contributorsrc` JSON file.
 
 ```json
 {
   "file": "README.md",
   "owner": "jfmengels",
   "emoji": {
-    "thoughtleadering": "some emoji"
+    "cheerful": ":smiley:"
+  }
+}
+```
+or creating a `all-contributors` updating the `package.json` file:
+
+```json
+{
+  "name": "all-contributors-cli",
+  "...": "...",
+  "all-contributors": {
+    "file": "README.md",
+    "owner": "jfmengels"
   }
 }
 ```

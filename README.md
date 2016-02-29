@@ -2,10 +2,17 @@
 
 This is a tool to help automate adding contributor acknowledgements according to the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
 
+## Installation
+
+You can install it via `npm`:
+```
+npm install all-contributors-cli
+```
+
 ## Usage
 
 ```
-# Add new contributor <username>, who a contribution of type <contribution>
+# Add new contributor <username>, who made a contribution of type <contribution>
 all-contributors add <username> <contribution>
 # Example:
 all-contributors add jfmengels code,doc

@@ -13,7 +13,8 @@ var addContributor = require('./lib/addContributor');
 var defaultRCFile = '.all-contributorsrc';
 
 var argv = require('yargs')
-  .usage('Usage: $0 <username> <contribution>')
+  .command('add', 'add a new contributor')
+  .usage('Usage: $0 add <username> <contribution>')
   .demand(2)
   .default('config', defaultRCFile)
   .default('file', 'README.md')
@@ -32,8 +33,8 @@ var argv = require('yargs')
   .argv;
 
 argv.emoji = assign({}, defaultEmojis, argv.emoji);
-argv.username = argv._[0];
-argv.contributions = argv._[1].split(',');
+argv.username = argv._[1];
+argv.contributions = argv._[2].split(',');
 argv.file = path.join(__dirname, argv.file);
 
 getUserInfo(argv.username, function(error, user) {

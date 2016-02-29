@@ -10,7 +10,7 @@ all-contributors <username> <contribution>
 ```
 Where:
 - `username` is the user's GitHub username
-- `contribution` is a ','-separated list of ways to contribute, from the following list ([see the specs](https://github.com/kentcdodds/all-contributors#emoji-key)):
+- `contribution` is a `,`-separated list of ways to contribute, from the following list ([see the specs](https://github.com/kentcdodds/all-contributors#emoji-key)):
   - code: 💻
   - plugin: 🔌
   - tool: 🔧
@@ -53,8 +53,9 @@ or creating a `all-contributors` updating the `package.json` file:
 ```
 
 These are the keys you can specify:
+- `emoji`: Specify custom emoji, can override the documented emojis. It doesn't really have to be emojis really.
 - `file`: File to write the list of contributors in. Default: 'README.md'
-- `owner`: Name of the user the project is hosted by. Example: `jfmengels/all-contributor-cli` --> `jfmengels`. By default will be parsed from the repo's homepage in `package.json` (TODO).
-- `project`: Name of the project. Default: Name of the project written in the `package.json` file (TODO).
 - `imageSize`: Size (in px) of the user's avatar. Default: 100.
-- `emoji`: Specify custom emoji, can override the documented emojis.
+- `owner`: Name of the user the project is hosted by. Example: `jfmengels/all-contributor-cli` --> `jfmengels`. By default will be parsed from the repo's homepage in `package.json` (TODO).
+- `project`: Name of the project. Example: `jfmengels/all-contributor-cli` --> `all-contributor-cli`. Default: Name of the project written in the `package.json` file (TODO).
+- `template`: Define your own contributor template. Please read the code to see what you can define (**warning**: not sure it will work well after several tries).

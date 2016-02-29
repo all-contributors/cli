@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "Tool to easily add recognition for new contributors",
   "bin": "cli.js",
-  "scripts": {},
+  "scripts": {
+    "test": "ava lib/**/*.test.js",
+    "test:w": "npm test -- --watch"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jfmengels/all-contributors-cli.git"
@@ -26,12 +29,14 @@
     "yargs": "^4.2.0"
   },
   "all-contributors": {
-    "file": "./fixture/some.md",
     "projectOwner": "jfmengels",
     "projectName": "all-contributors-cli",
     "imageSize": 100,
     "emoji": {
       "cheerful": ":smiley:"
     }
+  },
+  "devDependencies": {
+    "ava": "^0.12.0"
   }
 }

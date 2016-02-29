@@ -1,0 +1,25 @@
+{
+  "name": "all-contributors-cli",
+  "version": "1.0.0",
+  "description": "Tool to easily add recognition for new contributors",
+  "bin": "cli.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jfmengels/all-contributors-cli.git"
+  },
+  "keywords": [
+    "all-contributors",
+    "contributors"
+  ],
+  "author": "Jeroen Engels <jfm.engels@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jfmengels/all-contributors-cli/issues"
+  },
+  "homepage": "https://github.com/jfmengels/all-contributors-cli#readme",
+  "dependencies": {
+    "lodash.findindex": "^4.2.0",
+    "request": "^2.69.0"
+  }
+}

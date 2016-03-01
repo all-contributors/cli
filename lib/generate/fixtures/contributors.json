@@ -1,0 +1,22 @@
+{
+  "kentcdodds": {
+    "login": "kentcdodds",
+    "name": "Kent C. Dodds",
+    "html_url": "http://kentcdodds.com",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/1500684",
+    "contributions": [
+      "doc",
+      "review",
+      "question"
+    ]
+  },
+  "bogas04": {
+    "login": "bogas04",
+    "name": "Divjot Singh",
+    "html_url": "http://bogas04.github.io",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/6177621",
+    "contributions": [
+      "review"
+    ]
+  }
+}

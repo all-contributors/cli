@@ -1,0 +1,16 @@
+{
+  "projectOwner": "jfmengels",
+  "projectName": "all-contributors-cli",
+  "imageSize": 100,
+  "contributors": [{
+    "login": "jfmengels",
+    "name": "Jeroen Engels",
+    "avatar_url": "https://avatars.githubusercontent.com/u/3869412?v=3",
+    "html_url": "https://github.com/jfmengels",
+    "contributions": [
+      "code",
+      "doc",
+      "test"
+    ]
+  }]
+}

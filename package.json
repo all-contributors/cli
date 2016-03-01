@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/jfmengels/all-contributors-cli#readme",
   "dependencies": {
+    "lodash": "^4.5.1",
     "lodash.assign": "^4.0.4",
     "lodash.findindex": "^4.2.0",
     "lodash.template": "^4.2.1",
@@ -31,11 +32,6 @@
     "lodash.values": "^4.1.0",
     "request": "^2.69.0",
     "yargs": "^4.2.0"
-  },
-  "all-contributors": {
-    "projectOwner": "jfmengels",
-    "projectName": "all-contributors-cli",
-    "imageSize": 100
   },
   "devDependencies": {
     "ava": "^0.12.0"

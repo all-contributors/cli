@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/jfmengels/all-contributors-cli#readme",
   "dependencies": {
-    "lodash": "^4.5.1",
+    "lodash": "^4.6.1",
     "lodash.assign": "^4.0.4",
     "lodash.findindex": "^4.2.0",
     "lodash.template": "^4.2.1",

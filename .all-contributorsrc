@@ -7,7 +7,7 @@
       "login": "jfmengels"
     , "name": "Jeroen Engels"
     , "avatar_url": "https://avatars.githubusercontent.com/u/3869412?v=3"
-    , "html_url": "https://github.com/jfmengels"
+    , "profile": "https://github.com/jfmengels"
     , "contributions": [
         "code"
       , "doc"
@@ -18,7 +18,7 @@
       "login": "kentcdodds"
     , "name": "Kent C. Dodds"
     , "avatar_url": "https://avatars.githubusercontent.com/u/1500684?v=3"
-    , "html_url": "http://kentcdodds.com/"
+    , "profile": "http://kentcdodds.com/"
     , "contributions": [
         "doc"
       ]

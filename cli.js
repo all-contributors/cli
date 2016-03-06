@@ -3,7 +3,6 @@
 
 var fs = require('fs');
 var path = require('path');
-var assign = require('lodash.assign');
 
 var generate = require('./lib/generate');
 var markdown = require('./lib/markdown');

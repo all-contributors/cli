@@ -1,5 +1,9 @@
 # all-contributors-cli
 
+<!-- CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
+<!-- CONTRIBUTORS-BADGE:END -->
+
 This is a tool to help automate adding contributor acknowledgements according to the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
 
 ## Installation
@@ -10,17 +14,6 @@ npm install all-contributors-cli
 ```
 
 ## Configuration
-
-### Add contributing section
-
-If you don't already have a Contributing section in a Markdown file, create one. Then add the following comment tags section to it. Don't worry, they're visible only to those that read the raw file. The tags **must** be at the beginning of the line.
-
-```md
-## Contributing
-
- <!-- CONTRIBUTORS:START - Do not remove or modify this section -->
- <!-- CONTRIBUTORS:END -->
-```
 
 ### Create a `.all-contributorsrc` file
 
@@ -50,6 +43,28 @@ These are the keys you can specify:
 - `imageSize`: Size (in px) of the user's avatar. Default: 100.
 - `contributorsPerLine`: Maximum number of columns for the contributors table. Default: 7.
 - `template`: Define your own template to generate the contributor list.
+- `badgeTemplate`: Define your own template to generate the badge.
+
+### Add contributors section
+
+If you don't already have a Contributors section in a Markdown file, create one. Then add the comment tags section below to it. Don't worry, they're visible only to those that read the raw file. The tags **must** be at the beginning of the line, and each on their separate line.
+
+```md
+## Contributors
+
+ <!-- CONTRIBUTORS:START - Do not remove or modify this section -->
+ <!-- CONTRIBUTORS:END -->
+```
+
+If you wish to add a badge ( [![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors) ) indicating the number of collaborators, add the following tags (again, at the beginning of the line and each on their separate line):
+
+```md
+some-badge
+
+ <!-- CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+ <!-- CONTRIBUTORS-BADGE:END -->
+some-other-badge
+```
 
 ## Usage
 

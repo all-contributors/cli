@@ -6,7 +6,7 @@
     "all-contributors": "cli.js"
   },
   "scripts": {
-    "test": "ava lib/**/*.test.js",
+    "test": "ava 'lib/**/*.test.js'",
     "test:w": "npm test -- --watch"
   },
   "repository": {
@@ -25,11 +25,6 @@
   "homepage": "https://github.com/jfmengels/all-contributors-cli#readme",
   "dependencies": {
     "lodash": "^4.6.1",
-    "lodash.assign": "^4.0.4",
-    "lodash.findindex": "^4.2.0",
-    "lodash.template": "^4.2.1",
-    "lodash.uniq": "^4.2.0",
-    "lodash.values": "^4.1.0",
     "request": "^2.69.0",
     "yargs": "^4.2.0"
   },

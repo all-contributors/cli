@@ -1,8 +1,8 @@
 # all-contributors-cli
 
-<!-- CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
-<!-- CONTRIBUTORS-BADGE:END -->
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This is a tool to help automate adding contributor acknowledgements according to the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
 
@@ -21,7 +21,7 @@ You must create a `.all-contributorsrc` JSON file. The data used to generate the
 
 ```json
 {
-  "file": "README.md",
+  "files": ["README.md"],
   "owner": "jfmengels",
   "types": {
     "cheerful": {
@@ -36,13 +36,13 @@ You must create a `.all-contributorsrc` JSON file. The data used to generate the
 ```
 
 These are the keys you can specify:
-- `file`: File to write the list of contributors in. Default: 'README.md'
+- `files`: Array of files to update. Default: `['README.md']`
 - `projectOwner`: Name of the user the project is hosted by. Example: `jfmengels/all-contributor-cli` --> `jfmengels`. Mandatory.
 - `projectName`: Name of the project. Example: `jfmengels/all-contributor-cli` --> `all-contributor-cli`. Mandatory.
 - `types`: Specify custom symbols or link templates for contribution types. Can override the documented types.
-- `imageSize`: Size (in px) of the user's avatar. Default: 100.
-- `contributorsPerLine`: Maximum number of columns for the contributors table. Default: 7.
-- `template`: Define your own template to generate the contributor list.
+- `imageSize`: Size (in px) of the user's avatar. Default: `100`.
+- `contributorsPerLine`: Maximum number of columns for the contributors table. Default: `7`.
+- `contributorTemplate`: Define your own template to generate the contributor list.
 - `badgeTemplate`: Define your own template to generate the badge.
 
 ### Add contributors section
@@ -52,8 +52,8 @@ If you don't already have a Contributors section in a Markdown file, create one.
 ```md
 ## Contributors
 
- <!-- CONTRIBUTORS:START - Do not remove or modify this section -->
- <!-- CONTRIBUTORS:END -->
+ <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+ <!-- ALL-CONTRIBUTORS-LIST:END -->
 ```
 
 If you wish to add a badge ( [![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors) ) indicating the number of collaborators, add the following tags (again, at the beginning of the line and each on their separate line):
@@ -61,8 +61,8 @@ If you wish to add a badge ( [![All Contributors](https://img.shields.io/badge/a
 ```md
 some-badge
 
- <!-- CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
- <!-- CONTRIBUTORS-BADGE:END -->
+ <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+ <!-- ALL-CONTRIBUTORS-BADGE:END -->
 some-other-badge
 ```
 
@@ -111,10 +111,10 @@ Where:
 
 Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
-<!-- CONTRIBUTORS:START - Do not remove or modify this section -->
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 | [![Jeroen Engels](https://avatars.githubusercontent.com/u/3869412?v=3&s=100)<br /><sub>Jeroen Engels</sub>](https://github.com/jfmengels)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=jfmengels) [📖](https://github.com/jfmengels/all-contributors-cli/commits?author=jfmengels) [⚠️](https://github.com/jfmengels/all-contributors-cli/commits?author=jfmengels) | [![Kent C. Dodds](https://avatars.githubusercontent.com/u/1500684?v=3&s=100)<br /><sub>Kent C. Dodds</sub>](http://kentcdodds.com/)<br />[📖](https://github.com/jfmengels/all-contributors-cli/commits?author=kentcdodds) |
 | :---: | :---: |
-<!-- CONTRIBUTORS:END -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
 Contributions of any kind welcome!

@@ -19,7 +19,7 @@ var argv = require('yargs')
   .command('add', 'add a new contributor')
   .usage('Usage: $0 add <username> <contribution>')
   .demand(2)
-  .default('file', 'README.md')
+  .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
   .default('contributors', [])
   .default('config', defaultRCFile)
@@ -35,16 +35,20 @@ var argv = require('yargs')
   })
   .argv;
 
-argv.file = path.join(cwd, argv.file);
-
 function startGeneration(argv, cb) {
-  markdown.read(argv.file, function(error, fileContent) {
-    if (error) {
-      return cb(error);
-    }
-    var newFileContent = generate(argv, argv.contributors, fileContent);
-    markdown.write(argv.file, newFileContent, cb);
-  });
+  argv.files
+    .map(function(file) {
+      return path.join(cwd, file);
+    })
+    .forEach(function(file) {
+      markdown.read(file, function(error, fileContent) {
+        if (error) {
+          return cb(error);
+        }
+        var newFileContent = generate(argv, argv.contributors, fileContent);
+        markdown.write(file, newFileContent, cb);
+      });
+    });
 }
 
 function onError(error) {
@@ -60,7 +64,7 @@ if (command === 'generate') {
 } else if (command === 'add') {
   var username = argv._[1];
   var contributions = argv._[2];
-  // Add/update contributor and save him to the config file
+  // Add or update contributor in the config file
   updateContributors(argv, username, contributions, function(error, contributors) {
     if (error) {
       return onError(error);

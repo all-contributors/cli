@@ -6,8 +6,10 @@
     "all-contributors": "cli.js"
   },
   "scripts": {
-    "test": "ava \"lib/**/*.test.js\"",
-    "test:w": "npm test -- --watch"
+    "lint": "eslint  cli.js \"lib/**/*.js\" && xo",
+    "test": "npm run lint && npm run test-unit",
+    "test-unit": "ava \"lib/**/*.test.js\"",
+    "test-unit:w": "npm run test-unit -- --watch"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,15 @@
     "yargs": "^4.2.0"
   },
   "devDependencies": {
-    "ava": "^0.12.0"
+    "ava": "^0.12.0",
+    "eslint": "^2.3.0",
+    "eslint-plugin-ava": "^1.1.1",
+    "xo": "^0.13.0"
+  },
+  "xo": {
+    "space": 2,
+    "rules": {
+      "camelcase": [2, {"properties": "never"}]
+    }
   }
 }

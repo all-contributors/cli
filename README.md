@@ -9,7 +9,7 @@ This is a tool to help automate adding contributor acknowledgements according to
 ## Installation
 
 You can install it via `npm`:
-```
+```console
 npm install all-contributors-cli
 ```
 
@@ -80,7 +80,7 @@ all-contributors generate
 
 Use `add` to add new contributors to your project. They will be added to your configuration file. The contributors file will then be updated just as if you used the `generate` command.
 
-```
+```console
 # Add new contributor <username>, who made a contribution of type <contribution>
 all-contributors add <username> <contribution>
 # Example:

@@ -6,7 +6,7 @@
     "all-contributors": "cli.js"
   },
   "scripts": {
-    "test": "ava 'lib/**/*.test.js'",
+    "test": "ava \"lib/**/*.test.js\"",
     "test:w": "npm test -- --watch"
   },
   "repository": {

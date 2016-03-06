@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+/* eslint-disable no-console */
 'use strict';
 
 var fs = require('fs');
@@ -23,7 +24,7 @@ var argv = require('yargs')
   .default('contributorsPerLine', 7)
   .default('contributors', [])
   .default('config', defaultRCFile)
-  .config('config', function(configPath) {
+  .config('config', function (configPath) {
     try {
       return JSON.parse(fs.readFileSync(configPath, 'utf-8'));
     } catch (error) {
@@ -37,11 +38,11 @@ var argv = require('yargs')
 
 function startGeneration(argv, cb) {
   argv.files
-    .map(function(file) {
+    .map(function (file) {
       return path.join(cwd, file);
     })
-    .forEach(function(file) {
-      markdown.read(file, function(error, fileContent) {
+    .forEach(function (file) {
+      markdown.read(file, function (error, fileContent) {
         if (error) {
           return cb(error);
         }
@@ -65,7 +66,7 @@ if (command === 'generate') {
   var username = argv._[1];
   var contributions = argv._[2];
   // Add or update contributor in the config file
-  updateContributors(argv, username, contributions, function(error, contributors) {
+  updateContributors(argv, username, contributions, function (error, contributors) {
     if (error) {
       return onError(error);
     }

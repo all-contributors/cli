@@ -1,8 +1,6 @@
 # all-contributors-cli
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
-<!-- ALL-CONTRIBUTORS-BADGE:END -->
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 This is a tool to help automate adding contributor acknowledgements according to the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
 
@@ -47,22 +45,20 @@ These are the keys you can specify:
 
 ### Add contributors section
 
-If you don't already have a Contributors section in a Markdown file, create one. Then add the comment tags section below to it. Don't worry, they're visible only to those that read the raw file. The tags **must** be at the beginning of the line, and each on their separate line.
+If you don't already have a Contributors section in a Markdown file, create one. Then add the comment tags section below to it. Don't worry, they're visible only to those that read the raw file.
 
 ```md
 ## Contributors
 
- <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
- <!-- ALL-CONTRIBUTORS-LIST:END -->
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 ```
 
-If you wish to add a badge ( [![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors) ) indicating the number of collaborators, add the following tags (again, at the beginning of the line and each on their separate line):
+If you wish to add a badge ( [![All Contributors](https://img.shields.io/badge/all_contributors-14-orange.svg?style=flat-square)](#contributors) ) indicating the number of collaborators, add the following comment tags section:
 
 ```md
 some-badge
-
- <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
- <!-- ALL-CONTRIBUTORS-BADGE:END -->
+<!-- ALL-CONTRIBUTORS-BADGE:START --><!-- ALL-CONTRIBUTORS-BADGE:END -->
 some-other-badge
 ```
 
@@ -72,7 +68,7 @@ some-other-badge
 
 Use `generate` to generate the contributors list and inject it into your contributors file. Contributors will be read from your configuration file.
 
-```
+```console
 all-contributors generate
 ```
 

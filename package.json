@@ -6,7 +6,7 @@
     "all-contributors": "cli.js"
   },
   "scripts": {
-    "lint": "eslint  cli.js \"lib/**/*.js\" && xo",
+    "lint": "eslint cli.js \"lib/**/*.js\" && xo",
     "test": "npm run lint && npm run test-unit",
     "test-unit": "ava \"lib/**/*.test.js\"",
     "test-unit:w": "npm run test-unit -- --watch"
@@ -28,18 +28,23 @@
   "dependencies": {
     "lodash": "^4.6.1",
     "request": "^2.69.0",
-    "yargs": "^4.2.0"
+    "yargs": "^4.3.2"
   },
   "devDependencies": {
-    "ava": "^0.12.0",
-    "eslint": "^2.3.0",
-    "eslint-plugin-ava": "^1.1.1",
+    "ava": "^0.13.0",
+    "eslint": "^2.4.0",
+    "eslint-plugin-ava": "^1.2.1",
     "xo": "^0.13.0"
   },
   "xo": {
     "space": 2,
     "rules": {
-      "camelcase": [2, {"properties": "never"}]
+      "camelcase": [
+        2,
+        {
+          "properties": "never"
+        }
+      ]
     }
   }
 }

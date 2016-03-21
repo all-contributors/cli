@@ -5,6 +5,7 @@
 var fs = require('fs');
 var path = require('path');
 
+var init = require('./lib/init');
 var generate = require('./lib/generate');
 var markdown = require('./lib/markdown');
 var updateContributors = require('./lib/contributors');
@@ -19,6 +20,8 @@ var argv = require('yargs')
   .usage('Usage: $0 generate')
   .command('add', 'add a new contributor')
   .usage('Usage: $0 add <username> <contribution>')
+  .command('init', 'Prepare the project to be used with this tool')
+  .usage('Usage: $0 init')
   .demand(2)
   .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
@@ -60,7 +63,9 @@ function onError(error) {
 
 var command = argv._[0];
 
-if (command === 'generate') {
+if (command === 'init') {
+  init(onError);
+} else if (command === 'generate') {
   startGeneration(argv, onError);
 } else if (command === 'add') {
   var username = argv._[1];

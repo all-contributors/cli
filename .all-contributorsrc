@@ -1,6 +1,7 @@
 {
   "projectOwner": "jfmengels"
 , "projectName": "all-contributors-cli"
+, "imageSize": 100
 , "contributors": [
     {
       "login": "jfmengels"

@@ -1,6 +1,6 @@
 # all-contributors-cli
 
-<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)<!-- ALL-CONTRIBUTORS-BADGE:END -->
+[![version](https://img.shields.io/npm/v/all-contributors-cli.svg)](http://npm.im/all-contributors-cli)[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors)
 
 This is a tool to help automate adding contributor acknowledgements according to the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
 
@@ -14,7 +14,7 @@ Then init the project using `init` and answering a few questions:
 ```console
 all-contributors init
 ```
-Once initialized, you don't need to have  `all-contributors-cli` instaled globally. You can instead save it as a devDependency of your project and add it to your scripts:
+Once initialized, you don't need to have  `all-contributors-cli` installed globally. You can instead save it as a devDependency of your project and add it to your `package.json` scripts:
 ```console
 npm install --save-dev all-contributors-cli
 ```

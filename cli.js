@@ -55,6 +55,19 @@ function startGeneration(argv, cb) {
     });
 }
 
+function addContribution(argv, cb) {
+  var username = argv._[1];
+  var contributions = argv._[2];
+  // Add or update contributor in the config file
+  updateContributors(argv, username, contributions, function (error, contributors) {
+    if (error) {
+      return onError(error);
+    }
+    argv.contributors = contributors;
+    startGeneration(argv, cb);
+  });
+}
+
 function onError(error) {
   if (error) {
     return console.error(error);
@@ -68,14 +81,5 @@ if (command === 'init') {
 } else if (command === 'generate') {
   startGeneration(argv, onError);
 } else if (command === 'add') {
-  var username = argv._[1];
-  var contributions = argv._[2];
-  // Add or update contributor in the config file
-  updateContributors(argv, username, contributions, function (error, contributors) {
-    if (error) {
-      return onError(error);
-    }
-    argv.contributors = contributors;
-    startGeneration(argv, onError);
-  });
+  addContribution(argv, onError);
 }

@@ -4,16 +4,17 @@
 
 var fs = require('fs');
 var path = require('path');
+var yargs = require('yargs');
 
 var init = require('./lib/init');
 var generate = require('./lib/generate');
-var markdown = require('./lib/markdown');
+var markdown = require('./lib/util').markdown;
 var updateContributors = require('./lib/contributors');
 
 var cwd = process.cwd();
 var defaultRCFile = path.join(cwd, '.all-contributorsrc');
 
-var argv = require('yargs')
+var argv = yargs
   .help('help')
   .alias('h', 'help')
   .command('generate', 'Generate the list of contributors')
@@ -22,7 +23,6 @@ var argv = require('yargs')
   .usage('Usage: $0 add <username> <contribution>')
   .command('init', 'Prepare the project to be used with this tool')
   .usage('Usage: $0 init')
-  .demand(2)
   .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
   .default('contributors', [])

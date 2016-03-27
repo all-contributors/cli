@@ -8,8 +8,8 @@
   "scripts": {
     "lint": "eslint cli.js \"lib/**/*.js\" && xo",
     "test": "npm run lint && npm run test-unit",
-    "test-unit": "ava \"lib/**/*.test.js\"",
-    "test-unit:w": "npm run test-unit -- --watch"
+    "test-unit": "ava",
+    "test-unit:w": "ava --watch"
   },
   "repository": {
     "type": "git",
@@ -37,6 +37,9 @@
     "eslint": "^2.4.0",
     "eslint-plugin-ava": "^1.2.1",
     "xo": "^0.13.0"
+  },
+  "ava": {
+    "files": ["lib/**/*.test.js"]
   },
   "xo": {
     "space": 2,

@@ -8,7 +8,7 @@ var yargs = require('yargs');
 
 var init = require('./lib/init');
 var generate = require('./lib/generate');
-var markdown = require('./lib/util').markdown;
+var util = require('./lib/util');
 var updateContributors = require('./lib/contributors');
 
 var cwd = process.cwd();
@@ -23,6 +23,7 @@ var argv = yargs
   .usage('Usage: $0 add <username> <contribution>')
   .command('init', 'Prepare the project to be used with this tool')
   .usage('Usage: $0 init')
+  .boolean('commit')
   .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
   .default('contributors', [])
@@ -45,12 +46,12 @@ function startGeneration(argv, cb) {
       return path.join(cwd, file);
     })
     .forEach(function (file) {
-      markdown.read(file, function (error, fileContent) {
+      util.markdown.read(file, function (error, fileContent) {
         if (error) {
           return cb(error);
         }
         var newFileContent = generate(argv, argv.contributors, fileContent);
-        markdown.write(file, newFileContent, cb);
+        util.markdown.write(file, newFileContent, cb);
       });
     });
 }
@@ -59,12 +60,20 @@ function addContribution(argv, cb) {
   var username = argv._[1];
   var contributions = argv._[2];
   // Add or update contributor in the config file
-  updateContributors(argv, username, contributions, function (error, contributors) {
+  updateContributors(argv, username, contributions, function (error, data) {
     if (error) {
       return onError(error);
     }
-    argv.contributors = contributors;
-    startGeneration(argv, cb);
+    argv.contributors = data.contributors;
+    startGeneration(argv, function (error) {
+      if (error) {
+        return cb(error);
+      }
+      if (!argv.commit) {
+        return cb();
+      }
+      return util.git.commit(argv, data, cb);
+    });
   });
 }
 

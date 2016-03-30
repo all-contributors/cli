@@ -5,6 +5,7 @@
 var fs = require('fs');
 var path = require('path');
 var yargs = require('yargs');
+var inquirer = require('inquirer');
 
 var init = require('./lib/init');
 var generate = require('./lib/generate');
@@ -83,12 +84,37 @@ function onError(error) {
   }
 }
 
-var command = argv._[0];
+function promptForCommand(argv, cb) {
+  try {
+    fs.statSync(argv.config);
+  } catch (error) { // No config file --> first time using the command
+    return cb('init');
+  }
 
-if (command === 'init') {
-  init(onError);
-} else if (command === 'generate') {
-  startGeneration(argv, onError);
-} else if (command === 'add') {
-  addContribution(argv, onError);
+  var questions = [{
+    type: 'list',
+    name: 'command',
+    message: "What do you want to do?",
+    choices: [{
+      name: 'Add a new contributor or add a new contribution type',
+      value: 'add'
+    }, {
+      name: 'Re-generate the contributors list',
+      value: 'generate'
+    }],
+    default: 0
+  }];
+  inquirer.prompt(questions, function treatAnswers(answers) {
+    return cb(answers.command);
+  });
 }
+
+promptForCommand(argv, function (command) {
+  if (command === 'init') {
+    init(onError);
+  } else if (command === 'generate') {
+    startGeneration(argv, onError);
+  } else if (command === 'add') {
+    addContribution(argv, onError);
+  }
+});

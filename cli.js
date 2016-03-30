@@ -102,10 +102,11 @@ function promptForCommand(argv, cb) {
       name: 'Re-generate the contributors list',
       value: 'generate'
     }],
+    when: !argv._[0],
     default: 0
   }];
   inquirer.prompt(questions, function treatAnswers(answers) {
-    return cb(answers.command);
+    return cb(answers.command || argv._[0]);
   });
 }
 

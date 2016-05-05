@@ -94,7 +94,7 @@ function promptForCommand(argv, cb) {
   var questions = [{
     type: 'list',
     name: 'command',
-    message: "What do you want to do?",
+    message: 'What do you want to do?',
     choices: [{
       name: 'Add a new contributor or add a new contribution type',
       value: 'add'

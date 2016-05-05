@@ -39,6 +39,12 @@
       "lib/**/*.test.js"
     ]
   },
+  "files": [
+    "cli.js",
+    "lib",
+    "!lib/**/*.test.js",
+    "!lib/**/fixtures"
+  ],
   "xo": {
     "space": 2,
     "rules": {

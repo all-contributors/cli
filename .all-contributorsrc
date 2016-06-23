@@ -5,6 +5,35 @@
   "commit": true,
   "contributors": [
     {
+      "login": "jfmengels",
+      "name": "Jeroen Engels",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3869412?v=3",
+      "profile": "https://github.com/jfmengels",
+      "contributions": [
+        "code",
+        "doc",
+        "test"
+      ]
+    },
+    {
+      "login": "kentcdodds",
+      "name": "Kent C. Dodds",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1500684?v=3",
+      "profile": "http://kentcdodds.com/",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "jccguimaraes",
+      "name": "João Guimarães",
+      "avatar_url": "https://avatars.githubusercontent.com/u/14871650?v=3",
+      "profile": "https://github.com/jccguimaraes",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "ben-eb",
       "name": "Ben Briggs",
       "avatar_url": "https://avatars.githubusercontent.com/u/1282980?v=3",

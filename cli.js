@@ -2,7 +2,6 @@
 /* eslint-disable no-console */
 'use strict';
 
-var fs = require('fs');
 var path = require('path');
 var yargs = require('yargs');
 var inquirer = require('inquirer');
@@ -31,11 +30,10 @@ var argv = yargs
   .default('config', defaultRCFile)
   .config('config', function (configPath) {
     try {
-      return JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+      return util.configFile.readConfig(configPath);
     } catch (error) {
       if (configPath !== defaultRCFile) {
-        console.error(error.message);
-        process.exit(1);
+        onError(error);
       }
     }
   })
@@ -80,17 +78,12 @@ function addContribution(argv, cb) {
 
 function onError(error) {
   if (error) {
-    return console.error(error);
+    console.error(error.message);
+    process.exit(1);
   }
 }
 
 function promptForCommand(argv, cb) {
-  try {
-    fs.statSync(argv.config);
-  } catch (error) { // No config file --> first time using the command
-    return cb('init');
-  }
-
   var questions = [{
     type: 'list',
     name: 'command',

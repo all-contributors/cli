@@ -1,16 +1,17 @@
 {
   "name": "all-contributors-cli",
-  "version": "3.0.7",
+  "version": "0.0.0-semantically-released",
   "description": "Tool to easily add recognition for new contributors",
   "bin": {
     "all-contributors": "cli.js"
   },
   "scripts": {
-    "test": "xo && nyc ava"
+    "test": "xo && nyc ava",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jfmengels/all-contributors-cli.git"
+    "url": "https://github.com/jfmengels/all-contributors-cli.git"
   },
   "keywords": [
     "all-contributors",
@@ -33,7 +34,8 @@
     "ava": "^0.14.0",
     "nock": "^8.0.0",
     "nyc": "^6.4.2",
-    "xo": "^0.15.0"
+    "xo": "^0.15.0",
+    "semantic-release": "^6.3.2"
   },
   "ava": {
     "files": [

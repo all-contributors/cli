@@ -1,0 +1,12 @@
+{
+  "EN": {
+    "title": "## Contributors",
+    "header": "Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):",
+    "footer": "This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!"
+  },
+  "ES": {
+    "title": "## Colaboradores",
+    "header": "Los agradecimientos a estas geniales personas: ([Simbología de Emojis](https://github.com/kentcdodds/all-contributors#emoji-key)):",
+    "footer": "Este proyecto se adhiere a la especicifación de [all-contributors](https://github.com/kentcdodds/all-contributors). Las contribuciones de todo tipo son bienvenidas!"
+  }
+}

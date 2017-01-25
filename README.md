@@ -56,18 +56,22 @@ Where `username` is the user's GitHub username, and `contribution` is a `,`-sepa
   - code: 💻
   - plugin: 🔌
   - tool: 🔧
+  - infra: 🚇
   - doc: 📖
-  - question: ❓
+  - translate: 🌍
+  - question: 💬
   - test: ⚠️
   - bug: 🐛
   - example: 💡
   - blog: 📝
   - tutorial: ✅
-  - translate: 🌍
   - video: 📹
   - talk: 📢
   - design: 🎨
   - review: 👀
+  - financial: 💵
+  - fundingFinding: 🔍
+  - eventOrganizing: 📋
 
 ## Configuration
 

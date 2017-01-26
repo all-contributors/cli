@@ -1,6 +1,7 @@
 # all-contributors-cli
 
-[![version](https://img.shields.io/npm/v/all-contributors-cli.svg)](http://npm.im/all-contributors-cli)[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg)](#contributors)
+[![version](https://img.shields.io/npm/v/all-contributors-cli.svg)](http://npm.im/all-contributors-cli)
+[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg)](#contributors)
 
 This is a tool to help automate adding contributor acknowledgements according to the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
 
@@ -10,7 +11,7 @@ You can install it via `npm`:
 ```console
 npm install all-contributors-cli -g
 ```
-Then init the project using `init` and answering a few questions:
+Then init the project using `init` and answer a few questions:
 ```console
 all-contributors init
 ```
@@ -44,7 +45,7 @@ all-contributors generate
 
 ### Add/update contributors
 
-Use `add` to add new contributors to your project, or add new ways in which they contributed. They will be added to your configuration file. The contributors file will then be updated just as if you used the `generate` command.
+Use `add` to add new contributors to your project, or add new ways in which they have contributed. They will be added to your configuration file, and the contributors file will be updated just as if you used the `generate` command.
 
 ```console
 # Add new contributor <username>, who made a contribution of type <contribution>
@@ -75,12 +76,12 @@ Where `username` is the user's GitHub username, and `contribution` is a `,`-sepa
 
 ## Configuration
 
-You can configure the project by updating the `.all-contributorsrc` JSON file. The data used to generate the contributors list will be stored in here, and you can configure how you want `all-contributors-cli` to generate the list.
+You can configure the project by updating the `.all-contributorsrc` JSON file. The data used to generate the contributors list will be stored in there, and you can configure how you want `all-contributors-cli` to generate the list.
 
 These are the keys you can specify:
 - `files`: Array of files to update. Default: `['README.md']`
-- `projectOwner`: Name of the user the project is hosted by. Example: `jfmengels/all-contributor-cli` --> `jfmengels`. Mandatory.
-- `projectName`: Name of the project. Example: `jfmengels/all-contributor-cli` --> `all-contributor-cli`. Mandatory.
+- `projectOwner`: Name of the user the project is hosted by. Example: `jfmengels/all-contributors-cli` --> `jfmengels`. Mandatory.
+- `projectName`: Name of the project. Example: `jfmengels/all-contributors-cli` --> `all-contributors-cli`. Mandatory.
 - `types`: Specify custom symbols or link templates for contribution types. Can override the documented types.
 - `imageSize`: Size (in px) of the user's avatar. Default: `100`.
 - `contributorsPerLine`: Maximum number of columns for the contributors table. Default: `7`.
@@ -97,7 +98,7 @@ Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification.
-Contributions of any kind welcome!
+Contributions of any kind are welcome!
 
 ## LICENSE
 

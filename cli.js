@@ -81,6 +81,7 @@ function onError(error) {
     console.error(error.message);
     process.exit(1);
   }
+  process.exit();
 }
 
 function promptForCommand(argv, cb) {

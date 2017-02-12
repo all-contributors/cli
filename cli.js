@@ -39,39 +39,31 @@ var argv = yargs
   })
   .argv;
 
-function startGeneration(argv, cb) {
-  argv.files
-    .map(function (file) {
-      return path.join(cwd, file);
-    })
-    .forEach(function (file) {
-      util.markdown.read(file, function (error, fileContent) {
-        if (error) {
-          return cb(error);
-        }
+function startGeneration(argv) {
+  return Promise.all(
+    argv.files.map(file => {
+      const filePath = path.join(cwd, file);
+      return util.markdown.read(filePath)
+      .then(fileContent => {
         var newFileContent = generate(argv, argv.contributors, fileContent);
-        util.markdown.write(file, newFileContent, cb);
+        return util.markdown.write(filePath, newFileContent);
       });
-    });
+    })
+  );
 }
 
-function addContribution(argv, cb) {
+function addContribution(argv) {
   var username = argv._[1];
   var contributions = argv._[2];
   // Add or update contributor in the config file
-  updateContributors(argv, username, contributions, function (error, data) {
-    if (error) {
-      return onError(error);
-    }
+  return updateContributors(argv, username, contributions)
+  .then(data => {
     argv.contributors = data.contributors;
-    startGeneration(argv, function (error) {
-      if (error) {
-        return cb(error);
+    return startGeneration(argv)
+    .then(() => {
+      if (argv.commit) {
+        return util.git.commit(argv, data);
       }
-      if (!argv.commit) {
-        return cb();
-      }
-      return util.git.commit(argv, data, cb);
     });
   });
 }
@@ -81,10 +73,10 @@ function onError(error) {
     console.error(error.message);
     process.exit(1);
   }
-  process.exit();
+  process.exit(0);
 }
 
-function promptForCommand(argv, cb) {
+function promptForCommand(argv) {
   var questions = [{
     type: 'list',
     name: 'command',
@@ -99,17 +91,24 @@ function promptForCommand(argv, cb) {
     when: !argv._[0],
     default: 0
   }];
-  inquirer.prompt(questions, function treatAnswers(answers) {
-    return cb(answers.command || argv._[0]);
+
+  return inquirer.prompt(questions)
+  .then(answers => {
+    return answers.command || argv._[0];
   });
 }
 
-promptForCommand(argv, function (command) {
-  if (command === 'init') {
-    init(onError);
-  } else if (command === 'generate') {
-    startGeneration(argv, onError);
-  } else if (command === 'add') {
-    addContribution(argv, onError);
-  }
-});
+promptForCommand(argv)
+  .then(command => {
+    switch (command) {
+      case 'init':
+        return init();
+      case 'generate':
+        return startGeneration(argv);
+      case 'add':
+        return addContribution(argv);
+      default:
+        throw new Error(`Unknown command ${command}`);
+    }
+  })
+  .catch(onError);

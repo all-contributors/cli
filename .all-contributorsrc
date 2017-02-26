@@ -52,6 +52,16 @@
         "doc",
         "code"
       ]
+    },
+    {
+      "login": "alexjoverm",
+      "name": "Alex Jover",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5701162?v=3",
+      "profile": "https://github.com/alexjoverm",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ]
 }

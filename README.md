@@ -59,7 +59,7 @@ Where `username` is the user's GitHub username, and `contribution` is a `,`-sepa
   - tool: 🔧
   - infra: 🚇
   - doc: 📖
-  - translate: 🌍
+  - translation: 🌍
   - question: 💬
   - test: ⚠️
   - bug: 🐛

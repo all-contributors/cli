@@ -1,7 +1,7 @@
 #root = true
 
 [*]
-indent_style = tab
+indent_style = space
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
@@ -11,6 +11,3 @@ indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false
-
-[*.{json,yml}]
-indent_style = space

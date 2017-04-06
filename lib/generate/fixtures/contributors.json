@@ -18,5 +18,14 @@
     "contributions": [
       "review"
     ]
+  },
+  "pipey": {
+    "login": "pipey",
+    "name": "Who | Needs | Pipes?",
+    "profile": "http://github.com/chrisinajar",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/1500684",
+    "contributions": [
+      "doc"
+    ]
   }
 }

@@ -54,25 +54,25 @@ all-contributors add <username> <contribution>
 all-contributors add jfmengels code,doc
 ```
 Where `username` is the user's GitHub username, and `contribution` is a `,`-separated list of ways to contribute, from the following list ([see the specs](https://github.com/kentcdodds/all-contributors#emoji-key)):
-  - code: 💻
-  - plugin: 🔌
-  - tool: 🔧
-  - infra: 🚇
-  - doc: 📖
-  - translation: 🌍
-  - question: 💬
-  - test: ⚠️
-  - bug: 🐛
-  - example: 💡
-  - blog: 📝
-  - tutorial: ✅
-  - video: 📹
-  - talk: 📢
-  - design: 🎨
-  - review: 👀
-  - financial: 💵
-  - fundingFinding: 🔍
-  - eventOrganizing: 📋
+  - code: [💻](# "Code")
+  - plugin: [🔌](# "Plugin/utility libraries")
+  - tool: [🔧](# "Tools")
+  - infra: [🚇](# "Infrastructure (Hosting, Build-Tools, etc)")
+  - doc: [📖](# "Documentation")
+  - translation: [🌍](# "Translation")
+  - question: [💬](# "Answering Questions")
+  - test: [⚠️](# "Tests")
+  - bug: [🐛](# "Bug reports")
+  - example: [💡](# "Examples")
+  - blog: [📝](# "Blogposts")
+  - tutorial: [✅](# "Tutorials")
+  - video: [📹](# "Videos")
+  - talk: [📢](# "Talks")
+  - design: [🎨](# "Design")
+  - review: [👀](# "Reviewed Pull Requests")
+  - financial: [💵](# "Financial")
+  - fundingFinding: [🔍](# "Funding Finding")
+  - eventOrganizing: [📋](# "Event Organizing")
 
 ## Configuration
 

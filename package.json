@@ -28,7 +28,7 @@
   "homepage": "https://github.com/jfmengels/all-contributors-cli#readme",
   "dependencies": {
     "async": "^2.0.0-rc.1",
-    "inquirer": "^3.0.1",
+    "inquirer": "^3.1.0",
     "lodash": "^4.11.2",
     "pify": "^2.3.0",
     "request": "^2.72.0",

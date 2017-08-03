@@ -73,7 +73,7 @@ Where `username` is the user's GitHub username, and `contribution` is a `,`-sepa
   - financial: [💵](# "Financial")
   - fundingFinding: [🔍](# "Funding Finding")
   - eventOrganizing: [📋](# "Event Organizing")
-  - ideas: [🤔](# "Ideas & Planning")
+  - ideas: [🤔](# "Ideas, Planning, & Feedback")
 
 ## Configuration
 

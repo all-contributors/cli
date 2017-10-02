@@ -80,6 +80,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "charlike",
+      "name": "tunnckoCore",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/5038030?v=4",
+      "profile": "https://i.am.charlike.online",
+      "contributions": [
+        "tool"
+      ]
     }
   ]
 }

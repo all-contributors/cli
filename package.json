@@ -9,6 +9,7 @@
     "node": ">=4"
   },
   "scripts": {
+    "all-contributors": "./cli.js",
     "test": "xo && nyc ava",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },

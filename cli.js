@@ -4,6 +4,7 @@
 
 var path = require('path');
 var yargs = require('yargs');
+var chalk = require('chalk');
 var inquirer = require('inquirer');
 
 var init = require('./lib/init');
@@ -23,8 +24,8 @@ var argv = yargs
   .usage('Usage: $0 add <username> <contribution>')
   .command('init', 'Prepare the project to be used with this tool')
   .usage('Usage: $0 init')
-  .command('check', 'Compares contributors from Github with the ones credited in .all-contributorsrc')
-  .usage('Usage: $0 check <repository>')
+  .command('check', 'Compares contributors from GitHub with the ones credited in .all-contributorsrc')
+  .usage('Usage: $0 check')
   .boolean('commit')
   .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
@@ -70,22 +71,34 @@ function addContribution(argv) {
   });
 }
 
-function checkContributors(argv) {
-  var repository = argv._[1];
+function checkContributors() {
+  var configData = util.configFile.readConfig(argv.config);
 
-  return util.check(repository)
+  return util.check(configData.projectOwner, configData.projectName)
   .then(ghContributors => {
-    var configData = util.configFile.readConfig(argv.config);
+    var knownContributions = configData.contributors.reduce((obj, item) => {
+      obj[item.login] = item.contributions;
+      return obj;
+    }, {});
     var knownContributors = configData.contributors.map(contributor => contributor.login);
 
     var missingInConfig = ghContributors.filter(login => knownContributors.indexOf(login) === -1);
-    var missingFromGithub = knownContributors.filter(login => ghContributors.indexOf(login) === -1);
+    var missingFromGithub = knownContributors.filter(login => {
+      return ghContributors.indexOf(login) === -1 && (
+        knownContributions[login].includes('code') ||
+        knownContributions[login].includes('tool')
+      );
+    });
 
-    process.stdout.write('Missing contributors in .all-contributorsrc:\n');
-    process.stdout.write('    ' + missingInConfig.join(', ') + '\n');
+    if (missingInConfig.length) {
+      process.stdout.write(chalk.bold('Missing contributors in .all-contributorsrc:\n'));
+      process.stdout.write('    ' + missingInConfig.join(', ') + '\n');
+    }
 
-    process.stdout.write('Unknown contributors found in .all-contributorsrc:\n');
-    process.stdout.write('    ' + missingFromGithub.join(', ') + '\n');
+    if (missingFromGithub.length) {
+      process.stdout.write(chalk.bold('Unknown contributors found in .all-contributorsrc:\n'));
+      process.stdout.write('    ' + missingFromGithub.join(', ') + '\n');
+    }
   });
 }
 
@@ -109,7 +122,7 @@ function promptForCommand(argv) {
       name: 'Re-generate the contributors list',
       value: 'generate'
     }, {
-      name: 'Compare contributors from Github with the credited ones',
+      name: 'Compare contributors from GitHub with the credited ones',
       value: 'check'
     }],
     when: !argv._[0],
@@ -132,7 +145,7 @@ promptForCommand(argv)
       case 'add':
         return addContribution(argv);
       case 'check':
-        return checkContributors(argv);
+        return checkContributors();
       default:
         throw new Error(`Unknown command ${command}`);
     }

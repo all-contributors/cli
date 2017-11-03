@@ -23,6 +23,8 @@ var argv = yargs
   .usage('Usage: $0 add <username> <contribution>')
   .command('init', 'Prepare the project to be used with this tool')
   .usage('Usage: $0 init')
+  .command('check', 'Compares contributors from Github with the ones credited in .all-contributorsrc')
+  .usage('Usage: $0 check <repository>')
   .boolean('commit')
   .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
@@ -68,6 +70,25 @@ function addContribution(argv) {
   });
 }
 
+function checkContributors(argv) {
+  var repository = argv._[1];
+
+  return util.check(repository)
+  .then(ghContributors => {
+    var configData = util.configFile.readConfig(argv.config);
+    var knownContributors = configData.contributors.map(contributor => contributor.login);
+
+    var missingInConfig = ghContributors.filter(login => knownContributors.indexOf(login) === -1);
+    var missingFromGithub = knownContributors.filter(login => ghContributors.indexOf(login) === -1);
+
+    process.stdout.write('Missing contributors in .all-contributorsrc:\n');
+    process.stdout.write('    ' + missingInConfig.join(', ') + '\n');
+
+    process.stdout.write('Unknown contributors found in .all-contributorsrc:\n');
+    process.stdout.write('    ' + missingFromGithub.join(', ') + '\n');
+  });
+}
+
 function onError(error) {
   if (error) {
     console.error(error.message);
@@ -87,6 +108,9 @@ function promptForCommand(argv) {
     }, {
       name: 'Re-generate the contributors list',
       value: 'generate'
+    }, {
+      name: 'Compare contributors from Github with the credited ones',
+      value: 'check'
     }],
     when: !argv._[0],
     default: 0
@@ -107,6 +131,8 @@ promptForCommand(argv)
         return startGeneration(argv);
       case 'add':
         return addContribution(argv);
+      case 'check':
+        return checkContributors(argv);
       default:
         throw new Error(`Unknown command ${command}`);
     }

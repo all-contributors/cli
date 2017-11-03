@@ -2,7 +2,7 @@
   "projectOwner": "jfmengels",
   "projectName": "all-contributors-cli",
   "imageSize": 100,
-  "commit": true,
+  "commit": false,
   "contributors": [
     {
       "login": "jfmengels",

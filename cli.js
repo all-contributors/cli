@@ -56,7 +56,7 @@ function addContribution(argv) {
   var username = argv._[1];
   var contributions = argv._[2];
   // Add or update contributor in the config file
-  return updateContributors(argv, username, contributions)
+  return updateContributors(argv, username, contributions, argv.contributors)
   .then(data => {
     argv.contributors = data.contributors;
     return startGeneration(argv)

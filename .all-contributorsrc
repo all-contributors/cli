@@ -116,6 +116,52 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "brycereynolds",
+      "name": "Bryce Reynolds",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/1026002?v=4",
+      "profile": "https://github.com/brycereynolds",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jmeas",
+      "name": "James, please",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2322305?v=4",
+      "profile": "http://www.jmeas.com",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
+    },
+    {
+      "login": "spirosikmd",
+      "name": "Spyros Ioakeimidis",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1057324?v=4",
+      "profile": "http://www.spyros.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "fadc80",
+      "name": "Fernando Costa",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/12335761?v=4",
+      "profile": "https://github.com/fadc80",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "snipe",
+      "name": "snipe",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/197404?v=4",
+      "profile": "https://snipe.net",
+      "contributions": [
+        "doc"
+      ]
     }
   ]
 }

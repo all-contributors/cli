@@ -29,6 +29,11 @@ var argv = yargs
   .boolean('commit')
   .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
+  .option('version', {
+    alias: 'v',
+    desc: 'Print installed version',
+    type: 'string'
+  })
   .default('contributors', [])
   .default('config', defaultRCFile)
   .config('config', function (configPath) {
@@ -111,6 +116,11 @@ function onError(error) {
 }
 
 function promptForCommand(argv) {
+  if (argv.version === '') {
+    console.log(require('./package.json').version);
+    process.exit(0);
+  }
+
   var questions = [{
     type: 'list',
     name: 'command',

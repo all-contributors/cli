@@ -19,18 +19,19 @@ Once initialized, you don't need to have  `all-contributors-cli` installed globa
 ```console
 npm install --save-dev all-contributors-cli
 ```
+
 ```json
 {
   "scripts": {
-    "add": "all-contributors add",
-    "generate": "all-contributors generate"
+    "contributors:add": "all-contributors add",
+    "contributors:generate": "all-contributors generate"
   }
 }
 ```
 and use them via `npm run`:
 ```console
-npm run add -- jfmengels doc
-npm run generate
+npm run contributors:add -- jfmengels doc
+npm run contributors:generate
 ```
 
 ## Usage

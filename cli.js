@@ -82,9 +82,9 @@ function checkContributors() {
     }, {});
     var knownContributors = configData.contributors.map(contributor => contributor.login);
 
-    var missingInConfig = ghContributors.filter(login => knownContributors.indexOf(login) === -1);
+    var missingInConfig = ghContributors.filter(login => !knownContributors.includes(login));
     var missingFromGithub = knownContributors.filter(login => {
-      return ghContributors.indexOf(login) === -1 && (
+      return !ghContributors.includes(login) && (
         knownContributions[login].includes('code') ||
         knownContributions[login].includes('test')
       );

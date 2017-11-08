@@ -2,7 +2,7 @@
   "projectOwner": "jfmengels",
   "projectName": "all-contributors-cli",
   "imageSize": 100,
-  "commit": true,
+  "commit": false,
   "contributors": [
     {
       "login": "jfmengels",
@@ -95,6 +95,24 @@
       "name": "Mehdi Achour",
       "avatar_url": "https://avatars2.githubusercontent.com/u/304450?v=4",
       "profile": "https://machour.idk.tn/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "revelt",
+      "name": "Roy Revelt",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/8344688?v=4",
+      "profile": "https://codsen.com",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "chrisinajar",
+      "name": "Chris Vickery",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/422331?v=4",
+      "profile": "https://github.com/chrisinajar",
       "contributions": [
         "code"
       ]

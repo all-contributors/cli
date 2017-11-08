@@ -86,7 +86,7 @@ function checkContributors() {
     var missingFromGithub = knownContributors.filter(login => {
       return ghContributors.indexOf(login) === -1 && (
         knownContributions[login].includes('code') ||
-        knownContributions[login].includes('tool')
+        knownContributions[login].includes('test')
       );
     });
 

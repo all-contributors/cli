@@ -92,12 +92,12 @@ function checkContributors() {
 
     if (missingInConfig.length) {
       process.stdout.write(chalk.bold('Missing contributors in .all-contributorsrc:\n'));
-      process.stdout.write('    ' + missingInConfig.join(', ') + '\n');
+      process.stdout.write(`    ${missingInConfig.join(', ')}\n`);
     }
 
     if (missingFromGithub.length) {
       process.stdout.write(chalk.bold('Unknown contributors found in .all-contributorsrc:\n'));
-      process.stdout.write('    ' + missingFromGithub.join(', ') + '\n');
+      process.stdout.write(`    ${missingFromGithub.join(', ')}\n`);
     }
   });
 }

@@ -19,9 +19,6 @@ Once initialized, you don't need to have  `all-contributors-cli` installed globa
 ```console
 npm install --save-dev all-contributors-cli
 ```
-```console
-yarn add all-contributors-cli --dev
-```
 
 ```json
 {
@@ -35,12 +32,6 @@ and use them via `npm run`:
 ```console
 npm run append -- jfmengels doc
 npm run generate
-```
-
-OR use them via `yarn`:
-```console
-yarn append jfmengels doc
-yarn generate
 ```
 
 ## Usage

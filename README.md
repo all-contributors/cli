@@ -75,6 +75,17 @@ Where `username` is the user's GitHub username, and `contribution` is a `,`-sepa
   - tutorial: [✅](# "Tutorials")
   - video: [📹](# "Videos")
 
+### Check for missing contributors
+
+Use `check` to compare contributors from GitHub with the ones credited in your `.all-contributorsrc` file, in order to make sure that credit is given where it's due.
+
+```console
+all-contributors check
+```
+
+> Due to GitHub API restrictions, this command only works for projects with less than 500 contributors.
+
+
 ## Configuration
 
 You can configure the project by updating the `.all-contributorsrc` JSON file. The data used to generate the contributors list will be stored in there, and you can configure how you want `all-contributors-cli` to generate the list.

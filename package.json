@@ -29,6 +29,7 @@
   "homepage": "https://github.com/jfmengels/all-contributors-cli#readme",
   "dependencies": {
     "async": "^2.0.0-rc.1",
+    "chalk": "^2.3.0",
     "inquirer": "^3.0.1",
     "lodash": "^4.11.2",
     "pify": "^2.3.0",
@@ -39,8 +40,8 @@
     "ava": "^0.14.0",
     "nock": "^8.0.0",
     "nyc": "^6.4.2",
-    "xo": "^0.15.0",
-    "semantic-release": "^6.3.2"
+    "semantic-release": "^6.3.2",
+    "xo": "^0.15.0"
   },
   "ava": {
     "files": [

@@ -18,6 +18,8 @@ var defaultRCFile = path.join(cwd, '.all-contributorsrc');
 var argv = yargs
   .help('help')
   .alias('h', 'help')
+  .alias('v', 'version')
+  .version()
   .command('generate', 'Generate the list of contributors')
   .usage('Usage: $0 generate')
   .command('add', 'add a new contributor')

@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors 1`] = `
+"# project
+
+Description
+
+## Contributors
+These people contributed to the project:
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<!-- prettier-ignore -->
+| Kent C. Dodds is awesome! | Divjot Singh is awesome! | Jeroen Engels is awesome! |
+| :---: | :---: | :---: |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Thanks a lot everyone!"
+`;
+
+exports[`split contributors into multiples lines when there are too many 1`] = `
+"# project
+
+Description
+
+## Contributors
+These people contributed to the project:
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<!-- prettier-ignore -->
+| Kent C. Dodds is awesome! | Kent C. Dodds is awesome! | Kent C. Dodds is awesome! | Kent C. Dodds is awesome! | Kent C. Dodds is awesome! |
+| :---: | :---: | :---: | :---: | :---: |
+| Kent C. Dodds is awesome! | Kent C. Dodds is awesome! |
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Thanks a lot everyone!"
+`;

@@ -5,8 +5,11 @@ const badgeContent =
   '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)'
 const headerContent =
   'Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):'
-const listContent =
-  '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section --><!-- ALL-CONTRIBUTORS-LIST:END -->'
+const listContent = [
+  '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->',
+  '<!-- prettier-ignore -->',
+  '<!-- ALL-CONTRIBUTORS-LIST:END -->',
+].join('\n')
 const footerContent =
   'This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!'
 

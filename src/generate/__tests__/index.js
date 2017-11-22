@@ -38,24 +38,9 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of c
   const {kentcdodds, bogas04} = contributors
   const {options, jfmengels, content} = fixtures()
   const contributorList = [kentcdodds, bogas04, jfmengels]
-  const expected = [
-    '# project',
-    '',
-    'Description',
-    '',
-    '## Contributors',
-    'These people contributed to the project:',
-    '<!-- ALL-CONTRIBUTORS-LIST:START -->',
-    '| Kent C. Dodds is awesome! | Divjot Singh is awesome! | Jeroen Engels is awesome! |',
-    '| :---: | :---: | :---: |',
-    '<!-- ALL-CONTRIBUTORS-LIST:END -->',
-    '',
-    'Thanks a lot everyone!',
-  ].join('\n')
-
   const result = generate(options, contributorList, content)
 
-  expect(result).toBe(expected)
+  expect(result).toMatchSnapshot()
 })
 
 test('split contributors into multiples lines when there are too many', () => {
@@ -70,25 +55,9 @@ test('split contributors into multiples lines when there are too many', () => {
     kentcdodds,
     kentcdodds,
   ]
-  const expected = [
-    '# project',
-    '',
-    'Description',
-    '',
-    '## Contributors',
-    'These people contributed to the project:',
-    '<!-- ALL-CONTRIBUTORS-LIST:START -->',
-    '| Kent C. Dodds is awesome! | Kent C. Dodds is awesome! | Kent C. Dodds is awesome! | Kent C. Dodds is awesome! | Kent C. Dodds is awesome! |',
-    '| :---: | :---: | :---: | :---: | :---: |',
-    '| Kent C. Dodds is awesome! | Kent C. Dodds is awesome! |',
-    '<!-- ALL-CONTRIBUTORS-LIST:END -->',
-    '',
-    'Thanks a lot everyone!',
-  ].join('\n')
-
   const result = generate(options, contributorList, content)
 
-  expect(result).toBe(expected)
+  expect(result).toMatchSnapshot()
 })
 
 test('not inject anything if there is no tags to inject content in', () => {
@@ -150,6 +119,7 @@ test('inject nothing if there are no contributors', () => {
     '## Contributors',
     'These people contributed to the project:',
     '<!-- ALL-CONTRIBUTORS-LIST:START -->',
+    '<!-- prettier-ignore -->',
     '<!-- ALL-CONTRIBUTORS-LIST:END -->',
     '',
     'Thanks a lot everyone!',

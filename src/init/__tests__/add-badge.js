@@ -1,35 +1,29 @@
-import {addBadge} from './init-content';
+import {addBadge} from './init-content'
 
 test('should insert badge under title', () => {
-  const content = [
-    '# project',
-    '',
-    'Description',
-    '',
-    'Foo bar'
-  ].join('\n');
+  const content = ['# project', '', 'Description', '', 'Foo bar'].join('\n')
   const expected = [
     '# project',
     '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)',
     '',
     'Description',
     '',
-    'Foo bar'
-  ].join('\n');
+    'Foo bar',
+  ].join('\n')
 
-  const result = addBadge(content);
+  const result = addBadge(content)
 
-  expect(result).toBe(expected);
-});
+  expect(result).toBe(expected)
+})
 
 test('should add badge if content is empty', () => {
-  const content = '';
+  const content = ''
   const expected = [
     '',
-    '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)'
-  ].join('\n');
+    '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)',
+  ].join('\n')
 
-  const result = addBadge(content);
+  const result = addBadge(content)
 
-  expect(result).toBe(expected);
-});
+  expect(result).toBe(expected)
+})

@@ -1,64 +1,76 @@
-'use strict';
+const _ = require('lodash/fp')
+const inquirer = require('inquirer')
+const util = require('../util')
 
-var _ = require('lodash/fp');
-var inquirer = require('inquirer');
-var util = require('../util');
-
-var contributionChoices = _.flow(
+const contributionChoices = _.flow(
   util.contributionTypes,
   _.toPairs,
-  _.sortBy(function (pair) {
-    return pair[1].description;
+  _.sortBy(pair => {
+    return pair[1].description
   }),
-  _.map(function (pair) {
+  _.map(pair => {
     return {
-      name: pair[1].symbol + '  ' + pair[1].description,
-      value: pair[0]
-    };
-  })
-);
+      name: `${pair[1].symbol}  ${pair[1].description}`,
+      value: pair[0],
+    }
+  }),
+)
 
 function getQuestions(options, username, contributions) {
-  return [{
-    type: 'input',
-    name: 'username',
-    message: 'What is the contributor\'s GitHub username?',
-    when: !username
-  }, {
-    type: 'checkbox',
-    name: 'contributions',
-    message: 'What are the contribution types?',
-    when: !contributions,
-    default: function (answers) {
-      // default values for contributions when updating existing users
-      answers.username = answers.username || username;
-      return options.contributors
-        .filter((entry) => entry.login.toLowerCase() === answers.username.toLowerCase())
-        .reduce((allEntries, entry) => allEntries.concat(entry.contributions), []);
+  return [
+    {
+      type: 'input',
+      name: 'username',
+      message: "What is the contributor's GitHub username?",
+      when: !username,
     },
-    choices: contributionChoices(options),
-    validate: function (input, answers) {
-      answers.username = answers.username || username;
-      var previousContributions = options.contributors
-        .filter((entry) => entry.login.toLowerCase() === answers.username.toLowerCase())
-        .reduce((allEntries, entry) => allEntries.concat(entry.contributions), []);
+    {
+      type: 'checkbox',
+      name: 'contributions',
+      message: 'What are the contribution types?',
+      when: !contributions,
+      default: function(answers) {
+        // default values for contributions when updating existing users
+        answers.username = answers.username || username
+        return options.contributors
+          .filter(
+            entry =>
+              entry.login.toLowerCase() === answers.username.toLowerCase(),
+          )
+          .reduce(
+            (allEntries, entry) => allEntries.concat(entry.contributions),
+            [],
+          )
+      },
+      choices: contributionChoices(options),
+      validate: function(input, answers) {
+        answers.username = answers.username || username
+        const previousContributions = options.contributors
+          .filter(
+            entry =>
+              entry.login.toLowerCase() === answers.username.toLowerCase(),
+          )
+          .reduce(
+            (allEntries, entry) => allEntries.concat(entry.contributions),
+            [],
+          )
 
-      if (!input.length) {
-        return 'Use space to select at least one contribution type.';
-      } else if (_.isEqual(input, previousContributions)) {
-        return 'Nothing changed, use space to select contribution types.';
-      }
-      return true;
-    }
-  }];
+        if (!input.length) {
+          return 'Use space to select at least one contribution type.'
+        } else if (_.isEqual(input, previousContributions)) {
+          return 'Nothing changed, use space to select contribution types.'
+        }
+        return true
+      },
+    },
+  ]
 }
 
 module.exports = function prompt(options, username, contributions) {
-  var defaults = {
-    username: username,
-    contributions: contributions && contributions.split(',')
-  };
-  var questions = getQuestions(options, username, contributions);
-  return inquirer.prompt(questions)
-    .then(_.assign(defaults));
-};
+  const defaults = {
+    username,
+    contributions: contributions && contributions.split(','),
+  }
+  const questions = getQuestions(options, username, contributions)
+  return inquirer.prompt(questions).then(_.assign(defaults))
+}

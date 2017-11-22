@@ -1,35 +1,43 @@
-'use strict';
+const _ = require('lodash/fp')
+const util = require('../util')
 
-var _ = require('lodash/fp');
-var util = require('../util');
-
-var linkTemplate = _.template('[<%= symbol %>](<%= url %> "<%= description %>")');
+const linkTemplate = _.template(
+  '[<%= symbol %>](<%= url %> "<%= description %>")',
+)
 
 function getType(options, contribution) {
-  var types = util.contributionTypes(options);
-  return types[contribution.type || contribution];
+  const types = util.contributionTypes(options)
+  return types[contribution.type || contribution]
 }
 
-module.exports = function formatContribution(options, contributor, contribution) {
-  var type = getType(options, contribution);
+module.exports = function formatContribution(
+  options,
+  contributor,
+  contribution,
+) {
+  const type = getType(options, contribution)
 
   if (!type) {
-    throw new Error('Unknown contribution type ' + contribution + ' for contributor ' + contributor.login);
+    throw new Error(
+      `Unknown contribution type ${contribution} for contributor ${
+        contributor.login
+      }`,
+    )
   }
 
-  var templateData = {
+  const templateData = {
     symbol: type.symbol,
     description: type.description,
-    contributor: contributor,
-    options: options
-  };
-
-  var url = `#${contribution}-${contributor.login}`;
-  if (contribution.url) {
-    url = contribution.url;
-  } else if (type.link) {
-    url = _.template(type.link)(templateData);
+    contributor,
+    options,
   }
 
-  return linkTemplate(_.assign({url: url}, templateData));
-};
+  let url = `#${contribution}-${contributor.login}`
+  if (contribution.url) {
+    url = contribution.url
+  } else if (type.link) {
+    url = _.template(type.link)(templateData)
+  }
+
+  return linkTemplate(_.assign({url}, templateData))
+}

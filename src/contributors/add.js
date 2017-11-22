@@ -1,54 +1,63 @@
-'use strict';
-
-var _ = require('lodash/fp');
+const _ = require('lodash/fp')
 
 function uniqueTypes(contribution) {
-  return contribution.type || contribution;
+  return contribution.type || contribution
 }
 
 function formatContributions(options, existing, types) {
   if (options.url) {
-    return (existing || []).concat(types.map(function (type) {
-      return {type: type, url: options.url};
-    }));
+    return (existing || []).concat(
+      types.map(type => {
+        return {type, url: options.url}
+      }),
+    )
   }
-  return _.uniqBy(uniqueTypes, (existing || []).concat(types));
+  return _.uniqBy(uniqueTypes, (existing || []).concat(types))
 }
 
 function updateContributor(options, contributor, contributions) {
   return _.assign(contributor, {
-    contributions: formatContributions(options, contributor.contributions, contributions)
-  });
+    contributions: formatContributions(
+      options,
+      contributor.contributions,
+      contributions,
+    ),
+  })
 }
 
 function updateExistingContributor(options, username, contributions) {
-  return options.contributors.map(function (contributor) {
+  return options.contributors.map(contributor => {
     if (username.toLowerCase() !== contributor.login.toLowerCase()) {
-      return contributor;
+      return contributor
     }
-    return updateContributor(options, contributor, contributions);
-  });
+    return updateContributor(options, contributor, contributions)
+  })
 }
 
 function addNewContributor(options, username, contributions, infoFetcher) {
-  return infoFetcher(username)
-  .then(userData => {
-    var contributor = _.assign(userData, {
-      contributions: formatContributions(options, [], contributions)
-    });
-    return options.contributors.concat(contributor);
-  });
+  return infoFetcher(username).then(userData => {
+    const contributor = _.assign(userData, {
+      contributions: formatContributions(options, [], contributions),
+    })
+    return options.contributors.concat(contributor)
+  })
 }
 
-module.exports = function addContributor(options, username, contributions, infoFetcher) {
+module.exports = function addContributor(
+  options,
+  username,
+  contributions,
+  infoFetcher,
+) {
   // case insensitive find
-  var exists = _.find(function (contributor) {
-    return contributor.login.toLowerCase() === username.toLowerCase();
-  }, options.contributors);
+  const exists = _.find(contributor => {
+    return contributor.login.toLowerCase() === username.toLowerCase()
+  }, options.contributors)
 
   if (exists) {
-    return Promise.resolve(updateExistingContributor(options, username, contributions));
+    return Promise.resolve(
+      updateExistingContributor(options, username, contributions),
+    )
   }
-  return addNewContributor(options, username, contributions, infoFetcher);
-};
-
+  return addNewContributor(options, username, contributions, infoFetcher)
+}

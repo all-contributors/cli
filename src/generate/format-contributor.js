@@ -1,38 +1,46 @@
-'use strict';
+const _ = require('lodash/fp')
+const formatContributionType = require('./format-contribution-type')
 
-var _ = require('lodash/fp');
-var formatContributionType = require('./format-contribution-type');
+const avatarTemplate = _.template(
+  '<img src="<%= contributor.avatar_url %>" width="<%= options.imageSize %>px;"/>',
+)
+const avatarBlockTemplate = _.template(
+  '[<%= avatar %><br /><sub><b><%= name %></b></sub>](<%= contributor.profile %>)',
+)
+const contributorTemplate = _.template(
+  '<%= avatarBlock %><br /><%= contributions %>',
+)
 
-var avatarTemplate = _.template('<img src="<%= contributor.avatar_url %>" width="<%= options.imageSize %>px;"/>');
-var avatarBlockTemplate = _.template('[<%= avatar %><br /><sub><b><%= name %></b></sub>](<%= contributor.profile %>)');
-var contributorTemplate = _.template('<%= avatarBlock %><br /><%= contributions %>');
-
-var defaultImageSize = 100;
+const defaultImageSize = 100
 
 function defaultTemplate(templateData) {
-  var avatar = avatarTemplate(templateData);
-  var avatarBlock = avatarBlockTemplate(_.assign({
-    name: escapeName(templateData.contributor.name),
-    avatar: avatar
-  }, templateData));
+  const avatar = avatarTemplate(templateData)
+  const avatarBlock = avatarBlockTemplate(
+    _.assign(
+      {
+        name: escapeName(templateData.contributor.name),
+        avatar,
+      },
+      templateData,
+    ),
+  )
 
-  return contributorTemplate(_.assign({avatarBlock: avatarBlock}, templateData));
+  return contributorTemplate(_.assign({avatarBlock}, templateData))
 }
 
 function escapeName(name) {
-  return name.replace(new RegExp('\\|', 'g'), '&#124;');
+  return name.replace(new RegExp('\\|', 'g'), '&#124;')
 }
 
 module.exports = function formatContributor(options, contributor) {
-  var formatter = _.partial(formatContributionType, [options, contributor]);
-  var contributions = contributor.contributions
-    .map(formatter)
-    .join(' ');
-  var templateData = {
-    contributions: contributions,
-    contributor: contributor,
-    options: _.assign({imageSize: defaultImageSize}, options)
-  };
-  var customTemplate = options.contributorTemplate && _.template(options.contributorTemplate);
-  return (customTemplate || defaultTemplate)(templateData);
-};
+  const formatter = _.partial(formatContributionType, [options, contributor])
+  const contributions = contributor.contributions.map(formatter).join(' ')
+  const templateData = {
+    contributions,
+    contributor,
+    options: _.assign({imageSize: defaultImageSize}, options),
+  }
+  const customTemplate =
+    options.contributorTemplate && _.template(options.contributorTemplate)
+  return (customTemplate || defaultTemplate)(templateData)
+}

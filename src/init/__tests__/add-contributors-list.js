@@ -1,4 +1,4 @@
-import {addContributorsList} from './init-content';
+import {addContributorsList} from './init-content'
 
 test('should insert list under contributors section', () => {
   const content = [
@@ -7,8 +7,8 @@ test('should insert list under contributors section', () => {
     'Description',
     '',
     '## Contributors',
-    ''
-  ].join('\n');
+    '',
+  ].join('\n')
   const expected = [
     '# project',
     '',
@@ -16,20 +16,16 @@ test('should insert list under contributors section', () => {
     '',
     '## Contributors',
     '',
-    '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section --><!-- ALL-CONTRIBUTORS-LIST:END -->'
-  ].join('\n');
+    '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section --><!-- ALL-CONTRIBUTORS-LIST:END -->',
+  ].join('\n')
 
-  const result = addContributorsList(content);
+  const result = addContributorsList(content)
 
-  expect(result).toBe(expected);
-});
+  expect(result).toBe(expected)
+})
 
 test('should create contributors section if it is absent', () => {
-  const content = [
-    '# project',
-    '',
-    'Description'
-  ].join('\n');
+  const content = ['# project', '', 'Description'].join('\n')
   const expected = [
     '# project',
     '',
@@ -40,16 +36,16 @@ test('should create contributors section if it is absent', () => {
     '',
     '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section --><!-- ALL-CONTRIBUTORS-LIST:END -->',
     '',
-    'This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!'
-  ].join('\n');
+    'This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!',
+  ].join('\n')
 
-  const result = addContributorsList(content);
+  const result = addContributorsList(content)
 
-  expect(result).toBe(expected);
-});
+  expect(result).toBe(expected)
+})
 
 test('should create contributors section if content is empty', () => {
-  const content = '';
+  const content = ''
   const expected = [
     '',
     '## Contributors',
@@ -58,10 +54,10 @@ test('should create contributors section if content is empty', () => {
     '',
     '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section --><!-- ALL-CONTRIBUTORS-LIST:END -->',
     '',
-    'This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!'
-  ].join('\n');
+    'This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!',
+  ].join('\n')
 
-  const result = addContributorsList(content);
+  const result = addContributorsList(content)
 
-  expect(result).toBe(expected);
-});
+  expect(result).toBe(expected)
+})

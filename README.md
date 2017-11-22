@@ -1,7 +1,7 @@
 <h1 align="center">
   all-contributors-cli 🤖
 </h1>
-<p align="center" style="font-size: 1.2rem;"></p>
+<p align="center" style="font-size: 1.2rem;">Automate acknowledging contributors to your open source projects</p>
 
 <hr />
 
@@ -159,18 +159,6 @@ These are the keys you can specify:
 * `contributorTemplate`: Define your own template to generate the contributor
   list.
 * `badgeTemplate`: Define your own template to generate the badge.
-
-## Inspiration
-
-I've been thinking about this for a while. The API was inspired by:
-
-* ESLint's [RuleTester][ruletester]
-* [@thejameskyle][@thejameskyle]'s [tweet][jamestweet]
-
-## Other Solutions
-
-I'm not aware of any, if you are please [make a pull request][prs] and add it
-here!
 
 ## Contributors
 

@@ -1,6 +1,5 @@
 import nock from 'nock'
-
-const check = require('./check')
+import check from '../check'
 
 import allContributorsCliResponse from './fixtures/all-contributors.response.json'
 import allContributorsCliTransformed from './fixtures/all-contributors.transformed.json'

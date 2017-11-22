@@ -1,15 +1,20 @@
 import nock from 'nock'
-import getUserInfo from './github'
+import getUserInfo from '../github'
 
-test('should handle errors', () => {
+async function rejects(promise) {
+  const error = await promise.catch(e => e)
+  expect(error).toBeTruthy()
+}
+
+test('handle errors', async () => {
   nock('https://api.github.com')
     .get('/users/nodisplayname')
     .replyWithError(404)
 
-  return expect(getUserInfo('nodisplayname')).toThrow()
+  await rejects(getUserInfo('nodisplayname'))
 })
 
-test('should handle github errors', () => {
+test('handle github errors', async () => {
   nock('https://api.github.com')
     .get('/users/nodisplayname')
     .reply(200, {
@@ -18,10 +23,10 @@ test('should handle github errors', () => {
       documentation_url: 'https://developer.github.com/v3/#rate-limiting',
     })
 
-  return expect(getUserInfo('nodisplayname')).toThrow()
+  await rejects(getUserInfo('nodisplayname'))
 })
 
-test('should fill in the name when null is returned', () => {
+test('fill in the name when null is returned', async () => {
   nock('https://api.github.com')
     .get('/users/nodisplayname')
     .reply(200, {
@@ -31,12 +36,11 @@ test('should fill in the name when null is returned', () => {
       html_url: 'https://github.com/nodisplayname',
     })
 
-  return getUserInfo('nodisplayname').then(info => {
-    expect(info.name).toBe('nodisplayname')
-  })
+  const info = await getUserInfo('nodisplayname')
+  expect(info.name).toBe('nodisplayname')
 })
 
-test('should fill in the name when an empty string is returned', () => {
+test('fill in the name when an empty string is returned', async () => {
   nock('https://api.github.com')
     .get('/users/nodisplayname')
     .reply(200, {
@@ -46,12 +50,11 @@ test('should fill in the name when an empty string is returned', () => {
       html_url: 'https://github.com/nodisplayname',
     })
 
-  return getUserInfo('nodisplayname').then(info => {
-    expect(info.name).toBe('nodisplayname')
-  })
+  const info = await getUserInfo('nodisplayname')
+  expect(info.name).toBe('nodisplayname')
 })
 
-test('should append http when no absolute link is provided', () => {
+test('append http when no absolute link is provided', async () => {
   nock('https://api.github.com')
     .get('/users/nodisplayname')
     .reply(200, {
@@ -61,7 +64,6 @@ test('should append http when no absolute link is provided', () => {
       html_url: 'www.github.com/nodisplayname',
     })
 
-  return getUserInfo('nodisplayname').then(info => {
-    expect(info.profile).toBe('http://www.github.com/nodisplayname')
-  })
+  const info = await getUserInfo('nodisplayname')
+  expect(info.profile).toBe('http://www.github.com/nodisplayname')
 })

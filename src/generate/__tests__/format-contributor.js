@@ -1,5 +1,5 @@
 import _ from 'lodash/fp'
-import formatContributor from './format-contributor'
+import formatContributor from '../format-contributor'
 import contributors from './fixtures/contributors.json'
 
 function fixtures() {
@@ -11,7 +11,7 @@ function fixtures() {
   return {options}
 }
 
-test('should format a simple contributor', () => {
+test('format a simple contributor', () => {
   const contributor = _.assign(contributors.kentcdodds, {
     contributions: ['review'],
   })
@@ -23,7 +23,7 @@ test('should format a simple contributor', () => {
   expect(formatContributor(options, contributor)).toBe(expected)
 })
 
-test('should format contributor with complex contribution types', () => {
+test('format contributor with complex contribution types', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
 
@@ -33,7 +33,7 @@ test('should format contributor with complex contribution types', () => {
   expect(formatContributor(options, contributor)).toBe(expected)
 })
 
-test('should format contributor using custom template', () => {
+test('format contributor using custom template', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   options.contributorTemplate = '<%= contributor.name %> is awesome!'
@@ -43,7 +43,7 @@ test('should format contributor using custom template', () => {
   expect(formatContributor(options, contributor)).toBe(expected)
 })
 
-test('should default image size to 100', () => {
+test('default image size to 100', () => {
   const contributor = _.assign(contributors.kentcdodds, {
     contributions: ['review'],
   })
@@ -56,7 +56,7 @@ test('should default image size to 100', () => {
   expect(formatContributor(options, contributor)).toBe(expected)
 })
 
-test('should format contributor with pipes in their name', () => {
+test('format contributor with pipes in their name', () => {
   const contributor = contributors.pipey
   const {options} = fixtures()
 

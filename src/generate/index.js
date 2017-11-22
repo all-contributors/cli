@@ -3,7 +3,7 @@ const injectContentBetween = require('../util').markdown.injectContentBetween
 const formatBadge = require('./format-badge')
 const formatContributor = require('./format-contributor')
 
-const badgeRegex = /\[!\[All Contributors\]\([a-zA-Z0-9\-\.\/_:\?=]+\)\]\(#\w+\)/
+const badgeRegex = /\[!\[All Contributors\]\([a-zA-Z0-9\-./_:?=]+\)\]\(#\w+\)/
 
 function injectListBetweenTags(newContent) {
   return function(previousContent) {

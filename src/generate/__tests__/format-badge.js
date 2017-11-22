@@ -1,7 +1,7 @@
 import _ from 'lodash/fp'
-import formatBadge from './format-badge'
+import formatBadge from '../format-badge'
 
-test('should return badge with the number of contributors', () => {
+test('return badge with the number of contributors', () => {
   const options = {}
   const expected8 =
     '[![All Contributors](https://img.shields.io/badge/all_contributors-8-orange.svg?style=flat-square)](#contributors)'
@@ -12,7 +12,7 @@ test('should return badge with the number of contributors', () => {
   expect(formatBadge(options, _.times(_.constant({}), 16))).toBe(expected16)
 })
 
-test('should be able to specify custom badge template', () => {
+test('be able to specify custom badge template', () => {
   const options = {
     badgeTemplate: 'We have <%= contributors.length %> contributors',
   }

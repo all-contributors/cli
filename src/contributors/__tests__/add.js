@@ -1,4 +1,4 @@
-import addContributor from './add'
+import addContributor from '../add'
 
 function mockInfoFetcher(username) {
   return Promise.resolve({
@@ -46,20 +46,25 @@ function caseFixtures() {
   return {options}
 }
 
-test('should callback with error if infoFetcher fails', () => {
+test('callback with error if infoFetcher fails', async () => {
   const {options} = fixtures()
   const username = 'login3'
   const contributions = ['doc']
+  const error = new Error('infoFetcher error')
   function infoFetcher() {
-    return Promise.reject(new Error('infoFetcher error'))
+    return Promise.reject(error)
   }
+  const resolvedError = await addContributor(
+    options,
+    username,
+    contributions,
+    infoFetcher,
+  ).catch(e => e)
 
-  return expect(
-    addContributor(options, username, contributions, infoFetcher),
-  ).toThrowError('infoFetcher error')
+  expect(resolvedError).toBe(error)
 })
 
-test('should add new contributor at the end of the list of contributors', () => {
+test('add new contributor at the end of the list of contributors', () => {
   const {options} = fixtures()
   const username = 'login3'
   const contributions = ['doc']
@@ -78,7 +83,7 @@ test('should add new contributor at the end of the list of contributors', () => 
   )
 })
 
-test('should add new contributor at the end of the list of contributors with a url link', () => {
+test('add new contributor at the end of the list of contributors with a url link', () => {
   const {options} = fixtures()
   const username = 'login3'
   const contributions = ['doc']

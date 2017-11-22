@@ -1,5 +1,5 @@
+import generate from '../'
 import contributors from './fixtures/contributors.json'
-import generate from './'
 
 function fixtures() {
   const options = {
@@ -34,7 +34,7 @@ function fixtures() {
   return {options, jfmengels, content}
 }
 
-test('should replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors', () => {
+test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors', () => {
   const {kentcdodds, bogas04} = contributors
   const {options, jfmengels, content} = fixtures()
   const contributorList = [kentcdodds, bogas04, jfmengels]
@@ -58,7 +58,7 @@ test('should replace the content between the ALL-CONTRIBUTORS-LIST tags by a tab
   expect(result).toBe(expected)
 })
 
-test('should split contributors into multiples lines when there are too many', () => {
+test('split contributors into multiples lines when there are too many', () => {
   const {kentcdodds} = contributors
   const {options, content} = fixtures()
   const contributorList = [
@@ -91,7 +91,7 @@ test('should split contributors into multiples lines when there are too many', (
   expect(result).toBe(expected)
 })
 
-test('should not inject anything if there is no tags to inject content in', () => {
+test('not inject anything if there is no tags to inject content in', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()
   const contributorList = [kentcdodds]
@@ -103,7 +103,7 @@ test('should not inject anything if there is no tags to inject content in', () =
   expect(result).toBe(content)
 })
 
-test('should not inject anything if start tag is malformed', () => {
+test('not inject anything if start tag is malformed', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()
   const contributorList = [kentcdodds]
@@ -121,7 +121,7 @@ test('should not inject anything if start tag is malformed', () => {
   expect(result).toBe(content)
 })
 
-test('should not inject anything if end tag is malformed', () => {
+test('not inject anything if end tag is malformed', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()
   const contributorList = [kentcdodds]
@@ -139,7 +139,7 @@ test('should not inject anything if end tag is malformed', () => {
   expect(result).toBe(content)
 })
 
-test('should inject nothing if there are no contributors', () => {
+test('inject nothing if there are no contributors', () => {
   const {options, content} = fixtures()
   const contributorList = []
   const expected = [
@@ -160,7 +160,7 @@ test('should inject nothing if there are no contributors', () => {
   expect(result).toBe(expected)
 })
 
-test('should replace all-contributors badge if present', () => {
+test('replace all-contributors badge if present', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()
   const contributorList = [kentcdodds]

@@ -46,7 +46,10 @@
     "extends": "./node_modules/kcd-scripts/eslint.js",
     "rules": {
       "camelcase": "off",
-      "no-process-exit": "off"
+      "no-process-exit": "off",
+      "import/extensions": "off",
+      "func-names": "off",
+      "consistent-return": "off"
     }
   }
 }

@@ -1,6 +1,6 @@
-import {addBadge} from './init-content'
+import {addBadge} from '../init-content'
 
-test('should insert badge under title', () => {
+test('insert badge under title', () => {
   const content = ['# project', '', 'Description', '', 'Foo bar'].join('\n')
   const expected = [
     '# project',
@@ -16,7 +16,7 @@ test('should insert badge under title', () => {
   expect(result).toBe(expected)
 })
 
-test('should add badge if content is empty', () => {
+test('add badge if content is empty', () => {
   const content = ''
   const expected = [
     '',

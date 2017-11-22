@@ -14,7 +14,7 @@ const updateContributors = require('./lib/contributors')
 const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
 
-const argv = yargs
+const yargv = yargs
   .help('help')
   .alias('h', 'help')
   .alias('v', 'version')
@@ -71,7 +71,7 @@ function addContribution(argv) {
   })
 }
 
-function checkContributors() {
+function checkContributors(argv) {
   const configData = util.configFile.readConfig(argv.config)
 
   return util
@@ -107,7 +107,7 @@ function checkContributors() {
         process.stdout.write(
           chalk.bold('Unknown contributors found in .all-contributorsrc:\n'),
         )
-        process.stdout.write(`    ${missingFromGithub.join(', ')}\n`)
+        process.stdout.write(`${missingFromGithub.join(', ')}\n`)
       }
     })
 }
@@ -150,17 +150,17 @@ function promptForCommand(argv) {
   })
 }
 
-promptForCommand(argv)
+promptForCommand(yargv)
   .then(command => {
     switch (command) {
       case 'init':
         return init()
       case 'generate':
-        return startGeneration(argv)
+        return startGeneration(yargv)
       case 'add':
-        return addContribution(argv)
+        return addContribution(yargv)
       case 'check':
-        return checkContributors()
+        return checkContributors(yargv)
       default:
         throw new Error(`Unknown command ${command}`)
     }

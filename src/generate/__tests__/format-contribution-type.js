@@ -1,5 +1,5 @@
+import formatContributionType from '../format-contribution-type'
 import contributors from './fixtures/contributors.json'
-import formatContributionType from './format-contribution-type'
 
 const fixtures = () => {
   const options = {
@@ -10,7 +10,7 @@ const fixtures = () => {
   return {options}
 }
 
-test('should return corresponding symbol', () => {
+test('return corresponding symbol', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
 
@@ -22,7 +22,7 @@ test('should return corresponding symbol', () => {
   )
 })
 
-test('should return link to commits', () => {
+test('return link to commits', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   const expectedLink =
@@ -39,7 +39,7 @@ test('should return link to commits', () => {
   )
 })
 
-test('should return link to issues', () => {
+test('return link to issues', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   const expected =
@@ -48,7 +48,7 @@ test('should return link to issues', () => {
   expect(formatContributionType(options, contributor, 'bug')).toBe(expected)
 })
 
-test('should make any symbol into a link if contribution is an object', () => {
+test('make any symbol into a link if contribution is an object', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   const contribution = {
@@ -61,7 +61,7 @@ test('should make any symbol into a link if contribution is an object', () => {
   )
 })
 
-test('should override url for given types', () => {
+test('override url for given types', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   const contribution = {
@@ -74,7 +74,7 @@ test('should override url for given types', () => {
   )
 })
 
-test('should be able to add types to the symbol list', () => {
+test('be able to add types to the symbol list', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   options.types = {
@@ -92,7 +92,7 @@ test('should be able to add types to the symbol list', () => {
   ).toBe('[:smiley:](www.foo.bar "")')
 })
 
-test('should be able to add types with template to the symbol list', () => {
+test('be able to add types with template to the symbol list', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   options.types = {
@@ -107,7 +107,7 @@ test('should be able to add types with template to the symbol list', () => {
   )
 })
 
-test('should be able to override existing types', () => {
+test('be able to override existing types', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   options.types = {
@@ -125,7 +125,7 @@ test('should be able to override existing types', () => {
   ).toBe('[:smiley:](www.foo.bar "")')
 })
 
-test('should be able to override existing templates', () => {
+test('be able to override existing templates', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   options.types = {
@@ -146,7 +146,7 @@ test('should be able to override existing templates', () => {
   ).toBe('[:web:](www.foo.bar "")')
 })
 
-test('should throw a helpful error on unknown type', () => {
+test('throw a helpful error on unknown type', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   expect(() =>

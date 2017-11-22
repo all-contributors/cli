@@ -1,6 +1,6 @@
-import {addContributorsList} from './init-content'
+import {addContributorsList} from '../init-content'
 
-test('should insert list under contributors section', () => {
+test('insert list under contributors section', () => {
   const content = [
     '# project',
     '',
@@ -24,7 +24,7 @@ test('should insert list under contributors section', () => {
   expect(result).toBe(expected)
 })
 
-test('should create contributors section if it is absent', () => {
+test('create contributors section if it is absent', () => {
   const content = ['# project', '', 'Description'].join('\n')
   const expected = [
     '# project',
@@ -44,7 +44,7 @@ test('should create contributors section if it is absent', () => {
   expect(result).toBe(expected)
 })
 
-test('should create contributors section if content is empty', () => {
+test('create contributors section if content is empty', () => {
   const content = ''
   const expected = [
     '',

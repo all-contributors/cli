@@ -1,3 +1,4 @@
+sudo: false
 language: node_js
 cache:
   directories:
@@ -5,13 +6,9 @@ cache:
 notifications:
   email: false
 node_js:
-  - '6'
-  - '5'
-  - '4'
-script:
-  - npm test
-after_success:
-  - npm run semantic-release
+  - '8'
+script: npm run validate
+after_success: kcd-scripts travis-after-success
 branches:
   only:
     - master

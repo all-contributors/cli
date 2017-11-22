@@ -1,0 +1,23 @@
+{
+  "kentcdodds": {
+    "login": "kentcdodds",
+    "name": "Kent C. Dodds",
+    "profile": "http://kentcdodds.com",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/1500684",
+    "contributions": ["doc", "review", "question"]
+  },
+  "bogas04": {
+    "login": "bogas04",
+    "name": "Divjot Singh",
+    "profile": "http://bogas04.github.io",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/6177621",
+    "contributions": ["review"]
+  },
+  "pipey": {
+    "login": "pipey",
+    "name": "Who | Needs | Pipes?",
+    "profile": "http://github.com/chrisinajar",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/1500684",
+    "contributions": ["doc"]
+  }
+}

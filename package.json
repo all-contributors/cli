@@ -3,24 +3,25 @@
   "version": "0.0.0-semantically-released",
   "description": "Tool to easily add recognition for new contributors",
   "bin": {
-    "all-contributors": "cli.js"
+    "all-contributors": "dist/cli.js"
   },
+  "files": ["dist"],
   "engines": {
     "node": ">=4"
   },
   "scripts": {
-    "all-contributors": "./cli.js",
-    "test": "xo && nyc ava",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+    "add-contributor": "kcd-scripts contributors add",
+    "build": "kcd-scripts build",
+    "lint": "kcd-scripts lint",
+    "test": "kcd-scripts test",
+    "validate": "kcd-scripts validate",
+    "precommit": "kcd-scripts precommit"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/jfmengels/all-contributors-cli.git"
   },
-  "keywords": [
-    "all-contributors",
-    "contributors"
-  ],
+  "keywords": ["all-contributors", "contributors"],
   "author": "Jeroen Engels <jfm.engels@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -30,39 +31,25 @@
   "dependencies": {
     "async": "^2.0.0-rc.1",
     "chalk": "^2.3.0",
-    "inquirer": "^3.0.1",
+    "inquirer": "^4.0.0",
     "lodash": "^4.11.2",
-    "pify": "^2.3.0",
+    "pify": "^3.0.0",
     "request": "^2.72.0",
-    "yargs": "^4.7.0"
+    "yargs": "^10.0.3"
   },
   "devDependencies": {
-    "ava": "^0.14.0",
-    "nock": "^8.0.0",
-    "nyc": "^6.4.2",
-    "semantic-release": "^6.3.2",
-    "xo": "^0.15.0"
+    "kcd-scripts": "^0.29.0",
+    "nock": "^9.1.0"
   },
-  "ava": {
-    "files": [
-      "lib/**/*.test.js"
-    ]
-  },
-  "files": [
-    "cli.js",
-    "lib",
-    "!lib/**/*.test.js",
-    "!lib/**/fixtures"
-  ],
-  "xo": {
-    "space": 2,
+  "eslintIgnore": ["node_modules", "coverage", "dist"],
+  "eslintConfig": {
+    "extends": "./node_modules/kcd-scripts/eslint.js",
     "rules": {
-      "camelcase": [
-        2,
-        {
-          "properties": "never"
-        }
-      ]
+      "camelcase": "off",
+      "no-process-exit": "off",
+      "import/extensions": "off",
+      "func-names": "off",
+      "consistent-return": "off"
     }
   }
 }

@@ -115,6 +115,7 @@ Where `username` is the user's GitHub username, and `contribution` is a
 * fundingFinding: [🔍](# "Funding Finding")
 * ideas: [🤔](# "Ideas, Planning, & Feedback")
 * infra: [🚇](# "Infrastructure (Hosting, Build-Tools, etc)")
+* platform: [📦](# "Packaging/porting to new platform")
 * plugin: [🔌](# "Plugin/utility libraries")
 * question: [💬](# "Answering Questions")
 * review: [👀](# "Reviewed Pull Requests")

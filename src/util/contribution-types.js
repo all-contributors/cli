@@ -53,6 +53,10 @@ const defaultTypes = {
     symbol: '🚇',
     description: 'Infrastructure (Hosting, Build-Tools, etc)',
   },
+  platform: {
+    symbol: '📦',
+    description: 'Packaging/porting to new platform',
+  },
   plugin: {
     symbol: '🔌',
     description: 'Plugin/utility libraries',

@@ -35,6 +35,7 @@ function getQuestions(options, username, contributions) {
         return options.contributors
           .filter(
             entry =>
+              entry.login &&
               entry.login.toLowerCase() === answers.username.toLowerCase(),
           )
           .reduce(
@@ -48,6 +49,7 @@ function getQuestions(options, username, contributions) {
         const previousContributions = options.contributors
           .filter(
             entry =>
+              entry.login &&
               entry.login.toLowerCase() === answers.username.toLowerCase(),
           )
           .reduce(

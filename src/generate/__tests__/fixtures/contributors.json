@@ -19,5 +19,15 @@
     "profile": "http://github.com/chrisinajar",
     "avatar_url": "https://avatars1.githubusercontent.com/u/1500684",
     "contributions": ["doc"]
+  },
+  "nologin": {
+    "name": "No Github Account",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/1500684",
+    "contributions": ["translation"]
+  },
+  "nologin_badrole": {
+    "name": "Wildly Misconfigured",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/1500684",
+    "contributions": ["plumbis"]
   }
 }

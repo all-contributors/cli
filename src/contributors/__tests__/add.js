@@ -26,6 +26,12 @@ function fixtures() {
         profile: 'www.profile.url',
         contributions: [{type: 'blog', url: 'www.blog.url/path'}, 'code'],
       },
+      {
+        name: 'Missing Login',
+        avatar_url: 'www.avatar.url',
+        profile: 'www.profile.url',
+        contributions: ['code'],
+      },
     ],
   }
   return {options}
@@ -71,8 +77,8 @@ test('add new contributor at the end of the list of contributors', () => {
 
   return addContributor(options, username, contributions, mockInfoFetcher).then(
     contributors => {
-      expect(contributors.length).toBe(3)
-      expect(contributors[2]).toEqual({
+      expect(contributors.length).toBe(options.contributors.length + 1)
+      expect(contributors[options.contributors.length]).toEqual({
         login: 'login3',
         name: 'Some name',
         avatar_url: 'www.avatar.url',
@@ -91,8 +97,8 @@ test('add new contributor at the end of the list of contributors with a url link
 
   return addContributor(options, username, contributions, mockInfoFetcher).then(
     contributors => {
-      expect(contributors.length).toBe(3)
-      expect(contributors[2]).toEqual({
+      expect(contributors.length).toBe(options.contributors.length + 1)
+      expect(contributors[options.contributors.length]).toEqual({
         login: 'login3',
         name: 'Some name',
         avatar_url: 'www.avatar.url',
@@ -133,7 +139,7 @@ test(`should update an existing contributor's contributions if a new type is add
   const contributions = ['bug']
   return addContributor(options, username, contributions, mockInfoFetcher).then(
     contributors => {
-      expect(contributors.length).toBe(2)
+      expect(contributors.length).toBe(options.contributors.length)
       expect(contributors[0]).toEqual({
         login: 'login1',
         name: 'Some name',
@@ -171,7 +177,7 @@ test(`should update an existing contributor's contributions if a new type is add
 
   return addContributor(options, username, contributions, mockInfoFetcher).then(
     contributors => {
-      expect(contributors.length).toBe(2)
+      expect(contributors.length).toBe(options.contributors.length)
       expect(contributors[0]).toEqual({
         login: 'login1',
         name: 'Some name',

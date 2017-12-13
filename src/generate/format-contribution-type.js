@@ -19,9 +19,8 @@ module.exports = function formatContribution(
 
   if (!type) {
     throw new Error(
-      `Unknown contribution type ${contribution} for contributor ${
-        contributor.login
-      }`,
+      `Unknown contribution type ${contribution} for contributor ${contributor.login ||
+        contributor.name}`,
     )
   }
 
@@ -32,7 +31,8 @@ module.exports = function formatContribution(
     options,
   }
 
-  let url = `#${contribution}-${contributor.login}`
+  let url = getUrl(contribution, contributor)
+
   if (contribution.url) {
     url = contribution.url
   } else if (type.link) {
@@ -40,4 +40,12 @@ module.exports = function formatContribution(
   }
 
   return linkTemplate(_.assign({url}, templateData))
+}
+
+function getUrl(contribution, contributor) {
+  if (contributor.login) {
+    return `#${contribution}-${contributor.login}`
+  } else {
+    return `#${contribution}`
+  }
 }

@@ -65,3 +65,13 @@ test('format contributor with pipes in their name', () => {
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
+
+test('format contributor with no github account', () => {
+  const contributor = contributors.nologin
+  const {options} = fixtures()
+
+  const expected =
+    '<img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;"/><br /><sub><b>No Github Account</b></sub><br />[🌍](#translation "Translation")'
+
+  expect(formatContributor(options, contributor)).toBe(expected)
+})

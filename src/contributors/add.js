@@ -27,7 +27,10 @@ function updateContributor(options, contributor, contributions) {
 
 function updateExistingContributor(options, username, contributions) {
   return options.contributors.map(contributor => {
-    if (username.toLowerCase() !== contributor.login.toLowerCase()) {
+    if (
+      !contributor.login ||
+      username.toLowerCase() !== contributor.login.toLowerCase()
+    ) {
       return contributor
     }
     return updateContributor(options, contributor, contributions)
@@ -51,7 +54,10 @@ module.exports = function addContributor(
 ) {
   // case insensitive find
   const exists = _.find(contributor => {
-    return contributor.login.toLowerCase() === username.toLowerCase()
+    return (
+      contributor.login &&
+      contributor.login.toLowerCase() === username.toLowerCase()
+    )
   }, options.contributors)
 
   if (exists) {

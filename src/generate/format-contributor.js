@@ -7,6 +7,9 @@ const avatarTemplate = _.template(
 const avatarBlockTemplate = _.template(
   '[<%= avatar %><br /><sub><b><%= name %></b></sub>](<%= contributor.profile %>)',
 )
+const avatarBlockTemplateNoProfile = _.template(
+  '<%= avatar %><br /><sub><b><%= name %></b></sub>',
+)
 const contributorTemplate = _.template(
   '<%= avatarBlock %><br /><%= contributions %>',
 )
@@ -15,15 +18,20 @@ const defaultImageSize = 100
 
 function defaultTemplate(templateData) {
   const avatar = avatarTemplate(templateData)
-  const avatarBlock = avatarBlockTemplate(
-    _.assign(
-      {
-        name: escapeName(templateData.contributor.name),
-        avatar,
-      },
-      templateData,
-    ),
+  const avatarBlockTemplateData = _.assign(
+    {
+      name: escapeName(templateData.contributor.name),
+      avatar,
+    },
+    templateData,
   )
+  let avatarBlock = null
+
+  if (templateData.contributor.profile) {
+    avatarBlock = avatarBlockTemplate(avatarBlockTemplateData)
+  } else {
+    avatarBlock = avatarBlockTemplateNoProfile(avatarBlockTemplateData)
+  }
 
   return contributorTemplate(_.assign({avatarBlock}, templateData))
 }

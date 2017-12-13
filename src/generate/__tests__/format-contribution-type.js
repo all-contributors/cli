@@ -153,3 +153,13 @@ test('throw a helpful error on unknown type', () => {
     formatContributionType(options, contributor, 'docs'),
   ).toThrowError('Unknown contribution type docs for contributor kentcdodds')
 })
+
+test('throw a helpful error on unknown type and no login', () => {
+  const contributor = contributors.nologin_badrole
+  const {options} = fixtures()
+  expect(() =>
+    formatContributionType(options, contributor, 'docs'),
+  ).toThrowError(
+    'Unknown contribution type docs for contributor Wildly Misconfigured',
+  )
+})

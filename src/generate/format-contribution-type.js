@@ -20,9 +20,8 @@ module.exports = function formatContribution(
 
   if (!type) {
     throw new Error(
-      `Unknown contribution type ${
-        contribution
-      } for contributor ${contributor.login || contributor.name}`,
+      `Unknown contribution type ${contribution} for contributor ${contributor.login ||
+        contributor.name}`,
     )
   }
 

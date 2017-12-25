@@ -77,7 +77,7 @@ function getValidUserContributions(options, contributions) {
   )(userContributions)
 
   if (_.isEmpty(validUserContributions)) {
-    throw new Error(`Invalid contribution type/s entered`)
+    throw new Error('Invalid contribution type(s) entered')
   }
 
   return validUserContributions

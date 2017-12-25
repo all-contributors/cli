@@ -3,6 +3,7 @@
   "projectName": "all-contributors-cli",
   "imageSize": 100,
   "commit": false,
+  "contributorsPerLine": 6,
   "contributors": [
     {
       "login": "jfmengels",

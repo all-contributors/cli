@@ -8,21 +8,21 @@ function fixtures() {
         name: 'Jeroen Engels',
         avatar_url: 'https://avatars.githubusercontent.com/u/3869412?v=3',
         profile: 'https://github.com/jfmengels',
-        contributions: [Array],
+        contributions: [],
       },
       {
         login: 'kentcdodds',
         name: 'Kent C. Dodds',
         avatar_url: 'https://avatars.githubusercontent.com/u/1500684?v=3',
         profile: 'http://kentcdodds.com/',
-        contributions: [Array],
+        contributions: [],
       },
       {
         login: 'jccguimaraes',
         name: 'João Guimarães',
         avatar_url: 'https://avatars.githubusercontent.com/u/14871650?v=3',
         profile: 'https://github.com/jccguimaraes',
-        contributions: [Array],
+        contributions: [],
       },
     ],
   }
@@ -34,7 +34,7 @@ test(`should throw error if all contribution types are invalid`, () => {
   const username = 'userName'
   const contributions = 'invalidContributionType1,invalidContributionType2'
   expect(() => prompt(options, username, contributions)).toThrow(
-    'Invalid contribution type/s entered',
+    'Invalid contribution type(s) entered',
   )
 })
 

@@ -86,7 +86,10 @@ function getValidUserContributions(options, contributions) {
 module.exports = function prompt(options, username, contributions) {
   const defaults = {
     username,
-    contributions: getValidUserContributions(options, contributions),
+    contributions:
+      username === undefined && contributions === undefined
+        ? []
+        : getValidUserContributions(options, contributions),
   }
   const questions = getQuestions(options, username, contributions)
   return inquirer.prompt(questions).then(_.assign(defaults))

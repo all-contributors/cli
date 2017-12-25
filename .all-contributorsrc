@@ -180,7 +180,9 @@
       "profile": "https://in.linkedin.com/in/mzubairahmed",
       "contributions": [
         "doc",
-        "bug"
+        "bug",
+        "code",
+        "test"
       ]
     }
   ]

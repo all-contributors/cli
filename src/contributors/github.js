@@ -2,6 +2,7 @@ const pify = require('pify')
 const request = pify(require('request'))
 
 module.exports = function getUserInfo(username) {
+  /* eslint-disable complexity */
   return request
     .get({
       url: `https://api.github.com/users/${username}`,

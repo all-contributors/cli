@@ -171,6 +171,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "M-ZubairAhmed",
+      "name": "Md Zubair Ahmed",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/17708702?v=4",
+      "profile": "https://in.linkedin.com/in/mzubairahmed",
+      "contributions": [
+        "code",
+        "bug",
+        "test"
+      ]
     }
   ]
 }

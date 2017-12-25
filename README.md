@@ -35,10 +35,9 @@ specification.
 
 - [Installation](#installation)
 - [Usage](#usage)
-  - [Generating the contributors list](#generating-the-contributors-list)
-  - [Add/update contributors](#addupdate-contributors)
-  - [Check for missing contributors](#check-for-missing-contributors)
 - [Configuration](#configuration)
+- [Inspiration](#inspiration)
+- [Other Solutions](#other-solutions)
 - [Contributors](#contributors)
 - [LICENSE](#license)
 

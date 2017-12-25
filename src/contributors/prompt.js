@@ -72,6 +72,12 @@ function getValidUserContributions(options, contributions) {
   const validContributionTypes = util.contributionTypes(options)
   const userContributions = contributions && contributions.split(',')
 
+  if (_.isEmpty(userContributions)) {
+    throw new Error(
+      `No contribution type found in the input. Did you forget to include them in the add command?`,
+    )
+  }
+
   const validUserContributions = _.filter(
     userContribution => validContributionTypes[userContribution] !== undefined,
   )(userContributions)

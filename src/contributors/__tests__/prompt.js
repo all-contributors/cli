@@ -57,3 +57,12 @@ test(`should filter valid contribution types from user inserted types`, () => {
     expect(answers.contributions).toEqual(['code', 'bug'])
   })
 })
+
+test(`should throw error if no contribution types were included in add command`, () => {
+  const options = fixtures()
+  const username = 'userName'
+  const contributions = ''
+  expect(() => prompt(options, username, contributions)).toThrow(
+    `No contribution type found in the input. Did you forget to include them in the add command?`,
+  )
+})

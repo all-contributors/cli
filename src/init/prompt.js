@@ -53,6 +53,28 @@ const questions = [
 
 const uniqueFiles = _.flow(_.compact, _.uniq)
 
+function createConfig(answers) {
+  const projectName = _.trim(answers.projectName)
+  const projectOwner = _.trim(answers.projectOwner)
+  if (projectName === '') {
+    throw new Error('Project name is not set, please re run `init`')
+  } else if (projectOwner === '') {
+    throw new Error('Project Owner is not set, please re run `init`')
+  }
+  return {
+    config: {
+      projectName,
+      projectOwner,
+      files: uniqueFiles([answers.contributorFile, answers.badgeFile]),
+      imageSize: answers.imageSize,
+      commit: answers.commit,
+      contributors: [],
+    },
+    contributorFile: answers.contributorFile,
+    badgeFile: answers.badgeFile,
+  }
+}
+
 module.exports = function prompt() {
   return git
     .getRepoInfo()
@@ -63,18 +85,5 @@ module.exports = function prompt() {
       }
       return inquirer.prompt(questions)
     })
-    .then(answers => {
-      return {
-        config: {
-          projectName: answers.projectName,
-          projectOwner: answers.projectOwner,
-          files: uniqueFiles([answers.contributorFile, answers.badgeFile]),
-          imageSize: answers.imageSize,
-          commit: answers.commit,
-          contributors: [],
-        },
-        contributorFile: answers.contributorFile,
-        badgeFile: answers.badgeFile,
-      }
-    })
+    .then(answers => createConfig(answers))
 }

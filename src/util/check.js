@@ -29,9 +29,8 @@ function getContributorsPage(url) {
         body = JSON.parse(res.body)
         contributorsIds = body.map(contributor => contributor.login)
       } catch (error) {
-        throw new Error(error)
+        Error(error)
       }
-
       const nextLink = getNextLink(res.headers.link)
       if (nextLink) {
         return getContributorsPage(nextLink).then(nextContributors => {
@@ -44,12 +43,12 @@ function getContributorsPage(url) {
 }
 
 module.exports = function getContributorsFromGithub(owner, name) {
-  if (owner === '') {
-    throw new Error('Error! Project owner is not set in .all-contributorsrc')
-  } else if (name === '') {
-    throw new Error('Error! Project name is not set in .all-contributorsrc ')
-  } else {
-    const url = `https://api.github.com/repos/${owner}/${name}/contributors?per_page=100`
-    return getContributorsPage(url)
-  }
+  // if (owner === '') {
+  //   throw new Error('Error! Project owner is not set in .all-contributorsrc')
+  // }
+  // if (name === '') {
+  //   throw new Error('Error! Project name is not set in .all-contributorsrc ')
+  // }
+  const url = `https://api.github.com/repos/${owner}/${name}/contributors?per_page=100`
+  return getContributorsPage(url)
 }

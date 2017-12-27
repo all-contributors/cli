@@ -46,3 +46,12 @@ test('Handle multiple results pages correctly', async () => {
   const transformed = await check('facebook', 'react-native')
   expect(transformed).toEqual(reactNativeTransformed)
 })
+
+test('Should throw error is no owner or name is present', () => {
+  expect(() => check('', 'cleave-markdown')).toThrow(
+    'Error! Project owner is not set in .all-contributorsrc',
+  )
+  expect(() => check('M-ZubairAhmed', '')).toThrow(
+    'Error! Project name is not set in .all-contributorsrc',
+  )
+})

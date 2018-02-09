@@ -56,6 +56,9 @@ npm install --save-dev all-contributors-cli
 Then init the project using `init` and answer a few questions:
 
 ```console
+# Use npx for npm@^5.2.0
+npx all-contributors init
+# Or directly execute the bin
 ./node_modules/.bin/all-contributors init
 ```
 

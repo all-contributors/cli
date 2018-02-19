@@ -1,6 +1,7 @@
 const _ = require('lodash/fp')
 const inquirer = require('inquirer')
 const util = require('../util')
+const repo = require('../repo')
 
 const contributionChoices = _.flow(
   util.contributionTypes,
@@ -21,7 +22,7 @@ function getQuestions(options, username, contributions) {
     {
       type: 'input',
       name: 'username',
-      message: "What is the contributor's GitHub username?",
+      message: `What is the contributor's ${repo.getTypeName(options.repoType)} username?`,
       when: !username,
     },
     {

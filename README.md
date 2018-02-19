@@ -104,7 +104,7 @@ all-contributors add <username> <contribution>
 all-contributors add jfmengels code,doc
 ```
 
-Where `username` is the user's GitHub username, and `contribution` is a
+Where `username` is the user's GitHub or Gitlab username, and `contribution` is a
 `,`-separated list of ways to contribute, from the following list
 ([see the specs](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
@@ -156,6 +156,8 @@ These are the keys you can specify:
   `jfmengels/all-contributors-cli` --> `jfmengels`. Mandatory.
 * `projectName`: Name of the project. Example: `jfmengels/all-contributors-cli`
   --> `all-contributors-cli`. Mandatory.
+* `repoType`: Type of repository. Must be either `github` or `gitlab`. Default: `github`.
+* `repoHost`: Points to your repository hostname. Change it if you use a self hosted repository. Default: `https://github.com` if `repoType` is `github`, and `https://gitlab.com` if `repoType` is `gitlab`.
 * `types`: Specify custom symbols or link templates for contribution types. Can
   override the documented types.
 * `imageSize`: Size (in px) of the user's avatar. Default: `100`.

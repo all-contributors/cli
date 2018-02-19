@@ -78,22 +78,23 @@ function checkContributors(argv) {
   return repo
     .getContributors(configData.projectOwner, configData.projectName, configData.repoType, configData.repoHost)
     .then(ghContributors => {
+			const checkKey = repo.getCheckKey(configData.repoType)
       const knownContributions = configData.contributors.reduce((obj, item) => {
-        obj[item.login] = item.contributions
+        obj[item[checkKey]] = item.contributions
         return obj
       }, {})
       const knownContributors = configData.contributors.map(
-        contributor => contributor.login,
+        contributor => contributor[checkKey],
       )
 
       const missingInConfig = ghContributors.filter(
-        login => !knownContributors.includes(login),
+        key => !knownContributors.includes(key),
       )
-      const missingFromGithub = knownContributors.filter(login => {
+      const missingFromGithub = knownContributors.filter(key => {
         return (
-          !ghContributors.includes(login) &&
-          (knownContributions[login].includes('code') ||
-            knownContributions[login].includes('test'))
+          !ghContributors.includes(key) &&
+          (knownContributions[key].includes('code') ||
+            knownContributions[key].includes('test'))
         )
       })
 

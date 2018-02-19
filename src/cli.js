@@ -9,6 +9,7 @@ const inquirer = require('inquirer')
 const init = require('./init')
 const generate = require('./generate')
 const util = require('./util')
+const repo = require('./repo')
 const updateContributors = require('./contributors')
 
 const cwd = process.cwd()
@@ -74,8 +75,8 @@ function addContribution(argv) {
 function checkContributors(argv) {
   const configData = util.configFile.readConfig(argv.config)
 
-  return util
-    .check(configData.projectOwner, configData.projectName)
+  return repo
+    .getContributors(configData.projectOwner, configData.projectName, configData.repoType, configData.repoHost)
     .then(ghContributors => {
       const knownContributions = configData.contributors.reduce((obj, item) => {
         obj[item.login] = item.contributions

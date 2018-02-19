@@ -5,6 +5,7 @@ const SUPPORTED_REPO_TYPES = {
 	github: {
 		value: 'github',
 		name: 'GitHub',
+		checkKey: 'login',
 		defaultHost: 'https://github.com',
 		linkToCommits: '<%= options.repoHost %>/<%= options.projectOwner %>/<%= options.projectName %>/commits?author=<%= contributor.login %>',
 		linkToIssues: '<%= options.repoHost %>/<%= options.projectOwner %>/<%= options.projectName %>/issues?q=author%3A<%= contributor.login %>',
@@ -14,6 +15,7 @@ const SUPPORTED_REPO_TYPES = {
 	gitlab: {
 		value: 'gitlab',
 		name: 'GitLab',
+		checkKey: 'name',
 		defaultHost: 'https://gitlab.com',
 		linkToCommits: '<%= options.repoHost || "https://gitlab.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/commits/master',
 		linkToIssues: '<%= options.repoHost || "https://gitlab.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/issues?author_username=<%= contributor.login %>',
@@ -36,6 +38,13 @@ const getHostname = function(repoType, repoHost) {
 		return repoHost
 	} else if (repoType in SUPPORTED_REPO_TYPES) {
 		return SUPPORTED_REPO_TYPES[repoType].defaultHost
+	}
+	return null
+}
+
+const getCheckKey = function(repoType) {
+	if (repoType in SUPPORTED_REPO_TYPES) {
+		return SUPPORTED_REPO_TYPES[repoType].checkKey
 	}
 	return null
 }
@@ -78,6 +87,7 @@ const getContributors = function(owner, name, repoType, repoHost) {
 module.exports = {
 	getChoices,
 	getHostname,
+	getCheckKey,
 	getTypeName,
 	getLinkToCommits,
 	getLinkToIssues,

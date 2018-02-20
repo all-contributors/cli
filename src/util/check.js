@@ -25,6 +25,9 @@ function getContributorsPage(url) {
     })
     .then(res => {
       const body = JSON.parse(res.body)
+      if (res.statusCode !== 200) {
+        throw new Error(body.message)
+      }
       const contributorsIds = body.map(contributor => contributor.login)
 
       const nextLink = getNextLink(res.headers.link)
@@ -39,8 +42,6 @@ function getContributorsPage(url) {
 }
 
 module.exports = function getContributorsFromGithub(owner, name) {
-  const url = `https://api.github.com/repos/${owner}/${
-    name
-  }/contributors?per_page=100`
+  const url = `https://api.github.com/repos/${owner}/${name}/contributors?per_page=100`
   return getContributorsPage(url)
 }

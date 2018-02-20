@@ -118,7 +118,7 @@ test('append http when no absolute link is provided', async () => {
 })
 
 test('retrieve user from a different github registry', async () => {
-	nock('http://api.github.myhost.com:3000')
+  nock('http://api.github.myhost.com:3000')
     .get('/users/nodisplayname')
     .reply(200, {
       login: 'nodisplayname',

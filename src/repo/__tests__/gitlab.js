@@ -17,7 +17,7 @@ test('handle errors', async () => {
 })
 
 test('fill in the name when it is returned', async () => {
-	nock('https://gitlab.com')
+  nock('https://gitlab.com')
     .get('/api/v4/users?username=nodisplayname')
     .reply(200, [{
       username: 'nodisplayname',
@@ -31,7 +31,7 @@ test('fill in the name when it is returned', async () => {
 })
 
 test('fill in the name when null is returned', async () => {
-	nock('https://gitlab.com')
+  nock('https://gitlab.com')
     .get('/api/v4/users?username=nodisplayname')
     .reply(200, [{
       username: 'nodisplayname',
@@ -45,7 +45,7 @@ test('fill in the name when null is returned', async () => {
 })
 
 test('fill in the name when an empty string is returned', async () => {
-	nock('https://gitlab.com')
+  nock('https://gitlab.com')
     .get('/api/v4/users?username=nodisplayname')
     .reply(200, [{
       username: 'nodisplayname',
@@ -59,9 +59,9 @@ test('fill in the name when an empty string is returned', async () => {
 })
 
 test('append http when no absolute link is provided', async () => {
-	nock('https://gitlab.com')
+  nock('https://gitlab.com')
     .get('/api/v4/users?username=nodisplayname')
-		.reply(200, [{
+    .reply(200, [{
       username: 'nodisplayname',
       name: 'No Display Name',
       avatar_url: 'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
@@ -73,7 +73,7 @@ test('append http when no absolute link is provided', async () => {
 })
 
 test('retrieve user from a different gitlab registry', async () => {
-	nock('http://gitlab.myhost.com:3000')
+  nock('http://gitlab.myhost.com:3000')
     .get('/api/v4/users?username=nodisplayname')
     .reply(200, [{
       username: 'nodisplayname',

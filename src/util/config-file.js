@@ -5,10 +5,10 @@ const _ = require('lodash/fp')
 function readConfig(configPath) {
   try {
     const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
-		if (!('repoType' in config)) {
-			config.repoType = 'github'
-		}
-		return config
+    if (!('repoType' in config)) {
+      config.repoType = 'github'
+    }
+    return config
   } catch (error) {
     if (error.code === 'ENOENT') {
       throw new Error(`Configuration file not found: ${configPath}`)

@@ -78,7 +78,7 @@ function checkContributors(argv) {
   return repo
     .getContributors(configData.projectOwner, configData.projectName, configData.repoType, configData.repoHost)
     .then(ghContributors => {
-			const checkKey = repo.getCheckKey(configData.repoType)
+      const checkKey = repo.getCheckKey(configData.repoType)
       const knownContributions = configData.contributors.reduce((obj, item) => {
         obj[item[checkKey]] = item.contributions
         return obj
@@ -155,16 +155,16 @@ function promptForCommand(argv) {
 promptForCommand(yargv)
   .then(command => {
     switch (command) {
-      case 'init':
-        return init()
-      case 'generate':
-        return startGeneration(yargv)
-      case 'add':
-        return addContribution(yargv)
-      case 'check':
-        return checkContributors(yargv)
-      default:
-        throw new Error(`Unknown command ${command}`)
+    case 'init':
+      return init()
+    case 'generate':
+      return startGeneration(yargv)
+    case 'add':
+      return addContribution(yargv)
+    case 'check':
+      return checkContributors(yargv)
+    default:
+      throw new Error(`Unknown command ${command}`)
     }
   })
   .catch(onError)

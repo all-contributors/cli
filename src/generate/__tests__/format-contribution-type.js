@@ -5,8 +5,8 @@ const fixtures = () => {
   const options = {
     projectOwner: 'jfmengels',
     projectName: 'all-contributors-cli',
-		repoType: 'github',
-		repoHost: 'https://github.com',
+    repoType: 'github',
+    repoHost: 'https://github.com',
     imageSize: 100,
   }
   return {options}

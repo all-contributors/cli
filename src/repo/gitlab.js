@@ -75,6 +75,9 @@ const getContributors = function(owner, name, hostname) {
         .then(newRes => {
           const contributors = JSON.parse(newRes.body)
           if (newRes.statusCode >= 400) {
+            if (newRes.statusCode === 404) {
+              throw new Error('No contributors found on the GitLab repository')
+            }
             throw new Error(contributors.message)
           }
           return contributors.map(item => item.name)

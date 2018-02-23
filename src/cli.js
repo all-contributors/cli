@@ -28,7 +28,7 @@ const yargv = yargs
   .usage('Usage: $0 init')
   .command(
     'check',
-    'Compares contributors from GitHub with the ones credited in .all-contributorsrc',
+    'Compares contributors from the repository with the ones credited in .all-contributorsrc',
   )
   .usage('Usage: $0 check')
   .boolean('commit')
@@ -138,7 +138,7 @@ function promptForCommand(argv) {
           value: 'generate',
         },
         {
-          name: 'Compare contributors from GitHub with the credited ones',
+          name: 'Compare contributors from the repository with the credited ones',
           value: 'check',
         },
       ],

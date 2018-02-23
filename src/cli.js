@@ -90,7 +90,7 @@ function checkContributors(argv) {
       const missingInConfig = repoContributors.filter(
         key => !knownContributors.includes(key),
       )
-      const missingFromGithub = knownContributors.filter(key => {
+      const missingFromRepo = knownContributors.filter(key => {
         return (
           !repoContributors.includes(key) &&
           (knownContributions[key].includes('code') ||
@@ -105,11 +105,11 @@ function checkContributors(argv) {
         process.stdout.write(`    ${missingInConfig.join(', ')}\n`)
       }
 
-      if (missingFromGithub.length) {
+      if (missingFromRepo.length) {
         process.stdout.write(
           chalk.bold('Unknown contributors found in .all-contributorsrc:\n'),
         )
-        process.stdout.write(`${missingFromGithub.join(', ')}\n`)
+        process.stdout.write(`${missingFromRepo.join(', ')}\n`)
       }
     })
 }

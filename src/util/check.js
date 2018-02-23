@@ -25,7 +25,7 @@ function getContributorsPage(url) {
     })
     .then(res => {
       const body = JSON.parse(res.body)
-      if (res.statusCode !== 200) {
+      if (res.statusCode >= 400) {
         throw new Error(body.message)
       }
       const contributorsIds = body.map(contributor => contributor.login)

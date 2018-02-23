@@ -191,6 +191,17 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "tigermarques",
+      "name": "João Marques",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/15315098?v=4",
+      "profile": "https://github.com/tigermarques",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas"
+      ]
     }
   ]
 }

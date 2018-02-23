@@ -9,6 +9,7 @@ const inquirer = require('inquirer')
 const init = require('./init')
 const generate = require('./generate')
 const util = require('./util')
+const repo = require('./repo')
 const updateContributors = require('./contributors')
 
 const cwd = process.cwd()
@@ -27,7 +28,7 @@ const yargv = yargs
   .usage('Usage: $0 init')
   .command(
     'check',
-    'Compares contributors from GitHub with the ones credited in .all-contributorsrc',
+    'Compares contributors from the repository with the ones credited in .all-contributorsrc',
   )
   .usage('Usage: $0 check')
   .boolean('commit')
@@ -74,25 +75,26 @@ function addContribution(argv) {
 function checkContributors(argv) {
   const configData = util.configFile.readConfig(argv.config)
 
-  return util
-    .check(configData.projectOwner, configData.projectName)
-    .then(ghContributors => {
+  return repo
+    .getContributors(configData.projectOwner, configData.projectName, configData.repoType, configData.repoHost)
+    .then(repoContributors => {
+      const checkKey = repo.getCheckKey(configData.repoType)
       const knownContributions = configData.contributors.reduce((obj, item) => {
-        obj[item.login] = item.contributions
+        obj[item[checkKey]] = item.contributions
         return obj
       }, {})
       const knownContributors = configData.contributors.map(
-        contributor => contributor.login,
+        contributor => contributor[checkKey],
       )
 
-      const missingInConfig = ghContributors.filter(
-        login => !knownContributors.includes(login),
+      const missingInConfig = repoContributors.filter(
+        key => !knownContributors.includes(key),
       )
-      const missingFromGithub = knownContributors.filter(login => {
+      const missingFromRepo = knownContributors.filter(key => {
         return (
-          !ghContributors.includes(login) &&
-          (knownContributions[login].includes('code') ||
-            knownContributions[login].includes('test'))
+          !repoContributors.includes(key) &&
+          (knownContributions[key].includes('code') ||
+            knownContributions[key].includes('test'))
         )
       })
 
@@ -103,11 +105,11 @@ function checkContributors(argv) {
         process.stdout.write(`    ${missingInConfig.join(', ')}\n`)
       }
 
-      if (missingFromGithub.length) {
+      if (missingFromRepo.length) {
         process.stdout.write(
           chalk.bold('Unknown contributors found in .all-contributorsrc:\n'),
         )
-        process.stdout.write(`${missingFromGithub.join(', ')}\n`)
+        process.stdout.write(`${missingFromRepo.join(', ')}\n`)
       }
     })
 }
@@ -136,7 +138,7 @@ function promptForCommand(argv) {
           value: 'generate',
         },
         {
-          name: 'Compare contributors from GitHub with the credited ones',
+          name: 'Compare contributors from the repository with the credited ones',
           value: 'check',
         },
       ],
@@ -153,16 +155,16 @@ function promptForCommand(argv) {
 promptForCommand(yargv)
   .then(command => {
     switch (command) {
-      case 'init':
-        return init()
-      case 'generate':
-        return startGeneration(yargv)
-      case 'add':
-        return addContribution(yargv)
-      case 'check':
-        return checkContributors(yargv)
-      default:
-        throw new Error(`Unknown command ${command}`)
+    case 'init':
+      return init()
+    case 'generate':
+      return startGeneration(yargv)
+    case 'add':
+      return addContribution(yargv)
+    case 'check':
+      return checkContributors(yargv)
+    default:
+      throw new Error(`Unknown command ${command}`)
     }
   })
   .catch(onError)

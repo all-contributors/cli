@@ -26,6 +26,9 @@ function getContributorsPage(url) {
     .then(res => {
       const body = JSON.parse(res.body)
       if (res.statusCode >= 400) {
+        if (res.statusCode === 404) {
+          throw new Error('No contributors found on the Github repository')
+        }
         throw new Error(body.message)
       }
       const contributorsIds = body.map(contributor => contributor.login)

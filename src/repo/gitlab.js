@@ -74,9 +74,9 @@ const getContributors = function(owner, name, hostname) {
         })
         .then(newRes => {
           const contributors = JSON.parse(newRes.body)
-					if (newRes.statusCode >= 400) {
-		        throw new Error(contributors.message)
-		      }
+          if (newRes.statusCode >= 400) {
+            throw new Error(contributors.message)
+          }
           return contributors.map(item => item.name)
         })
     })

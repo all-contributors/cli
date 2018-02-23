@@ -77,7 +77,7 @@ function checkContributors(argv) {
 
   return repo
     .getContributors(configData.projectOwner, configData.projectName, configData.repoType, configData.repoHost)
-    .then(ghContributors => {
+    .then(repoContributors => {
       const checkKey = repo.getCheckKey(configData.repoType)
       const knownContributions = configData.contributors.reduce((obj, item) => {
         obj[item[checkKey]] = item.contributions
@@ -87,12 +87,12 @@ function checkContributors(argv) {
         contributor => contributor[checkKey],
       )
 
-      const missingInConfig = ghContributors.filter(
+      const missingInConfig = repoContributors.filter(
         key => !knownContributors.includes(key),
       )
       const missingFromGithub = knownContributors.filter(key => {
         return (
-          !ghContributors.includes(key) &&
+          !repoContributors.includes(key) &&
           (knownContributions[key].includes('code') ||
             knownContributions[key].includes('test'))
         )

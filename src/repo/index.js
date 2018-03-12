@@ -7,8 +7,8 @@ const SUPPORTED_REPO_TYPES = {
     name: 'GitHub',
     checkKey: 'login',
     defaultHost: 'https://github.com',
-    linkToCommits: '<%= options.repoHost %>/<%= options.projectOwner %>/<%= options.projectName %>/commits?author=<%= contributor.login %>',
-    linkToIssues: '<%= options.repoHost %>/<%= options.projectOwner %>/<%= options.projectName %>/issues?q=author%3A<%= contributor.login %>',
+    linkToCommits: '<%= options.repoHost || "https://github.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/commits?author=<%= contributor.login %>',
+    linkToIssues: '<%= options.repoHost || "https://github.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/issues?q=author%3A<%= contributor.login %>',
     getUserInfo: githubAPI.getUserInfo,
     getContributors: githubAPI.getContributors
   },

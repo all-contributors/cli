@@ -30,11 +30,11 @@ test('Writing contributors in an absent configuration file throws a helpful erro
   expect(resolvedError.message).toBe(expected)
 })
 
-test('Should throw error and not edit config file if project name or owner is not set', () => {
+test('Should throw error and not allow editing config file if project name or owner is not set', () => {
   const configPath = './.all-contributorsrc'
   expect(() =>
     configFile.writeConfig(configPath, configFileContent_NoOwner),
-  ).toThrow(`Error! Project Name is not set in ${configPath}`)
+  ).toThrow(`Error! Project Owner is not set in ${configPath}`)
   expect(() =>
     configFile.writeConfig(configPath, configFileContent_NoName),
   ).toThrow(`Error! Project Name is not set in ${configPath}`)

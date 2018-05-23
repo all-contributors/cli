@@ -18,10 +18,10 @@ function readConfig(configPath) {
 }
 
 function writeConfig(configPath, content) {
-  if (content.projectOwner === '') {
-    throw new Error(`Error! Project Name is not set in ${configPath}`)
+  if (!content.projectOwner) {
+    throw new Error(`Error! Project Owner is not set in ${configPath}`)
   }
-  if (content.projectName === '') {
+  if (!content.projectName) {
     throw new Error(`Error! Project Name is not set in ${configPath}`)
   }
   return pify(fs.writeFile)(configPath, `${JSON.stringify(content, null, 2)}\n`)

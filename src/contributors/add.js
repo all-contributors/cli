@@ -38,7 +38,7 @@ function updateExistingContributor(options, username, contributions) {
 }
 
 function addNewContributor(options, username, contributions, infoFetcher) {
-  return infoFetcher(username).then(userData => {
+  return infoFetcher(username, options.repoType, options.repoHost).then(userData => {
     const contributor = _.assign(userData, {
       contributions: formatContributions(options, [], contributions),
     })

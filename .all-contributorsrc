@@ -184,6 +184,26 @@
         "code",
         "test"
       ]
+    },
+    {
+      "login": "bogas04",
+      "name": "Divjot Singh",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/6177621?v=4",
+      "profile": "http://bogas04.github.io",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "tigermarques",
+      "name": "João Marques",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/15315098?v=4",
+      "profile": "https://github.com/tigermarques",
+      "contributions": [
+        "code",
+        "doc",
+        "ideas"
+      ]
     }
   ]
 }

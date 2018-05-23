@@ -1,7 +1,7 @@
 const _ = require('lodash/fp')
 const util = require('../util')
+const repo = require('../repo')
 const add = require('./add')
-const github = require('./github')
 const prompt = require('./prompt')
 
 function isNewContributor(contributorList, username) {
@@ -11,7 +11,7 @@ function isNewContributor(contributorList, username) {
 module.exports = function addContributor(options, username, contributions) {
   const answersP = prompt(options, username, contributions)
   const contributorsP = answersP.then(answers =>
-    add(options, answers.username, answers.contributions, github),
+    add(options, answers.username, answers.contributions, repo.getUserInfo),
   )
 
   const writeContributorsP = contributorsP.then(contributors =>

@@ -34,8 +34,8 @@ test('Should throw error and not allow editing config file if project name or ow
   const configPath = './.all-contributorsrc'
   expect(() =>
     configFile.writeConfig(configPath, configFileContent_NoOwner),
-  ).toThrow(`Error! Project Owner is not set in ${configPath}`)
+  ).toThrow(`Error! Project owner is not set in ${configPath}`)
   expect(() =>
     configFile.writeConfig(configPath, configFileContent_NoName),
-  ).toThrow(`Error! Project Name is not set in ${configPath}`)
+  ).toThrow(`Error! Project name is not set in ${configPath}`)
 })

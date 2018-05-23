@@ -14,6 +14,34 @@ const questions = [
     message: 'Who is the owner of the repository?',
   },
   {
+    type: 'list',
+    name: 'repoType',
+    message: 'What is the repository type?',
+    choices: [
+      {
+        value: 'github',
+        name: 'GitHub',
+      },
+      {
+        value: 'gitlab',
+        name: 'GitLab',
+      },
+    ],
+    default: 'github',
+  },
+  {
+    type: 'input',
+    name: 'repoHost',
+    message: 'Where is the repository hosted?',
+    default: function(answers) {
+      if (answers.repoType === 'github') {
+        return 'https://github.com'
+      } else if (answers.repoType === 'gitlab') {
+        return 'https://gitlab.com'
+      }
+    },
+  },
+  {
     type: 'input',
     name: 'contributorFile',
     message: 'In which file should contributors be listed?',
@@ -66,8 +94,10 @@ module.exports = function prompt() {
     .then(answers => {
       return {
         config: {
-          projectName: _.trim(answers.projectName),
-          projectOwner: _.trim(answers.projectOwner),
+          projectName: answers.projectName,
+          projectOwner: answers.projectOwner,
+          repoType: answers.repoType,
+          repoHost: answers.repoHost,
           files: uniqueFiles([answers.contributorFile, answers.badgeFile]),
           imageSize: answers.imageSize,
           commit: answers.commit,

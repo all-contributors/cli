@@ -1,8 +1,9 @@
 import configFile from '../config-file'
 
 const absentFile = './abc'
-const expected = `Configuration file not found: ${absentFile}`
-const configFileContent_NoOwner = {
+const absentConfileFileExpected = `Configuration file not found: ${absentFile}`
+const incompleteConfigFilePath = './.all-contributorsrc'
+const NoOwnerConfigFile = {
   projectOwner: '',
   projectName: 'all-contributors-cli',
   imageSize: 100,
@@ -10,7 +11,7 @@ const configFileContent_NoOwner = {
   contributorsPerLine: 6,
   contributors: [],
 }
-const configFileContent_NoName = {
+const NoNameConfigFile = {
   projectOwner: 'jfmengels',
   projectName: '',
   imageSize: 100,
@@ -20,22 +21,23 @@ const configFileContent_NoName = {
 }
 
 test('Reading an absent configuration file throws a helpful error', () => {
-  expect(() => configFile.readConfig(absentFile)).toThrowError(expected)
+  expect(() => configFile.readConfig(absentFile)).toThrowError(
+    absentConfileFileExpected,
+  )
 })
 
 test('Writing contributors in an absent configuration file throws a helpful error', async () => {
   const resolvedError = await configFile
     .writeContributors(absentFile, [])
     .catch(e => e)
-  expect(resolvedError.message).toBe(expected)
+  expect(resolvedError.message).toBe(absentConfileFileExpected)
 })
 
 test('Should throw error and not allow editing config file if project name or owner is not set', () => {
-  const configPath = './.all-contributorsrc'
   expect(() =>
-    configFile.writeConfig(configPath, configFileContent_NoOwner),
-  ).toThrow(`Error! Project owner is not set in ${configPath}`)
+    configFile.writeConfig(incompleteConfigFilePath, NoOwnerConfigFile),
+  ).toThrow(`Error! Project owner is not set in ${incompleteConfigFilePath}`)
   expect(() =>
-    configFile.writeConfig(configPath, configFileContent_NoName),
-  ).toThrow(`Error! Project name is not set in ${configPath}`)
+    configFile.writeConfig(incompleteConfigFilePath, NoNameConfigFile),
+  ).toThrow(`Error! Project name is not set in ${incompleteConfigFilePath}`)
 })

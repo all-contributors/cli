@@ -6,10 +6,7 @@ function uniqueTypes(contribution) {
 
 function formatContributions(options, existing = [], types) {
   const same = _.intersectionBy(uniqueTypes, existing, types)
-  const diff = _.differenceBy(uniqueTypes, existing, types)
-
-  const keep = same.length
-  const remove = same.length && diff.length
+  const remove = types.length < existing.length && same.length
 
   if (options.url) {
     return existing.concat(
@@ -19,7 +16,7 @@ function formatContributions(options, existing = [], types) {
     )
   }
 
-  if (remove || keep) {
+  if (remove) {
     return same
   }
 

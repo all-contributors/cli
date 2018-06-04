@@ -24,6 +24,11 @@ function writeConfig(configPath, content) {
   if (!content.projectName) {
     throw new Error(`Error! Project name is not set in ${configPath}`)
   }
+  if (!content.files.length) {
+    throw new Error(
+      `Error! Project files was overridden and is empty in ${configPath}`,
+    )
+  }
   return pify(fs.writeFile)(configPath, `${JSON.stringify(content, null, 2)}\n`)
 }
 

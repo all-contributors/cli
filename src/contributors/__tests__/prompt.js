@@ -34,7 +34,7 @@ test(`should throw error if all contribution types are invalid`, () => {
   const username = 'userName'
   const contributions = 'invalidContributionType1,invalidContributionType2'
   expect(() => prompt(options, username, contributions)).toThrow(
-    'Invalid contribution type(s) entered',
+    'invalidContributionType1,invalidContributionType2 is/are invalid contribution type(s)',
   )
 })
 

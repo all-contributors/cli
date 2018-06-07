@@ -22,7 +22,9 @@ function getQuestions(options, username, contributions) {
     {
       type: 'input',
       name: 'username',
-      message: `What is the contributor's ${repo.getTypeName(options.repoType)} username?`,
+      message: `What is the contributor's ${repo.getTypeName(
+        options.repoType,
+      )} username?`,
       when: !username,
     },
     {
@@ -77,8 +79,14 @@ function getValidUserContributions(options, contributions) {
     userContribution => validContributionTypes[userContribution] !== undefined,
   )(userContributions)
 
+  const invalidUserContributions = _.filter(
+    userContribution => validContributionTypes[userContribution] === undefined,
+  )(userContributions)
+
   if (_.isEmpty(validUserContributions)) {
-    throw new Error('Invalid contribution type(s) entered')
+    throw new Error(
+      `${invalidUserContributions.toString()} is/are invalid contribution type(s)`,
+    )
   }
 
   return validUserContributions

@@ -127,6 +127,9 @@ test('retrieve user from a different github registry', async () => {
       html_url: 'http://github.myhost.com:3000/nodisplayname',
     })
 
-  const info = await getUserInfo('nodisplayname', 'http://github.myhost.com:3000')
+  const info = await getUserInfo(
+    'nodisplayname',
+    'http://github.myhost.com:3000',
+  )
   expect(info.name).toBe('No Display Name')
 })

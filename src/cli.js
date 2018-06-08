@@ -76,7 +76,12 @@ function checkContributors(argv) {
   const configData = util.configFile.readConfig(argv.config)
 
   return repo
-    .getContributors(configData.projectOwner, configData.projectName, configData.repoType, configData.repoHost)
+    .getContributors(
+      configData.projectOwner,
+      configData.projectName,
+      configData.repoType,
+      configData.repoHost,
+    )
     .then(repoContributors => {
       const checkKey = repo.getCheckKey(configData.repoType)
       const knownContributions = configData.contributors.reduce((obj, item) => {
@@ -138,7 +143,8 @@ function promptForCommand(argv) {
           value: 'generate',
         },
         {
-          name: 'Compare contributors from the repository with the credited ones',
+          name:
+            'Compare contributors from the repository with the credited ones',
           value: 'check',
         },
       ],
@@ -155,16 +161,16 @@ function promptForCommand(argv) {
 promptForCommand(yargv)
   .then(command => {
     switch (command) {
-    case 'init':
-      return init()
-    case 'generate':
-      return startGeneration(yargv)
-    case 'add':
-      return addContribution(yargv)
-    case 'check':
-      return checkContributors(yargv)
-    default:
-      throw new Error(`Unknown command ${command}`)
+      case 'init':
+        return init()
+      case 'generate':
+        return startGeneration(yargv)
+      case 'add':
+        return addContribution(yargv)
+      case 'check':
+        return checkContributors(yargv)
+      default:
+        throw new Error(`Unknown command ${command}`)
     }
   })
   .catch(onError)

@@ -7,30 +7,36 @@ const SUPPORTED_REPO_TYPES = {
     name: 'GitHub',
     checkKey: 'login',
     defaultHost: 'https://github.com',
-    linkToCommits: '<%= options.repoHost || "https://github.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/commits?author=<%= contributor.login %>',
-    linkToIssues: '<%= options.repoHost || "https://github.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/issues?q=author%3A<%= contributor.login %>',
+    linkToCommits:
+      '<%= options.repoHost || "https://github.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/commits?author=<%= contributor.login %>',
+    linkToIssues:
+      '<%= options.repoHost || "https://github.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/issues?q=author%3A<%= contributor.login %>',
     getUserInfo: githubAPI.getUserInfo,
-    getContributors: githubAPI.getContributors
+    getContributors: githubAPI.getContributors,
   },
   gitlab: {
     value: 'gitlab',
     name: 'GitLab',
     checkKey: 'name',
     defaultHost: 'https://gitlab.com',
-    linkToCommits: '<%= options.repoHost || "https://gitlab.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/commits/master',
-    linkToIssues: '<%= options.repoHost || "https://gitlab.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/issues?author_username=<%= contributor.login %>',
+    linkToCommits:
+      '<%= options.repoHost || "https://gitlab.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/commits/master',
+    linkToIssues:
+      '<%= options.repoHost || "https://gitlab.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/issues?author_username=<%= contributor.login %>',
     getUserInfo: gitlabAPI.getUserInfo,
-    getContributors: gitlabAPI.getContributors
-  }
+    getContributors: gitlabAPI.getContributors,
+  },
 }
 
 const getChoices = function() {
-  return Object.keys(SUPPORTED_REPO_TYPES).map(key => SUPPORTED_REPO_TYPES[key]).map(item => {
-    return {
-      value: item.value,
-      name: item.name
-    }
-  })
+  return Object.keys(SUPPORTED_REPO_TYPES)
+    .map(key => SUPPORTED_REPO_TYPES[key])
+    .map(item => {
+      return {
+        value: item.value,
+        name: item.name,
+      }
+    })
 }
 
 const getHostname = function(repoType, repoHost) {
@@ -72,14 +78,21 @@ const getLinkToIssues = function(repoType) {
 
 const getUserInfo = function(username, repoType, repoHost) {
   if (repoType in SUPPORTED_REPO_TYPES) {
-    return SUPPORTED_REPO_TYPES[repoType].getUserInfo(username, getHostname(repoType, repoHost))
+    return SUPPORTED_REPO_TYPES[repoType].getUserInfo(
+      username,
+      getHostname(repoType, repoHost),
+    )
   }
   return null
 }
 
 const getContributors = function(owner, name, repoType, repoHost) {
   if (repoType in SUPPORTED_REPO_TYPES) {
-    return SUPPORTED_REPO_TYPES[repoType].getContributors(owner, name, getHostname(repoType, repoHost))
+    return SUPPORTED_REPO_TYPES[repoType].getContributors(
+      owner,
+      name,
+      getHostname(repoType, repoHost),
+    )
   }
   return null
 }
@@ -92,5 +105,5 @@ module.exports = {
   getLinkToCommits,
   getLinkToIssues,
   getUserInfo,
-  getContributors
+  getContributors,
 }

@@ -22,7 +22,9 @@ function getQuestions(options, username, contributions) {
     {
       type: 'input',
       name: 'username',
-      message: `What is the contributor's ${repo.getTypeName(options.repoType)} username?`,
+      message: `What is the contributor's ${repo.getTypeName(
+        options.repoType,
+      )} username?`,
       when: !username,
     },
     {

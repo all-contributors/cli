@@ -71,10 +71,34 @@ function getQuestions(options, username, contributions) {
   ]
 }
 
+function getValidUserContributions(options, contributions) {
+  const validContributionTypes = util.contributionTypes(options)
+  const userContributions = contributions && contributions.split(',')
+
+  const validUserContributions = _.filter(
+    userContribution => validContributionTypes[userContribution] !== undefined,
+  )(userContributions)
+
+  const invalidUserContributions = _.filter(
+    userContribution => validContributionTypes[userContribution] === undefined,
+  )(userContributions)
+
+  if (_.isEmpty(validUserContributions)) {
+    throw new Error(
+      `${invalidUserContributions.toString()} is/are invalid contribution type(s)`,
+    )
+  }
+
+  return validUserContributions
+}
+
 module.exports = function prompt(options, username, contributions) {
   const defaults = {
     username,
-    contributions: contributions && contributions.split(','),
+    contributions:
+      username === undefined && contributions === undefined
+        ? []
+        : getValidUserContributions(options, contributions),
   }
   const questions = getQuestions(options, username, contributions)
   return inquirer.prompt(questions).then(_.assign(defaults))

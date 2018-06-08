@@ -127,6 +127,27 @@ test('retrieve user from a different github registry', async () => {
       html_url: 'http://github.myhost.com:3000/nodisplayname',
     })
 
-  const info = await getUserInfo('nodisplayname', 'http://github.myhost.com:3000')
+  const info = await getUserInfo(
+    'nodisplayname',
+    'http://github.myhost.com:3000',
+  )
+  expect(info.name).toBe('No Display Name')
+})
+
+test('retrieve user from a github enterprise', async () => {
+  nock('http://github.enterprise.com:3000/api/v3')
+    .get('/users/nodisplayname')
+    .reply(200, {
+      login: 'nodisplayname',
+      name: 'No Display Name',
+      avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
+      html_url: 'http://github.enterprise.com:3000/nodisplayname',
+    })
+
+  const info = await getUserInfo(
+    'nodisplayname',
+    'http://github.enterprise.com:3000',
+    true,
+  )
   expect(info.name).toBe('No Display Name')
 })

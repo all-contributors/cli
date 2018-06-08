@@ -166,6 +166,7 @@ These are the keys you can specify:
 * `contributorTemplate`: Define your own template to generate the contributor
   list.
 * `badgeTemplate`: Define your own template to generate the badge.
+* `isEnterprise`: True if repo is hosted on a githhub enterprise instance.
 
 ## Contributors
 

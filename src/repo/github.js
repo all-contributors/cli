@@ -1,5 +1,12 @@
+const url = require('url')
 const pify = require('pify')
 const request = pify(require('request'))
+
+function getApiHost(hostname, isEnterprise) {
+  return isEnterprise
+    ? url.resolve(hostname, '/api/v3')
+    : hostname.replace(/:\/\//, '://api.')
+}
 
 function getNextLink(link) {
   if (!link) {
@@ -15,10 +22,10 @@ function getNextLink(link) {
   return nextLink.split(';')[0].slice(1, -1)
 }
 
-function getContributorsPage(url) {
+function getContributorsPage(githubUrl) {
   return request
     .get({
-      url,
+      url: githubUrl,
       headers: {
         'User-Agent': 'request',
       },
@@ -44,13 +51,13 @@ function getContributorsPage(url) {
     })
 }
 
-const getUserInfo = function(username, hostname) {
+const getUserInfo = function(username, hostname, isEnterprise) {
   /* eslint-disable complexity */
   if (!hostname) {
-    hostname = 'https://github.com';
+    hostname = 'https://github.com'
   }
 
-  const root = hostname.replace(/:\/\//, '://api.')
+  const root = getApiHost(hostname, isEnterprise)
   return request
     .get({
       url: `${root}/users/${username}`,
@@ -78,17 +85,18 @@ const getUserInfo = function(username, hostname) {
     })
 }
 
-const getContributors = function(owner, name, hostname) {
+const getContributors = function(owner, name, hostname, isEnterprise) {
   if (!hostname) {
-    hostname = 'https://github.com';
+    hostname = 'https://github.com'
   }
 
-  const root = hostname.replace(/:\/\//, '://api.')
-  const url = `${root}/repos/${owner}/${name}/contributors?per_page=100`
-  return getContributorsPage(url)
+  const root = getApiHost(hostname, isEnterprise)
+  const githubUrl = `${root}/repos/${owner}/${name}/contributors?per_page=100`
+
+  return getContributorsPage(githubUrl)
 }
 
 module.exports = {
   getUserInfo,
-  getContributors
+  getContributors,
 }

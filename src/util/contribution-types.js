@@ -90,7 +90,7 @@ const defaultTypes = function(repoType) {
     video: {
       symbol: '📹',
       description: 'Videos',
-    }
+    },
   }
 }
 

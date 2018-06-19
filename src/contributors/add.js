@@ -4,15 +4,23 @@ function uniqueTypes(contribution) {
   return contribution.type || contribution
 }
 
-function formatContributions(options, existing, types) {
+function formatContributions(options, existing = [], types) {
+  const same = _.intersectionBy(uniqueTypes, existing, types)
+  const remove = types.length < existing.length && same.length
+
   if (options.url) {
-    return (existing || []).concat(
+    return existing.concat(
       types.map(type => {
         return {type, url: options.url}
       }),
     )
   }
-  return _.uniqBy(uniqueTypes, (existing || []).concat(types))
+
+  if (remove) {
+    return same
+  }
+
+  return _.uniqBy(uniqueTypes, existing.concat(types))
 }
 
 function updateContributor(options, contributor, contributions) {

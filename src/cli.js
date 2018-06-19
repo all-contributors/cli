@@ -135,7 +135,7 @@ function promptForCommand(argv) {
       message: 'What do you want to do?',
       choices: [
         {
-          name: 'Add a new contributor or add a new contribution type',
+          name: 'Add new contributor or edit contribution type',
           value: 'add',
         },
         {

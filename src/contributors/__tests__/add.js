@@ -188,3 +188,22 @@ test(`should update an existing contributor's contributions if a new type is add
     },
   )
 })
+
+test(`should update an existing contributor's contributions if an existing type is removed`, () => {
+  const {options} = fixtures()
+  const username = 'login2'
+  const contributions = ['code']
+
+  return addContributor(options, username, contributions, mockInfoFetcher).then(
+    contributors => {
+      expect(contributors.length).toBe(options.contributors.length)
+      expect(contributors[1]).toEqual({
+        login: 'login2',
+        name: 'Some name',
+        avatar_url: 'www.avatar.url',
+        profile: 'www.profile.url',
+        contributions: ['code'],
+      })
+    },
+  )
+})

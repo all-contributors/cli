@@ -1,4 +1,5 @@
 const _ = require('lodash/fp')
+
 const util = require('../util')
 
 const linkTemplate = _.template(

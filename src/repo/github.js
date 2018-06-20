@@ -47,7 +47,7 @@ function getContributorsPage(url) {
 const getUserInfo = function(username, hostname) {
   /* eslint-disable complexity */
   if (!hostname) {
-    hostname = 'https://github.com';
+    hostname = 'https://github.com'
   }
 
   const root = hostname.replace(/:\/\//, '://api.')
@@ -80,7 +80,7 @@ const getUserInfo = function(username, hostname) {
 
 const getContributors = function(owner, name, hostname) {
   if (!hostname) {
-    hostname = 'https://github.com';
+    hostname = 'https://github.com'
   }
 
   const root = hostname.replace(/:\/\//, '://api.')
@@ -90,5 +90,5 @@ const getContributors = function(owner, name, hostname) {
 
 module.exports = {
   getUserInfo,
-  getContributors
+  getContributors,
 }

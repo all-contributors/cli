@@ -84,7 +84,14 @@ npm run contributors:generate
 
 ### Generating the contributors list
 
-Use `generate` to generate the contributors list and inject it into your
+Please add following placeholders in [`files`](#configuration) to specify the generation area first.
+
+```
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+```
+
+Then use `generate` to generate the contributors list and inject it into your
 contributors file. Contributors will be read from your configuration file.
 
 ```console

@@ -37,8 +37,16 @@ function getRepoInfo() {
 
 const spawnGitCommand = pify((args, cb) => {
   const git = spawn('git', args)
-  git.stderr.on('data', cb)
-  git.on('close', cb)
+  const bufs = [];
+  git.stderr.on('data', (buf) => bufs.push(buf));
+  git.on('close', (code) => {
+    if (code) {
+      const msg = Buffer.concat(bufs).toString() || `git ${args.join('')} - exit code: ${code}`;
+      cb(new Error(msg));
+    } else {
+      cb(null);
+    }
+  });
 })
 
 function commit(options, data) {

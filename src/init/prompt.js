@@ -32,7 +32,7 @@ const questions = [
   {
     type: 'input',
     name: 'repoHost',
-    message: 'Where is the repository hosted?',
+    message: 'Where is the repository hosted? Hit Enter if it\'s on GitHub or GitLab',
     default: function(answers) {
       if (answers.repoType === 'github') {
         return 'https://github.com'

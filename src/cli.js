@@ -81,6 +81,7 @@ function checkContributors(argv) {
       configData.projectName,
       configData.repoType,
       configData.repoHost,
+      configData.privateToken,
     )
     .then(repoContributors => {
       const checkKey = repo.getCheckKey(configData.repoType)

@@ -1,7 +1,14 @@
 const pify = require('pify')
 const request = pify(require('request'))
 
-const getUserInfo = function(username, hostname) {
+const addPrivateToken = (url, privateToken = '') => {
+  if (privateToken === '') return url
+  return `${url}&private_token=${privateToken}`
+    .replace(/\?/g, '&')
+    .replace('&', '?')
+}
+
+const getUserInfo = function(username, hostname, privateToken = '') {
   /* eslint-disable complexity */
   if (!hostname) {
     hostname = 'https://gitlab.com'
@@ -9,7 +16,10 @@ const getUserInfo = function(username, hostname) {
 
   return request
     .get({
-      url: `${hostname}/api/v4/users?username=${username}`,
+      url: addPrivateToken(
+        `${hostname}/api/v4/users?username=${username}`,
+        privateToken,
+      ),
       headers: {
         'User-Agent': 'request',
       },
@@ -35,14 +45,17 @@ const getUserInfo = function(username, hostname) {
     })
 }
 
-const getContributors = function(owner, name, hostname) {
+const getContributors = function(owner, name, hostname, privateToken = '') {
   if (!hostname) {
     hostname = 'https://gitlab.com'
   }
 
   return request
     .get({
-      url: `${hostname}/api/v4/projects?search=${name}`,
+      url: addPrivateToken(
+        `${hostname}/api/v4/projects?search=${name}`,
+        privateToken,
+      ),
       headers: {
         'User-Agent': 'request',
       },
@@ -69,9 +82,10 @@ const getContributors = function(owner, name, hostname) {
 
       return request
         .get({
-          url: `${hostname}/api/v4/projects/${
-            project.id
-          }/repository/contributors`,
+          url: addPrivateToken(
+            `${hostname}/api/v4/projects/${project.id}/repository/contributors`,
+            privateToken,
+          ),
           headers: {
             'User-Agent': 'request',
           },

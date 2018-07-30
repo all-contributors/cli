@@ -103,3 +103,32 @@ test('retrieve user from a different gitlab registry', async () => {
   )
   expect(info.name).toBe('No Display Name')
 })
+
+test('retrieve user from a gitlab registry that needs a token', async () => {
+  nock('http://gitlab.needtoken.com:3000')
+    .get('/api/v4/users?username=nodisplayname&private_token=faketoken')
+    .reply(200, [
+      {
+        username: 'nodisplayname',
+        name: 'No Display Name',
+        avatar_url:
+          'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
+        web_url: 'https://gitlab.com/nodisplayname',
+      },
+    ])
+  const info = await getUserInfo(
+    'nodisplayname',
+    'http://gitlab.needtoken.com:3000',
+    'faketoken',
+  )
+  expect(info.name).toBe('No Display Name')
+})
+
+test('handle error when no token is offered', async () => {
+  nock('http://gitlab.needtoken.com:3000')
+    .get('/api/v4/users?username=nodisplayname')
+    .reply(200, [])
+  await rejects(
+    getUserInfo('nodisplayname', 'http://gitlab.needtoken.com:3000', ''),
+  )
+})

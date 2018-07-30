@@ -46,14 +46,17 @@ function updateExistingContributor(options, username, contributions) {
 }
 
 function addNewContributor(options, username, contributions, infoFetcher) {
-  return infoFetcher(username, options.repoType, options.repoHost).then(
-    userData => {
-      const contributor = _.assign(userData, {
-        contributions: formatContributions(options, [], contributions),
-      })
-      return options.contributors.concat(contributor)
-    },
-  )
+  return infoFetcher(
+    username,
+    options.repoType,
+    options.repoHost,
+    options.privateToken,
+  ).then(userData => {
+    const contributor = _.assign(userData, {
+      contributions: formatContributions(options, [], contributions),
+    })
+    return options.contributors.concat(contributor)
+  })
 }
 
 module.exports = function addContributor(

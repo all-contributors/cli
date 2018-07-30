@@ -76,22 +76,30 @@ const getLinkToIssues = function(repoType) {
   return null
 }
 
-const getUserInfo = function(username, repoType, repoHost) {
+const getUserInfo = function(username, repoType, repoHost, privateToken = '') {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].getUserInfo(
       username,
       getHostname(repoType, repoHost),
+      privateToken,
     )
   }
   return null
 }
 
-const getContributors = function(owner, name, repoType, repoHost) {
+const getContributors = function(
+  owner,
+  name,
+  repoType,
+  repoHost,
+  privateToken = '',
+) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].getContributors(
       owner,
       name,
       getHostname(repoType, repoHost),
+      privateToken,
     )
   }
   return null

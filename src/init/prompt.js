@@ -32,7 +32,8 @@ const questions = [
   {
     type: 'input',
     name: 'repoHost',
-    message: 'Where is the repository hosted? Hit Enter if it\'s on GitHub or GitLab',
+    message:
+      "Where is the repository hosted? Hit Enter if it's on GitHub or GitLab",
     default: function(answers) {
       if (answers.repoType === 'github') {
         return 'https://github.com'
@@ -40,6 +41,13 @@ const questions = [
         return 'https://gitlab.com'
       }
     },
+  },
+  {
+    type: 'input',
+    name: 'privateToken',
+    message:
+      'What is the personal access token? (If you use a self hosted repository)',
+    default: '',
   },
   {
     type: 'input',
@@ -79,7 +87,10 @@ const questions = [
   },
 ]
 
-const uniqueFiles = _.flow(_.compact, _.uniq)
+const uniqueFiles = _.flow(
+  _.compact,
+  _.uniq,
+)
 
 module.exports = function prompt() {
   return git
@@ -98,6 +109,7 @@ module.exports = function prompt() {
           projectOwner: answers.projectOwner,
           repoType: answers.repoType,
           repoHost: answers.repoHost,
+          privateToken: answers.privateToken,
           files: uniqueFiles([answers.contributorFile, answers.badgeFile]),
           imageSize: answers.imageSize,
           commit: answers.commit,

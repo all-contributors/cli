@@ -165,6 +165,7 @@ These are the keys you can specify:
   --> `all-contributors-cli`. Mandatory.
 * `repoType`: Type of repository. Must be either `github` or `gitlab`. Default: `github`.
 * `repoHost`: Points to the repository hostname. Change it if you use a self hosted repository. Default: `https://github.com` if `repoType` is `github`, and `https://gitlab.com` if `repoType` is `gitlab`.
+* `privateToken`: The personal access token to authenticate with the GitLab API. Offer it if you use a self hosted repository. Default: `''`. *WARNING: this will keep your private token in the config file, and may commit to git*
 * `types`: Specify custom symbols or link templates for contribution types. Can
   override the documented types.
 * `imageSize`: Size (in px) of the user's avatar. Default: `100`.

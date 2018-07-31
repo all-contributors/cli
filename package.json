@@ -5,7 +5,9 @@
   "bin": {
     "all-contributors": "dist/cli.js"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=4"
   },
@@ -21,7 +23,10 @@
     "type": "git",
     "url": "https://github.com/jfmengels/all-contributors-cli.git"
   },
-  "keywords": ["all-contributors", "contributors"],
+  "keywords": [
+    "all-contributors",
+    "contributors"
+  ],
   "author": "Jeroen Engels <jfm.engels@gmail.com>",
   "license": "MIT",
   "bugs": {
@@ -38,10 +43,14 @@
     "yargs": "^10.0.3"
   },
   "devDependencies": {
-    "kcd-scripts": "^0.29.0",
+    "kcd-scripts": "^0.30.0",
     "nock": "^9.1.0"
   },
-  "eslintIgnore": ["node_modules", "coverage", "dist"],
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist"
+  ],
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js",
     "rules": {

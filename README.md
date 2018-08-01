@@ -137,16 +137,16 @@ Where `username` is the user's GitHub or Gitlab username, and `contribution` is 
 * tutorial: [✅](# "Tutorials")
 * video: [📹](# "Videos")
 
-Please note that if you are using a self-hosted gitlab instance, before add 
+Please note that if you are using a self-hosted gitlab instance, before adding 
 contributor, you need to set an environment variable named `PRIVATE_TOKEN` first.
 
 > Private token is the personal access token to authenticate with the GitLab API.
 
 ```console
 # set private token on linux
-export PRIVATE_TOKEN=your_privete_token
+export PRIVATE_TOKEN=your_private_token
 # set private token on windows
-set PRIVATE_TOKEN=your_privete_token
+set PRIVATE_TOKEN=your_private_token
 ```
 
 ### Check for missing contributors

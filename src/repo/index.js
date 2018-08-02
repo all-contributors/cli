@@ -1,6 +1,7 @@
 const githubAPI = require('./github')
 const gitlabAPI = require('./gitlab')
 
+const privateToken = (process.env && process.env.PRIVATE_TOKEN) || ''
 const SUPPORTED_REPO_TYPES = {
   github: {
     value: 'github',
@@ -81,6 +82,7 @@ const getUserInfo = function(username, repoType, repoHost) {
     return SUPPORTED_REPO_TYPES[repoType].getUserInfo(
       username,
       getHostname(repoType, repoHost),
+      privateToken,
     )
   }
   return null
@@ -92,6 +94,7 @@ const getContributors = function(owner, name, repoType, repoHost) {
       owner,
       name,
       getHostname(repoType, repoHost),
+      privateToken,
     )
   }
   return null

@@ -2,6 +2,7 @@
   "projectOwner": "jfmengels",
   "projectName": "all-contributors-cli",
   "imageSize": 100,
+  "repoType": "github",
   "commit": false,
   "contributorsPerLine": 6,
   "contributors": [
@@ -232,9 +233,16 @@
       "profile": "https://github.com/xuchaoying",
       "contributions": [
         "code",
+      ]
+    },
+    {
+      "login": "chris-dura",
+      "name": "Dura",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3680914?v=4",
+      "profile": "https://github.com/chris-dura",
+      "contributions": [
         "doc"
       ]
     }
-  ],
-  "repoType": "github"
+  ]
 }

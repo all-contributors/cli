@@ -32,7 +32,6 @@ specification for your GitHub or GitLab repository.
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
 - [Installation](#installation)
 - [Usage](#usage)
   - [Generating the contributors list](#generating-the-contributors-list)
@@ -115,27 +114,27 @@ Where `username` is the user's GitHub or Gitlab username, and `contribution` is 
 `,`-separated list of ways to contribute, from the following list
 ([see the specs](https://github.com/kentcdodds/all-contributors#emoji-key)):
 
-* blog: [📝](# "Blogposts")
-* bug: [🐛](# "Bug reports")
-* code: [💻](# "Code")
-* design: [🎨](# "Design")
-* doc: [📖](# "Documentation")
-* eventOrganizing: [📋](# "Event Organizing")
-* example: [💡](# "Examples")
-* financial: [💵](# "Financial")
-* fundingFinding: [🔍](# "Funding Finding")
-* ideas: [🤔](# "Ideas, Planning, & Feedback")
-* infra: [🚇](# "Infrastructure (Hosting, Build-Tools, etc)")
-* platform: [📦](# "Packaging/porting to new platform")
-* plugin: [🔌](# "Plugin/utility libraries")
-* question: [💬](# "Answering Questions")
-* review: [👀](# "Reviewed Pull Requests")
-* talk: [📢](# "Talks")
-* test: [⚠️](# "Tests")
-* tool: [🔧](# "Tools")
-* translation: [🌍](# "Translation")
-* tutorial: [✅](# "Tutorials")
-* video: [📹](# "Videos")
+- blog: [📝](# 'Blogposts')
+- bug: [🐛](# 'Bug reports')
+- code: [💻](# 'Code')
+- design: [🎨](# 'Design')
+- doc: [📖](# 'Documentation')
+- eventOrganizing: [📋](# 'Event Organizing')
+- example: [💡](# 'Examples')
+- financial: [💵](# 'Financial')
+- fundingFinding: [🔍](# 'Funding Finding')
+- ideas: [🤔](# 'Ideas, Planning, & Feedback')
+- infra: [🚇](# 'Infrastructure (Hosting, Build-Tools, etc)')
+- platform: [📦](# 'Packaging/porting to new platform')
+- plugin: [🔌](# 'Plugin/utility libraries')
+- question: [💬](# 'Answering Questions')
+- review: [👀](# 'Reviewed Pull Requests')
+- talk: [📢](# 'Talks')
+- test: [⚠️](# 'Tests')
+- tool: [🔧](# 'Tools')
+- translation: [🌍](# 'Translation')
+- tutorial: [✅](# 'Tutorials')
+- video: [📹](# 'Videos')
 
 Please note that if you are using a self-hosted gitlab instance, before adding 
 contributor, you need to set an environment variable named `PRIVATE_TOKEN` first.
@@ -170,21 +169,42 @@ can configure how you want `all-contributors-cli` to generate the list.
 
 These are the keys you can specify:
 
-* `files`: Array of files to update. Default: `['README.md']`
-* `projectOwner`: Name of the user the project is hosted by. Example:
-  `jfmengels/all-contributors-cli` --> `jfmengels`. Mandatory.
-* `projectName`: Name of the project. Example: `jfmengels/all-contributors-cli`
-  --> `all-contributors-cli`. Mandatory.
-* `repoType`: Type of repository. Must be either `github` or `gitlab`. Default: `github`.
-* `repoHost`: Points to the repository hostname. Change it if you use a self hosted repository. Default: `https://github.com` if `repoType` is `github`, and `https://gitlab.com` if `repoType` is `gitlab`.
-* `types`: Specify custom symbols or link templates for contribution types. Can
-  override the documented types.
-* `imageSize`: Size (in px) of the user's avatar. Default: `100`.
-* `contributorsPerLine`: Maximum number of columns for the contributors table.
-  Default: `7`.
-* `contributorTemplate`: Define your own template to generate the contributor
-  list.
-* `badgeTemplate`: Define your own template to generate the badge.
+| Option                | Description                                                                                         | Example/Default                                                                                             |
+| --------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `projectName`         | Mandatory, name of the project.                                                                     | Example: `all-contributors-cli`                                                                             |
+| `projectOwner`        | Mandatory, name of the user the project is hosted by.                                               | Example: `jfmengels`                                                                                        |
+| `repoType`            | Type of repository. Must be either `github` or `gitlab`.                                            | Default: `github`                                                                                           |
+| `repoHost`            | Points to the repository hostname. Change it if you use a self-hosted repository.                   | Default: `https://github.com` if `repoType` is `github`, and `https://gitlab.com` if `repoType` is `gitlab` |
+| `files`               | Array of files to update.                                                                           | Default: `['README.md']`                                                                                    |
+| `imageSize`           | Size (in px) of the user's avatar.                                                                  | Default: `100`                                                                                              |
+| `commit`              | Auto-commit badge when adding contributors.                                                         | `true` or `false`                                                                                           |
+| `contributorsPerLine` | Maximum number of columns for the contributors table.                                               | Default: `7`                                                                                                |
+| `badgeTemplate`       | Define your own lodash template to generate the badge.                                              |
+| `contributorTemplate` | Define your own lodash template to generate the contributor.                                        |
+| `types`               | Specify custom symbols or link templates for contribution types. Can override the documented types. |
+
+```json
+{
+  "projectName": "all-contributors-cli",
+  "projectOwner": "jfmengels",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": ["README.md"],
+  "imageSize": 100,
+  "commit": false,
+  "contributorsPerLine": 7,
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors)",
+  "contributorTemplate": "<%= avatarBlock %><br /><%= contributions %>",
+  "types": {
+    "custom": {
+      "symbol": "🔭",
+      "description": "A custom contribution type.",
+      "link": "[<%= symbol %>](<%= url %> \"<%= description %>\"),"
+    }
+  },
+  "contributors": []
+}
+```
 
 ## Contributors
 
@@ -197,7 +217,9 @@ Thanks goes to these wonderful people
 | :---: | :---: | :---: | :---: | :---: | :---: |
 | [<img src="https://avatars3.githubusercontent.com/u/8212?v=3" width="100px;"/><br /><sub><b>Jerod Santo</b></sub>](https://jerodsanto.net)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=jerodsanto "Code") | [<img src="https://avatars1.githubusercontent.com/u/574871?v=3" width="100px;"/><br /><sub><b>Kevin Jalbert</b></sub>](https://github.com/kevinjalbert)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=kevinjalbert "Code") | [<img src="https://avatars3.githubusercontent.com/u/5038030?v=4" width="100px;"/><br /><sub><b>tunnckoCore</b></sub>](https://i.am.charlike.online)<br />[🔧](#tool-charlike "Tools") | [<img src="https://avatars2.githubusercontent.com/u/304450?v=4" width="100px;"/><br /><sub><b>Mehdi Achour</b></sub>](https://machour.idk.tn/)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=machour "Code") | [<img src="https://avatars1.githubusercontent.com/u/8344688?v=4" width="100px;"/><br /><sub><b>Roy Revelt</b></sub>](https://codsen.com)<br />[🐛](https://github.com/jfmengels/all-contributors-cli/issues?q=author%3Arevelt "Bug reports") | [<img src="https://avatars1.githubusercontent.com/u/422331?v=4" width="100px;"/><br /><sub><b>Chris Vickery</b></sub>](https://github.com/chrisinajar)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=chrisinajar "Code") |
 | [<img src="https://avatars2.githubusercontent.com/u/1026002?v=4" width="100px;"/><br /><sub><b>Bryce Reynolds</b></sub>](https://github.com/brycereynolds)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=brycereynolds "Code") | [<img src="https://avatars3.githubusercontent.com/u/2322305?v=4" width="100px;"/><br /><sub><b>James, please</b></sub>](http://www.jmeas.com)<br />[🤔](#ideas-jmeas "Ideas, Planning, & Feedback") [💻](https://github.com/jfmengels/all-contributors-cli/commits?author=jmeas "Code") | [<img src="https://avatars3.githubusercontent.com/u/1057324?v=4" width="100px;"/><br /><sub><b>Spyros Ioakeimidis</b></sub>](http://www.spyros.io)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=spirosikmd "Code") | [<img src="https://avatars3.githubusercontent.com/u/12335761?v=4" width="100px;"/><br /><sub><b>Fernando Costa</b></sub>](https://github.com/fadc80)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=fadc80 "Code") | [<img src="https://avatars0.githubusercontent.com/u/197404?v=4" width="100px;"/><br /><sub><b>snipe</b></sub>](https://snipe.net)<br />[📖](https://github.com/jfmengels/all-contributors-cli/commits?author=snipe "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/997157?v=4" width="100px;"/><br /><sub><b>Gant Laborde</b></sub>](http://gantlaborde.com/)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=GantMan "Code") |
-| [<img src="https://avatars2.githubusercontent.com/u/17708702?v=4" width="100px;"/><br /><sub><b>Md Zubair Ahmed</b></sub>](https://in.linkedin.com/in/mzubairahmed)<br />[📖](https://github.com/jfmengels/all-contributors-cli/commits?author=M-ZubairAhmed "Documentation") [🐛](https://github.com/jfmengels/all-contributors-cli/issues?q=author%3AM-ZubairAhmed "Bug reports") [💻](https://github.com/jfmengels/all-contributors-cli/commits?author=M-ZubairAhmed "Code") [⚠️](https://github.com/jfmengels/all-contributors-cli/commits?author=M-ZubairAhmed "Tests") | [<img src="https://avatars3.githubusercontent.com/u/6177621?v=4" width="100px;"/><br /><sub><b>Divjot Singh</b></sub>](http://bogas04.github.io)<br />[📖](https://github.com/jfmengels/all-contributors-cli/commits?author=bogas04 "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/15315098?v=4" width="100px;"/><br /><sub><b>João Marques</b></sub>](https://github.com/tigermarques)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=tigermarques "Code") [📖](https://github.com/jfmengels/all-contributors-cli/commits?author=tigermarques "Documentation") [🤔](#ideas-tigermarques "Ideas, Planning, & Feedback") | [<img src="https://avatars3.githubusercontent.com/u/1192452?v=4" width="100px;"/><br /><sub><b>Andrew Lisowski</b></sub>](http://hipstersmoothie.com)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=hipstersmoothie "Code") [📖](https://github.com/jfmengels/all-contributors-cli/commits?author=hipstersmoothie "Documentation") [⚠️](https://github.com/jfmengels/all-contributors-cli/commits?author=hipstersmoothie "Tests") | [<img src="https://avatars3.githubusercontent.com/u/1736154?v=4" width="100px;"/><br /><sub><b>Xianming Zhong</b></sub>](https://github.com/chinesedfan)<br />[📖](https://github.com/jfmengels/all-contributors-cli/commits?author=chinesedfan "Documentation") | [<img src="https://avatars2.githubusercontent.com/u/8073251?v=4" width="100px;"/><br /><sub><b>C.Y.Xu</b></sub>](https://github.com/xuchaoying)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=xuchaoying "Code") [📖](https://github.com/jfmengels/all-contributors-cli/commits?author=xuchaoying "Documentation") |
+| [<img src="https://avatars2.githubusercontent.com/u/17708702?v=4" width="100px;"/><br /><sub><b>Md Zubair Ahmed</b></sub>](https://in.linkedin.com/in/mzubairahmed)<br />[📖](https://github.com/jfmengels/all-contributors-cli/commits?author=M-ZubairAhmed "Documentation") [🐛](https://github.com/jfmengels/all-contributors-cli/issues?q=author%3AM-ZubairAhmed "Bug reports") [💻](https://github.com/jfmengels/all-contributors-cli/commits?author=M-ZubairAhmed "Code") [⚠️](https://github.com/jfmengels/all-contributors-cli/commits?author=M-ZubairAhmed "Tests") | [<img src="https://avatars3.githubusercontent.com/u/6177621?v=4" width="100px;"/><br /><sub><b>Divjot Singh</b></sub>](http://bogas04.github.io)<br />[📖](https://github.com/jfmengels/all-contributors-cli/commits?author=bogas04 "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/15315098?v=4" width="100px;"/><br /><sub><b>João Marques</b></sub>](https://github.com/tigermarques)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=tigermarques "Code") [📖](https://github.com/jfmengels/all-contributors-cli/commits?author=tigermarques "Documentation") [🤔](#ideas-tigermarques "Ideas, Planning, & Feedback") | [<img src="https://avatars3.githubusercontent.com/u/1192452?v=4" width="100px;"/><br /><sub><b>Andrew Lisowski</b></sub>](http://hipstersmoothie.com)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=hipstersmoothie "Code") [📖](https://github.com/jfmengels/all-contributors-cli/commits?author=hipstersmoothie "Documentation") [⚠️](https://github.com/jfmengels/all-contributors-cli/commits?author=hipstersmoothie "Tests") | [<img src="https://avatars3.githubusercontent.com/u/1736154?v=4" width="100px;"/><br /><sub><b>Xianming Zhong</b></sub>](https://github.com/chinesedfan)<br />[📖](https://github.com/jfmengels/all-contributors-cli/commits?author=chinesedfan "Documentation") | [<img src="https://avatars3.githubusercontent.com/u/3680914?v=4" width="100px;"/><br /><sub><b>Dura</b></sub>](https://github.com/chris-dura)<br />[📖](https://github.com/jfmengels/all-contributors-cli/commits?author=chris-dura "Documentation") |   | [<img src="https://avatars2.githubusercontent.com/u/8073251?v=4" width="100px;"/><br /><sub><b>C.Y.Xu</b></sub>](https://github.com/xuchaoying)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=xuchaoying "Code") [📖](https://github.com/jfmengels/all-contributors-cli/commits?author=xuchaoying "Documentation") |
+| [<img src="https://avatars2.githubusercontent.com/u/8073251?v=4" width="100px;"/><br /><sub><b>C.Y.Xu</b></sub>](https://github.com/xuchaoying)<br />[💻](https://github.com/jfmengels/all-contributors-cli/commits?author=xuchaoying "Code") [📖](https://github.com/jfmengels/all-contributors-cli/commits?author=xuchaoying "Documentation") |
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the

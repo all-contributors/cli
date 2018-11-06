@@ -90,7 +90,7 @@ Below we'll just show `all-contributors` to keep things simple, but if you're ha
 Please add following placeholders in [`files`](#configuration) to specify the generation area first.
 
 <pre>
-&lt;!-- ALL-CONTRIBUTORS-<!-- hack break -->LIST: START - Do not remove or modify this section --&gt;
+&lt;!-- ALL-CONTRIBUTORS-<!-- hack break -->LIST:START - Do not remove or modify this section --&gt;
 &lt;!-- ALL-CONTRIBUTORS-<!-- hack break -->LIST:END --&gt;
 </pre>
 

@@ -1,8 +1,6 @@
 const pify = require('pify')
 const request = pify(require('request'))
 
-
-
 function getRequestHeaders() {
   const requestHeaders = {
     'User-Agent': 'request',

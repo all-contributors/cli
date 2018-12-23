@@ -8,7 +8,7 @@ function getRequestHeaders() {
   
   const optionalAuthToken = process.env.GITHUB_TOKEN
   if (optionalAuthToken) {
-    requestHeaders.Authorization = 'token ' + optionalAuthToken
+    requestHeaders.Authorization = `token ${optionalAuthToken}`
   }
 
   return requestHeaders

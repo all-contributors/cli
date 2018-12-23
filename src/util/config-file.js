@@ -10,6 +10,9 @@ function readConfig(configPath) {
     }
     return config
   } catch (error) {
+    if (error instanceof SyntaxError) {
+      throw new SyntaxError(`Configuration file has malformed json: ${configPath}. Error:: ${error.message}`)
+    }
     if (error.code === 'ENOENT') {
       throw new Error(`Configuration file not found: ${configPath}`)
     }
@@ -24,7 +27,7 @@ function writeConfig(configPath, content) {
   if (!content.projectName) {
     throw new Error(`Error! Project name is not set in ${configPath}`)
   }
-  
+
   if (content.files && !content.files.length) {
     throw new Error(
       `Error! Project files was overridden and is empty in ${configPath}`,

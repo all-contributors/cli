@@ -40,7 +40,7 @@ const yargv = yargs
     try {
       return util.configFile.readConfig(configPath)
     } catch (error) {
-      if (configPath !== defaultRCFile) {
+      if (error instanceof SyntaxError || configPath !== defaultRCFile) {
         onError(error)
       }
     }

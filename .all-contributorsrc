@@ -1,6 +1,7 @@
 {
   "projectOwner": "jfmengels",
   "projectName": "all-contributors-cli",
+  "files": ["README.md"],
   "imageSize": 100,
   "repoType": "github",
   "commit": false,

@@ -1,6 +1,21 @@
 const pify = require('pify')
 const request = pify(require('request'))
 
+
+
+function getRequestHeaders() {
+  const requestHeaders = {
+    'User-Agent': 'request',
+  }
+  
+  const optionalAuthToken = process.env.GITHUB_TOKEN
+  if (optionalAuthToken) {
+    requestHeaders.Authorization = 'token ' + optionalAuthToken
+  }
+
+  return requestHeaders
+}
+
 function getNextLink(link) {
   if (!link) {
     return null
@@ -19,9 +34,7 @@ function getContributorsPage(url) {
   return request
     .get({
       url,
-      headers: {
-        'User-Agent': 'request',
-      },
+      headers: getRequestHeaders(),
     })
     .then(res => {
       const body = JSON.parse(res.body)
@@ -54,9 +67,7 @@ const getUserInfo = function(username, hostname) {
   return request
     .get({
       url: `${root}/users/${username}`,
-      headers: {
-        'User-Agent': 'request',
-      },
+      headers: getRequestHeaders(),
     })
     .then(res => {
       const body = JSON.parse(res.body)

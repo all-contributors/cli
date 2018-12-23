@@ -210,7 +210,7 @@ These are the keys you can specify:
 }
 ```
 
-In some cases you may see the error message 'GitHub API rate limit exceeded for xxx'. You may need to set an environment variable named `PRIVATE_TOKEN` in order to circumvent this rate-limiting.
+In some cases you may see the error message 'GitHub API rate limit exceeded for xxx'. You may need to set an environment variable named `PRIVATE_TOKEN` in order to circumvent this [GitHub rate limit](https://developer.github.com/v3/rate_limit/).
 
 > Private token is your personal access token to authenticate with the GitHub API.
 

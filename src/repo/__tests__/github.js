@@ -89,6 +89,40 @@ test('fill in the name when null is returned', async () => {
   expect(info.name).toBe('nodisplayname')
 })
 
+test('attaches token when supplied', async () => {
+  const mockAuthToken = 'myMock-token-adaskjda'
+  nock('https://api.github.com')
+    .matchHeader('authorization', `token ${mockAuthToken}`)
+    .get('/users/test-token')
+    .reply(200, {
+        html_url: 'test-token',
+    })
+
+    await(getUserInfo('test-token', 'https://github.com', mockAuthToken))
+})
+
+test('attaches no token when supplied empty', async () => {
+  nock('https://api.github.com')
+    .matchHeader('authorization', '')
+    .get('/users/test-token')
+    .reply(200, {
+        html_url: 'test-token',
+    })
+
+    await(getUserInfo('test-token', 'https://github.com', ''))
+})
+
+test('attaches no token when not supplied', async () => {
+  nock('https://api.github.com')
+    .matchHeader('authorization', '')
+    .get('/users/test-token')
+    .reply(200, {
+        html_url: 'test-token',
+    })
+
+    await(getUserInfo('test-token'))
+})
+
 test('fill in the name when an empty string is returned', async () => {
   nock('https://api.github.com')
     .get('/users/nodisplayname')

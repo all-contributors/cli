@@ -11,7 +11,7 @@ function readConfig(configPath) {
     return config
   } catch (error) {
     if (error instanceof SyntaxError) {
-      throw new SyntaxError(`Configuration file has malformed json: ${configPath}. Error:: ${error.message}`)
+      throw new SyntaxError(`Configuration file has malformed JSON: ${configPath}. Error:: ${error.message}`)
     }
     if (error.code === 'ENOENT') {
       throw new Error(`Configuration file not found: ${configPath}`)

@@ -1,14 +1,13 @@
 const pify = require('pify')
 const request = pify(require('request'))
 
-function getRequestHeaders() {
+function getRequestHeaders(optionalPrivateToken = '') {
   const requestHeaders = {
     'User-Agent': 'request',
   }
-  
-  const optionalAuthToken = process.env.GITHUB_TOKEN
-  if (optionalAuthToken) {
-    requestHeaders.Authorization = `token ${optionalAuthToken}`
+
+  if (optionalPrivateToken && optionalPrivateToken.length > 0) {
+    requestHeaders.Authorization = `token ${optionalPrivateToken}`
   }
 
   return requestHeaders
@@ -28,11 +27,11 @@ function getNextLink(link) {
   return nextLink.split(';')[0].slice(1, -1)
 }
 
-function getContributorsPage(url) {
+function getContributorsPage(url, optionalPrivateToken) {
   return request
     .get({
       url,
-      headers: getRequestHeaders(),
+      headers: getRequestHeaders(optionalPrivateToken),
     })
     .then(res => {
       const body = JSON.parse(res.body)
@@ -55,7 +54,7 @@ function getContributorsPage(url) {
     })
 }
 
-const getUserInfo = function(username, hostname) {
+const getUserInfo = function(username, hostname, optionalPrivateToken) {
   /* eslint-disable complexity */
   if (!hostname) {
     hostname = 'https://github.com'
@@ -65,7 +64,7 @@ const getUserInfo = function(username, hostname) {
   return request
     .get({
       url: `${root}/users/${username}`,
-      headers: getRequestHeaders(),
+      headers: getRequestHeaders(optionalPrivateToken),
     })
     .then(res => {
       const body = JSON.parse(res.body)
@@ -87,14 +86,14 @@ const getUserInfo = function(username, hostname) {
     })
 }
 
-const getContributors = function(owner, name, hostname) {
+const getContributors = function(owner, name, hostname, optionalPrivateToken) {
   if (!hostname) {
     hostname = 'https://github.com'
   }
 
   const root = hostname.replace(/:\/\//, '://api.')
   const url = `${root}/repos/${owner}/${name}/contributors?per_page=100`
-  return getContributorsPage(url)
+  return getContributorsPage(url, optionalPrivateToken)
 }
 
 module.exports = {

@@ -43,7 +43,7 @@
     "yargs": "^10.0.3"
   },
   "devDependencies": {
-    "kcd-scripts": "^0.30.0",
+    "kcd-scripts": "^0.30.4",
     "nock": "^9.1.0"
   },
   "eslintIgnore": [

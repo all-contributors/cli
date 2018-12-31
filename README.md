@@ -133,11 +133,13 @@ Where `username` is the user's GitHub or Gitlab username, and `contribution` is 
 - plugin: [🔌](# 'Plugin/utility libraries')
 - question: [💬](# 'Answering Questions')
 - review: [👀](# 'Reviewed Pull Requests')
+- security: [🛡](# 'Security')
 - talk: [📢](# 'Talks')
 - test: [⚠️](# 'Tests')
 - tool: [🔧](# 'Tools')
 - translation: [🌍](# 'Translation')
 - tutorial: [✅](# 'Tutorials')
+- tutorial: [📓](# 'User Testing')
 - video: [📹](# 'Videos')
 
 Please note that if you are using a self-hosted gitlab instance, before adding

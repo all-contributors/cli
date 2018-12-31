@@ -66,6 +66,10 @@ const defaultTypes = function(repoType) {
       symbol: '👀',
       description: 'Reviewed Pull Requests',
     },
+    security: {
+      symbol: '🛡️',
+      description: 'Security',
+    },
     talk: {
       symbol: '📢',
       description: 'Talks',
@@ -86,6 +90,10 @@ const defaultTypes = function(repoType) {
     tutorial: {
       symbol: '✅',
       description: 'Tutorials',
+    },
+    userTesting: {
+      symbol: '📓',
+      description: 'User Testing',
     },
     video: {
       symbol: '📹',

@@ -66,6 +66,10 @@ const defaultTypes = function(repoType) {
       symbol: '👀',
       description: 'Reviewed Pull Requests',
     },
+    security: {
+      symbol: '🛡️',
+      description: 'Security',
+    },
     talk: {
       symbol: '📢',
       description: 'Talks',

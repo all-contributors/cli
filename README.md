@@ -139,7 +139,7 @@ Where `username` is the user's GitHub or Gitlab username, and `contribution` is 
 - tool: [🔧](# 'Tools')
 - translation: [🌍](# 'Translation')
 - tutorial: [✅](# 'Tutorials')
-- tutorial: [📓](# 'User Testing')
+- userTesting: [📓](# 'User Testing')
 - video: [📹](# 'Videos')
 
 Please note that if you are using a self-hosted gitlab instance, before adding

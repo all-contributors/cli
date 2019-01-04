@@ -1,3 +1,5 @@
+STATUS: UNMAINTAINED ([looking for maintainers](https://github.com/jfmengels/all-contributors-cli/issues/129))
+
 <h1 align="center">
   all-contributors-cli 🤖
 </h1>

@@ -1,5 +1,3 @@
-STATUS: UNMAINTAINED ([looking for maintainers](https://github.com/jfmengels/all-contributors-cli/issues/129))
-
 <h1 align="center">
   all-contributors-cli 🤖
 </h1>
@@ -236,6 +234,7 @@ Thanks goes to these wonderful people
 This project follows the
 [all-contributors](https://github.com/kentcdodds/all-contributors)
 specification. Contributions of any kind are welcome!
+We are also [looking for maintainers](https://github.com/jfmengels/all-contributors-cli/issues/129)
 
 ## LICENSE
 

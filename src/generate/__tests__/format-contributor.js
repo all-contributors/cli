@@ -30,7 +30,7 @@ test('format contributor with complex contribution types', () => {
   const {options} = fixtures()
 
   const expected =
-    '[<img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;"/><br /><sub><b>Kent C. Dodds</b></sub>](http://kentcdodds.com)<br />[📖](https://github.com/jfmengels/all-contributors-cli/commits?author=kentcdodds "Documentation") [👀](#review-kentcdodds "Reviewed Pull Requests") [💬](#question-kentcdodds "Answering Questions")'
+    '[<img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;"/><br /><sub><b>Kent C. Dodds</b></sub>](http://kentcdodds.com)<br />[📖](https://github.com/all-contributors/all-contributors-cli/commits?author=kentcdodds "Documentation") [👀](#review-kentcdodds "Reviewed Pull Requests") [💬](#question-kentcdodds "Answering Questions")'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
@@ -63,7 +63,7 @@ test('format contributor with pipes in their name', () => {
   const {options} = fixtures()
 
   const expected =
-    '[<img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;"/><br /><sub><b>Who &#124; Needs &#124; Pipes?</b></sub>](http://github.com/chrisinajar)<br />[📖](https://github.com/jfmengels/all-contributors-cli/commits?author=pipey "Documentation")'
+    '[<img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;"/><br /><sub><b>Who &#124; Needs &#124; Pipes?</b></sub>](http://github.com/chrisinajar)<br />[📖](https://github.com/all-contributors/all-contributors-cli/commits?author=pipey "Documentation")'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })

@@ -16,7 +16,7 @@ const check = githubAPI.getContributors
 beforeAll(() => {
   nock('https://api.github.com')
     .persist()
-    .get('/repos/jfmengels/all-contributors-cli/contributors?per_page=100')
+    .get('/repos/all-contributors/all-contributors-cli/contributors?per_page=100')
     .reply(200, allContributorsCliResponse)
     .get('/repos/facebook/react-native/contributors?per_page=100')
     .reply(200, reactNativeResponse1, {

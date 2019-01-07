@@ -28,7 +28,7 @@ test('return link to commits', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   const expectedLink =
-    'https://github.com/jfmengels/all-contributors-cli/commits?author=kentcdodds'
+    'https://github.com/all-contributors/all-contributors-cli/commits?author=kentcdodds'
 
   expect(formatContributionType(options, contributor, 'code')).toBe(
     `[💻](${expectedLink} "Code")`,
@@ -45,7 +45,7 @@ test('return link to issues', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   const expected =
-    '[🐛](https://github.com/jfmengels/all-contributors-cli/issues?q=author%3Akentcdodds "Bug reports")'
+    '[🐛](https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Akentcdodds "Bug reports")'
 
   expect(formatContributionType(options, contributor, 'bug')).toBe(expected)
 })

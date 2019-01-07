@@ -51,12 +51,15 @@ jobs:
       - run: yarn kcd-scripts travis-after-success
 workflows:
   version: 2
-  test_and_deploy:
+  validate_and_deploy:
     jobs:
       - node_modules
-      - deploy:
+      - validate:
           requires:
             - node_modules
+      - deploy:
+          requires:
+            - validate
           filters:
             branches:
               only:

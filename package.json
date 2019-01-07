@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jfmengels/all-contributors-cli.git"
+    "url": "https://github.com/all-contributors/all-contributors-cli.git"
   },
   "keywords": [
     "all-contributors",
@@ -30,9 +30,9 @@
   "author": "Jeroen Engels <jfm.engels@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jfmengels/all-contributors-cli/issues"
+    "url": "https://github.com/all-contributors/all-contributors-cli/issues"
   },
-  "homepage": "https://github.com/jfmengels/all-contributors-cli#readme",
+  "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
     "async": "^2.0.0-rc.1",
     "chalk": "^2.3.0",

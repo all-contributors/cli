@@ -4,14 +4,14 @@ const injectContentBetween = require('../util').markdown.injectContentBetween
 const badgeContent =
   '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)'
 const headerContent =
-  'Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):'
+  'Thanks goes to these wonderful people ([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):'
 const listContent = [
   '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->',
   '<!-- prettier-ignore -->',
   '<!-- ALL-CONTRIBUTORS-LIST:END -->',
 ].join('\n')
 const footerContent =
-  'This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!'
+  'This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!'
 
 function addBadge(lines) {
   return injectContentBetween(lines, badgeContent, 1, 1)

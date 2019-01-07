@@ -48,7 +48,8 @@ jobs:
       - prep_env
       - attach_workspace:
           at: ./
-      - run: yarn kcd-scripts travis-after-success
+      - run: yarn codecov
+      - run: yarn semantic-release
 workflows:
   version: 2
   validate_and_deploy:

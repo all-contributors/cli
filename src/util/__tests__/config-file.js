@@ -12,7 +12,7 @@ const NoOwnerConfigFile = {
   contributors: [],
 }
 const NoNameConfigFile = {
-  projectOwner: 'jfmengels',
+  projectOwner: 'all-contributors',
   projectName: '',
   imageSize: 100,
   commit: false,
@@ -20,7 +20,7 @@ const NoNameConfigFile = {
   contributors: [],
 }
 const NoFilesConfigFile = {
-  projectOwner: 'jfmengels',
+  projectOwner: 'all-contributors',
   projectName: 'all-contributors-cli',
   imageSize: 100,
   commit: false,

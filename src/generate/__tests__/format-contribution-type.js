@@ -3,7 +3,7 @@ import contributors from './fixtures/contributors.json'
 
 const fixtures = () => {
   const options = {
-    projectOwner: 'jfmengels',
+    projectOwner: 'all-contributors',
     projectName: 'all-contributors-cli',
     repoType: 'github',
     repoHost: 'https://github.com',

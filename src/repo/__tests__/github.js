@@ -16,7 +16,9 @@ const check = githubAPI.getContributors
 beforeAll(() => {
   nock('https://api.github.com')
     .persist()
-    .get('/repos/all-contributors/all-contributors-cli/contributors?per_page=100')
+    .get(
+      '/repos/all-contributors/all-contributors-cli/contributors?per_page=100',
+    )
     .reply(200, allContributorsCliResponse)
     .get('/repos/facebook/react-native/contributors?per_page=100')
     .reply(200, reactNativeResponse1, {
@@ -41,7 +43,7 @@ beforeAll(() => {
 })
 
 test('Handle a single results page correctly', async () => {
-  const transformed = await check('jfmengels', 'all-contributors-cli')
+  const transformed = await check('all-contributors', 'all-contributors-cli')
   expect(transformed).toEqual(allContributorsCliTransformed)
 })
 
@@ -95,10 +97,10 @@ test('attaches token when supplied', async () => {
     .matchHeader('authorization', `token ${mockAuthToken}`)
     .get('/users/test-token')
     .reply(200, {
-        html_url: 'test-token',
+      html_url: 'test-token',
     })
 
-    await(getUserInfo('test-token', 'https://github.com', mockAuthToken))
+  await getUserInfo('test-token', 'https://github.com', mockAuthToken)
 })
 
 test('attaches no token when supplied empty', async () => {
@@ -106,10 +108,10 @@ test('attaches no token when supplied empty', async () => {
     .matchHeader('authorization', '')
     .get('/users/test-token')
     .reply(200, {
-        html_url: 'test-token',
+      html_url: 'test-token',
     })
 
-    await(getUserInfo('test-token', 'https://github.com', ''))
+  await getUserInfo('test-token', 'https://github.com', '')
 })
 
 test('attaches no token when not supplied', async () => {
@@ -117,10 +119,10 @@ test('attaches no token when not supplied', async () => {
     .matchHeader('authorization', '')
     .get('/users/test-token')
     .reply(200, {
-        html_url: 'test-token',
+      html_url: 'test-token',
     })
 
-    await(getUserInfo('test-token'))
+  await getUserInfo('test-token')
 })
 
 test('fill in the name when an empty string is returned', async () => {

@@ -5,6 +5,7 @@
   "bin": {
     "all-contributors": "dist/cli.js"
   },
+  "main": "dist/api.js",
   "files": [
     "dist"
   ],

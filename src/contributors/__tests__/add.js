@@ -1,4 +1,5 @@
 import addContributor from '../add'
+import fixtures from './fixtures'
 
 function mockInfoFetcher(username) {
   return Promise.resolve({
@@ -7,34 +8,6 @@ function mockInfoFetcher(username) {
     avatar_url: 'www.avatar.url',
     profile: 'www.profile.url',
   })
-}
-
-function fixtures() {
-  const options = {
-    contributors: [
-      {
-        login: 'login1',
-        name: 'Some name',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: ['code'],
-      },
-      {
-        login: 'login2',
-        name: 'Some name',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: [{type: 'blog', url: 'www.blog.url/path'}, 'code'],
-      },
-      {
-        name: 'Missing Login',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: ['code'],
-      },
-    ],
-  }
-  return {options}
 }
 
 function caseFixtures() {

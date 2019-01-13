@@ -31,7 +31,7 @@ function addContributorsList(lines) {
   const insertionLine = findContributorsSection(lines)
   if (insertionLine === -1) {
     return lines.concat([
-      '## Contributors',
+      '## Contributors ✨',
       '',
       headerContent,
       '',

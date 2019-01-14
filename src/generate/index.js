@@ -40,20 +40,21 @@ function formatLine(contributors) {
   return `| ${contributors.join(' | ')} |`
 }
 
-function createColumnLine(options, contributors) {
-  const nbColumns = Math.min(options.contributorsPerLine, contributors.length)
+function createColumnLine(contributorsPerLine, contributors) {
+  const nbColumns = Math.min(contributorsPerLine, contributors.length)
   return `${_.repeat(nbColumns, '| :---: ')}|`
 }
 
 function generateContributorsList(options, contributors) {
+  const contributorsPerLine = options.contributorsPerLine || 7
   return _.flow(
     _.map(function formatEveryContributor(contributor) {
       return formatContributor(options, contributor)
     }),
-    _.chunk(options.contributorsPerLine),
+    _.chunk(contributorsPerLine),
     _.map(formatLine),
     function insertColumns(lines) {
-      const columnLine = createColumnLine(options, contributors)
+      const columnLine = createColumnLine(contributorsPerLine, contributors)
       return injectContentBetween(lines, columnLine, 1, 1)
     },
     _.join('\n'),

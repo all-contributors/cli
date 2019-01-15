@@ -1,5 +1,8 @@
+> [There is now a GitHub Bot](https://github.com/all-contributors/all-contributors-bot) for automating the maintenance of your contributors table ✨<br />Say goodbye to command line tool dependencies and hello to [@all-contributors 🤖](https://github.com/all-contributors/all-contributors-bot)
+
+
 <h1 align="center">
-  all-contributors-cli 🤖
+  all-contributors-cli
 </h1>
 <p align="center" style="font-size: 1.2rem;">Automate acknowledging contributors to your open source projects</p>
 

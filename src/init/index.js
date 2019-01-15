@@ -1,9 +1,15 @@
-const { configFile } = require('../util')
+const util = require('../util')
 const prompt = require('./prompt')
 const initContent = require('./init-content')
-const injectInFile = require('./injectInFile')
 
-function initCommand() {
+const configFile = util.configFile
+const markdown = util.markdown
+
+function injectInFile(file, fn) {
+  return markdown.read(file).then(content => markdown.write(file, fn(content)))
+}
+
+module.exports = function init() {
   return prompt().then(result => {
     return configFile
       .writeConfig('.all-contributorsrc', result.config)
@@ -17,5 +23,3 @@ function initCommand() {
       })
   })
 }
-
-module.exports = initCommand

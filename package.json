@@ -18,7 +18,8 @@
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
     "validate": "kcd-scripts validate",
-    "precommit": "kcd-scripts precommit"
+    "precommit": "kcd-scripts precommit",
+    "commit": "npx git-cz"
   },
   "repository": {
     "type": "git",
@@ -45,6 +46,8 @@
   },
   "devDependencies": {
     "codecov": "^3.1.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "git-cz": "^1.8.0",
     "kcd-scripts": "^0.30.4",
     "nock": "^9.1.0",
     "semantic-release": "^15.13.2"
@@ -62,6 +65,11 @@
       "import/extensions": "off",
       "func-names": "off",
       "consistent-return": "off"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
     }
   }
 }

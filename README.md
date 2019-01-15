@@ -1,4 +1,4 @@
-> [There is now a GitHub Bot](https://github.com/all-contributors/all-contributors-bot) for automating the maintenance of your contributors table ✨<br />Say goodbye to command line tool dependencies and hello to [@all-contributors 🤖](https://github.com/all-contributors/all-contributors-bot)
+> [There is now a GitHub Bot](https://github.com/all-contributors/all-contributors-bot) for automating the maintenance of your contributors table ✨<br />Say goodbye to command line tool dependencies and hello to the [@all-contributors bot 🤖](https://github.com/all-contributors/all-contributors-bot)
 
 
 <h1 align="center">

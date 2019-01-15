@@ -7,6 +7,7 @@ const chalk = require('chalk')
 
 const addContributorWithDetails = require('./contributors/addWithDetails')
 const generate = require('./generate')
+const init = require('./init/api')
 
 process.stdout.write(
   chalk.yellow(
@@ -19,4 +20,5 @@ process.stdout.write(
 module.exports = {
   addContributorWithDetails,
   generate,
+  init,
 }

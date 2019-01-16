@@ -50,6 +50,10 @@ const defaultTypes = function(repoType) {
       symbol: '🚇',
       description: 'Infrastructure (Hosting, Build-Tools, etc)',
     },
+    maintenance: {
+      symbol: '🚧',
+      description: 'Maintenance',
+    },
     platform: {
       symbol: '📦',
       description: 'Packaging/porting to new platform',

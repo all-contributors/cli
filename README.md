@@ -133,6 +133,7 @@ Where `username` is the user's GitHub or Gitlab username, and `contribution` is 
 - fundingFinding: [🔍](# 'Funding Finding')
 - ideas: [🤔](# 'Ideas, Planning, & Feedback')
 - infra: [🚇](# 'Infrastructure (Hosting, Build-Tools, etc)')
+- maintenance [🚧](# 'Maintenance')
 - platform: [📦](# 'Packaging/porting to new platform')
 - plugin: [🔌](# 'Plugin/utility libraries')
 - question: [💬](# 'Answering Questions')

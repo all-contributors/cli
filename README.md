@@ -203,7 +203,7 @@ These are the keys you can specify:
   "imageSize": 100,
   "commit": false,
   "contributorsPerLine": 7,
-  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors)",
+  "badgeTemplate": "[![All Contributors](https://img.shields.io/badge/all_contributors-<%= contributors.length %>-orange.svg?style=flat-square)](#contributors) [![Greenkeeper badge](https://badges.greenkeeper.io/all-contributors/all-contributors-cli.svg)](https://greenkeeper.io/)",
   "contributorTemplate": "<%= avatarBlock %><br /><%= contributions %>",
   "types": {
     "custom": {

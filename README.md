@@ -145,7 +145,6 @@ Where `username` is the user's GitHub or Gitlab username, and `contribution` is 
 - tutorial: [✅](# 'Tutorials')
 - userTesting: [📓](# 'User Testing')
 - video: [📹](# 'Videos')
-- maintenance [👷](# 'Maintenance')
 
 Please note that if you are using a self-hosted gitlab instance, before adding
 contributor, you need to set an environment variable named `PRIVATE_TOKEN` first.

@@ -99,10 +99,6 @@ const defaultTypes = function(repoType) {
       symbol: '📹',
       description: 'Videos',
     },
-    maintenance: {
-      symbol: '👷',
-      description: 'Maintenance',
-    },
   }
 }
 

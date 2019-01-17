@@ -17,8 +17,12 @@
     "build": "kcd-scripts build",
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
-    "validate": "kcd-scripts validate",
-    "precommit": "kcd-scripts precommit"
+    "validate": "kcd-scripts validate"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "kcd-scripts precommit"
+    }
   },
   "repository": {
     "type": "git",
@@ -35,6 +39,7 @@
   },
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
+    "@babel/runtime": "^7.2.0",
     "async": "^2.0.0-rc.1",
     "chalk": "^2.3.0",
     "inquirer": "^6.2.1",

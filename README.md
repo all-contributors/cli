@@ -13,6 +13,7 @@
 [![version][version-badge]][package] [![downloads][downloads-badge]][downloads]
 [![MIT License][license-badge]][license]
 [![Chat on Slack][chat-badge]][chat]
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 [![All Contributors](https://img.shields.io/badge/all_contributors-28-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs] [![Code of Conduct][coc-badge]][coc]

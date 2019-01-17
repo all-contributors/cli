@@ -7,7 +7,7 @@ const chalk = require('chalk')
 
 const addContributorWithDetails = require('./contributors/addWithDetails')
 const generate = require('./generate')
-const { addContributorsList, addBadge } = require('./init-content')
+const {addContributorsList, addBadge} = require('./init/init-content')
 
 process.stdout.write(
   chalk.yellow(

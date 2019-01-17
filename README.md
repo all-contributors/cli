@@ -9,6 +9,7 @@
 
 [![Build Status][build-badge]][build]
 [![Code Coverage][coverage-badge]][coverage]
+[![Greenkeeper badge](https://badges.greenkeeper.io/all-contributors/all-contributors-cli.svg)](https://greenkeeper.io/)
 [![version][version-badge]][package] [![downloads][downloads-badge]][downloads]
 [![MIT License][license-badge]][license]
 [![Chat on Slack][chat-badge]][chat]

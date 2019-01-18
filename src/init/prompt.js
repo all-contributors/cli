@@ -102,6 +102,7 @@ module.exports = function prompt() {
           imageSize: answers.imageSize,
           commit: answers.commit,
           contributors: [],
+          contributorsPerLine: 7,
         },
         contributorFile: answers.contributorFile,
         badgeFile: answers.badgeFile,

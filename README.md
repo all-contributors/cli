@@ -55,7 +55,6 @@ Thanks goes to these wonderful people
 This project follows the
 [all-contributors](https://github.com/all-contributors/all-contributors)
 specification. Contributions of any kind are welcome!
-We are also [looking for maintainers](https://github.com/all-contributors/all-contributors-cli/issues/129)
 
 ## LICENSE
 

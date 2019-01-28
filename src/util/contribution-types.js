@@ -12,10 +12,18 @@ const defaultTypes = function(repoType) {
       description: 'Bug reports',
       link: repo.getLinkToIssues(repoType),
     },
+    business: {
+      symbol: '💼',
+      description: 'Business development',
+    },
     code: {
       symbol: '💻',
       description: 'Code',
       link: repo.getLinkToCommits(repoType),
+    },
+    content: {
+      symbol: '🖋',
+      description: 'Content',
     },
     design: {
       symbol: '🎨',

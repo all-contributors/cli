@@ -1,4 +1,4 @@
-import formatContributionType from '../format-contribution-type-html'
+import formatContributionType from '../format-contribution-type'
 import contributors from './fixtures/contributors.json'
 
 const fixtures = () => {

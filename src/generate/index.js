@@ -1,6 +1,6 @@
 const _ = require('lodash/fp')
 const formatBadge = require('./format-badge')
-const formatContributor = require('./format-contributor-html')
+const formatContributor = require('./format-contributor')
 
 const badgeRegex = /\[!\[All Contributors\]\([a-zA-Z0-9\-./_:?=]+\)\]\(#\w+\)/
 
@@ -35,17 +35,17 @@ function injectListBetweenTags(newContent) {
   }
 }
 
-function formatLineHtml(contributors) {
+function formatLine(contributors) {
   return `<td>${contributors.join('</td><td>')}</td>`
 }
 
-function generateContributorsListHtml(options, contributors) {
+function generateContributorsList(options, contributors) {
   return _.flow(
     _.map(function formatEveryContributor(contributor) {
       return formatContributor(options, contributor)
     }),
     _.chunk(options.contributorsPerLine),
-    _.map(formatLineHtml),
+    _.map(formatLine),
     _.join('</tr><tr>'),
     newContent => {
       const style =
@@ -73,7 +73,7 @@ module.exports = function generate(options, contributors, fileContent) {
   const contributorsList =
     contributors.length === 0
       ? '\n'
-      : generateContributorsListHtml(options, contributors)
+      : generateContributorsList(options, contributors)
   const badge = formatBadge(options, contributors)
   return _.flow(
     injectListBetweenTags(contributorsList),

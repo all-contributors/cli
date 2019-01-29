@@ -1,5 +1,5 @@
 import _ from 'lodash/fp'
-import formatContributor from '../format-contributor-html'
+import formatContributor from '../format-contributor'
 import contributors from './fixtures/contributors.json'
 
 function fixtures() {

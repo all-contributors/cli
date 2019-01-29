@@ -3,7 +3,7 @@ const _ = require('lodash/fp')
 const util = require('../util')
 
 const linkTemplate = _.template(
-  '[<%= symbol %>](<%= url %> "<%= description %>")',
+  '<a href="<%= url %>" title="<%= description %>"><%= symbol %></a>',
 )
 
 function getType(options, contribution) {

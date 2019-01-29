@@ -18,7 +18,9 @@
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
     "validate": "kcd-scripts validate",
-    "commit": "npx git-cz"
+    "commit": "git-cz",
+    "start": "./dist/cli.js",
+    "dev": "./src/cli.js"
   },
   "husky": {
     "hooks": {

@@ -1,7 +1,6 @@
 const _ = require('lodash/fp')
-const injectContentBetween = require('../util').markdown.injectContentBetween
 const formatBadge = require('./format-badge')
-const formatContributor = require('./format-contributor')
+const formatContributor = require('./format-contributor-html')
 
 const badgeRegex = /\[!\[All Contributors\]\([a-zA-Z0-9\-./_:?=]+\)\]\(#\w+\)/
 
@@ -36,29 +35,22 @@ function injectListBetweenTags(newContent) {
   }
 }
 
-function formatLine(contributors) {
-  return `| ${contributors.join(' | ')} |`
+function formatLineHtml(contributors) {
+  return `<td>${contributors.join('</td><td>')}</td>`
 }
 
-function createColumnLine(options, contributors) {
-  const nbColumns = Math.min(options.contributorsPerLine, contributors.length)
-  return `${_.repeat(nbColumns, '| :---: ')}|`
-}
-
-function generateContributorsList(options, contributors) {
+function generateContributorsListHtml(options, contributors) {
   return _.flow(
     _.map(function formatEveryContributor(contributor) {
       return formatContributor(options, contributor)
     }),
     _.chunk(options.contributorsPerLine),
-    _.map(formatLine),
-    function insertColumns(lines) {
-      const columnLine = createColumnLine(options, contributors)
-      return injectContentBetween(lines, columnLine, 1, 1)
-    },
-    _.join('\n'),
+    _.map(formatLineHtml),
+    _.join('</tr><tr>'),
     newContent => {
-      return `\n${newContent}\n`
+      const style =
+        '<style>#emoji-table, #emoji-table td { border: 1px solid #ccc; }</style>'
+      return `\n${style}<table id="emoji-table" cellspacing=0 cellpadding=1><tr>${newContent}</tr></table>\n`
     },
   )(contributors)
 }
@@ -81,9 +73,10 @@ module.exports = function generate(options, contributors, fileContent) {
   const contributorsList =
     contributors.length === 0
       ? '\n'
-      : generateContributorsList(options, contributors)
+      : generateContributorsListHtml(options, contributors)
   const badge = formatBadge(options, contributors)
-  return _.flow(injectListBetweenTags(contributorsList), replaceBadge(badge))(
-    fileContent,
-  )
+  return _.flow(
+    injectListBetweenTags(contributorsList),
+    replaceBadge(badge),
+  )(fileContent)
 }

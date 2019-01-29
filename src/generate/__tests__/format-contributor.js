@@ -1,5 +1,5 @@
 import _ from 'lodash/fp'
-import formatContributor from '../format-contributor'
+import formatContributor from '../format-contributor-html'
 import contributors from './fixtures/contributors.json'
 
 function fixtures() {
@@ -20,7 +20,7 @@ test('format a simple contributor', () => {
   const {options} = fixtures()
 
   const expected =
-    '[<img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub>](http://kentcdodds.com)<br />[👀](#review-kentcdodds "Reviewed Pull Requests")'
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="#review-kentcdodds" title="Reviewed Pull Requests">👀</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
@@ -30,7 +30,7 @@ test('format contributor with complex contribution types', () => {
   const {options} = fixtures()
 
   const expected =
-    '[<img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub>](http://kentcdodds.com)<br />[📖](https://github.com/all-contributors/all-contributors-cli/commits?author=kentcdodds "Documentation") [👀](#review-kentcdodds "Reviewed Pull Requests") [💬](#question-kentcdodds "Answering Questions")'
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=kentcdodds" title="Documentation">📖</a> <a href="#review-kentcdodds" title="Reviewed Pull Requests">👀</a> <a href="#question-kentcdodds" title="Answering Questions">💬</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
@@ -53,7 +53,7 @@ test('default image size to 100', () => {
   delete options.imageSize
 
   const expected =
-    '[<img src="https://avatars1.githubusercontent.com/u/1500684" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub>](http://kentcdodds.com)<br />[👀](#review-kentcdodds "Reviewed Pull Requests")'
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="#review-kentcdodds" title="Reviewed Pull Requests">👀</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
@@ -63,7 +63,7 @@ test('format contributor with pipes in their name', () => {
   const {options} = fixtures()
 
   const expected =
-    '[<img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="Who &#124; Needs &#124; Pipes?"/><br /><sub><b>Who &#124; Needs &#124; Pipes?</b></sub>](http://github.com/chrisinajar)<br />[📖](https://github.com/all-contributors/all-contributors-cli/commits?author=pipey "Documentation")'
+    '<a href="http://github.com/chrisinajar"><img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="Who &#124; Needs &#124; Pipes?"/><br /><sub><b>Who &#124; Needs &#124; Pipes?</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=pipey" title="Documentation">📖</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
@@ -73,7 +73,7 @@ test('format contributor with no github account', () => {
   const {options} = fixtures()
 
   const expected =
-    '<img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="No Github Account"/><br /><sub><b>No Github Account</b></sub><br />[🌍](#translation "Translation")'
+    '<img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="No Github Account"/><br /><sub><b>No Github Account</b></sub><br /><a href="#translation" title="Translation">🌍</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })

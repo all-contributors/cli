@@ -34,7 +34,7 @@ specification for your GitHub or GitLab repository.
 
 ## Using the all-contributors-cli
 
-If you're looking to use the cli, head over to [the cli docs on all-contributors.js.org](https://all-contributors.js.org/docs/cli/overview). The all-contributors website contains all the information required to install, configure and use the all-contributors-cli.
+If you're looking to use the cli, head over to [the cli docs on all-contributors.js.org](https://all-contributors.js.org/docs/en/cli/overview). The all-contributors website contains all the information required to install, configure and use the all-contributors-cli.
 
 ## Contributors
 

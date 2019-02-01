@@ -2,9 +2,14 @@ const path = require('path')
 const spawn = require('child_process').spawn
 const _ = require('lodash/fp')
 const pify = require('pify')
+const convention = require('../init/commit-conventions')
+const {readConfig} = require('./config-file')
+
+// const config = readConfig('.all-contributorsrc')
+// console.log(c)
 
 const commitTemplate =
-  '<%= (newContributor ? "Add" : "Update") %> @<%= username %> as a contributor'
+  '<%= prefix %> <%= (newContributor ? "Add" : "Update") %> @<%= username %> as a contributor'
 
 const getRemoteOriginData = pify(cb => {
   let output = ''
@@ -37,27 +42,33 @@ function getRepoInfo() {
 
 const spawnGitCommand = pify((args, cb) => {
   const git = spawn('git', args)
-  const bufs = [];
-  git.stderr.on('data', (buf) => bufs.push(buf));
-  git.on('close', (code) => {
+  const bufs = []
+  git.stderr.on('data', buf => bufs.push(buf))
+  git.on('close', code => {
     if (code) {
-      const msg = Buffer.concat(bufs).toString() || `git ${args.join(' ')} - exit code: ${code}`;
-      cb(new Error(msg));
+      const msg =
+        Buffer.concat(bufs).toString() ||
+        `git ${args.join(' ')} - exit code: ${code}`
+      cb(new Error(msg))
     } else {
-      cb(null);
+      cb(null)
     }
-  });
+  })
 })
 
 function commit(options, data) {
+  // console.log('opts=', options, 'data=', data)
   const files = options.files.concat(options.config)
   const absolutePathFiles = files.map(file => {
     return path.resolve(process.cwd(), file)
   })
+  const config = readConfig(options.config)
+  const prefix = convention[config.commitConvention].msg
   return spawnGitCommand(['add'].concat(absolutePathFiles)).then(() => {
-    const commitMessage = _.template(options.commitTemplate || commitTemplate)(
-      data,
-    )
+    const commitMessage = _.template(options.commitTemplate || commitTemplate)({
+      ...data,
+      prefix,
+    })
     return spawnGitCommand(['commit', '-m', commitMessage])
   })
 }

@@ -1,7 +1,7 @@
 const util = require('../util')
 const prompt = require('./prompt')
 const initContent = require('./init-content')
-const check = require('./check-file')
+const ensureFileExists = require('./file-exist')
 
 const configFile = util.configFile
 const markdown = util.markdown
@@ -15,7 +15,7 @@ module.exports = function init() {
     return configFile
       .writeConfig('.all-contributorsrc', result.config)
       .then(() => {
-        check(result.contributorFile)
+        ensureFileExists(result.contributorFile)
       })
       .then(() =>
         injectInFile(result.contributorFile, initContent.addContributorsList),

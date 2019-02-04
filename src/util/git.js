@@ -2,11 +2,8 @@ const path = require('path')
 const spawn = require('child_process').spawn
 const _ = require('lodash/fp')
 const pify = require('pify')
-const convention = require('../init/commit-conventions')
+const conventions = require('../init/commit-conventions')
 const {readConfig} = require('./config-file')
-
-// const config = readConfig('.all-contributorsrc')
-// console.log(c)
 
 const commitTemplate =
   '<%= prefix %> <%= (newContributor ? "Add" : "Update") %> @<%= username %> as a contributor'
@@ -57,18 +54,20 @@ const spawnGitCommand = pify((args, cb) => {
 })
 
 function commit(options, data) {
-  // console.log('opts=', options, 'data=', data)
   const files = options.files.concat(options.config)
   const absolutePathFiles = files.map(file => {
     return path.resolve(process.cwd(), file)
   })
   const config = readConfig(options.config)
-  const prefix = convention[config.commitConvention].msg
+  const commitConvention = conventions[config.commitConvention]
+
   return spawnGitCommand(['add'].concat(absolutePathFiles)).then(() => {
-    const commitMessage = _.template(options.commitTemplate || commitTemplate)({
+    let commitMessage = _.template(options.commitTemplate || commitTemplate)({
       ...data,
-      prefix,
+      prefix: commitConvention.msg,
     })
+    if (commitConvention.lowercase)
+      commitMessage = commitConvention.transform(commitMessage)
     return spawnGitCommand(['commit', '-m', commitMessage])
   })
 }

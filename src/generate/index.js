@@ -48,9 +48,7 @@ function generateContributorsList(options, contributors) {
     _.map(formatLine),
     _.join('</tr><tr>'),
     newContent => {
-      const style =
-        '<style>#emoji-table, #emoji-table td { border: 1px solid #ccc; }</style>'
-      return `\n${style}<table id="emoji-table" cellspacing=0 cellpadding=1><tr>${newContent}</tr></table>\n`
+      return `\n<table id="emoji-table" cellspacing=0 cellpadding=1><tr>${newContent}</tr></table>\n`
     },
   )(contributors)
 }

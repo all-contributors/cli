@@ -48,7 +48,7 @@ function generateContributorsList(options, contributors) {
     _.map(formatLine),
     _.join('</tr><tr>'),
     newContent => {
-      return `\n<table id="emoji-table" cellspacing=0 cellpadding=1><tr>${newContent}</tr></table>\n`
+      return `\n<table cellspacing="0" cellpadding="1"><tr>${newContent}</tr></table>\n`
     },
   )(contributors)
 }

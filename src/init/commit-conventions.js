@@ -3,6 +3,12 @@ const conventions = {
     name: 'Angular',
     msg: 'docs:',
     lowercase: true,
+    transform(msg) {
+      return msg.replace(
+        /(^.*?) ([A-Z][a-z]+) \w*/,
+        (_, ...words) => `${words[0]} ${words[1].toLowerCase()} `,
+      )
+    },
   },
   atom: {
     name: 'Atom',
@@ -22,7 +28,7 @@ const conventions = {
   },
   none: {
     name: 'None',
-    msg: 'Docs:',
+    msg: '',
   },
 }
 

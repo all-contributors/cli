@@ -17,10 +17,10 @@ test('return corresponding symbol', () => {
   const {options} = fixtures()
 
   expect(formatContributionType(options, contributor, 'tool')).toBe(
-    '[🔧](#tool-kentcdodds "Tools")',
+    '<a href="#tool-kentcdodds" title="Tools">🔧</a>',
   )
   expect(formatContributionType(options, contributor, 'question')).toBe(
-    '[💬](#question-kentcdodds "Answering Questions")',
+    '<a href="#question-kentcdodds" title="Answering Questions">💬</a>',
   )
 })
 
@@ -31,13 +31,13 @@ test('return link to commits', () => {
     'https://github.com/all-contributors/all-contributors-cli/commits?author=kentcdodds'
 
   expect(formatContributionType(options, contributor, 'code')).toBe(
-    `[💻](${expectedLink} "Code")`,
+    `<a href="${expectedLink}" title="Code">💻</a>`,
   )
   expect(formatContributionType(options, contributor, 'doc')).toBe(
-    `[📖](${expectedLink} "Documentation")`,
+    `<a href="${expectedLink}" title="Documentation">📖</a>`,
   )
   expect(formatContributionType(options, contributor, 'test')).toBe(
-    `[⚠️](${expectedLink} "Tests")`,
+    `<a href="${expectedLink}" title="Tests">⚠️</a>`,
   )
 })
 
@@ -45,7 +45,7 @@ test('return link to issues', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
   const expected =
-    '[🐛](https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Akentcdodds "Bug reports")'
+    '<a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Akentcdodds" title="Bug reports">🐛</a>'
 
   expect(formatContributionType(options, contributor, 'bug')).toBe(expected)
 })
@@ -59,7 +59,7 @@ test('make any symbol into a link if contribution is an object', () => {
   }
 
   expect(formatContributionType(options, contributor, contribution)).toBe(
-    '[🔧](www.foo.bar "Tools")',
+    '<a href="www.foo.bar" title="Tools">🔧</a>',
   )
 })
 
@@ -72,7 +72,7 @@ test('override url for given types', () => {
   }
 
   expect(formatContributionType(options, contributor, contribution)).toBe(
-    '[💻](www.foo.bar "Code")',
+    '<a href="www.foo.bar" title="Code">💻</a>',
   )
 })
 
@@ -84,14 +84,14 @@ test('be able to add types to the symbol list', () => {
   }
 
   expect(formatContributionType(options, contributor, 'cheerful')).toBe(
-    '[:smiley:](#cheerful-kentcdodds "")',
+    '<a href="#cheerful-kentcdodds" title="">:smiley:</a>',
   )
   expect(
     formatContributionType(options, contributor, {
       type: 'cheerful',
       url: 'www.foo.bar',
     }),
-  ).toBe('[:smiley:](www.foo.bar "")')
+  ).toBe('<a href="www.foo.bar" title="">:smiley:</a>')
 })
 
 test('be able to add types with template to the symbol list', () => {
@@ -105,7 +105,7 @@ test('be able to add types with template to the symbol list', () => {
   }
 
   expect(formatContributionType(options, contributor, 'web')).toBe(
-    '[:web:](www.kentcdodds.com "")',
+    '<a href="www.kentcdodds.com" title="">:web:</a>',
   )
 })
 
@@ -117,14 +117,14 @@ test('be able to override existing types', () => {
   }
 
   expect(formatContributionType(options, contributor, 'code')).toBe(
-    '[:smiley:](#code-kentcdodds "")',
+    '<a href="#code-kentcdodds" title="">:smiley:</a>',
   )
   expect(
     formatContributionType(options, contributor, {
       type: 'code',
       url: 'www.foo.bar',
     }),
-  ).toBe('[:smiley:](www.foo.bar "")')
+  ).toBe('<a href="www.foo.bar" title="">:smiley:</a>')
 })
 
 test('be able to override existing templates', () => {
@@ -138,14 +138,14 @@ test('be able to override existing templates', () => {
   }
 
   expect(formatContributionType(options, contributor, 'code')).toBe(
-    '[:web:](www.kentcdodds.com "")',
+    '<a href="www.kentcdodds.com" title="">:web:</a>',
   )
   expect(
     formatContributionType(options, contributor, {
       type: 'code',
       url: 'www.foo.bar',
     }),
-  ).toBe('[:web:](www.foo.bar "")')
+  ).toBe('<a href="www.foo.bar" title="">:web:</a>')
 })
 
 test('throw a helpful error on unknown type', () => {

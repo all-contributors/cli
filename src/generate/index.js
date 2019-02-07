@@ -36,7 +36,7 @@ function injectListBetweenTags(newContent) {
 }
 
 function formatLine(contributors) {
-  return `<td>${contributors.join('</td><td>')}</td>`
+  return `<td style="text-align:center;">${contributors.join('</td><td>')}</td>`
 }
 
 function generateContributorsList(options, contributors) {
@@ -48,7 +48,7 @@ function generateContributorsList(options, contributors) {
     _.map(formatLine),
     _.join('</tr><tr>'),
     newContent => {
-      return `\n<table cellspacing="0" cellpadding="1"><tr>${newContent}</tr></table>\n`
+      return `\n<table><tr>${newContent}</tr></table>\n`
     },
   )(contributors)
 }

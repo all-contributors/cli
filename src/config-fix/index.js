@@ -15,7 +15,7 @@ function doubleCheck(data) {
   try {
     const res = parse(data)
     console.log('The JSON data was fixed!')
-    if (res) return data
+    if (res) return res
   } catch (err) {
     console.error("There's still an error!")
     throw new Error(captureError(err).errMsg)
@@ -43,10 +43,16 @@ function checkJson(data) {
   try {
     const res = parse(data)
     if (res) {
-      return res
+      return {
+        data: res,
+        changed: false,
+      }
     }
   } catch (err) {
-    return fixJson(err, data)
+    return {
+      data: fixJson(err, data),
+      changed: true,
+    }
   }
 }
 

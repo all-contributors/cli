@@ -1,18 +1,22 @@
 const fs = require('fs')
 const pify = require('pify')
 const _ = require('lodash/fp')
+const fixConfig = require('../config-fix')
 
 function readConfig(configPath) {
   try {
-    const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'))
+    const {data: config, changed} = fixConfig(
+      fs.readFileSync(configPath, 'utf-8'),
+    )
     if (!('repoType' in config)) {
       config.repoType = 'github'
     }
+    if (changed) {
+      //Updates the file with fixes
+      fs.writeFileSync(configPath, JSON.stringify(config, null, 2))
+    }
     return config
   } catch (error) {
-    if (error instanceof SyntaxError) {
-      throw new SyntaxError(`Configuration file has malformed JSON: ${configPath}. Error:: ${error.message}`)
-    }
     if (error.code === 'ENOENT') {
       throw new Error(`Configuration file not found: ${configPath}`)
     }

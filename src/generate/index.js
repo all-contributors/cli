@@ -45,7 +45,7 @@ function formatFooter(options) {
   //   return ''
   // }
 
-    return `<tr colspan="${options.contributorsPerLine}"> <img src="${LOGO_SMALL_URL}" /> Table generated using all contributors</tr>`
+    return `<tr><td colspan="${options.contributorsPerLine}"> <img src="${LOGO_SMALL_URL}" /> Table generated using all contributors</td></tr>`
 }
 
 function generateContributorsList(options, contributors) {

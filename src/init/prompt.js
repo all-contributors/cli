@@ -103,6 +103,7 @@ module.exports = function prompt() {
           commit: answers.commit,
           contributors: [],
           contributorsPerLine: 7,
+          linkToUsage: true,
         },
         contributorFile: answers.contributorFile,
         badgeFile: answers.badgeFile,

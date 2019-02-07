@@ -41,14 +41,15 @@ function formatLine(contributors) {
 
 
 function formatFooter(options) {
+  if (!options.linkToUsage) {
+    return ''
+  }
   const smallLogoURL = 'https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg'
+  const linkToAllContributors = 'https://all-contributors.js.org'
   const linkToBotAdd = 'https://all-contributors.js.org/docs/en/bot/usage'
-    // if (!options.attachFooter) {
-  //   return ''
-  // }
 
     return `<tr>
-        <td colspan="${options.contributorsPerLine}" style="font-size:13px;"><img src="${smallLogoURL}" /> Contributors are recognised by the All Contributor bot, to <a href="${linkToBotAdd}">add your contribution</a>.</td>
+        <td colspan="${options.contributorsPerLine}" style="font-size:13px;"><img src="${smallLogoURL}" /> Table generated with <a href="${linkToAllContributors}">All Contributors</a>, <a href="${linkToBotAdd}">add your contributor</a></td>
     </tr>`
 }
 

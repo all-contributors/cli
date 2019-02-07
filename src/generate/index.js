@@ -1,7 +1,6 @@
 const _ = require('lodash/fp')
 const formatBadge = require('./format-badge')
 const formatContributor = require('./format-contributor')
-const logoSmall = require('./logoSmall')
 
 const badgeRegex = /\[!\[All Contributors\]\([a-zA-Z0-9\-./_:?=]+\)\]\(#\w+\)/
 
@@ -40,12 +39,14 @@ function formatLine(contributors) {
   return `<td style="text-align:center;">${contributors.join('</td><td>')}</td>`
 }
 
+const LOGO_SMALL_URL = 'https://raw.githubusercontent.com/all-contributors/all-contributors-cli/4f38a545c8f963e318429acb2f3e43f7c9b5d657/assets/logo-small.svg'
+
 function formatFooter(options) {
   // if (!options.attachFooter) {
   //   return ''
   // }
 
-    return `<tr> ${logoSmall} Table generated using all contributors</tr>`
+    return `<tr> <img src="${LOGO_SMALL_URL}" /> Table generated using all contributors</tr>`
 }
 
 function generateContributorsList(options, contributors) {

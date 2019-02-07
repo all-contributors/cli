@@ -1,6 +1,7 @@
 const _ = require('lodash/fp')
 const formatBadge = require('./format-badge')
 const formatContributor = require('./format-contributor')
+const logoSmall = require('./logoSmall')
 
 const badgeRegex = /\[!\[All Contributors\]\([a-zA-Z0-9\-./_:?=]+\)\]\(#\w+\)/
 
@@ -36,10 +37,20 @@ function injectListBetweenTags(newContent) {
 }
 
 function formatLine(contributors) {
-  return `<td>${contributors.join('</td><td>')}</td>`
+  return `<td style="text-align:center;">${contributors.join('</td><td>')}</td>`
+}
+
+function formatFooter(options) {
+  // if (!options.attachFooter) {
+  //   return ''
+  // }
+
+    return `<tr> ${logoSmall} Table generated using all contributors</tr>`
 }
 
 function generateContributorsList(options, contributors) {
+  const tableFooter = formatFooter(options)
+
   return _.flow(
     _.map(function formatEveryContributor(contributor) {
       return formatContributor(options, contributor)
@@ -48,7 +59,7 @@ function generateContributorsList(options, contributors) {
     _.map(formatLine),
     _.join('</tr><tr>'),
     newContent => {
-      return `\n<table cellspacing="0" cellpadding="1"><tr>${newContent}</tr></table>\n`
+      return `\n<table><tr>${newContent}</tr>${tableFooter}</table>\n`
     },
   )(contributors)
 }

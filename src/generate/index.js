@@ -39,13 +39,14 @@ function formatLine(contributors) {
   return `<td style="text-align:center;">${contributors.join('</td><td>')}</td>`
 }
 
-const LOGO_SMALL_URL = 'https://raw.githubusercontent.com/all-contributors/all-contributors-cli/36236d43452fb807ca95fafbd90a8517107181cd/assets/logo-small.svg'
+
 function formatFooter(options) {
+  const smallLogoURL = 'https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg'
   // if (!options.attachFooter) {
   //   return ''
   // }
 
-    return `<tr><td colspan="${options.contributorsPerLine}"> <img src="${LOGO_SMALL_URL}" /> Table generated using all contributors</td></tr>`
+    return `<tr><td colspan="${options.contributorsPerLine}"><img src="${smallLogoURL}" /> Table generated using all contributors</td></tr>`
 }
 
 function generateContributorsList(options, contributors) {

@@ -49,7 +49,7 @@ function formatFooter(options) {
   const linkToBotAdd = 'https://all-contributors.js.org/docs/en/bot/usage'
 
     return `<tr>
-        <td style="font-size:13px;" colspan="${options.contributorsPerLine}"><img src="${smallLogoURL}" > <a href="${linkToBotAdd}">Add your contribution</a></td>
+        <td size="13px" colspan="${options.contributorsPerLine}"><img src="${smallLogoURL}" > <a href="${linkToBotAdd}">Add your contribution</a></td>
     </tr>`
 }
 

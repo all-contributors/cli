@@ -20,6 +20,6 @@ test('add new contributor without going to the network', async () => {
     profile: userDetails.profile,
   })
 
-  expect(contributors.length).toBe(options.contributors.length + 1)
+  expect(contributors).toHaveLength(options.contributors.length + 1)
   expect(contributors[options.contributors.length]).toEqual(userDetails)
 })

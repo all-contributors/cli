@@ -34,12 +34,12 @@ specification for your GitHub or GitLab repository.
 
 ## Using the all-contributors-cli
 
-If you're looking to use the cli, head over to [the cli docs on all-contributors.js.org](https://all-contributors.js.org/docs/en/cli/overview). The all-contributors website contains all the information required to install, configure and use the all-contributors-cli.
+If you're looking to use the cli, head over to [the cli docs on allcontributors.org](https://allcontributors.org/docs/en/cli/overview). The all-contributors website contains all the information required to install, configure and use the all-contributors-cli.
 
 ## Contributors
 
 Thanks goes to these wonderful people
-([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):
+([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore -->

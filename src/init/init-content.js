@@ -4,7 +4,7 @@ const injectContentBetween = require('../util').markdown.injectContentBetween
 const badgeContent =
   '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)'
 const headerContent =
-  'Thanks goes to these wonderful people ([emoji key](https://github.com/all-contributors/all-contributors#emoji-key)):'
+  'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):'
 const listContent = [
   '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->',
   '<!-- prettier-ignore -->',

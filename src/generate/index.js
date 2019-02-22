@@ -28,7 +28,7 @@ function injectListBetweenTags(newContent) {
     }
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
-      '\n\n<!-- prettier-ignore -->',
+      '\n<!-- prettier-ignore -->',
       newContent,
       previousContent.slice(startOfClosingTagIndex),
     ].join('')
@@ -48,7 +48,7 @@ function generateContributorsList(options, contributors) {
     _.map(formatLine),
     _.join('</tr><tr>'),
     newContent => {
-      return `\n<table><tr>${newContent}</tr></table>\n`
+      return `\n<table><tr>${newContent}</tr></table>\n\n`
     },
   )(contributors)
 }

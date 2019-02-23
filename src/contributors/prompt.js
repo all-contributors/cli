@@ -26,6 +26,12 @@ function getQuestions(options, username, contributions) {
         options.repoType,
       )} username?`,
       when: !username,
+      validate: function validate(input) {
+        if (!input) {
+          return 'Username not provided'
+        }
+        return true
+      },
     },
     {
       type: 'checkbox',
@@ -88,7 +94,6 @@ function getValidUserContributions(options, contributions) {
       `${invalidUserContributions.toString()} is/are invalid contribution type(s)`,
     )
   }
-
   return validUserContributions
 }
 

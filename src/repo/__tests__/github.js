@@ -65,6 +65,30 @@ test('handle errors', async () => {
   await rejects(getUserInfo('nodisplayname'))
 })
 
+test('Throw error when no username is provided', () => {
+  expect(getUserInfo).toThrow(
+    'No login when adding a contributor. Please specify a username.',
+  )
+})
+
+test('Throw error when non existent username is provided', async () => {
+  const username = 'thisusernamedoesntexist'
+  nock('https://api.github.com')
+    .get(`/users/${username}`)
+    .reply(404, {
+      message: 'Not Found',
+      documentation_url:
+        'https://developer.github.com/v3/users/#get-a-single-user',
+    })
+  try {
+    await getUserInfo(username)
+  } catch (error) {
+    expect(error.message).toEqual(
+      `Login not found when adding a contributor for username - ${username}.`,
+    )
+  }
+})
+
 test('handle github errors', async () => {
   nock('https://api.github.com')
     .get('/users/nodisplayname')

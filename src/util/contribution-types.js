@@ -70,6 +70,10 @@ const defaultTypes = function(repoType) {
       symbol: '🔌',
       description: 'Plugin/utility libraries',
     },
+    projectManagement: {
+      symbol: '📆',
+      description: 'Project Management',
+    },
     question: {
       symbol: '💬',
       description: 'Answering Questions',

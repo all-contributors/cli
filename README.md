@@ -8,7 +8,7 @@
 <hr />
 
 <table>
-    <caption>Read these documentation in the following languages</caption>
+    <caption>Read this documentation in the following languages</caption>
     <tbody>
         <tr>
             <td><a href="https://allcontributors.org/docs/ko/cli/overview">한국어</a></td>

@@ -7,19 +7,31 @@
 
 <hr />
 
-[![Build Status][build-badge]][build]
-[![Code Coverage][coverage-badge]][coverage]
-[![Greenkeeper badge](https://badges.greenkeeper.io/all-contributors/all-contributors-cli.svg)](https://greenkeeper.io/)
-[![version][version-badge]][package] [![downloads][downloads-badge]][downloads]
-[![MIT License][license-badge]][license]
-[![Chat on Slack][chat-badge]][chat]
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+<table>
+    <caption>Read these documentation in the following languages</caption>
+    <tbody>
+        <tr>
+            <td><a href="https://allcontributors.org/docs/ko/overview">한국어</a></td>
+            <td><a href="https://allcontributors.org/docs/zh-CN/overview">中文</a></td>
+            <td><a href="https://allcontributors.org/docs/id/overview">Bahasa Indonesia</a></td>
+            <td><a href="https://allcontributors.org/docs/de/overview">Deutsch</a></td>
+            <td><a href="https://allcontributors.org/docs/pl/overview">Polskie</a></td>
+        </tr>
+        <tr>
+            <td><a href="https://allcontributors.org/docs/en/overview">English</a></td>
+            <td><a href="https://allcontributors.org/docs/pt-BR/overview">Português</a></td>
+            <td><a href="https://allcontributors.org/docs/es-ES/overview">Español</a></td>
+            <td><a href="https://allcontributors.org/docs/fr/overview">Français</a></td>
+        </tr>
+    </tbody>
+</table>
 
+[![Build Status](https://img.shields.io/circleci/project/all-contributors/all-contributors-cli/master.svg)](https://circleci.com/gh/all-contributors/workflows/all-contributors-cli/tree/master)
+[![Code Coverage](https://img.shields.io/codecov/c/github/all-contributors/all-contributors-cli.svg)](https://codecov.io/github/all-contributors/all-contributors-cli)
+[![Version](https://img.shields.io/npm/v/all-contributors-cli.svg)](https://www.npmjs.com/package/all-contributors-cli)
+[![Downloads](https://img.shields.io/npm/dm/all-contributors-cli.svg)](http://www.npmtrends.com/all-contributors-cli)
 [![All Contributors](https://img.shields.io/badge/all_contributors-28-orange.svg?style=flat-square)](#contributors)
-[![PRs Welcome][prs-badge]][prs] [![Code of Conduct][coc-badge]][coc]
-[![Watch on GitHub][github-watch-badge]][github-watch]
-[![Star on GitHub][github-star-badge]][github-star]
-[![Tweet][twitter-badge]][twitter]
+[![Star on Github](https://img.shields.io/github/stars/all-contributors/all-contributors-cli.svg?style=social)](https://github.com/all-contributors/all-contributors-cli/stargazers)
 
 ## The problem
 
@@ -54,30 +66,3 @@ specification. Contributions of any kind are welcome!
 ## LICENSE
 
 MIT
-
-[npm]: https://www.npmjs.com/
-[node]: https://nodejs.org
-[chat-badge]: https://img.shields.io/badge/slack-join-ff69b4.svg?style=flat-square
-[chat]: https://join.slack.com/t/all-contributors/shared_invite/enQtNTE3ODMyMTA4NTk0LTUwZDMxZGZkMmViMzYzYzk2YTM2NjRkZGM5Yzc0ZTc5NmYzNWY3Y2Q0ZTY3ZmFhZDgyY2E3ZmIzNWQwMTUxZmE
-[build-badge]: https://img.shields.io/circleci/project/all-contributors/all-contributors-cli/master.svg?style=flat-square
-[build]: https://circleci.com/gh/all-contributors/all-contributors-cli
-[coverage-badge]: https://img.shields.io/codecov/c/github/all-contributors/all-contributors-cli.svg?style=flat-square
-[coverage]: https://codecov.io/github/all-contributors/all-contributors-cli
-[version-badge]: https://img.shields.io/npm/v/all-contributors-cli.svg?style=flat-square
-[package]: https://www.npmjs.com/package/all-contributors-cli
-[downloads-badge]: https://img.shields.io/npm/dm/all-contributors-cli.svg?style=flat-square
-[downloads]: http://www.npmtrends.com/all-contributors-cli
-[license-badge]: https://img.shields.io/npm/l/all-contributors-cli.svg?style=flat-square
-[license]: https://github.com/all-contributors/all-contributors-cli/blob/master/other/LICENSE
-[prs-badge]: https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square
-[prs]: http://makeapullrequest.com
-[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
-[coc]: https://github.com/all-contributors/all-contributors-cli/blob/master/other/CODE_OF_CONDUCT.md
-[github-watch-badge]: https://img.shields.io/github/watchers/all-contributors/all-contributors-cli.svg?style=social
-[github-watch]: https://github.com/all-contributors/all-contributors-cli/watchers
-[github-star-badge]: https://img.shields.io/github/stars/all-contributors/all-contributors-cli.svg?style=social
-[github-star]: https://github.com/all-contributors/all-contributors-cli/stargazers
-[twitter]: https://twitter.com/intent/tweet?text=Check%20out%20all-contributors-cli!%20https://github.com/all-contributors/all-contributors-cli%20%F0%9F%91%8D
-[twitter-badge]: https://img.shields.io/twitter/url/https/github.com/all-contributors/all-contributors-cli.svg?style=social
-[emojis]: https://github.com/all-contributors/all-contributors#emoji-key
-[all-contributors]: https://github.com/all-contributors/all-contributors

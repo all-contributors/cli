@@ -47,6 +47,7 @@
     "chalk": "^2.3.0",
     "inquirer": "^6.2.1",
     "lodash": "^4.11.2",
+    "name-your-contributors": "^3.4.0",
     "pify": "^4.0.1",
     "request": "^2.72.0",
     "yargs": "^13.1.0"

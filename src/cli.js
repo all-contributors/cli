@@ -11,6 +11,7 @@ const generate = require('./generate')
 const util = require('./util')
 const repo = require('./repo')
 const updateContributors = require('./contributors')
+const { getContributors } = require('./discover')
 
 const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
@@ -83,6 +84,8 @@ function checkContributors(argv) {
       configData.repoHost,
     )
     .then(repoContributors => {
+      // console.log('repoContributors=')
+      // console.dir(repoContributors) //['jfmengels', 'jakebolam', ...]
       const checkKey = repo.getCheckKey(configData.repoType)
       const knownContributions = configData.contributors.reduce((obj, item) => {
         obj[item[checkKey]] = item.contributions
@@ -117,6 +120,72 @@ function checkContributors(argv) {
         process.stdout.write(`${missingFromRepo.join(', ')}\n`)
       }
     })
+}
+
+function fetchContributors(argv) {
+  const configData = util.configFile.readConfig(argv.config)
+  // console.log('configData')
+  // console.dir(configData)
+
+  return getContributors(
+      configData.projectOwner,
+      configData.projectName,
+    )
+    .then(repoContributors => {
+      // repoContributors = {prCreators, prCommentators, issueCreators, issueCommentators, reviewers, commitAuthors, commitCommentators}
+      // console.dir(repoContributors)
+
+      const checkKey = repo.getCheckKey(configData.repoType)
+      const knownContributions = configData.contributors.reduce((obj, item) => {
+        obj[item[checkKey]] = item.contributions
+        return obj
+      }, {})
+      // console.log('knownContributions', knownContributions) //{ jfmengels: ['code', 'test', 'doc'], ...}
+      const knownContributors = configData.contributors.map(
+        contributor => contributor[checkKey],
+      )
+      // console.log('knownContributors', knownContributors) //['kentcdodds', 'ben-eb', ...]
+
+      let contributors = new Set(repoContributors.prCreators.map(usr => usr.login))
+
+      repoContributors.issueCreators.forEach(usr => contributors.add(usr.login))
+      repoContributors.reviewers.forEach(usr => contributors.add(usr.login))
+      repoContributors.commitAuthors.forEach(usr => contributors.add(usr.login))
+      contributors = Array.from(contributors)
+
+      // console.log('ctbs=', contributors);
+      const missingInConfig = contributors.filter(
+        key => !knownContributors.includes(key),
+      )
+
+      const missingFromRepo = knownContributors.filter(key => {
+        return (
+          !contributors.includes(key) &&
+          (knownContributions[key].includes('code') ||
+            knownContributions[key].includes('test'))
+        )
+      })
+
+      if (missingInConfig.length) {
+        process.stdout.write(
+          chalk.bold('Missing contributors in .all-contributorsrc:\n'),
+        )
+        process.stdout.write(`    ${missingInConfig.join(', ')}\n`)
+      }
+
+      if (missingFromRepo.length) {
+        process.stdout.write(
+          chalk.bold('Unknown contributors found in .all-contributorsrc:\n'),
+        )
+        process.stdout.write(`${missingFromRepo.join(', ')}\n`)
+      }
+
+      //1. Auto-add reviewers for review
+      //2. Auto-add issue creators for bug/security
+      //3. Find a way to distinguish bug from security contributions
+      //4. Roll onto other contribution categories following https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
+    },
+    err => console.error('checkContributorsFromNYC error:', err))
 }
 
 function onError(error) {
@@ -169,6 +238,8 @@ promptForCommand(yargv)
         return addContribution(yargv)
       case 'check':
         return checkContributors(yargv)
+      case 'fetch':
+        return fetchContributors(yargv)
       default:
         throw new Error(`Unknown command ${command}`)
     }

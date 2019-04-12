@@ -50,6 +50,7 @@
     "name-your-contributors": "^3.4.0",
     "pify": "^4.0.1",
     "request": "^2.72.0",
+    "string-similarity": "^3.0.0",
     "yargs": "^13.1.0"
   },
   "devDependencies": {

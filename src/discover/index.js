@@ -10,9 +10,8 @@ const getContributors = function(owner, name, token = privateToken) {
     token,
     user: owner,
     repo: name,
-    commits: true
+    commits: true,
   })
 }
 
-
-module.exports = { getContributors }
+module.exports = {getContributors}

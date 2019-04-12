@@ -11,7 +11,8 @@ const generate = require('./generate')
 const util = require('./util')
 const repo = require('./repo')
 const updateContributors = require('./contributors')
-const { getContributors } = require('./discover')
+const {getContributors} = require('./discover')
+const {classifyLabel} = require('./discover/labelClass')
 
 const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
@@ -60,6 +61,7 @@ function startGeneration(argv) {
 }
 
 function addContribution(argv) {
+  // console.log('argv=', argv);
   const username = argv._[1]
   const contributions = argv._[2]
   // Add or update contributor in the config file
@@ -127,11 +129,8 @@ function fetchContributors(argv) {
   // console.log('configData')
   // console.dir(configData)
 
-  return getContributors(
-      configData.projectOwner,
-      configData.projectName,
-    )
-    .then(repoContributors => {
+  return getContributors(configData.projectOwner, configData.projectName).then(
+    repoContributors => {
       // repoContributors = {prCreators, prCommentators, issueCreators, issueCommentators, reviewers, commitAuthors, commitCommentators}
       // console.dir(repoContributors)
 
@@ -146,7 +145,9 @@ function fetchContributors(argv) {
       )
       // console.log('knownContributors', knownContributors) //['kentcdodds', 'ben-eb', ...]
 
-      let contributors = new Set(repoContributors.prCreators.map(usr => usr.login))
+      let contributors = new Set(
+        repoContributors.prCreators.map(usr => usr.login),
+      )
 
       repoContributors.issueCreators.forEach(usr => contributors.add(usr.login))
       repoContributors.reviewers.forEach(usr => contributors.add(usr.login))
@@ -166,7 +167,7 @@ function fetchContributors(argv) {
         )
       })
 
-      if (missingInConfig.length) {
+      /* if (missingInConfig.length) {
         process.stdout.write(
           chalk.bold('Missing contributors in .all-contributorsrc:\n'),
         )
@@ -178,14 +179,28 @@ function fetchContributors(argv) {
           chalk.bold('Unknown contributors found in .all-contributorsrc:\n'),
         )
         process.stdout.write(`${missingFromRepo.join(', ')}\n`)
-      }
+      } */
 
       //1. Auto-add reviewers for review
       //2. Auto-add issue creators for bug/security
-      //3. Find a way to distinguish bug from security contributions
+      //3. Find a way to distinguish bug from security contributions (_erm_ labels _erm_)
       //4. Roll onto other contribution categories following https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
+
+      let args = Object.assign({}, configData, {_: []});
+      repoContributors.reviewers.forEach(usr => {
+        args._ = ['', usr.login, 'review']
+        addContribution(args)
+        console.log(`Adding Reviewer ${usr.login}`)
+      })
+
+      repoContributors.issueCreators.forEach(usr => {
+        console.log('usr=', usr.login, 'labels=', usr.labels);
+        console.log('categories', usr.labels.map(lbl => classifyLabel(lbl)))
+      })
+
     },
-    err => console.error('checkContributorsFromNYC error:', err))
+    err => console.error('checkContributorsFromNYC error:', err),
+  )
 }
 
 function onError(error) {

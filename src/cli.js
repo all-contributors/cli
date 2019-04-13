@@ -12,7 +12,7 @@ const util = require('./util')
 const repo = require('./repo')
 const updateContributors = require('./contributors')
 const {getContributors} = require('./discover')
-const {classifyLabel} = require('./discover/labelClass')
+const findCategory = require('./discover/findCategory')
 
 const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
@@ -134,15 +134,15 @@ function fetchContributors(argv) {
       // repoContributors = {prCreators, prCommentators, issueCreators, issueCommentators, reviewers, commitAuthors, commitCommentators}
       // console.dir(repoContributors)
 
-      const checkKey = repo.getCheckKey(configData.repoType)
-      const knownContributions = configData.contributors.reduce((obj, item) => {
-        obj[item[checkKey]] = item.contributions
-        return obj
-      }, {})
+      // const checkKey = repo.getCheckKey(configData.repoType)
+      // const knownContributions = configData.contributors.reduce((obj, item) => {
+      //   obj[item[checkKey]] = item.contributions
+      //   return obj
+      // }, {})
       // console.log('knownContributions', knownContributions) //{ jfmengels: ['code', 'test', 'doc'], ...}
-      const knownContributors = configData.contributors.map(
-        contributor => contributor[checkKey],
-      )
+      // const knownContributors = configData.contributors.map(
+      //   contributor => contributor[checkKey],
+      // )
       // console.log('knownContributors', knownContributors) //['kentcdodds', 'ben-eb', ...]
 
       let contributors = new Set(
@@ -155,7 +155,7 @@ function fetchContributors(argv) {
       contributors = Array.from(contributors)
 
       // console.log('ctbs=', contributors);
-      const missingInConfig = contributors.filter(
+      /*const missingInConfig = contributors.filter(
         key => !knownContributors.includes(key),
       )
 
@@ -165,7 +165,7 @@ function fetchContributors(argv) {
           (knownContributions[key].includes('code') ||
             knownContributions[key].includes('test'))
         )
-      })
+      })*/
 
       /* if (missingInConfig.length) {
         process.stdout.write(
@@ -186,7 +186,7 @@ function fetchContributors(argv) {
       //3. Find a way to distinguish bug from security contributions (_erm_ labels _erm_)
       //4. Roll onto other contribution categories following https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
 
-      let args = Object.assign({}, configData, {_: []});
+      const args = Object.assign({}, configData, {_: []})
       repoContributors.reviewers.forEach(usr => {
         args._ = ['', usr.login, 'review']
         addContribution(args)
@@ -194,10 +194,9 @@ function fetchContributors(argv) {
       })
 
       repoContributors.issueCreators.forEach(usr => {
-        console.log('usr=', usr.login, 'labels=', usr.labels);
-        console.log('categories', usr.labels.map(lbl => classifyLabel(lbl)))
+        console.log('usr=', usr.login, 'labels=', usr.labels)
+        console.log('categories', usr.labels.map(lbl => findCategory(lbl)))
       })
-
     },
     err => console.error('checkContributorsFromNYC error:', err),
   )

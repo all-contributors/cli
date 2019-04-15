@@ -12,10 +12,18 @@ const defaultTypes = function(repoType) {
       description: 'Bug reports',
       link: repo.getLinkToIssues(repoType),
     },
+    business: {
+      symbol: '💼',
+      description: 'Business development',
+    },
     code: {
       symbol: '💻',
       description: 'Code',
       link: repo.getLinkToCommits(repoType),
+    },
+    content: {
+      symbol: '🖋',
+      description: 'Content',
     },
     design: {
       symbol: '🎨',
@@ -50,6 +58,10 @@ const defaultTypes = function(repoType) {
       symbol: '🚇',
       description: 'Infrastructure (Hosting, Build-Tools, etc)',
     },
+    maintenance: {
+      symbol: '🚧',
+      description: 'Maintenance',
+    },
     platform: {
       symbol: '📦',
       description: 'Packaging/porting to new platform',
@@ -57,6 +69,10 @@ const defaultTypes = function(repoType) {
     plugin: {
       symbol: '🔌',
       description: 'Plugin/utility libraries',
+    },
+    projectManagement: {
+      symbol: '📆',
+      description: 'Project Management',
     },
     question: {
       symbol: '💬',

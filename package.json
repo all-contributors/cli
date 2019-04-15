@@ -18,7 +18,14 @@
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
     "validate": "kcd-scripts validate",
-    "precommit": "kcd-scripts precommit"
+    "commit": "git-cz",
+    "start": "./dist/cli.js",
+    "dev": "./src/cli.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "kcd-scripts pre-commit"
+    }
   },
   "repository": {
     "type": "git",
@@ -35,18 +42,21 @@
   },
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
+    "@babel/runtime": "^7.2.0",
     "async": "^2.0.0-rc.1",
     "chalk": "^2.3.0",
-    "inquirer": "^4.0.0",
+    "inquirer": "^6.2.1",
     "lodash": "^4.11.2",
-    "pify": "^3.0.0",
+    "pify": "^4.0.1",
     "request": "^2.72.0",
-    "yargs": "^10.0.3"
+    "yargs": "^13.1.0"
   },
   "devDependencies": {
     "codecov": "^3.1.0",
-    "kcd-scripts": "^0.30.4",
-    "nock": "^9.1.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "git-cz": "^3.0.0",
+    "kcd-scripts": "^1.0.0",
+    "nock": "^10.0.6",
     "semantic-release": "^15.13.2"
   },
   "eslintIgnore": [
@@ -62,6 +72,11 @@
       "import/extensions": "off",
       "func-names": "off",
       "consistent-return": "off"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
     }
   }
 }

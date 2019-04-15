@@ -1,5 +1,4 @@
 const _ = require('lodash/fp')
-const injectContentBetween = require('../util').markdown.injectContentBetween
 const formatBadge = require('./format-badge')
 const formatContributor = require('./format-contributor')
 
@@ -37,12 +36,7 @@ function injectListBetweenTags(newContent) {
 }
 
 function formatLine(contributors) {
-  return `| ${contributors.join(' | ')} |`
-}
-
-function createColumnLine(contributorsPerLine, contributors) {
-  const nbColumns = Math.min(contributorsPerLine, contributors.length)
-  return `${_.repeat(nbColumns, '| :---: ')}|`
+  return `<td align="center">${contributors.join('</td><td align="center">')}</td>`
 }
 
 function generateContributorsList(options, contributors) {
@@ -53,13 +47,9 @@ function generateContributorsList(options, contributors) {
     }),
     _.chunk(contributorsPerLine),
     _.map(formatLine),
-    function insertColumns(lines) {
-      const columnLine = createColumnLine(contributorsPerLine, contributors)
-      return injectContentBetween(lines, columnLine, 1, 1)
-    },
-    _.join('\n'),
+    _.join('</tr><tr>'),
     newContent => {
-      return `\n${newContent}\n`
+      return `\n<table><tr>${newContent}</tr></table>\n\n`
     },
   )(contributors)
 }
@@ -84,7 +74,8 @@ module.exports = function generate(options, contributors, fileContent) {
       ? '\n'
       : generateContributorsList(options, contributors)
   const badge = formatBadge(options, contributors)
-  return _.flow(injectListBetweenTags(contributorsList), replaceBadge(badge))(
-    fileContent,
-  )
+  return _.flow(
+    injectListBetweenTags(contributorsList),
+    replaceBadge(badge),
+  )(fileContent)
 }

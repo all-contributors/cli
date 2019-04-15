@@ -60,6 +60,12 @@ const getUserInfo = function(username, hostname, optionalPrivateToken) {
     hostname = 'https://github.com'
   }
 
+  if (!username) {
+    throw new Error(
+      `No login when adding a contributor. Please specify a username.`,
+    )
+  }
+
   const root = hostname.replace(/:\/\//, '://api.')
   return request
     .get({
@@ -68,11 +74,14 @@ const getUserInfo = function(username, hostname, optionalPrivateToken) {
     })
     .then(res => {
       const body = JSON.parse(res.body)
+
       let profile = body.blog || body.html_url
 
       // Github throwing specific errors as 200...
       if (!profile && body.message) {
-        throw new Error(body.message)
+        throw new Error(
+          `Login not found when adding a contributor for username - ${username}.`,
+        )
       }
 
       profile = profile.startsWith('http') ? profile : `http://${profile}`

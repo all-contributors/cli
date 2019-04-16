@@ -1,4 +1,4 @@
-const nyc = require('../../../name-your-contributors')
+const nyc = require('name-your-contributors')
 
 const privateToken = (process.env && process.env.PRIVATE_TOKEN) || ''
 

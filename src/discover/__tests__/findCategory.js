@@ -1,4 +1,4 @@
-import findBestCategory from '../labelClass'
+import findBestCategory from '../findCategory'
 
 test('exact labels', () => {
   expect(findBestCategory('bug')).toStrictEqual('bug')

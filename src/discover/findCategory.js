@@ -1,34 +1,6 @@
 const strSim = require('string-similarity')
 
-const CATEGORIES = [
-  'blog',
-  'bug',
-  'business',
-  'code',
-  'content',
-  'design',
-  'doc',
-  'eventOrganizing',
-  'example',
-  'financial',
-  'fundingFinding',
-  'ideas',
-  'infra',
-  'maintenance',
-  'platform',
-  'plugin',
-  'projectManagement',
-  'question',
-  'review',
-  'security',
-  'talk',
-  'test',
-  'tool',
-  'translation',
-  'tutorial',
-  'userTesting',
-  'video',
-] //Object.keys(ctrbType('github'));
+const CATEGORIES = require('./categories.json') //Object.keys(ctrbType('github'));
 
 const MATCH_THRESHOLD = 0.4 //40% to allow for shorter/longer versions of categories
 const SIM_EXCEPTIONS = {

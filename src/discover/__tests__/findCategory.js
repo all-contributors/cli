@@ -39,3 +39,7 @@ test('namespaced labels', () => {
   expect(findBestCategory('cat-bug')).toStrictEqual('bug')
   expect(findBestCategory('Bug 🐛')).toStrictEqual('bug')
 })
+
+test('accurate guessing', () => {
+  /* @todo Test findBestCategory() on each items of labels.json */
+})

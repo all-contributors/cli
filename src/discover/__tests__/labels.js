@@ -10,6 +10,11 @@ test('All data', () => {
   expect(data[9]).toEqual({label: ':bug: bug', category: 'bug'})
 })
 
+test('get', () => {
+  expect(labels.getAt(0)).toEqual({label: '0 - backlog', category: 'null'})
+  expect(labels.getAt(9)).toEqual({label: ':bug: bug', category: 'bug'})
+})
+
 test('Labels', () => {
   const lbls = labels.getLabels()
   expect(lbls.length).toStrictEqual(LEN)
@@ -26,7 +31,6 @@ test('Categories', () => {
 
 test('Distinct cats', () => {
   const dc = labels.getDistinctCategories()
-  expect(dc.length).toStrictEqual(categories.length + 1)
   expect(dc.includes('null')).toBeTruthy()
 })
 

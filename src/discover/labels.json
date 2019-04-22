@@ -785,7 +785,7 @@
   },
   {
     "label": "lint",
-    "category": ""
+    "category": "maintenance"
   },
   {
     "label": "linux",
@@ -909,7 +909,7 @@
   },
   {
     "label": "new best practice",
-    "category": "doc"
+    "category": "ideas"
   },
   {
     "label": "node",
@@ -981,7 +981,7 @@
   },
   {
     "label": "performance",
-    "category": "code"
+    "category": "maintenance"
   },
   {
     "label": "planned feature",
@@ -1053,7 +1053,7 @@
   },
   {
     "label": "pr: new dependency",
-    "category": "maintenance"
+    "category": "ideas"
   },
   {
     "label": "pr: new feature",
@@ -1061,7 +1061,7 @@
   },
   {
     "label": "pr: new feature :rocket:",
-    "category": "maintenance"
+    "category": "ideas"
   },
   {
     "label": "pr: polish :nail_care:",
@@ -1141,7 +1141,7 @@
   },
   {
     "label": "refactor",
-    "category": "maintenance"
+    "category": "code"
   },
   {
     "label": "regression",
@@ -1185,7 +1185,7 @@
   },
   {
     "label": "revisitinfuture",
-    "category": "maintenance"
+    "category": "ideas"
   },
   {
     "label": "rfc",

@@ -501,11 +501,11 @@
   },
   {
     "label": "feat: e2e-cypress",
-    "category": "plugin"
+    "category": "test"
   },
   {
     "label": "feat: e2e-nightwatch",
-    "category": "plugin"
+    "category": "test"
   },
   {
     "label": "feat: eslint",
@@ -1205,7 +1205,7 @@
   },
   {
     "label": "socket.io client",
-    "category": "code"
+    "category": "tool"
   },
   {
     "label": "spam",
@@ -1353,7 +1353,7 @@
   },
   {
     "label": "support",
-    "category": "maintenance"
+    "category": "null"
   },
   {
     "label": "syntax feature request",
@@ -1436,7 +1436,7 @@
     "category": "ideas"
   },
   {
-    "label": "type: docs update",
+    "label": "type: doc update",
     "category": "doc"
   },
   {

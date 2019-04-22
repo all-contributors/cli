@@ -27,14 +27,17 @@ const SIM_EXCEPTIONS = {
   csharp: 'code',
   css: 'code',
   currency: 'financial',
+  update: 'maintenance',
   defect: 'bug',
   dep: 'maintenance',
   dependency: 'maintenance',
   device: 'platform',
+  digest: 'blog',
   discuss: 'ideas',
   document: 'doc',
   dom: 'code',
   e2e: 'test',
+  electron: 'tool',
   es6: 'code',
   external: 'plugin',
   frontend: 'code',
@@ -42,6 +45,7 @@ const SIM_EXCEPTIONS = {
   graphic: 'design',
   greenkeeper: 'infra',
   hack: 'code',
+  handshake: 'business',
   html: 'code',
   legal: 'security',
   lib: 'tool', //or code
@@ -60,6 +64,7 @@ const SIM_EXCEPTIONS = {
   js: 'code',
   mac: 'platform',
   meet: 'eventOrganizing',
+  mocha: test,
   module: 'code',
   new: 'ideas',
   node: 'platform',
@@ -77,6 +82,8 @@ const SIM_EXCEPTIONS = {
   rfc: 'ideas',
   ruby: 'code',
   shell: 'tool',
+  socket: 'tool',
+  site: 'code', //website
   spec: 'doc',
   todo: 'maintenance',
   ui: 'design', //or code
@@ -124,8 +131,10 @@ function bestCat(label, showRating) {
   }
   const match = strSim.findBestMatch(lbl, CATEGORIES)
   const seMatch = strSim.findBestMatch(lbl, SE)
+  const eMatch = strSim.findBestMatch(lbl, EMO)
   const goodMatch = match.bestMatch.rating >= MATCH_THRESHOLD
   const goodSeMatch = seMatch.bestMatch.rating >= MATCH_THRESHOLD
+  const goodEMatch = eMatch.bestMatch.rating >= MATCH_THRESHOLD
 
   if (goodMatch && match.bestMatch.rating >= seMatch.bestMatch.rating) {
     return showRating ? match.bestMatch : match.bestMatch.target
@@ -134,7 +143,7 @@ function bestCat(label, showRating) {
   const nclMatch = strSim.findBestMatch(lbl, NON_CATEGORY_LABELS)
   if (nclMatch.bestMatch.rating >= MATCH_THRESHOLD) return null
 
-  if (goodSeMatch) {
+  if (goodSeMatch && seMatch.bestMatch.rating >= eMatch.bestMatch.rating) {
     const target = SIM_EXCEPTIONS[seMatch.bestMatch.target]
     return showRating
       ? {
@@ -144,8 +153,7 @@ function bestCat(label, showRating) {
         }
       : target
   }
-  const eMatch = strSim.findBestMatch(lbl, EMO)
-  if (eMatch.bestMatch.rating >= MATCH_THRESHOLD) {
+  if (goodEMatch) {
     const target = EMOJIS[eMatch.bestMatch.target]
     return showRating
       ? {

@@ -1,6 +1,6 @@
-import chalk from 'chalk'
+// import chalk from 'chalk'
 import findBestCategory from '../findCategory'
-import {getAt, size} from '../labels'
+import {getAll} from '../labels'
 
 test('exact labels', () => {
   expect(findBestCategory('bug')).toStrictEqual('bug')
@@ -43,24 +43,33 @@ test('namespaced labels', () => {
   expect(findBestCategory('Bug 🐛')).toStrictEqual('bug')
 })
 
-test('accurate guessing', () => {
-  /* @todo Test findBestCategory() on each items of labels.json */
-  for (let i = 0; i < size(); ++i) {
-    const data = getAt(i)
-    let expectedCat = ''
-    /* @todo remove this line soon */
-    /* eslint-disable no-continue */
-    if (data.category === 'null') continue //skip the unclassifiable ones (for now)
-    /* eslint-enable no-continue */
-    process.stdout.write(`\n${chalk.cyan(`label guess: ${data.label}`)}\n`)
-    try {
-      expectedCat = findBestCategory(data.label)
-    } catch (err) {
-      process.stdout.write(
-        `${chalk.yellow(`Oooh boi! err= ${err.message}`)}\n\n`,
-      )
-      expectedCat = 'null'
-    }
-    expect(expectedCat).toStrictEqual(data.category)
-  }
+// test('accurate guessing', () => {
+/* @todo Test findBestCategory() on each items of labels.json */
+// for (let i = 0; i < size(); ++i) {
+//   const data = getAt(i)
+//   let expectedCat = ''
+//   /* @todo remove this line soon */
+//   /* eslint-disable no-continue */
+//   if (data.category === 'null') continue //skip the unclassifiable ones (for now)
+//   /* eslint-enable no-continue */
+//   try {
+//     expectedCat = findBestCategory(data.label)
+//   } catch (err) {
+//     process.stdout.write(
+//       `${chalk.yellow(`Oooh boi! err= ${err.message}`)}\n\n`,
+//     )
+//     expectedCat = 'null'
+//   }
+//   expect(expectedCat).toStrictEqual(data.category)
+//   process.stdout.write(`\n${chalk.cyan(`label guessed: ${data.label}`)}\n`)
+// }
+// })
+
+describe('accurate guessing', () => {
+  const labels = getAll()
+    .filter(data => data.category !== 'null')
+    .map(data => [data.label, data.category, findBestCategory(data.label)])
+  test.each(labels)('guess "%s" in %s', (label, actual, expected) => {
+    expect(expected).toStrictEqual(actual)
+  })
 })

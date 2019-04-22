@@ -157,11 +157,11 @@
   },
   {
     "label": "browser: ie",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "browser: safari",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "bug",
@@ -177,7 +177,7 @@
   },
   {
     "label": "c/c++",
-    "category": "code"
+    "category": "null"
   },
   {
     "label": "cannot reproduce",
@@ -225,31 +225,31 @@
   },
   {
     "label": "cmty:bug-report",
-    "category": ""
+    "category": "bug"
   },
   {
     "label": "cmty:feature-request",
-    "category": ""
+    "category": "ideas"
   },
   {
     "label": "cmty:question",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "cmty:status:cancelled",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "cmty:status:fixed",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "cmty:status:implemented",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "cmty:status:resolved",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "community",
@@ -269,7 +269,7 @@
   },
   {
     "label": "component: core utilities",
-    "category": "code"
+    "category": "maintenance"
   },
   {
     "label": "component: developer tools",
@@ -281,11 +281,11 @@
   },
   {
     "label": "component: eslint rules",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "component: hooks",
-    "category": ""
+    "category": "code"
   },
   {
     "label": "component: optimizing compiler",
@@ -293,15 +293,15 @@
   },
   {
     "label": "component: reactis",
-    "category": "plugin"
+    "category": "code"
   },
   {
     "label": "component: reconciler",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "component: scheduler",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "component: server rendering",
@@ -333,7 +333,7 @@
   },
   {
     "label": "conflicts",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "contribution welcome",
@@ -341,7 +341,7 @@
   },
   {
     "label": "core",
-    "category": ""
+    "category": "maintenance"
   },
   {
     "label": "critical",
@@ -349,7 +349,7 @@
   },
   {
     "label": "csharp",
-    "category": ""
+    "category": "code"
   },
   {
     "label": "css",
@@ -441,7 +441,7 @@
   },
   {
     "label": "electron",
-    "category": ""
+    "category": "tool"
   },
   {
     "label": "enhancement",
@@ -449,19 +449,19 @@
   },
   {
     "label": "enterprise",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "enterprise-2.0-backport",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "enterprise-2.1-backport",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "enterprise-2.2-backport",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "es6",
@@ -473,7 +473,7 @@
   },
   {
     "label": "external",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "externs",
@@ -577,15 +577,15 @@
   },
   {
     "label": "frontend",
-    "category": ""
+    "category": "code"
   },
   {
     "label": "future architecture enhancements",
-    "category": ""
+    "category": "ideas"
   },
   {
     "label": "future crypto enhancements",
-    "category": ""
+    "category": "ideas"
   },
   {
     "label": "genders (category)",
@@ -601,7 +601,7 @@
   },
   {
     "label": "go client internal release",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "good first issue",
@@ -681,7 +681,7 @@
   },
   {
     "label": "https",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "icebox",
@@ -689,7 +689,7 @@
   },
   {
     "label": "ie8",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "import in progress",
@@ -713,7 +713,7 @@
   },
   {
     "label": "installer",
-    "category": ""
+    "category": "tool"
   },
   {
     "label": "internal cleanup",
@@ -729,7 +729,7 @@
   },
   {
     "label": "ios",
-    "category": ""
+    "category": "platform"
   },
   {
     "label": "jquery differences",
@@ -741,39 +741,39 @@
   },
   {
     "label": "kbfs",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "lang-crystal",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "lang-dart",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "lang-elixir",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "lang-go",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "lang-julia",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "lang-objc",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "lang-r",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "lang-scala",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "legal",
@@ -789,27 +789,27 @@
   },
   {
     "label": "linux",
-    "category": ""
+    "category": "platform"
   },
   {
     "label": "lks",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "m1.s0",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "m1.s1",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "m1.s2",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "macos",
-    "category": ""
+    "category": "platform"
   },
   {
     "label": "maintenance",
@@ -821,7 +821,7 @@
   },
   {
     "label": "mass purge 2015.10.26",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "minor",
@@ -829,7 +829,7 @@
   },
   {
     "label": "mobile device support",
-    "category": ""
+    "category": "platform"
   },
   {
     "label": "mode: proxy",
@@ -933,7 +933,7 @@
   },
   {
     "label": "operations",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "opinions needed",
@@ -1121,7 +1121,7 @@
   },
   {
     "label": "project management",
-    "category": ""
+    "category": "projectManagement"
   },
   {
     "label": "question",
@@ -1193,7 +1193,7 @@
   },
   {
     "label": "ruby",
-    "category": ""
+    "category": "code"
   },
   {
     "label": "security",
@@ -1401,7 +1401,7 @@
   },
   {
     "label": "travis-yml",
-    "category": ""
+    "category": "infra"
   },
   {
     "label": "triage",
@@ -1457,7 +1457,7 @@
   },
   {
     "label": "type: getting started",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "type: invalid :x:",
@@ -1501,7 +1501,7 @@
   },
   {
     "label": "types",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "ui",
@@ -1549,11 +1549,11 @@
   },
   {
     "label": "weekly-digest",
-    "category": ""
+    "category": "blog"
   },
   {
     "label": "windows",
-    "category": ""
+    "category": "platform"
   },
   {
     "label": "wip",
@@ -1577,6 +1577,6 @@
   },
   {
     "label": "xhr-polling",
-    "category": ""
+    "category": "null"
   }
 ]

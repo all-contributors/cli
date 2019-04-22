@@ -9,6 +9,7 @@ const SIM_EXCEPTIONS = {
   android: 'platform',
   angular: 'code',
   api: 'code',
+  babel: 'tool',
   'back-end': 'code',
   bootstrap: 'tool',
   breaking: 'code', //or null
@@ -71,10 +72,12 @@ const SIM_EXCEPTIONS = {
   pull: 'maintenance',
   react: 'code',
   regression: 'bug',
+  rendering: 'code',
   request: 'ideas',
   rfc: 'ideas',
   ruby: 'code',
   shell: 'tool',
+  spec: 'doc',
   todo: 'maintenance',
   ui: 'design', //or code
   ux: 'design',
@@ -120,15 +123,18 @@ function bestCat(label, showRating) {
     return showRating ? {target, rating: 1} : target
   }
   const match = strSim.findBestMatch(lbl, CATEGORIES)
-  if (match.bestMatch.rating >= MATCH_THRESHOLD) {
+  const seMatch = strSim.findBestMatch(lbl, SE)
+  const goodMatch = match.bestMatch.rating >= MATCH_THRESHOLD
+  const goodSeMatch = seMatch.bestMatch.rating >= MATCH_THRESHOLD
+
+  if (goodMatch && match.bestMatch.rating >= seMatch.bestMatch.rating) {
     return showRating ? match.bestMatch : match.bestMatch.target
   }
 
   const nclMatch = strSim.findBestMatch(lbl, NON_CATEGORY_LABELS)
   if (nclMatch.bestMatch.rating >= MATCH_THRESHOLD) return null
 
-  const seMatch = strSim.findBestMatch(lbl, SE)
-  if (seMatch.bestMatch.rating >= MATCH_THRESHOLD) {
+  if (goodSeMatch) {
     const target = SIM_EXCEPTIONS[seMatch.bestMatch.target]
     return showRating
       ? {

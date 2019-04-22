@@ -485,7 +485,7 @@
   },
   {
     "label": "feat: babel",
-    "category": "code"
+    "category": "tool"
   },
   {
     "label": "feat: cli",
@@ -509,7 +509,7 @@
   },
   {
     "label": "feat: eslint",
-    "category": "tool"
+    "category": "maintenance"
   },
   {
     "label": "feat: plugin api",
@@ -529,11 +529,11 @@
   },
   {
     "label": "feat: unit-jest",
-    "category": "tool"
+    "category": "test"
   },
   {
     "label": "feat: unit-mocha",
-    "category": "tool"
+    "category": "test"
   },
   {
     "label": "feature",
@@ -685,7 +685,7 @@
   },
   {
     "label": "icebox",
-    "category": "projectManagement"
+    "category": "platform"
   },
   {
     "label": "ie8",
@@ -1057,7 +1057,7 @@
   },
   {
     "label": "pr: new feature",
-    "category": "maintenance"
+    "category": "ideas"
   },
   {
     "label": "pr: new feature :rocket:",
@@ -1085,7 +1085,7 @@
   },
   {
     "label": "pr: spec compliance :eyeglasses:",
-    "category": "null"
+    "category": "doc"
   },
   {
     "label": "pr: underlying tools",
@@ -1217,35 +1217,35 @@
   },
   {
     "label": "spec: async functions",
-    "category": "code"
+    "category": "doc"
   },
   {
     "label": "spec: async generators",
-    "category": "code"
+    "category": "doc"
   },
   {
     "label": "spec: bigint",
-    "category": "code"
+    "category": "doc"
   },
   {
     "label": "spec: class fields",
-    "category": "code"
+    "category": "doc"
   },
   {
     "label": "spec: classes",
-    "category": "code"
+    "category": "doc"
   },
   {
     "label": "spec: decorators",
-    "category": "code"
+    "category": "doc"
   },
   {
     "label": "spec: decorators (legacy)",
-    "category": "code"
+    "category": "doc"
   },
   {
     "label": "spec: do expressions",
-    "category": "code"
+    "category": "doc"
   },
   {
     "label": "stale",

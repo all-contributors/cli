@@ -1,4 +1,6 @@
-import findBestCategory from '../labelClass'
+import chalk from 'chalk'
+import findBestCategory from '../findCategory'
+import {getAt, size} from '../labels'
 
 test('exact labels', () => {
   expect(findBestCategory('bug')).toStrictEqual('bug')
@@ -26,9 +28,10 @@ test('exceptions', () => {
 })
 
 test('nothing found', () => {
-  expect(() => findBestCategory('doing')).toThrowError(
+  /* expect(() => findBestCategory('doing')).toThrowError(
     'Match threshold of 0.4 not met for "doing"',
-  )
+  ) */
+  expect(findBestCategory('archive')).toStrictEqual(null)
 })
 
 test('namespaced labels', () => {
@@ -42,4 +45,22 @@ test('namespaced labels', () => {
 
 test('accurate guessing', () => {
   /* @todo Test findBestCategory() on each items of labels.json */
+  for (let i = 0; i < size(); ++i) {
+    const data = getAt(i)
+    let expectedCat = ''
+    /* @todo remove this line soon */
+    /* eslint-disable no-continue */
+    if (data.category === 'null') continue //skip the unclassifiable ones (for now)
+    /* eslint-enable no-continue */
+    process.stdout.write(`\n${chalk.cyan(`label guess: ${data.label}`)}\n`)
+    try {
+      expectedCat = findBestCategory(data.label)
+    } catch (err) {
+      process.stdout.write(
+        `${chalk.yellow(`Oooh boi! err= ${err.message}`)}\n\n`,
+      )
+      expectedCat = 'null'
+    }
+    expect(expectedCat).toStrictEqual(data.category)
+  }
 })

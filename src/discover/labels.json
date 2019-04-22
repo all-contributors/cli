@@ -77,11 +77,11 @@
   },
   {
     "label": "advance developer workflow",
-    "category": "projectManagement"
+    "category": "infra"
   },
   {
     "label": "android",
-    "category": ""
+    "category": "platform"
   },
   {
     "label": "angular",
@@ -89,7 +89,7 @@
   },
   {
     "label": "animals (category)",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "answered",
@@ -121,7 +121,7 @@
   },
   {
     "label": "awaiting-review",
-    "category": ""
+    "category": "null"
   },
   {
     "label": "beginner-friendly",
@@ -177,7 +177,7 @@
   },
   {
     "label": "c/c++",
-    "category": ""
+    "category": "code"
   },
   {
     "label": "cannot reproduce",

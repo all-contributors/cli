@@ -21,7 +21,7 @@ const COMPOSED_LABELS = {
   'code-clean': 'maintenance',
   'front-end': 'code',
   'internal-issue': 'bug',
-  'internal-cleanup': 'maintenance'
+  'internal-cleanup': 'maintenance',
 }
 
 const SE = Object.keys(SIM_EXCEPTIONS)
@@ -35,8 +35,8 @@ function bestCat(label, showRating) {
     return showRating ? {target, rating: 1} : target
   }
   const match = strSim.findBestMatch(lbl, CATEGORIES).bestMatch
-  const seMatch = { ...strSim.findBestMatch(lbl, SE).bestMatch, ref: 'SE' }
-  const clMatch = { ...strSim.findBestMatch(lbl, CL).bestMatch, ref: 'CL' }
+  const seMatch = {...strSim.findBestMatch(lbl, SE).bestMatch, ref: 'SE'}
+  const clMatch = {...strSim.findBestMatch(lbl, CL).bestMatch, ref: 'CL'}
 
   const scores = [match, seMatch, clMatch].sort((a, b) => b.rating - a.rating)
   if (process.env.DEBUG) console.log('scores=', scores)
@@ -44,7 +44,15 @@ function bestCat(label, showRating) {
   while (scores[idx++].rating < MATCH_THRESHOLD && idx < scores.length) {
     /*  */
   }
-  if (process.env.DEBUG) console.log('idx-1=', idx - 1, 'score=', scores[idx - 1], 'len=', scores.length)
+  if (process.env.DEBUG)
+    console.log(
+      'idx-1=',
+      idx - 1,
+      'score=',
+      scores[idx - 1],
+      'len=',
+      scores.length,
+    )
   switch (idx) {
     case scores.length:
       return null
@@ -54,12 +62,13 @@ function bestCat(label, showRating) {
       let target = scores[idx].target
       // console.log('target=', target)
       if (scores[idx].ref === 'SE') target = SIM_EXCEPTIONS[scores[idx].target]
-      else if (scores[idx].ref === 'CL') target = COMPOSED_LABELS[scores[idx].target]
-      
+      else if (scores[idx].ref === 'CL')
+        target = COMPOSED_LABELS[scores[idx].target]
+
       if (showRating) {
         return {
           ...scores[idx],
-          target
+          target,
         }
       }
       return target
@@ -67,7 +76,7 @@ function bestCat(label, showRating) {
 }
 
 function findBestCategory(label, showRating) {
-  const lbl = label.toLowerCase();
+  const lbl = label.toLowerCase()
   if (NON_CATEGORY_LABELS.includes(lbl)) return null
   if (CL.includes(lbl)) return bestCat(lbl, showRating)
   const tokens = tokenize(lbl)
@@ -77,21 +86,21 @@ function findBestCategory(label, showRating) {
     const composedMatch = strSim.findBestMatch(lbl, CL).bestMatch
     const target = COMPOSED_LABELS[composedMatch.target]
     if (composedMatch.rating >= COMPLEX_THRESHOLD) {
-      return showRating ? { ...composedMatch, target, ref: 'CPX' } : target
+      return showRating ? {...composedMatch, target, ref: 'CPX'} : target
     }
   }
   if (process.env.DEBUG) console.log('tokens=', tokens)
   if (tokens.length > 1) {
     //If `lbl` can be split into *several* tokens
-    const cats = tokens
-      .map(tk => bestCat(tk, true))
-      .filter(cat => cat !== null)
+    const cats = tokens.map(tk => bestCat(tk, true)).filter(cat => cat !== null)
     if (!cats.length) return null
     cats.sort((a, b) => b.rating - a.rating)
     return showRating ? cats[0] : cats[0].target
   } else if (tokens.length === 1) return bestCat(tokens[0], showRating)
 
-  process.stdout.write(`Match threshold of ${MATCH_THRESHOLD} not met for "${label}"\n`)
+  process.stdout.write(
+    `Match threshold of ${MATCH_THRESHOLD} not met for "${label}"\n`,
+  )
   return null
 }
 

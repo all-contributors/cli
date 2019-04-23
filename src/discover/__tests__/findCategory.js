@@ -1,4 +1,5 @@
 import findBestCategory from '../findCategory'
+import {getAll} from '../labels'
 
 test('exact labels', () => {
   expect(findBestCategory('bug')).toStrictEqual('bug')
@@ -26,9 +27,10 @@ test('exceptions', () => {
 })
 
 test('nothing found', () => {
-  expect(() => findBestCategory('doing')).toThrowError(
+  /* expect(() => findBestCategory('doing')).toThrowError(
     'Match threshold of 0.4 not met for "doing"',
-  )
+  ) */
+  expect(findBestCategory('archive')).toStrictEqual(null)
 })
 
 test('namespaced labels', () => {
@@ -38,4 +40,13 @@ test('namespaced labels', () => {
   expect(findBestCategory('cat:bug')).toStrictEqual('bug')
   expect(findBestCategory('cat-bug')).toStrictEqual('bug')
   expect(findBestCategory('Bug 🐛')).toStrictEqual('bug')
+})
+
+describe('accurate guessing', () => {
+  const labels = getAll()
+    .filter(data => data.category !== 'null') //skip the unclassifiable ones (for now)
+    .map(data => [data.label, data.category, findBestCategory(data.label)])
+  test.each(labels)('guess "%s" in %s', (label, actual, expected) => {
+    expect(expected).toStrictEqual(actual)
+  })
 })

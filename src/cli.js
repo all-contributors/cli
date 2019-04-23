@@ -186,7 +186,7 @@ function fetchContributors(argv) {
       //3. Find a way to distinguish bug from security contributions (_erm_ labels _erm_)
       //4. Roll onto other contribution categories following https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
 
-      const args = Object.assign({}, configData, {_: []})
+      const args = {...configData, _: []}
       repoContributors.reviewers.forEach(usr => {
         args._ = ['', usr.login, 'review']
         addContribution(args)

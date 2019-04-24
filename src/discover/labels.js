@@ -20,8 +20,6 @@ module.exports = {
   getValidCatLabels: () => labels.filter(l => CATEGORIES.includes(l.category)),
   getBadData: () =>
     labels.filter(
-      l =>
-        !!l.category &&
-        /* l.category != 'null' && */ !CATEGORIES.includes(l.category),
+      l => (!!l.category && !CATEGORIES.includes(l.category)) || !l.category,
     ),
 }

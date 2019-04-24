@@ -53,7 +53,7 @@
   },
   {
     "label": "@font-face",
-    "category": "null"
+    "category": "design"
   },
   {
     "label": "abandoned",
@@ -69,7 +69,7 @@
   },
   {
     "label": "hacked",
-    "category": "null"
+    "category": "security"
   },
   {
     "label": "adapter",
@@ -265,7 +265,7 @@
   },
   {
     "label": "component: concurrent mode",
-    "category": "null"
+    "category": "code"
   },
   {
     "label": "component: core utilities",
@@ -281,7 +281,7 @@
   },
   {
     "label": "component: eslint rules",
-    "category": "null"
+    "category": "maintenance"
   },
   {
     "label": "component: hooks",
@@ -561,7 +561,7 @@
   },
   {
     "label": "flashsocket",
-    "category": "null"
+    "category": "tool"
   },
   {
     "label": "fontawesome.com",
@@ -745,35 +745,35 @@
   },
   {
     "label": "lang-crystal",
-    "category": "null"
+    "category": "code"
   },
   {
     "label": "lang-dart",
-    "category": "null"
+    "category": "code"
   },
   {
     "label": "lang-elixir",
-    "category": "null"
+    "category": "code"
   },
   {
     "label": "lang-go",
-    "category": "null"
+    "category": "code"
   },
   {
     "label": "lang-julia",
-    "category": "null"
+    "category": "code"
   },
   {
     "label": "lang-objc",
-    "category": "null"
+    "category": "code"
   },
   {
     "label": "lang-r",
-    "category": "null"
+    "category": "code"
   },
   {
     "label": "lang-scala",
-    "category": "null"
+    "category": "code"
   },
   {
     "label": "legal",

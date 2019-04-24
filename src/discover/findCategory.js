@@ -22,6 +22,7 @@ const COMPOSED_LABELS = {
   'front-end': 'code',
   'internal-issue': 'bug',
   'internal-cleanup': 'maintenance',
+  'other-feature': 'ideas',
 }
 
 const SE = Object.keys(SIM_EXCEPTIONS)
@@ -39,40 +40,25 @@ function bestCat(label, showRating) {
   const clMatch = {...strSim.findBestMatch(lbl, CL).bestMatch, ref: 'CL'}
 
   const scores = [match, seMatch, clMatch].sort((a, b) => b.rating - a.rating)
-  if (process.env.DEBUG) console.log('scores=', scores)
   let idx = 0
   while (scores[idx++].rating < MATCH_THRESHOLD && idx < scores.length) {
     /*  */
   }
-  if (process.env.DEBUG)
-    console.log(
-      'idx-1=',
-      idx - 1,
-      'score=',
-      scores[idx - 1],
-      'len=',
-      scores.length,
-    )
-  switch (idx) {
-    case scores.length:
-      return null
-    default:
-      --idx
-      // console.log('after --idx:', idx, 'score=', scores[idx])
-      let target = scores[idx].target
-      // console.log('target=', target)
-      if (scores[idx].ref === 'SE') target = SIM_EXCEPTIONS[scores[idx].target]
-      else if (scores[idx].ref === 'CL')
-        target = COMPOSED_LABELS[scores[idx].target]
 
-      if (showRating) {
-        return {
-          ...scores[idx],
-          target,
-        }
-      }
-      return target
+  if (idx === scores.length) return null
+  --idx
+  let target = scores[idx].target
+  if (scores[idx].ref === 'SE') target = SIM_EXCEPTIONS[scores[idx].target]
+  else if (scores[idx].ref === 'CL')
+    target = COMPOSED_LABELS[scores[idx].target]
+
+  if (showRating) {
+    return {
+      ...scores[idx],
+      target,
+    }
   }
+  return target
 }
 
 function findBestCategory(label, showRating) {
@@ -89,7 +75,6 @@ function findBestCategory(label, showRating) {
       return showRating ? {...composedMatch, target, ref: 'CPX'} : target
     }
   }
-  if (process.env.DEBUG) console.log('tokens=', tokens)
   if (tokens.length > 1) {
     //If `lbl` can be split into *several* tokens
     const cats = tokens.map(tk => bestCat(tk, true)).filter(cat => cat !== null)

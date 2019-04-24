@@ -83,6 +83,7 @@ module.exports = {
   spa: 'code',
   spec: 'doc',
   suggestion: 'ideas',
+  tip: 'ideas',
   todo: 'maintenance',
   travis: 'infra',
   ui: 'design', //or code
@@ -100,6 +101,7 @@ module.exports = {
   ':construction:': 'maintenance', //or null (for WIP)
   ':detective:': 'null',
   ':heavy_check_mark:': 'null',
+  ':nail_care:': 'maintenance',
   ':rocket:': 'maintenance', //or code or ideas
   ':sos:': 'null',
   ':speech_balloon:': 'null',

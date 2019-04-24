@@ -19,3 +19,9 @@ test('no uneeded tokens', () => {
   expect(tokenize(':')).toEqual([])
   expect(tokenize('=')).toEqual([])
 })
+
+test('no conjunctions', () => {
+  expect(tokenize('a or b')).toEqual(['a', 'b'])
+  expect(tokenize('a and b')).toEqual(['a', 'b'])
+  expect(tokenize('a nor b')).toEqual(['a', 'b'])
+})

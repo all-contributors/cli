@@ -1,81 +1,64 @@
 const strSim = require('string-similarity')
 const tokenize = require('./token')
 const CATEGORIES = require('./categories.json') //Object.keys(ctrbType('github'));
-const SIM_EXCEPTIONS = require('./simExceptions')
+const SIM_EXCEPTIONS = require('./sets/simExceptions')
+const NON_CATEGORY_LABELS = require('./sets/noCategory')
 
 const MATCH_THRESHOLD = 0.4 //40% to allow for shorter/longer versions of categories
 // const COMPLEX_THRESHOLD = 0.7 //70% to make sure really similar composed labels are matchable
-const NON_CATEGORY_LABELS = [
-  'area',
-  'available',
-  'awaiting',
-  'backlog', //or could be a projectManagement one
-  'beginner-friendly',
-  'block',
-  'bounty',
-  'cla',
-  'closed',
-  'component',
-  'concurrent',
-  'confirm',
-  'conflict',
-  'contribution welcome',
-  'difficulty',
-  'done',
-  'duplicate',
-  'enterprise',
-  'gender',
-  'feedback',
-  'good first issue',
-  'help',
-  'help wanted',
-  'hold',
-  'in progress',
-  'inactive',
-  'info',
-  'invalid',
-  'merge',
-  'n/a',
-  'needs',
-  'priority',
-  'question',
-  'reminder',
-  'repo',
-  'reproduce',
-  'requested',
-  'resolution',
-  'signed',
-  'spam',
-  'stale',
-  'start',
-  'unknown',
-  'wip',
-  'wontfix',
-  'working',
-  'wrong',
-]
 
 const COMPOSED_LABELS = {
   'awaiting-review': 'null',
   'back-end': 'code',
-  'cla-no': 'null',
-  'cla-sign': 'null',
-  'cla-yes': 'null',
   'code-clean': 'maintenance',
+  'code-review-request': 'null',
   'current-mod': 'null',
   'difficulty-easy': 'null',
+  'do-not-merge': 'null',
   'first-time': 'null',
   'front-end': 'code',
   'internal-issue-created': 'bug',
   'internal-cleanup': 'maintenance',
-  'needs-a': 'null',
-  'needs-more': 'null',
   'non-library': 'null',
-  'not-a-bug': 'null',
+  'non-library-issue': 'bug',
   'other-feature': 'ideas',
-  'review-in-progress': 'null',
+  'ready-review': 'null',
+  'review-changes': 'null',
   'review-request': 'null',
-  'work-in-progress': 'null',
+  'to-do': 'maintenance',
+}
+
+const FORBIDDEN_PREFIXES = [
+  //start with
+  // 'cla',
+  'has',
+  'need',
+  'not',
+  'pending',
+  'planned',
+]
+const FORBIDDEN_SUFFIXES = [
+  'accepted',
+  'approved',
+  'hold',
+  'progress',
+  'missing',
+  'needed',
+  'rejected',
+  'required',
+]
+
+const NAMESPACE_RE = /^(\w+):\s*(.*?)/
+
+const badStartEnd = label => {
+  const lbl = label.replace(NAMESPACE_RE, '$2') //Removes the namespace
+  for (const prefix of FORBIDDEN_PREFIXES) {
+    if (label.startsWith(prefix) || lbl.startsWith(prefix)) return true
+  }
+  for (const suffix of FORBIDDEN_SUFFIXES) {
+    if (label.endsWith(suffix) || lbl.endsWith(suffix)) return true
+  }
+  return false
 }
 
 const SE = Object.keys(SIM_EXCEPTIONS)
@@ -83,12 +66,11 @@ const CL = Object.keys(COMPOSED_LABELS)
 
 function bestCat(label, showRating = false, log = false) {
   const lbl = label.toLowerCase()
-  if (NON_CATEGORY_LABELS.includes(lbl)) return null
   if (lbl in SIM_EXCEPTIONS) {
     const target = SIM_EXCEPTIONS[lbl]
     return showRating ? {target, rating: 1} : target
   }
-  const match = {...strSim.findBestMatch(lbl, CATEGORIES).bestMatch, ref: ''}
+  const match = {...strSim.findBestMatch(lbl, CATEGORIES).bestMatch, ref: 'M'}
   const seMatch = {...strSim.findBestMatch(lbl, SE).bestMatch, ref: 'SE'}
   const nclMatch = {
     ...strSim.findBestMatch(lbl, NON_CATEGORY_LABELS).bestMatch,
@@ -127,11 +109,18 @@ function bestCat(label, showRating = false, log = false) {
 
 function findBestCategory(label, showRating = false, log = false) {
   const lbl = label.toLowerCase()
-  if (NON_CATEGORY_LABELS.includes(lbl)) return null
+  const lblSubset = lbl.replace(NAMESPACE_RE, '$2') //Removes the namespace
+  if (badStartEnd(lbl) || NON_CATEGORY_LABELS.includes(lbl)) return null
   if (CL.includes(lbl)) return bestCat(lbl, showRating, log)
+  if (CL.includes(lblSubset)) return bestCat(lblSubset, showRating, log)
+  // if (bestCat(lbl.replace(NAMESPACE_RE, '$2')) === null) return null
   const tokens = tokenize(lbl)
   const composition = tokens.join('-')
+  const tokenSubset = tokenize(lblSubset)
+  const compositionSubset = tokenSubset.join('-')
   if (CL.includes(composition)) return bestCat(composition, showRating, log)
+  if (CL.includes(compositionSubset))
+    return bestCat(compositionSubset, showRating, log)
 
   // const composedMatch = strSim.findBestMatch(lbl, CL).bestMatch
   // const target = COMPOSED_LABELS[composedMatch.target]

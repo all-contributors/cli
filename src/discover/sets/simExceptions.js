@@ -67,6 +67,7 @@ module.exports = {
   new: 'ideas',
   node: 'platform',
   opinion: 'ideas',
+  operation: 'maintenance',
   optim: 'code',
   osx: 'platform',
   package: 'platform',
@@ -109,5 +110,6 @@ module.exports = {
   ':rocket:': 'maintenance', //or code or ideas
   ':sos:': 'null',
   ':speech_balloon:': 'null',
+  ':stop_sign:': 'null',
   ':warning:': 'security',
 }

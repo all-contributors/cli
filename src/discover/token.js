@@ -21,6 +21,9 @@ const BAD_TOKENS = [
   'just',
   'too',
   'very',
+  //other
+  'due',
+  'be',
 ]
 
 const tokenize = data => {

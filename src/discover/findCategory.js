@@ -1,10 +1,10 @@
 const strSim = require('string-similarity')
-const {tokenize} = require('./token')
+const tokenize = require('./token')
 const CATEGORIES = require('./categories.json') //Object.keys(ctrbType('github'));
 const SIM_EXCEPTIONS = require('./simExceptions')
 
 const MATCH_THRESHOLD = 0.4 //40% to allow for shorter/longer versions of categories
-const COMPLEX_THRESHOLD = 0.7 //70% to make sure really similar composed labels are matchable
+// const COMPLEX_THRESHOLD = 0.7 //70% to make sure really similar composed labels are matchable
 const NON_CATEGORY_LABELS = [
   'area',
   'available',
@@ -12,6 +12,7 @@ const NON_CATEGORY_LABELS = [
   'backlog', //or could be a projectManagement one
   'beginner-friendly',
   'block',
+  'bounty',
   'cla',
   'closed',
   'component',
@@ -26,9 +27,12 @@ const NON_CATEGORY_LABELS = [
   'gender',
   'feedback',
   'good first issue',
+  'help',
   'help wanted',
   'hold',
   'in progress',
+  'inactive',
+  'info',
   'invalid',
   'merge',
   'n/a',
@@ -37,6 +41,8 @@ const NON_CATEGORY_LABELS = [
   'question',
   'reminder',
   'repo',
+  'reproduce',
+  'requested',
   'resolution',
   'signed',
   'spam',
@@ -60,9 +66,15 @@ const COMPOSED_LABELS = {
   'difficulty-easy': 'null',
   'first-time': 'null',
   'front-end': 'code',
-  'internal-issue': 'bug',
+  'internal-issue-created': 'bug',
   'internal-cleanup': 'maintenance',
+  'needs-a': 'null',
+  'needs-more': 'null',
+  'non-library': 'null',
+  'not-a-bug': 'null',
   'other-feature': 'ideas',
+  'review-in-progress': 'null',
+  'review-request': 'null',
   'work-in-progress': 'null',
 }
 
@@ -120,13 +132,13 @@ function findBestCategory(label, showRating = false, log = false) {
   const tokens = tokenize(lbl)
   const composition = tokens.join('-')
   if (CL.includes(composition)) return bestCat(composition, showRating, log)
-  else {
-    const composedMatch = strSim.findBestMatch(lbl, CL).bestMatch
-    const target = COMPOSED_LABELS[composedMatch.target]
-    if (composedMatch.rating >= COMPLEX_THRESHOLD) {
-      return showRating ? {...composedMatch, target, ref: 'CPX'} : target
-    }
-  }
+
+  // const composedMatch = strSim.findBestMatch(lbl, CL).bestMatch
+  // const target = COMPOSED_LABELS[composedMatch.target]
+  // if (composedMatch.rating >= COMPLEX_THRESHOLD) {
+  //   return showRating ? {...composedMatch, target, ref: 'CPX'} : target
+  // }
+
   if (tokens.length > 1) {
     //If `lbl` can be split into *several* tokens
     const cats = tokens

@@ -473,7 +473,7 @@
   },
   {
     "label": "external",
-    "category": "null"
+    "category": "plugin"
   },
   {
     "label": "externs",

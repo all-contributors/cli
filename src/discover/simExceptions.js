@@ -103,6 +103,7 @@ module.exports = {
   ':bulb:': 'ideas',
   ':construction:': 'maintenance', //or null (for WIP)
   ':detective:': 'null',
+  ':grey_question:': 'null',
   ':heavy_check_mark:': 'null',
   ':nail_care:': 'maintenance',
   ':rocket:': 'maintenance', //or code or ideas

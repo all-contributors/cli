@@ -17,6 +17,7 @@ const COMPOSED_LABELS = {
   'do-not-merge': 'null',
   'first-time': 'null',
   'front-end': 'code',
+  'in-review': 'null',
   'internal-issue-created': 'bug',
   'internal-cleanup': 'maintenance',
   'non-library': 'null',

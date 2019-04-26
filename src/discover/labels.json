@@ -1469,7 +1469,7 @@
   },
   {
     "label": "type: non-library issue",
-    "category": "null"
+    "category": "bug"
   },
   {
     "label": "type: question",

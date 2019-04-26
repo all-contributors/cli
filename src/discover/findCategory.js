@@ -25,18 +25,21 @@ const COMPOSED_LABELS = {
   'other-feature': 'ideas',
   'ready-review': 'null',
   'review-changes': 'null',
+  'review-needed-passport_control': 'null',
   'review-request': 'null',
   'to-do': 'maintenance',
 }
 
 const FORBIDDEN_PREFIXES = [
-  //start with
-  // 'cla',
   'has',
+  'in progress',
+  'in review',
   'need',
   'not',
+  'on hold',
   'pending',
   'planned',
+  'review-needed',
 ]
 const FORBIDDEN_SUFFIXES = [
   'accepted',

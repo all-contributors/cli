@@ -13,6 +13,7 @@ module.exports = [
   'confirm',
   'conflict',
   'contribution welcome',
+  'deploy',
   'deprecate',
   'difficulty',
   'done',

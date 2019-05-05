@@ -15,13 +15,15 @@
             <td><a href="https://allcontributors.org/docs/zh-CN/cli/overview">中文</a></td>
             <td><a href="https://allcontributors.org/docs/id/cli/overview">Bahasa Indonesia</a></td>
             <td><a href="https://allcontributors.org/docs/de/cli/overview">Deutsch</a></td>
-            <td><a href="https://allcontributors.org/docs/pl/cli/overview">Polskie</a></td>
+            <td><a href="https://allcontributors.org/docs/pl/cli/overview">Polski</a></td>
         </tr>
         <tr>
             <td><a href="https://allcontributors.org/docs/en/cli/overview">English</a></td>
             <td><a href="https://allcontributors.org/docs/pt-BR/cli/overview">Português</a></td>
             <td><a href="https://allcontributors.org/docs/es-ES/cli/overview">Español</a></td>
             <td><a href="https://allcontributors.org/docs/fr/cli/overview">Français</a></td>
+            <td><a href="https://allcontributors.org/docs/ru/cli/overview">Русский</a></td>
+            <td><a href="https://allcontributors.org/docs/ja/cli/overview">日本語</a></td>
         </tr>
     </tbody>
 </table>

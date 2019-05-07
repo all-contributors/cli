@@ -11,12 +11,22 @@ function readConfig(configPath) {
     if (!('repoType' in config)) {
       config.repoType = 'github'
     }
+    if (!('commitConvention' in config)) {
+      config.commitConvention = 'none'
+    }
     if (changed) {
       //Updates the file with fixes
       fs.writeFileSync(configPath, JSON.stringify(config, null, 2))
     }
     return config
   } catch (error) {
+    if (error instanceof SyntaxError) {
+      throw new SyntaxError(
+        `Configuration file has malformed JSON: ${configPath}. Error:: ${
+          error.message
+        }`,
+      )
+    }
     if (error.code === 'ENOENT') {
       throw new Error(`Configuration file not found: ${configPath}`)
     }

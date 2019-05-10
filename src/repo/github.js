@@ -54,6 +54,36 @@ function getContributorsPage(url, optionalPrivateToken) {
     })
 }
 
+function getIssueContributorsPage(url, optionalPrivateToken) {
+  return request
+    .get({
+      url,
+      headers: getRequestHeaders(optionalPrivateToken),
+    })
+    .then(res => {
+      const body = JSON.parse(res.body)
+      if (res.statusCode >= 300) {
+        throw new Error(body.message)
+      }
+
+      const contributorsIds = []
+      for (const issue of body) {
+        if (!issue.pull_request) {
+          contributorsIds.push(issue.user.login)
+        }
+      }
+
+      const nextLink = getNextLink(res.headers.link)
+      if (nextLink) {
+        return getIssueContributorsPage(nextLink).then(nextContributors => {
+          return contributorsIds.concat(nextContributors)
+        })
+      }
+
+      return contributorsIds
+    })
+}
+
 const getUserInfo = function(username, hostname, optionalPrivateToken) {
   /* eslint-disable complexity */
   if (!hostname) {
@@ -96,7 +126,25 @@ const getContributors = function(owner, name, hostname, optionalPrivateToken) {
   return getContributorsPage(url, optionalPrivateToken)
 }
 
+const getBugContributors = function(
+  owner,
+  name,
+  hostname,
+  optionalPrivateToken,
+) {
+  if (!hostname) {
+    hostname = 'https://github.com'
+  }
+
+  const root = hostname.replace(/:\/\//, '://api.')
+  // GET /repos/:owner/:repo/issues
+  const url = `${root}/repos/${owner}/${name}/issues`
+
+  return getIssueContributorsPage(url, optionalPrivateToken)
+}
+
 module.exports = {
   getUserInfo,
   getContributors,
+  getBugContributors,
 }

@@ -1,6 +1,7 @@
 const _ = require('lodash/fp')
 const inquirer = require('inquirer')
 const git = require('../util').git
+const conventions = require('./commit-conventions')
 
 const questions = [
   {
@@ -32,7 +33,8 @@ const questions = [
   {
     type: 'input',
     name: 'repoHost',
-    message: 'Where is the repository hosted? Hit Enter if it\'s on GitHub or GitLab',
+    message:
+      "Where is the repository hosted? Hit Enter if it's on GitHub or GitLab",
     default: function(answers) {
       if (answers.repoType === 'github') {
         return 'https://github.com'
@@ -77,9 +79,19 @@ const questions = [
       'Do you want this badge to auto-commit when contributors are added?',
     default: true,
   },
+  {
+    type: 'list',
+    name: 'commitConvention',
+    message: 'What commit convention would you want it to use?',
+    choices: Object.values(conventions),
+    default: 'none',
+  },
 ]
 
-const uniqueFiles = _.flow(_.compact, _.uniq)
+const uniqueFiles = _.flow(
+  _.compact,
+  _.uniq,
+)
 
 module.exports = function prompt() {
   return git
@@ -101,7 +113,9 @@ module.exports = function prompt() {
           files: uniqueFiles([answers.contributorFile, answers.badgeFile]),
           imageSize: answers.imageSize,
           commit: answers.commit,
+          commitConvention: answers.commitConvention,
           contributors: [],
+          contributorsPerLine: 7,
         },
         contributorFile: answers.contributorFile,
         badgeFile: answers.badgeFile,

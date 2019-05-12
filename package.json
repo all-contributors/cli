@@ -35,6 +35,8 @@
   },
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
+    "@octokit/plugin-retry": "^2.2.0",
+    "@octokit/rest": "^16.25.3",
     "async": "^2.0.0-rc.1",
     "chalk": "^2.3.0",
     "inquirer": "^4.0.0",

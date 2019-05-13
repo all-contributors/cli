@@ -126,12 +126,6 @@ function findBestCategory(label, showRating = false, log = false) {
   if (CL.includes(compositionSubset))
     return bestCat(compositionSubset, showRating, log)
 
-  // const composedMatch = strSim.findBestMatch(lbl, CL).bestMatch
-  // const target = COMPOSED_LABELS[composedMatch.target]
-  // if (composedMatch.rating >= COMPLEX_THRESHOLD) {
-  //   return showRating ? {...composedMatch, target, ref: 'CPX'} : target
-  // }
-
   if (tokens.length > 1) {
     //If `lbl` can be split into *several* tokens
     const cats = tokens

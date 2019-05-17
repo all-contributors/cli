@@ -1,13 +1,11 @@
 const fs = require('fs')
 const pify = require('pify')
 const _ = require('lodash/fp')
-const fixConfig = require('../config-fix')
+const jf = require('json-fixer')
 
 function readConfig(configPath) {
   try {
-    const {data: config, changed} = fixConfig(
-      fs.readFileSync(configPath, 'utf-8'),
-    )
+    const {data: config, changed} = jf(fs.readFileSync(configPath, 'utf-8'))
     if (!('repoType' in config)) {
       config.repoType = 'github'
     }

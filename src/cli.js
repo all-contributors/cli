@@ -5,6 +5,10 @@ const path = require('path')
 const yargs = require('yargs')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
+const didYouMean = require('didyoumean')
+
+// Setting edit length to be 60% of the input string's length
+didYouMean.threshold = 0.6
 
 const init = require('./init')
 const generate = require('./generate')
@@ -47,6 +51,15 @@ const yargv = yargs
       }
     }
   }).argv
+
+function suggestCommands(cmd) {
+  const availableCommands = ['generate', 'add', 'init', 'check']
+  const suggestion = didYouMean(cmd, availableCommands)
+
+  if (suggestion) {
+    console.log(chalk.bold(`Did you mean ${suggestion}`))
+  }
+}
 
 function startGeneration(argv) {
   return Promise.all(
@@ -305,6 +318,7 @@ promptForCommand(yargv)
       case 'fetch':
         return fetchContributors(yargv)
       default:
+        suggestCommands(command)
         throw new Error(`Unknown command ${command}`)
     }
   })

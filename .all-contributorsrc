@@ -275,9 +275,28 @@
       "contributions": [
         "design"
       ]
+    },
+    {
+      "login": "ehmicky",
+      "name": "ehmicky",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/8136211?v=4",
+      "profile": "https://twitter.com/ehmicky",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jamesgeorge007",
+      "name": "James George",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/25279263?v=4",
+      "profile": "https://ghuser.io/jamesgeorge007",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "files": [
     "README.md"
-  ]
+  ],
+  "repoHost": "https://github.com"
 }

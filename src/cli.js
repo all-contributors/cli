@@ -12,7 +12,7 @@ const util = require('./util')
 const repo = require('./repo')
 const updateContributors = require('./contributors')
 const {getContributors} = require('./discover')
-const findCategory = require('./discover/findCategory')
+const learner = require('./discover/learner')
 
 const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
@@ -181,21 +181,30 @@ function fetchContributors(argv) {
         process.stdout.write(`${missingFromRepo.join(', ')}\n`)
       } */
 
-      //1. Auto-add reviewers for review
+      //~1. Auto-add reviewers for review~
       //2. Auto-add issue creators for bug/security
       //3. Find a way to distinguish bug from security contributions (_erm_ labels _erm_)
-      //4. Roll onto other contribution categories following https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
+      //4. Roll onto other contribution categories foll owing https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
 
       const args = {...configData, _: []}
       repoContributors.reviewers.forEach(usr => {
         args._ = ['', usr.login, 'review']
         addContribution(args)
-        console.log(`Adding Reviewer ${usr.login}`)
+        console.log(
+          `Adding ${chalk.underline('Reviewer')} ${chalk.blue(usr.login)}`,
+        )
       })
 
       repoContributors.issueCreators.forEach(usr => {
         console.log('usr=', usr.login, 'labels=', usr.labels)
-        console.log('categories', usr.labels.map(lbl => findCategory(lbl)))
+        usr.labels.forEach(lbl => {
+          const category = learner.classify(lbl)[0]
+          args._ = ['', usr.login, category]
+          addContribution(args)
+          console.log(
+            `Adding ${chalk.blue(usr.login)} for ${chalk.underline(category)}`,
+          )
+        })
       })
     },
     err => console.error('checkContributorsFromNYC error:', err),
@@ -229,6 +238,10 @@ function promptForCommand(argv) {
           name:
             'Compare contributors from the repository with the credited ones',
           value: 'check',
+        },
+        {
+          name: 'Fetch contributors from the repository',
+          value: 'fetch',
         },
       ],
       when: !argv._[0],

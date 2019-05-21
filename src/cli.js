@@ -62,17 +62,51 @@ function startGeneration(argv) {
 
 function addContribution(argv) {
   // console.log('argv=', argv);
+  /* Example:
+  {
+    _: [ 'add' ],
+    projectName: 'cz-cli',
+    projectOwner: 'commitizen',
+    repoType: 'github',
+    repoHost: 'https://github.com',
+    files: [ 'AC.md' ],
+    imageSize: 100,
+    commit: false,
+    commitConvention: 'angular',
+    contributors: [],
+    contributorsPerLine: 7,
+    'contributors-per-line': 7,
+    config: '/mnt/c/Users/max/Projects/cz-cli/.all-contributorsrc',
+    '$0': '../all-contributors-cli/src/cli.js'
+}
+  */
   const username = argv._[1]
   const contributions = argv._[2]
+  console.log('username=', username, 'contributions=', contributions)
   // Add or update contributor in the config file
-  return updateContributors(argv, username, contributions).then(data => {
-    argv.contributors = data.contributors
-    return startGeneration(argv).then(() => {
-      if (argv.commit) {
-        return util.git.commit(argv, data)
-      }
-    })
-  })
+  return updateContributors(argv, username, contributions).then(
+    data => {
+      argv.contributors = data.contributors
+      // console.log('argv contributors=', argv.contributors)
+      /* Example
+     [ { login: 'Berkmann18',
+     name: 'Maximilian Berkmann',
+     avatar_url: 'https://avatars0.githubusercontent.com/u/8260834?v=4',
+     profile: 'http://maxcubing.wordpress.com',
+     contributions: [ 'code', 'ideas' ] },
+     { already in argv.contributors } ]
+    */
+      return startGeneration(argv).then(
+        () => {
+          if (argv.commit) {
+            return util.git.commit(argv, data)
+          }
+        },
+        err => console.error('Generation fail:', err),
+      )
+    },
+    err => console.error('Contributor Update fail:', err),
+  )
 }
 
 function checkContributors(argv) {
@@ -125,11 +159,12 @@ function checkContributors(argv) {
 }
 
 function fetchContributors(argv) {
-  const configData = util.configFile.readConfig(argv.config)
+  // console.log('argv=', argv);
+  // const configData = util.configFile.readConfig(argv.config)
   // console.log('configData')
   // console.dir(configData)
 
-  return getContributors(configData.projectOwner, configData.projectName).then(
+  return getContributors(argv.projectOwner, argv.projectName).then(
     repoContributors => {
       // repoContributors = {prCreators, prCommentators, issueCreators, issueCommentators, reviewers, commitAuthors, commitCommentators}
       // console.dir(repoContributors)
@@ -186,28 +221,30 @@ function fetchContributors(argv) {
       //3. Find a way to distinguish bug from security contributions (_erm_ labels _erm_)
       //4. Roll onto other contribution categories foll owing https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
 
-      const args = {...configData, _: []}
+      const args = {...argv, _: []}
       repoContributors.reviewers.forEach(usr => {
-        args._ = ['', usr.login, 'review']
+        args._ = ['add', usr.login, 'review']
         addContribution(args)
         console.log(
           `Adding ${chalk.underline('Reviewer')} ${chalk.blue(usr.login)}`,
         )
       })
 
-      repoContributors.issueCreators.forEach(usr => {
-        console.log('usr=', usr.login, 'labels=', usr.labels)
-        usr.labels.forEach(lbl => {
-          const category = learner.classify(lbl)[0]
-          args._ = ['', usr.login, category]
-          addContribution(args)
-          console.log(
-            `Adding ${chalk.blue(usr.login)} for ${chalk.underline(category)}`,
-          )
-        })
-      })
+      // repoContributors.issueCreators.forEach(usr => {
+      //   console.log('usr=', usr.login, 'labels=', usr.labels)
+      //   usr.labels.forEach(lbl => {
+      //     const category = learner.classify(lbl)[0]
+      //     if (category !== 'null') {
+      //       args._ = ['', usr.login, category]
+      //       addContribution(args)
+      //       console.log(
+      //         `Adding ${chalk.blue(usr.login)} for ${chalk.underline(category)}`,
+      //       )
+      //     }
+      //   })
+      // })
     },
-    err => console.error('checkContributorsFromNYC error:', err),
+    err => console.error('fetch error:', err),
   )
 }
 

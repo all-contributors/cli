@@ -10,13 +10,18 @@ function isNewContributor(contributorList, username) {
 
 module.exports = function addContributor(options, username, contributions) {
   const answersP = prompt(options, username, contributions)
-  const contributorsP = answersP.then(answers =>
-    add(options, answers.username, answers.contributions, repo.getUserInfo),
-  )
+  // console.log('options=', options)
+  const contributorsP = answersP
+    .then(answers =>
+      add(options, answers.username, answers.contributions, repo.getUserInfo),
+    )
+    .catch(err => console.error('contributorsP error:', err))
 
-  const writeContributorsP = contributorsP.then(contributors =>
-    util.configFile.writeContributors(options.config, contributors),
-  )
+  const writeContributorsP = contributorsP
+    .then(contributors => {
+      return util.configFile.writeContributors(options.config, contributors)
+    })
+    .catch(err => console.error('writeContributorsP error:', err))
 
   return Promise.all([answersP, contributorsP, writeContributorsP]).then(
     res => {
@@ -32,5 +37,6 @@ module.exports = function addContributor(options, username, contributions) {
         ),
       }
     },
+    err => console.error('contributors fail: ', err),
   )
 }

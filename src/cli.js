@@ -95,7 +95,7 @@ function addContribution(argv) {
   */
   const username = argv._[1]
   const contributions = argv._[2]
-  console.log('username=', username, 'contributions=', contributions)
+  // console.log('username=', username, 'contributions=', contributions)
   // Add or update contributor in the config file
   return updateContributors(argv, username, contributions).then(
     data => {
@@ -235,27 +235,58 @@ function fetchContributors(argv) {
       //4. Roll onto other contribution categories foll owing https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
 
       const args = {...argv, _: []}
+      const contributorsToAdd = []
       repoContributors.reviewers.forEach(usr => {
-        args._ = ['add', usr.login, 'review']
-        addContribution(args)
-        console.log(
-          `Adding ${chalk.underline('Reviewer')} ${chalk.blue(usr.login)}`,
-        )
+        // args._ = ['add', usr.login, 'review']
+        // addContribution(args)
+        contributorsToAdd.push({login: usr.login, contributions: ['review']})
+        // console.log(
+        //   `Adding ${chalk.underline('Reviewer')} ${chalk.blue(usr.login)}`,
+        // )
       })
 
-      // repoContributors.issueCreators.forEach(usr => {
-      //   console.log('usr=', usr.login, 'labels=', usr.labels)
-      //   usr.labels.forEach(lbl => {
-      //     const category = learner.classify(lbl)[0]
-      //     if (category !== 'null') {
-      //       args._ = ['', usr.login, category]
-      //       addContribution(args)
-      //       console.log(
-      //         `Adding ${chalk.blue(usr.login)} for ${chalk.underline(category)}`,
-      //       )
-      //     }
-      //   })
-      // })
+      repoContributors.issueCreators.forEach(usr => {
+        // console.log('usr=', usr.login, 'labels=', usr.labels)
+        const contributor = {
+          login: usr.login,
+          contributions: [],
+        }
+        usr.labels.forEach(lbl => {
+          const guesses = learner.classify(lbl).filter(c => c && c !== 'null')
+          if (guesses.length) {
+            const category = guesses[0]
+            // args._ = ['', usr.login, category]
+            // addContribution(args)
+            if (!contributor.contributions.includes(category))
+              contributor.contributions.push(category)
+            // console.log(
+            //   `Adding ${chalk.blue(usr.login)} for ${chalk.underline(category)}`,
+            // )
+          } //else console.warn(`Oops, I couldn't find any category for the "${lbl}" label`)
+        })
+        const existingContributor = contributorsToAdd.filter(
+          ctrb => ctrb.login === usr.login,
+        )
+        if (existingContributor.length) {
+          existingContributor[0].contributions = existingContributor[0].contributions.concat(
+            contributor.contributions,
+          )
+          existingContributor[0].contributions = [
+            ...new Set(existingContributor[0].contributions),
+          ]
+        } else contributorsToAdd.push(contributor)
+      })
+      // console.log('contributorsToAdd=', contributorsToAdd)
+      contributorsToAdd.forEach(contributor => {
+        console.log(
+          `Adding ${chalk.blue(contributor.login)} for ${chalk.underline(
+            contributor.contributions.join('/'),
+          )}`,
+        )
+        args._ = ['', contributor.login, contributor.contributions.join(',')]
+        if (contributor.contributions.length) addContribution(args)
+        else console.log('Skipping', contributor.login)
+      })
     },
     err => console.error('fetch error:', err),
   )

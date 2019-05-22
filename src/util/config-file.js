@@ -5,7 +5,10 @@ const jf = require('json-fixer')
 
 function readConfig(configPath) {
   try {
-    const {data: config, changed} = jf(fs.readFileSync(configPath, 'utf-8'))
+    const configData = fs.readFileSync(configPath, 'utf-8')
+    // console.log('configData(%s)=', configPath, 'len=', configData.length)
+    // configData.split('\n').forEach((l, i) => process.stdout.write(`${i}  ${l}\n`))
+    const {data: config, changed} = jf(configData, true)
     if (!('repoType' in config)) {
       config.repoType = 'github'
     }
@@ -51,6 +54,8 @@ function writeConfig(configPath, content) {
 function writeContributors(configPath, contributors) {
   let config
   try {
+    // console.log('reading from', configPath)
+    // console.log('contributors=', contributors)
     config = readConfig(configPath)
   } catch (error) {
     return Promise.reject(error)

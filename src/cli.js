@@ -205,9 +205,9 @@ function fetchContributors(argv) {
       // console.log('ctbs=', contributors);
 
       //~1. Auto-add reviewers for review~
-      //2. Auto-add issue creators for bug/security
-      //3. Find a way to distinguish bug from security contributions (_erm_ labels _erm_)
-      //4. Roll onto other contribution categories foll owing https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
+      //~2. Auto-add issue creators for any categories found~
+      //~3. Auto-add commit authors~
+      //4. Roll onto other contribution categories following https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
 
       const args = {...argv, _: []}
       const contributorsToAdd = []

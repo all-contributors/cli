@@ -193,41 +193,16 @@ function fetchContributors(argv) {
       // )
       // console.log('knownContributors', knownContributors) //['kentcdodds', 'ben-eb', ...]
 
-      let contributors = new Set(
-        repoContributors.prCreators.map(usr => usr.login),
-      )
+      // let contributors = new Set(
+      //   repoContributors.prCreators.map(usr => usr.login),
+      // )
 
-      repoContributors.issueCreators.forEach(usr => contributors.add(usr.login))
-      repoContributors.reviewers.forEach(usr => contributors.add(usr.login))
-      repoContributors.commitAuthors.forEach(usr => contributors.add(usr.login))
-      contributors = Array.from(contributors)
+      // repoContributors.issueCreators.forEach(usr => contributors.add(usr.login))
+      // repoContributors.reviewers.forEach(usr => contributors.add(usr.login))
+      // repoContributors.commitAuthors.forEach(usr => contributors.add(usr.login))
+      // contributors = Array.from(contributors)
 
       // console.log('ctbs=', contributors);
-      /*const missingInConfig = contributors.filter(
-        key => !knownContributors.includes(key),
-      )
-
-      const missingFromRepo = knownContributors.filter(key => {
-        return (
-          !contributors.includes(key) &&
-          (knownContributions[key].includes('code') ||
-            knownContributions[key].includes('test'))
-        )
-      })*/
-
-      /* if (missingInConfig.length) {
-        process.stdout.write(
-          chalk.bold('Missing contributors in .all-contributorsrc:\n'),
-        )
-        process.stdout.write(`    ${missingInConfig.join(', ')}\n`)
-      }
-
-      if (missingFromRepo.length) {
-        process.stdout.write(
-          chalk.bold('Unknown contributors found in .all-contributorsrc:\n'),
-        )
-        process.stdout.write(`${missingFromRepo.join(', ')}\n`)
-      } */
 
       //~1. Auto-add reviewers for review~
       //2. Auto-add issue creators for bug/security
@@ -268,14 +243,34 @@ function fetchContributors(argv) {
           ctrb => ctrb.login === usr.login,
         )
         if (existingContributor.length) {
-          existingContributor[0].contributions = existingContributor[0].contributions.concat(
-            contributor.contributions,
-          )
           existingContributor[0].contributions = [
-            ...new Set(existingContributor[0].contributions),
+            ...new Set(
+              existingContributor[0].contributions.concat(
+                contributor.contributions,
+              ),
+            ),
           ]
         } else contributorsToAdd.push(contributor)
       })
+
+      repoContributors.commitAuthors.forEach(usr => {
+        // const contributor = {
+        //   login: usr.login,
+        //   contributions: [],
+        // }
+        // console.log('commit auth:', usr)
+        const existingContributor = contributorsToAdd.filter(
+          ctrb => ctrb.login === usr.login,
+        )
+        if (existingContributor.length) {
+          //there's no label or commit message info so use only code for now
+          if (!existingContributor[0].contributions.includes('code')) {
+            existingContributor[0].contributions.push('code')
+          }
+        } else
+          contributorsToAdd.push({login: usr.login, contributions: ['code']})
+      })
+
       // console.log('contributorsToAdd=', contributorsToAdd)
       contributorsToAdd.forEach(contributor => {
         console.log(
@@ -284,8 +279,8 @@ function fetchContributors(argv) {
           )}`,
         )
         args._ = ['', contributor.login, contributor.contributions.join(',')]
-        if (contributor.contributions.length) addContribution(args)
-        else console.log('Skipping', contributor.login)
+        // if (contributor.contributions.length) addContribution(args)
+        // else console.log('Skipping', contributor.login)
       })
     },
     err => console.error('fetch error:', err),

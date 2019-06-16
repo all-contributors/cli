@@ -37,7 +37,7 @@
 
 ## The problem
 
-You want to implement the [All Contributors][all-contributors] spec, but don't
+You want to implement the [All Contributors](https://github.com/all-contributors/all-contributors) spec, but don't
 want to maintain the table by hand
 
 ## This solution

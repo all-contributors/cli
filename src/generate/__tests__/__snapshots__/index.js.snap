@@ -8,7 +8,8 @@ Description
 ## Contributors
 These people contributed to the project:
 <!-- ALL-CONTRIBUTORS-LIST:START -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
     <td align=\\"center\\">Kent C. Dodds is awesome!</td>
@@ -17,6 +18,8 @@ These people contributed to the project:
   </tr>
 </table>
 
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Thanks a lot everyone!"
@@ -30,7 +33,8 @@ Description
 ## Contributors
 These people contributed to the project:
 <!-- ALL-CONTRIBUTORS-LIST:START -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
     <td align=\\"center\\">Kent C. Dodds is awesome!</td>
@@ -45,6 +49,8 @@ These people contributed to the project:
   </tr>
 </table>
 
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Thanks a lot everyone!"

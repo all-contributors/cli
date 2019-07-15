@@ -5,6 +5,11 @@
   "repoType": "github",
   "commit": false,
   "contributorsPerLine": 6,
+  "files": [
+    "README.md"
+  ],
+  "repoHost": "https://github.com",
+  "commitConvention": "angular",
   "contributors": [
     {
       "login": "jfmengels",
@@ -321,10 +326,5 @@
         "code"
       ]
     }
-  ],
-  "files": [
-    "README.md"
-  ],
-  "repoHost": "https://github.com",
-  "commitConvention": "none"
+  ]
 }

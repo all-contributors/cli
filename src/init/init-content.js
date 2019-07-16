@@ -7,7 +7,10 @@ const headerContent =
   'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):'
 const listContent = [
   '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->',
-  '<!-- prettier-ignore -->',
+  '<!-- prettier-ignore-start -->',
+  '<!-- markdownlint-disable -->',
+  '<!-- markdownlint-enable -->',
+  '<!-- prettier-ignore-end -->',
   '<!-- ALL-CONTRIBUTORS-LIST:END -->',
 ].join('\n')
 const footerContent =
@@ -18,7 +21,11 @@ function addBadge(lines) {
 }
 
 function splitAndRejoin(fn) {
-  return _.flow(_.split('\n'), fn, _.join('\n'))
+  return _.flow(
+    _.split('\n'),
+    fn,
+    _.join('\n'),
+  )
 }
 
 const findContributorsSection = _.findIndex(function isContributorsSection(
@@ -43,8 +50,8 @@ function addContributorsList(lines) {
   return injectContentBetween(
     lines,
     listContent,
-    insertionLine + 2,
-    insertionLine + 2,
+    insertionLine + 3,
+    insertionLine + 3,
   )
 }
 

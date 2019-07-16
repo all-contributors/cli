@@ -5,6 +5,11 @@
   "repoType": "github",
   "commit": false,
   "contributorsPerLine": 6,
+  "files": [
+    "README.md"
+  ],
+  "repoHost": "https://github.com",
+  "commitConvention": "angular",
   "contributors": [
     {
       "login": "jfmengels",
@@ -311,10 +316,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "JReinhold",
+      "name": "Jeppe Reinhold",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5678122?v=4",
+      "profile": "https://reinhold.is",
+      "contributions": [
+        "code"
+      ]
     }
-  ],
-  "files": [
-    "README.md"
-  ],
-  "repoHost": "https://github.com"
+  ]
 }

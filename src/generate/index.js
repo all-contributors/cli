@@ -28,8 +28,12 @@ function injectListBetweenTags(newContent) {
     }
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
-      '\n<!-- prettier-ignore -->',
+      '\n<!-- prettier-ignore-start -->',
+      '\n<!-- markdownlint-disable -->',
       newContent,
+      '<!-- markdownlint-enable -->',
+      '\n<!-- prettier-ignore-end -->',
+      '\n',
       previousContent.slice(startOfClosingTagIndex),
     ].join('')
   }

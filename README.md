@@ -46,7 +46,7 @@
 [![Code Coverage](https://img.shields.io/codecov/c/github/all-contributors/all-contributors-cli.svg)](https://codecov.io/github/all-contributors/all-contributors-cli)
 [![Version](https://img.shields.io/npm/v/all-contributors-cli.svg)](https://www.npmjs.com/package/all-contributors-cli)
 [![Downloads](https://img.shields.io/npm/dm/all-contributors-cli.svg)](http://www.npmtrends.com/all-contributors-cli)
-[![All Contributors](https://img.shields.io/badge/all_contributors-33-orange.svg?style=flat-square)](#contributors)
+[![All Contributors](https://img.shields.io/badge/all_contributors-34-orange.svg?style=flat-square)](#contributors-)
 [![Star on Github](https://img.shields.io/github/stars/all-contributors/all-contributors-cli.svg?style=social)](https://github.com/all-contributors/all-contributors-cli/stargazers)
 
 ## The problem
@@ -64,7 +64,7 @@ specification for your GitHub or GitLab repository.
 
 If you're looking to use the cli, head over to [the cli docs on allcontributors.org](https://allcontributors.org/docs/en/cli/overview). The all-contributors website contains all the information required to install, configure and use the all-contributors-cli.
 
-## Contributors
+## Contributors ✨
 
 Thanks goes to these wonderful people
 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -117,6 +117,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/nschonni"><img src="https://avatars2.githubusercontent.com/u/1297909?v=4" width="100px;" alt="Nick Schonning"/><br /><sub><b>Nick Schonning</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=nschonni" title="Code">💻</a></td>
     <td align="center"><a href="https://cezaraugusto.net/"><img src="https://avatars0.githubusercontent.com/u/4672033?v=4" width="100px;" alt="Cezar Augusto"/><br /><sub><b>Cezar Augusto</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=cezaraugusto" title="Documentation">📖</a></td>
     <td align="center"><a href="https://reinhold.is"><img src="https://avatars1.githubusercontent.com/u/5678122?v=4" width="100px;" alt="Jeppe Reinhold"/><br /><sub><b>Jeppe Reinhold</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=JReinhold" title="Code">💻</a></td>
+    <td align="center"><a href="https://rachelcarmena.github.io"><img src="https://avatars0.githubusercontent.com/u/22792183?v=4" width="100px;" alt="Rachel M. Carmena"/><br /><sub><b>Rachel M. Carmena</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=rachelcarmena" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -2,7 +2,7 @@ const _ = require('lodash/fp')
 const injectContentBetween = require('../util').markdown.injectContentBetween
 
 const badgeContent =
-  '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)'
+  '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)'
 const headerContent =
   'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):'
 const listContent = [

@@ -14,6 +14,10 @@ const conventions = {
     name: 'Atom',
     msg: ':memo:',
   },
+  gitmoji: {
+    name: 'Gitmoji',
+    msg: ':busts_in_silhouette:',
+  },
   ember: {
     name: 'Ember',
     msg: '[DOC canary]',

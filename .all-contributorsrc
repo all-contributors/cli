@@ -334,6 +334,24 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "simon300000",
+      "name": "simon3000",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12656264?v=4",
+      "profile": "https://github.com/simon300000",
+      "contributions": [
+        "test"
+      ]
+    },
+    {
+      "login": "SnO2WMaN",
+      "name": "SnO₂WMaN",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/15155608?v=4",
+      "profile": "https://sno2wman.dev/",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

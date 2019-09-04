@@ -80,13 +80,9 @@ test('Throw error when non existent username is provided', async () => {
       documentation_url:
         'https://developer.github.com/v3/users/#get-a-single-user',
     })
-  try {
-    await getUserInfo(username)
-  } catch (error) {
-    expect(error.message).toEqual(
-      `Login not found when adding a contributor for username - ${username}.`,
-    )
-  }
+  await expect(getUserInfo(username)).rejects.toThrow(
+    `Login not found when adding a contributor for username - ${username}.`,
+  )
 })
 
 test('handle github errors', async () => {

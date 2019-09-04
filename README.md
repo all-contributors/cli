@@ -70,8 +70,7 @@ Thanks goes to these wonderful people
 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
+<!-- prettier-ignore -->
 <table>
   <tr>
     <td align="center"><a href="https://github.com/jfmengels"><img src="https://avatars.githubusercontent.com/u/3869412?v=3" width="100px;" alt="Jeroen Engels"/><br /><sub><b>Jeroen Engels</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=jfmengels" title="Code">💻</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=jfmengels" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=jfmengels" title="Tests">⚠️</a></td>
@@ -118,11 +117,10 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://cezaraugusto.net/"><img src="https://avatars0.githubusercontent.com/u/4672033?v=4" width="100px;" alt="Cezar Augusto"/><br /><sub><b>Cezar Augusto</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=cezaraugusto" title="Documentation">📖</a></td>
     <td align="center"><a href="https://reinhold.is"><img src="https://avatars1.githubusercontent.com/u/5678122?v=4" width="100px;" alt="Jeppe Reinhold"/><br /><sub><b>Jeppe Reinhold</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=JReinhold" title="Code">💻</a></td>
     <td align="center"><a href="https://rachelcarmena.github.io"><img src="https://avatars0.githubusercontent.com/u/22792183?v=4" width="100px;" alt="Rachel M. Carmena"/><br /><sub><b>Rachel M. Carmena</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=rachelcarmena" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/simon300000"><img src="https://avatars1.githubusercontent.com/u/12656264?v=4" width="100px;" alt="simon3000"/><br /><sub><b>simon3000</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=simon300000" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://sno2wman.dev/"><img src="https://avatars3.githubusercontent.com/u/15155608?v=4" width="100px;" alt="SnO₂WMaN"/><br /><sub><b>SnO₂WMaN</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=SnO2WMaN" title="Code">💻</a></td>
   </tr>
 </table>
-
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

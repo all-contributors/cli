@@ -72,7 +72,7 @@ function startGeneration(argv) {
 }
 
 function addContribution(argv) {
-  const username = argv._[1] !== undefined ? String(argv._[1]) : undefined
+  const username = argv._[1] === undefined ? undefined : String(argv._[1])
   const contributions = argv._[2]
   // Add or update contributor in the config file
   return updateContributors(argv, username, contributions).then(data => {

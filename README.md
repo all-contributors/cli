@@ -1,18 +1,19 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [
-  all-contributors-cli
-  ](#all-contributors-cli)
+- [ all-contributors-cli ](#all-contributors-cli)
   - [The problem](#the-problem)
   - [This solution](#this-solution)
   - [Using the all-contributors-cli](#using-the-all-contributors-cli)
-  - [Contributors](#contributors)
+  - [Contributors ✨](#contributors-)
   - [LICENSE](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-> [There is now a GitHub Bot](https://github.com/all-contributors/all-contributors-bot) for automating the maintenance of your contributors table ✨<br />Say goodbye to command line tool dependencies and hello to the [@all-contributors bot 🤖](https://github.com/all-contributors/all-contributors-bot)
+> [There is now a GitHub Bot](https://github.com/all-contributors/all-contributors-bot)
+> for automating the maintenance of your contributors table ✨<br />Say goodbye
+> to command line tool dependencies and hello to the
+> [@all-contributors bot 🤖](https://github.com/all-contributors/all-contributors-bot)
 
 <h1 align="center">
   all-contributors-cli
@@ -46,13 +47,14 @@
 [![Code Coverage](https://img.shields.io/codecov/c/github/all-contributors/all-contributors-cli.svg)](https://codecov.io/github/all-contributors/all-contributors-cli)
 [![Version](https://img.shields.io/npm/v/all-contributors-cli.svg)](https://www.npmjs.com/package/all-contributors-cli)
 [![Downloads](https://img.shields.io/npm/dm/all-contributors-cli.svg)](http://www.npmtrends.com/all-contributors-cli)
-[![All Contributors](https://img.shields.io/badge/all_contributors-34-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-37-orange.svg?style=flat-square)](#contributors-)
 [![Star on Github](https://img.shields.io/github/stars/all-contributors/all-contributors-cli.svg?style=social)](https://github.com/all-contributors/all-contributors-cli/stargazers)
 
 ## The problem
 
-You want to implement the [All Contributors](https://github.com/all-contributors/all-contributors) spec, but don't
-want to maintain the table by hand
+You want to implement the
+[All Contributors](https://github.com/all-contributors/all-contributors) spec,
+but don't want to maintain the table by hand
 
 ## This solution
 
@@ -62,7 +64,10 @@ specification for your GitHub or GitLab repository.
 
 ## Using the all-contributors-cli
 
-If you're looking to use the cli, head over to [the cli docs on allcontributors.org](https://allcontributors.org/docs/en/cli/overview). The all-contributors website contains all the information required to install, configure and use the all-contributors-cli.
+If you're looking to use the cli, head over to
+[the cli docs on allcontributors.org](https://allcontributors.org/docs/en/cli/overview).
+The all-contributors website contains all the information required to install,
+configure and use the all-contributors-cli.
 
 ## Contributors ✨
 
@@ -70,7 +75,8 @@ Thanks goes to these wonderful people
 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
 <table>
   <tr>
     <td align="center"><a href="https://github.com/jfmengels"><img src="https://avatars.githubusercontent.com/u/3869412?v=3" width="100px;" alt="Jeroen Engels"/><br /><sub><b>Jeroen Engels</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=jfmengels" title="Code">💻</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=jfmengels" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=jfmengels" title="Tests">⚠️</a></td>
@@ -120,7 +126,13 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/simon300000"><img src="https://avatars1.githubusercontent.com/u/12656264?v=4" width="100px;" alt="simon3000"/><br /><sub><b>simon3000</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=simon300000" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://sno2wman.dev/"><img src="https://avatars3.githubusercontent.com/u/15155608?v=4" width="100px;" alt="SnO₂WMaN"/><br /><sub><b>SnO₂WMaN</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=SnO2WMaN" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://www.destro.me"><img src="https://avatars1.githubusercontent.com/u/7031675?v=4" width="100px;" alt="Fabrizio"/><br /><sub><b>Fabrizio</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Adexpota" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=dexpota" title="Code">💻</a></td>
+  </tr>
 </table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

@@ -143,7 +143,9 @@ test('replace all-contributors badge if present', () => {
     'Badges',
     [
       '[![version](https://img.shields.io/npm/v/all-contributors-cli.svg?style=flat-square)](http://npm.im/all-contributors-cli)',
+      '<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->',
       '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)',
+      '<!-- ALL-CONTRIBUTORS-BADGE:END -->',
       '[![version](https://img.shields.io/npm/v/all-contributors-cli.svg?style=flat-square)](http://npm.im/all-contributors-cli)',
     ].join(''),
     '',
@@ -155,7 +157,9 @@ test('replace all-contributors badge if present', () => {
     'Badges',
     [
       '[![version](https://img.shields.io/npm/v/all-contributors-cli.svg?style=flat-square)](http://npm.im/all-contributors-cli)',
+      '<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->',
       '[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)',
+      '<!-- ALL-CONTRIBUTORS-BADGE:END -->',
       '[![version](https://img.shields.io/npm/v/all-contributors-cli.svg?style=flat-square)](http://npm.im/all-contributors-cli)',
     ].join(''),
     '',

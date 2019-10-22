@@ -20,7 +20,7 @@ test('format a simple contributor', () => {
   const {options} = fixtures()
 
   const expected =
-    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="#review-kentcdodds" title="Reviewed Pull Requests">👀</a>'
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
@@ -30,7 +30,7 @@ test('format contributor with complex contribution types', () => {
   const {options} = fixtures()
 
   const expected =
-    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=kentcdodds" title="Documentation">📖</a> <a href="#review-kentcdodds" title="Reviewed Pull Requests">👀</a> <a href="#question-kentcdodds" title="Answering Questions">💬</a>'
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=kentcdodds" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a> <a href="#question-kentcdodds" title="Answering Questions">💬</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
@@ -53,7 +53,7 @@ test('default image size to 100', () => {
   delete options.imageSize
 
   const expected =
-    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="#review-kentcdodds" title="Reviewed Pull Requests">👀</a>'
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="100px;" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })

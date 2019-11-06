@@ -128,6 +128,7 @@ Thanks goes to these wonderful people
   </tr>
   <tr>
     <td align="center"><a href="https://www.destro.me"><img src="https://avatars1.githubusercontent.com/u/7031675?v=4" width="100px;" alt="Fabrizio"/><br /><sub><b>Fabrizio</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Adexpota" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=dexpota" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/marceloalves"><img src="https://avatars1.githubusercontent.com/u/216782?v=4" width="100px;" alt="Marcelo Alves"/><br /><sub><b>Marcelo Alves</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=MarceloAlves" title="Code">💻</a></td>
   </tr>
 </table>
 

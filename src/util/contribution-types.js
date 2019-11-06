@@ -81,6 +81,7 @@ const defaultTypes = function(repoType) {
     review: {
       symbol: '👀',
       description: 'Reviewed Pull Requests',
+      link: repo.getLinkToReviews(repoType),
     },
     security: {
       symbol: '🛡️',

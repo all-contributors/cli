@@ -3,6 +3,10 @@ const repo = require('../repo')
 
 const defaultTypes = function(repoType) {
   return {
+    a11y: {
+      symbol: '️️️️♿️',
+      description: 'Accessibility',
+    }
     blog: {
       symbol: '📝',
       description: 'Blogposts',

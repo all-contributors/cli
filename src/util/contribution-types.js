@@ -6,7 +6,7 @@ const defaultTypes = function(repoType) {
     a11y: {
       symbol: '️️️️♿️',
       description: 'Accessibility',
-    }
+    },
     blog: {
       symbol: '📝',
       description: 'Blogposts',

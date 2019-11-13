@@ -75,8 +75,7 @@ Thanks goes to these wonderful people
 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
+<!-- prettier-ignore -->
 <table>
   <tr>
     <td align="center"><a href="https://github.com/jfmengels"><img src="https://avatars.githubusercontent.com/u/3869412?v=3" width="100px;" alt="Jeroen Engels"/><br /><sub><b>Jeroen Engels</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=jfmengels" title="Code">💻</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=jfmengels" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=jfmengels" title="Tests">⚠️</a></td>
@@ -129,11 +128,9 @@ Thanks goes to these wonderful people
   <tr>
     <td align="center"><a href="https://www.destro.me"><img src="https://avatars1.githubusercontent.com/u/7031675?v=4" width="100px;" alt="Fabrizio"/><br /><sub><b>Fabrizio</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Adexpota" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=dexpota" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/marceloalves"><img src="https://avatars1.githubusercontent.com/u/216782?v=4" width="100px;" alt="Marcelo Alves"/><br /><sub><b>Marcelo Alves</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=MarceloAlves" title="Code">💻</a></td>
+    <td align="center"><a href="https://phacks.dev/"><img src="https://avatars1.githubusercontent.com/u/2587348?v=4" width="100px;" alt="Nicolas Goutay"/><br /><sub><b>Nicolas Goutay</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=phacks" title="Code">💻</a></td>
   </tr>
 </table>
-
-<!-- markdownlint-enable -->
-<!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 

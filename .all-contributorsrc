@@ -352,6 +352,34 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dexpota",
+      "name": "Fabrizio",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/7031675?v=4",
+      "profile": "https://www.destro.me",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "MarceloAlves",
+      "name": "Marcelo Alves",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/216782?v=4",
+      "profile": "https://github.com/marceloalves",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "phacks",
+      "name": "Nicolas Goutay",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2587348?v=4",
+      "profile": "https://phacks.dev/",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

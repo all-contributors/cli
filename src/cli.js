@@ -5,10 +5,6 @@ const path = require('path')
 const yargs = require('yargs')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
-const didYouMean = require('didyoumean')
-
-// Setting edit length to be 60% of the input string's length
-didYouMean.threshold = 0.6
 
 const init = require('./init')
 const generate = require('./generate')
@@ -24,6 +20,7 @@ const yargv = yargs
   .alias('h', 'help')
   .alias('v', 'version')
   .version()
+  .recommendCommands()
   .command('generate', 'Generate the list of contributors')
   .usage('Usage: $0 generate')
   .command('add', 'add a new contributor')
@@ -50,15 +47,6 @@ const yargv = yargs
     }
   }).argv
 
-function suggestCommands(cmd) {
-  const availableCommands = ['generate', 'add', 'init', 'check']
-  const suggestion = didYouMean(cmd, availableCommands)
-
-  if (suggestion) {
-    console.log(chalk.bold(`Did you mean ${suggestion}`))
-  }
-}
-
 function startGeneration(argv) {
   return Promise.all(
     argv.files.map(file => {
@@ -72,7 +60,7 @@ function startGeneration(argv) {
 }
 
 function addContribution(argv) {
-  const username = argv._[1]
+  const username = argv._[1] === undefined ? undefined : String(argv._[1])
   const contributions = argv._[2]
   // Add or update contributor in the config file
   return updateContributors(argv, username, contributions).then(data => {
@@ -183,7 +171,6 @@ promptForCommand(yargv)
       case 'check':
         return checkContributors(yargv)
       default:
-        suggestCommands(command)
         throw new Error(`Unknown command ${command}`)
     }
   })

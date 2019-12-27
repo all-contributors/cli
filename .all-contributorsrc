@@ -380,6 +380,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "tylerkrupicka",
+      "name": "Tyler Krupicka",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5761061?s=460&v=4",
+      "profile": "https://github.com/tylerkrupicka",
+      "contributions": [
+        "code",
+        "test"
+      ]
     }
   ]
 }

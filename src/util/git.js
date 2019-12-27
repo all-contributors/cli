@@ -2,9 +2,11 @@ const path = require('path')
 const spawn = require('child_process').spawn
 const _ = require('lodash/fp')
 const pify = require('pify')
+const conventions = require('../init/commit-conventions')
+const {readConfig} = require('./config-file')
 
 const commitTemplate =
-  '<%= (newContributor ? "Add" : "Update") %> @<%= username %> as a contributor'
+  '<%= prefix %> <%= (newContributor ? "Add" : "Update") %> @<%= username %> as a contributor'
 
 const getRemoteOriginData = pify(cb => {
   let output = ''
@@ -37,8 +39,18 @@ function getRepoInfo() {
 
 const spawnGitCommand = pify((args, cb) => {
   const git = spawn('git', args)
-  git.stderr.on('data', cb)
-  git.on('close', cb)
+  const bufs = []
+  git.stderr.on('data', buf => bufs.push(buf))
+  git.on('close', code => {
+    if (code) {
+      const msg =
+        Buffer.concat(bufs).toString() ||
+        `git ${args.join(' ')} - exit code: ${code}`
+      cb(new Error(msg))
+    } else {
+      cb(null)
+    }
+  })
 })
 
 function commit(options, data) {
@@ -46,10 +58,16 @@ function commit(options, data) {
   const absolutePathFiles = files.map(file => {
     return path.resolve(process.cwd(), file)
   })
+  const config = readConfig(options.config)
+  const commitConvention = conventions[config.commitConvention]
+
   return spawnGitCommand(['add'].concat(absolutePathFiles)).then(() => {
-    const commitMessage = _.template(options.commitTemplate || commitTemplate)(
-      data,
-    )
+    let commitMessage = _.template(options.commitTemplate || commitTemplate)({
+      ...data,
+      prefix: commitConvention.msg,
+    })
+    if (commitConvention.lowercase)
+      commitMessage = commitConvention.transform(commitMessage)
     return spawnGitCommand(['commit', '-m', commitMessage])
   })
 }

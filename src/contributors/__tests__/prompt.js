@@ -53,7 +53,7 @@ test(`should filter valid contribution types from user inserted types`, () => {
   const contributions =
     'invalidContributionType1,code,invalidContributionType2,bug'
   return prompt(options, username, contributions).then(answers => {
-    expect(answers.contributions.length).toBe(2)
+    expect(answers.contributions).toHaveLength(2)
     expect(answers.contributions).toEqual(['code', 'bug'])
   })
 })

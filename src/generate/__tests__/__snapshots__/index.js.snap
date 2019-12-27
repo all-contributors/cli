@@ -8,9 +8,18 @@ Description
 ## Contributors
 These people contributed to the project:
 <!-- ALL-CONTRIBUTORS-LIST:START -->
-<!-- prettier-ignore -->
-| Kent C. Dodds is awesome! | Divjot Singh is awesome! | Jeroen Engels is awesome! |
-| :---: | :---: | :---: |
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+    <td align=\\"center\\">Divjot Singh is awesome!</td>
+    <td align=\\"center\\">Jeroen Engels is awesome!</td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Thanks a lot everyone!"
@@ -24,10 +33,24 @@ Description
 ## Contributors
 These people contributed to the project:
 <!-- ALL-CONTRIBUTORS-LIST:START -->
-<!-- prettier-ignore -->
-| Kent C. Dodds is awesome! | Kent C. Dodds is awesome! | Kent C. Dodds is awesome! | Kent C. Dodds is awesome! | Kent C. Dodds is awesome! |
-| :---: | :---: | :---: | :---: | :---: |
-| Kent C. Dodds is awesome! | Kent C. Dodds is awesome! |
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+    <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+    <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+    <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+    <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+  </tr>
+  <tr>
+    <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+    <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 Thanks a lot everyone!"

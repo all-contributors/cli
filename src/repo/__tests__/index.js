@@ -85,7 +85,9 @@ test('get user info calls underlying APIs', () => {
   ).toEqual({
     login: 'nodisplayname',
     name: 'nodisplayname',
-    profile: 'https://github.enterprise.com/nodisplayname',
+    avatar_url:
+      'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
+    profile: 'https://gitlab.com/nodisplayname',
   })
   expect(repo.getUserInfo('nodisplayname', 'other')).toBe(null)
 })

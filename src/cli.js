@@ -20,6 +20,7 @@ const yargv = yargs
   .alias('h', 'help')
   .alias('v', 'version')
   .version()
+  .recommendCommands()
   .command('generate', 'Generate the list of contributors')
   .usage('Usage: $0 generate')
   .command('add', 'add a new contributor')
@@ -40,7 +41,7 @@ const yargv = yargs
     try {
       return util.configFile.readConfig(configPath)
     } catch (error) {
-      if (configPath !== defaultRCFile) {
+      if (error instanceof SyntaxError || configPath !== defaultRCFile) {
         onError(error)
       }
     }
@@ -59,7 +60,7 @@ function startGeneration(argv) {
 }
 
 function addContribution(argv) {
-  const username = argv._[1]
+  const username = argv._[1] === undefined ? undefined : String(argv._[1])
   const contributions = argv._[2]
   // Add or update contributor in the config file
   return updateContributors(argv, username, contributions).then(data => {
@@ -76,7 +77,12 @@ function checkContributors(argv) {
   const configData = util.configFile.readConfig(argv.config)
 
   return repo
-    .getContributors(configData.projectOwner, configData.projectName, configData.repoType, configData.repoHost)
+    .getContributors(
+      configData.projectOwner,
+      configData.projectName,
+      configData.repoType,
+      configData.repoHost,
+    )
     .then(repoContributors => {
       const checkKey = repo.getCheckKey(configData.repoType)
       const knownContributions = configData.contributors.reduce((obj, item) => {
@@ -130,7 +136,7 @@ function promptForCommand(argv) {
       message: 'What do you want to do?',
       choices: [
         {
-          name: 'Add a new contributor or add a new contribution type',
+          name: 'Add new contributor or edit contribution type',
           value: 'add',
         },
         {
@@ -138,7 +144,8 @@ function promptForCommand(argv) {
           value: 'generate',
         },
         {
-          name: 'Compare contributors from the repository with the credited ones',
+          name:
+            'Compare contributors from the repository with the credited ones',
           value: 'check',
         },
       ],
@@ -155,16 +162,16 @@ function promptForCommand(argv) {
 promptForCommand(yargv)
   .then(command => {
     switch (command) {
-    case 'init':
-      return init()
-    case 'generate':
-      return startGeneration(yargv)
-    case 'add':
-      return addContribution(yargv)
-    case 'check':
-      return checkContributors(yargv)
-    default:
-      throw new Error(`Unknown command ${command}`)
+      case 'init':
+        return init()
+      case 'generate':
+        return startGeneration(yargv)
+      case 'add':
+        return addContribution(yargv)
+      case 'check':
+        return checkContributors(yargv)
+      default:
+        throw new Error(`Unknown command ${command}`)
     }
   })
   .catch(onError)

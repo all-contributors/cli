@@ -46,14 +46,6 @@ test('get user info calls underlying APIs', () => {
       profile: 'https://github.com/nodisplayname',
     }
   })
-
-  expect(repo.getUserInfo('nodisplayname', 'github')).toEqual({
-    login: 'nodisplayname',
-    name: 'nodisplayname',
-    avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
-    profile: 'https://github.com/nodisplayname',
-  })
-
   gitlabAPI.getUserInfo.mockImplementationOnce(() => {
     return {
       login: 'nodisplayname',
@@ -64,25 +56,13 @@ test('get user info calls underlying APIs', () => {
     }
   })
 
-  expect(repo.getUserInfo('nodisplayname', 'gitlab')).toEqual({
+  expect(repo.getUserInfo('nodisplayname', 'github')).toEqual({
     login: 'nodisplayname',
     name: 'nodisplayname',
-    avatar_url:
-      'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
-    profile: 'https://gitlab.com/nodisplayname',
+    avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
+    profile: 'https://github.com/nodisplayname',
   })
-
-  githubAPI.getUserInfo.mockImplementationOnce(() => {
-    return {
-      login: 'nodisplayname',
-      name: 'nodisplayname',
-      profile: 'https://github.enterprise.com/nodisplayname',
-    }
-  })
-
-  expect(
-    repo.getUserInfo('nodisplayname', 'github', 'github.enterprise.com', true),
-  ).toEqual({
+  expect(repo.getUserInfo('nodisplayname', 'gitlab')).toEqual({
     login: 'nodisplayname',
     name: 'nodisplayname',
     avatar_url:

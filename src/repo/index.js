@@ -99,13 +99,7 @@ const getUserInfo = function(username, repoType, repoHost) {
   return null
 }
 
-const getContributors = function(
-  owner,
-  name,
-  repoType,
-  repoHost,
-  isEnterprise,
-) {
+const getContributors = function(owner, name, repoType, repoHost) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].getContributors(
       owner,

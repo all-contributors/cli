@@ -2,6 +2,26 @@ const url = require('url')
 const pify = require('pify')
 const request = pify(require('request'))
 
+/**
+ * Get the host based on public or enterprise GitHub.
+ * https://developer.github.com/enterprise/2.17/v3/#current-version
+ *
+ * @param {String} hostname - Hostname from config.
+ * @returns {String} - Host for GitHub API.
+ */
+function getApiHost(hostname) {
+  if (!hostname) {
+    hostname = 'https://github.com'
+  }
+
+  if (hostname !== 'https://github.com') {
+    // Assume Github Enterprise
+    return url.resolve(hostname, '/api/v3')
+  }
+
+  return hostname.replace(/:\/\//, '://api.')
+}
+
 function getRequestHeaders(optionalPrivateToken = '') {
   const requestHeaders = {
     'User-Agent': 'request',
@@ -28,10 +48,10 @@ function getNextLink(link) {
   return nextLink.split(';')[0].slice(1, -1)
 }
 
-function getContributorsPage(url, optionalPrivateToken) {
+function getContributorsPage(githubUrl, optionalPrivateToken) {
   return request
     .get({
-      url,
+      url: githubUrl,
       headers: getRequestHeaders(optionalPrivateToken),
     })
     .then(res => {
@@ -56,18 +76,13 @@ function getContributorsPage(url, optionalPrivateToken) {
 }
 
 const getUserInfo = function(username, hostname, optionalPrivateToken) {
-  /* eslint-disable complexity */
-  if (!hostname) {
-    hostname = 'https://github.com'
-  }
-
   if (!username) {
     throw new Error(
       `No login when adding a contributor. Please specify a username.`,
     )
   }
 
-  const root = getApiHost(hostname, isEnterprise)
+  const root = getApiHost(hostname)
   return request
     .get({
       url: `${root}/users/${username}`,
@@ -97,13 +112,9 @@ const getUserInfo = function(username, hostname, optionalPrivateToken) {
 }
 
 const getContributors = function(owner, name, hostname, optionalPrivateToken) {
-  if (!hostname) {
-    hostname = 'https://github.com'
-  }
-
-  const root = hostname.replace(/:\/\//, '://api.')
-  const url = `${root}/repos/${owner}/${name}/contributors?per_page=100`
-  return getContributorsPage(url, optionalPrivateToken)
+  const root = getApiHost(hostname)
+  const contributorsUrl = `${root}/repos/${owner}/${name}/contributors?per_page=100`
+  return getContributorsPage(contributorsUrl, optionalPrivateToken)
 }
 
 module.exports = {

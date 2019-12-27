@@ -85,6 +85,21 @@ test('Throw error when non existent username is provided', async () => {
   )
 })
 
+test('Throw error when missing enterprise authentication', async () => {
+  const username = 'notauthenticated'
+  nock('http://github.myhost.com:3000/api/v3')
+    .get(`/users/${username}`)
+    .reply(401, {
+      message: 'Must authenticate to access this API.',
+      documentation_url: 'https://developer.github.com/enterprise/2.17/v3',
+    })
+  await expect(
+    getUserInfo(username, 'http://github.myhost.com:3000'),
+  ).rejects.toThrow(
+    `Missing authentication for GitHub API. Did you set PRIVATE_TOKEN?`,
+  )
+})
+
 test('handle github errors', async () => {
   nock('https://api.github.com')
     .get('/users/nodisplayname')

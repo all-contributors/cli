@@ -93,6 +93,16 @@ const getUserInfo = function(username, hostname, optionalPrivateToken) {
 
       let profile = body.blog || body.html_url
 
+      // Check for authentication required
+      if (
+        (!profile && body.message.includes('Must authenticate')) ||
+        res.statusCode === 401
+      ) {
+        throw new Error(
+          `Missing authentication for GitHub API. Did you set PRIVATE_TOKEN?`,
+        )
+      }
+
       // Github throwing specific errors as 200...
       if (!profile && body.message) {
         throw new Error(

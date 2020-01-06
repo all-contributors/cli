@@ -9,4 +9,5 @@ module.exports = Object.assign(jestConfig, {
       statements: 50,
     },
   },
+  forceExit: true
 })

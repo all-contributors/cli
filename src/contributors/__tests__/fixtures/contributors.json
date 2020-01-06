@@ -1,0 +1,28 @@
+[
+  {
+    "login": "login1",
+    "name": "Some name",
+    "avatar_url": "www.avatar.url",
+    "profile": "www.profile.url",
+    "contributions": ["code"]
+  },
+  {
+    "login": "login2",
+    "name": "Some name",
+    "avatar_url": "www.avatar.url",
+    "profile": "www.profile.url",
+    "contributions": [
+      {
+        "type": "blog",
+        "url": "www.blog.url/path"
+      },
+      "code"
+    ]
+  },
+  {
+    "name": "Missing Login",
+    "avatar_url": "www.avatar.url",
+    "profile": "www.profile.url",
+    "contributions": ["code"]
+  }
+]

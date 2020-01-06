@@ -10,3 +10,6 @@ dist
 # when working with contributors
 package-lock.json
 yarn.lock
+.vscode
+cache
+.idea

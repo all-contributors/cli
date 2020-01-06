@@ -2,10 +2,10 @@ const _ = require('lodash/fp')
 const formatContributionType = require('./format-contribution-type')
 
 const avatarTemplate = _.template(
-  '<img src="<%= contributor.avatar_url %>" width="<%= options.imageSize %>px;"/>',
+  '<img src="<%= contributor.avatar_url %>" width="<%= options.imageSize %>px;" alt=""/>',
 )
 const avatarBlockTemplate = _.template(
-  '[<%= avatar %><br /><sub><b><%= name %></b></sub>](<%= contributor.profile %>)',
+  '<a href="<%= contributor.profile %>"><%= avatar %><br /><sub><b><%= name %></b></sub></a>',
 )
 const avatarBlockTemplateNoProfile = _.template(
   '<%= avatar %><br /><sub><b><%= name %></b></sub>',
@@ -17,10 +17,15 @@ const contributorTemplate = _.template(
 const defaultImageSize = 100
 
 function defaultTemplate(templateData) {
-  const avatar = avatarTemplate(templateData)
+  const name = escapeName(templateData.contributor.name)
+  const avatar = avatarTemplate(
+    _.assign(templateData, {
+      name,
+    }),
+  )
   const avatarBlockTemplateData = _.assign(
     {
-      name: escapeName(templateData.contributor.name),
+      name,
       avatar,
     },
     templateData,

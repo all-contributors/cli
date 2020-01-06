@@ -3,6 +3,10 @@ const repo = require('../repo')
 
 const defaultTypes = function(repoType) {
   return {
+    a11y: {
+      symbol: '️️️️♿️',
+      description: 'Accessibility',
+    },
     blog: {
       symbol: '📝',
       description: 'Blogposts',
@@ -12,10 +16,18 @@ const defaultTypes = function(repoType) {
       description: 'Bug reports',
       link: repo.getLinkToIssues(repoType),
     },
+    business: {
+      symbol: '💼',
+      description: 'Business development',
+    },
     code: {
       symbol: '💻',
       description: 'Code',
       link: repo.getLinkToCommits(repoType),
+    },
+    content: {
+      symbol: '🖋',
+      description: 'Content',
     },
     design: {
       symbol: '🎨',
@@ -50,6 +62,10 @@ const defaultTypes = function(repoType) {
       symbol: '🚇',
       description: 'Infrastructure (Hosting, Build-Tools, etc)',
     },
+    maintenance: {
+      symbol: '🚧',
+      description: 'Maintenance',
+    },
     platform: {
       symbol: '📦',
       description: 'Packaging/porting to new platform',
@@ -58,6 +74,10 @@ const defaultTypes = function(repoType) {
       symbol: '🔌',
       description: 'Plugin/utility libraries',
     },
+    projectManagement: {
+      symbol: '📆',
+      description: 'Project Management',
+    },
     question: {
       symbol: '💬',
       description: 'Answering Questions',
@@ -65,6 +85,11 @@ const defaultTypes = function(repoType) {
     review: {
       symbol: '👀',
       description: 'Reviewed Pull Requests',
+      link: repo.getLinkToReviews(repoType),
+    },
+    security: {
+      symbol: '🛡️',
+      description: 'Security',
     },
     talk: {
       symbol: '📢',
@@ -87,10 +112,14 @@ const defaultTypes = function(repoType) {
       symbol: '✅',
       description: 'Tutorials',
     },
+    userTesting: {
+      symbol: '📓',
+      description: 'User Testing',
+    },
     video: {
       symbol: '📹',
       description: 'Videos',
-    }
+    },
   }
 }
 

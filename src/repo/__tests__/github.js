@@ -16,7 +16,9 @@ const check = githubAPI.getContributors
 beforeAll(() => {
   nock('https://api.github.com')
     .persist()
-    .get('/repos/jfmengels/all-contributors-cli/contributors?per_page=100')
+    .get(
+      '/repos/all-contributors/all-contributors-cli/contributors?per_page=100',
+    )
     .reply(200, allContributorsCliResponse)
     .get('/repos/facebook/react-native/contributors?per_page=100')
     .reply(200, reactNativeResponse1, {
@@ -41,7 +43,7 @@ beforeAll(() => {
 })
 
 test('Handle a single results page correctly', async () => {
-  const transformed = await check('jfmengels', 'all-contributors-cli')
+  const transformed = await check('all-contributors', 'all-contributors-cli')
   expect(transformed).toEqual(allContributorsCliTransformed)
 })
 
@@ -61,6 +63,41 @@ test('handle errors', async () => {
     .replyWithError(404)
 
   await rejects(getUserInfo('nodisplayname'))
+})
+
+test('Throw error when no username is provided', () => {
+  expect(getUserInfo).toThrow(
+    'No login when adding a contributor. Please specify a username.',
+  )
+})
+
+test('Throw error when non existent username is provided', async () => {
+  const username = 'thisusernamedoesntexist'
+  nock('https://api.github.com')
+    .get(`/users/${username}`)
+    .reply(404, {
+      message: 'Not Found',
+      documentation_url:
+        'https://developer.github.com/v3/users/#get-a-single-user',
+    })
+  await expect(getUserInfo(username)).rejects.toThrow(
+    `Login not found when adding a contributor for username - ${username}.`,
+  )
+})
+
+test('Throw error when missing enterprise authentication', async () => {
+  const username = 'notauthenticated'
+  nock('http://github.myhost.com:3000/api/v3')
+    .get(`/users/${username}`)
+    .reply(401, {
+      message: 'Must authenticate to access this API.',
+      documentation_url: 'https://developer.github.com/enterprise/2.17/v3',
+    })
+  await expect(
+    getUserInfo(username, 'http://github.myhost.com:3000'),
+  ).rejects.toThrow(
+    `Missing authentication for GitHub API. Did you set PRIVATE_TOKEN?`,
+  )
 })
 
 test('handle github errors', async () => {
@@ -87,6 +124,40 @@ test('fill in the name when null is returned', async () => {
 
   const info = await getUserInfo('nodisplayname')
   expect(info.name).toBe('nodisplayname')
+})
+
+test('attaches token when supplied', async () => {
+  const mockAuthToken = 'myMock-token-adaskjda'
+  nock('https://api.github.com')
+    .matchHeader('authorization', `token ${mockAuthToken}`)
+    .get('/users/test-token')
+    .reply(200, {
+      html_url: 'test-token',
+    })
+
+  await getUserInfo('test-token', 'https://github.com', mockAuthToken)
+})
+
+test('attaches no token when supplied empty', async () => {
+  nock('https://api.github.com')
+    .matchHeader('authorization', '')
+    .get('/users/test-token')
+    .reply(200, {
+      html_url: 'test-token',
+    })
+
+  await getUserInfo('test-token', 'https://github.com', '')
+})
+
+test('attaches no token when not supplied', async () => {
+  nock('https://api.github.com')
+    .matchHeader('authorization', '')
+    .get('/users/test-token')
+    .reply(200, {
+      html_url: 'test-token',
+    })
+
+  await getUserInfo('test-token')
 })
 
 test('fill in the name when an empty string is returned', async () => {
@@ -118,7 +189,7 @@ test('append http when no absolute link is provided', async () => {
 })
 
 test('retrieve user from a different github registry', async () => {
-  nock('http://api.github.myhost.com:3000')
+  nock('http://github.myhost.com:3000/api/v3')
     .get('/users/nodisplayname')
     .reply(200, {
       login: 'nodisplayname',
@@ -130,24 +201,6 @@ test('retrieve user from a different github registry', async () => {
   const info = await getUserInfo(
     'nodisplayname',
     'http://github.myhost.com:3000',
-  )
-  expect(info.name).toBe('No Display Name')
-})
-
-test('retrieve user from a github enterprise', async () => {
-  nock('http://github.enterprise.com:3000/api/v3')
-    .get('/users/nodisplayname')
-    .reply(200, {
-      login: 'nodisplayname',
-      name: 'No Display Name',
-      avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
-      html_url: 'http://github.enterprise.com:3000/nodisplayname',
-    })
-
-  const info = await getUserInfo(
-    'nodisplayname',
-    'http://github.enterprise.com:3000',
-    true,
   )
   expect(info.name).toBe('No Display Name')
 })

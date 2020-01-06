@@ -12,12 +12,21 @@ const NoOwnerConfigFile = {
   contributors: [],
 }
 const NoNameConfigFile = {
-  projectOwner: 'jfmengels',
+  projectOwner: 'all-contributors',
   projectName: '',
   imageSize: 100,
   commit: false,
   contributorsPerLine: 6,
   contributors: [],
+}
+const NoFilesConfigFile = {
+  projectOwner: 'all-contributors',
+  projectName: 'all-contributors-cli',
+  imageSize: 100,
+  commit: false,
+  contributorsPerLine: 6,
+  contributors: [],
+  files: [],
 }
 
 test('Reading an absent configuration file throws a helpful error', () => {
@@ -40,4 +49,12 @@ test('Should throw error and not allow editing config file if project name or ow
   expect(() =>
     configFile.writeConfig(incompleteConfigFilePath, NoNameConfigFile),
   ).toThrow(`Error! Project name is not set in ${incompleteConfigFilePath}`)
+})
+
+test(`throws if 'files' was overridden in .all-contributorsrc and is empty`, () => {
+  expect(() =>
+    configFile.writeConfig(incompleteConfigFilePath, NoFilesConfigFile),
+  ).toThrow(
+    `Error! Project files was overridden and is empty in ${incompleteConfigFilePath}`,
+  )
 })

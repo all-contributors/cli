@@ -1,4 +1,5 @@
 import addContributor from '../add'
+import fixtures from './fixtures'
 
 function mockInfoFetcher(username) {
   return Promise.resolve({
@@ -7,34 +8,6 @@ function mockInfoFetcher(username) {
     avatar_url: 'www.avatar.url',
     profile: 'www.profile.url',
   })
-}
-
-function fixtures() {
-  const options = {
-    contributors: [
-      {
-        login: 'login1',
-        name: 'Some name',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: ['code'],
-      },
-      {
-        login: 'login2',
-        name: 'Some name',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: [{type: 'blog', url: 'www.blog.url/path'}, 'code'],
-      },
-      {
-        name: 'Missing Login',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: ['code'],
-      },
-    ],
-  }
-  return {options}
 }
 
 function caseFixtures() {
@@ -77,7 +50,7 @@ test('add new contributor at the end of the list of contributors', () => {
 
   return addContributor(options, username, contributions, mockInfoFetcher).then(
     contributors => {
-      expect(contributors.length).toBe(options.contributors.length + 1)
+      expect(contributors).toHaveLength(options.contributors.length + 1)
       expect(contributors[options.contributors.length]).toEqual({
         login: 'login3',
         name: 'Some name',
@@ -97,7 +70,7 @@ test('add new contributor at the end of the list of contributors with a url link
 
   return addContributor(options, username, contributions, mockInfoFetcher).then(
     contributors => {
-      expect(contributors.length).toBe(options.contributors.length + 1)
+      expect(contributors).toHaveLength(options.contributors.length + 1)
       expect(contributors[options.contributors.length]).toEqual({
         login: 'login3',
         name: 'Some name',
@@ -139,7 +112,7 @@ test(`should update an existing contributor's contributions if a new type is add
   const contributions = ['bug']
   return addContributor(options, username, contributions, mockInfoFetcher).then(
     contributors => {
-      expect(contributors.length).toBe(options.contributors.length)
+      expect(contributors).toHaveLength(options.contributors.length)
       expect(contributors[0]).toEqual({
         login: 'login1',
         name: 'Some name',
@@ -157,7 +130,7 @@ test(`should update an existing contributor's contributions if a new type is add
   const contributions = ['bug']
   return addContributor(options, username, contributions, mockInfoFetcher).then(
     contributors => {
-      expect(contributors.length).toBe(1)
+      expect(contributors).toHaveLength(1)
       expect(contributors[0]).toEqual({
         login: 'Login1',
         name: 'Some name',
@@ -177,13 +150,32 @@ test(`should update an existing contributor's contributions if a new type is add
 
   return addContributor(options, username, contributions, mockInfoFetcher).then(
     contributors => {
-      expect(contributors.length).toBe(options.contributors.length)
+      expect(contributors).toHaveLength(options.contributors.length)
       expect(contributors[0]).toEqual({
         login: 'login1',
         name: 'Some name',
         avatar_url: 'www.avatar.url',
         profile: 'www.profile.url',
         contributions: ['code', {type: 'bug', url: 'www.foo.bar'}],
+      })
+    },
+  )
+})
+
+test(`should update an existing contributor's contributions if an existing type is removed`, () => {
+  const {options} = fixtures()
+  const username = 'login2'
+  const contributions = ['code']
+
+  return addContributor(options, username, contributions, mockInfoFetcher).then(
+    contributors => {
+      expect(contributors).toHaveLength(options.contributors.length)
+      expect(contributors[1]).toEqual({
+        login: 'login2',
+        name: 'Some name',
+        avatar_url: 'www.avatar.url',
+        profile: 'www.profile.url',
+        contributions: ['code'],
       })
     },
   )

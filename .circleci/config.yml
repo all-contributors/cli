@@ -1,0 +1,73 @@
+version: 2.1
+
+docker_defaults: &docker_defaults
+  docker:
+    - image: circleci/node:8.16.2
+
+commands:
+  prep_env:
+    description: Prepares environment with cache
+    steps:
+      - checkout:
+          path: ~/repo
+      - restore_cache:
+          name: Restore node_modules cache
+          key: all-contributors-cli-v2-{{ checksum "package.json" }}-{{ .Branch }}
+  save_env_cache:
+    description: Saves environment cache
+    steps:
+      - save_cache:
+          name: Save node_modules cache
+          key: all-contributors-cli-v2-{{ checksum "package.json" }}-{{ .Branch }}
+          paths:
+            - node_modules/
+
+jobs:
+  node_modules:
+    <<: *docker_defaults
+    working_directory: ~/repo
+    steps:
+      - prep_env
+      - run: yarn install
+      - save_env_cache
+  validate:
+    <<: *docker_defaults
+    working_directory: ~/repo
+    steps:
+      - prep_env
+      - run: yarn validate
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - dist
+            - coverage
+  deploy:
+    <<: *docker_defaults
+    working_directory: ~/repo
+    steps:
+      - prep_env
+      - attach_workspace:
+          at: ./
+      - run: yarn codecov
+      - run: yarn semantic-release
+workflows:
+  version: 2
+  validate_and_deploy:
+    jobs:
+      - node_modules
+      - validate:
+          requires:
+            - node_modules
+      - deploy:
+          requires:
+            - validate
+          filters:
+            branches:
+              only:
+                - master
+
+experimental:
+  notify:
+    branches:
+      only:
+        - master

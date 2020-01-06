@@ -5,7 +5,10 @@
   "bin": {
     "all-contributors": "dist/cli.js"
   },
-  "files": ["dist"],
+  "main": "dist/api.js",
+  "files": [
+    "dist"
+  ],
   "engines": {
     "node": ">=4"
   },
@@ -15,33 +18,55 @@
     "lint": "kcd-scripts lint",
     "test": "kcd-scripts test",
     "validate": "kcd-scripts validate",
-    "precommit": "kcd-scripts precommit"
+    "commit": "git-cz",
+    "start": "./dist/cli.js",
+    "dev": "./src/cli.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "kcd-scripts pre-commit"
+    }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jfmengels/all-contributors-cli.git"
+    "url": "https://github.com/all-contributors/all-contributors-cli.git"
   },
-  "keywords": ["all-contributors", "contributors"],
+  "keywords": [
+    "all-contributors",
+    "contributors"
+  ],
   "author": "Jeroen Engels <jfm.engels@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jfmengels/all-contributors-cli/issues"
+    "url": "https://github.com/all-contributors/all-contributors-cli/issues"
   },
-  "homepage": "https://github.com/jfmengels/all-contributors-cli#readme",
+  "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
-    "async": "^2.0.0-rc.1",
-    "chalk": "^2.3.0",
-    "inquirer": "^4.0.0",
+    "@babel/runtime": "^7.2.0",
+    "async": "^3.0.1",
+    "chalk": "^3.0.0",
+    "didyoumean": "^1.2.1",
+    "inquirer": "^7.0.0",
+    "inquirer": "^6.2.1",
+    "json-fixer": "^1.3.1-0",
     "lodash": "^4.11.2",
-    "pify": "^3.0.0",
+    "pify": "^4.0.1",
     "request": "^2.72.0",
-    "yargs": "^10.0.3"
+    "yargs": "^15.0.1"
   },
   "devDependencies": {
-    "kcd-scripts": "^0.29.0",
-    "nock": "^9.1.0"
+    "codecov": "^3.1.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "git-cz": "^3.0.0",
+    "kcd-scripts": "^1.0.0",
+    "nock": "^11.1.0",
+    "semantic-release": "^15.13.2"
   },
-  "eslintIgnore": ["node_modules", "coverage", "dist"],
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "dist"
+  ],
   "eslintConfig": {
     "extends": "./node_modules/kcd-scripts/eslint.js",
     "rules": {
@@ -50,6 +75,11 @@
       "import/extensions": "off",
       "func-names": "off",
       "consistent-return": "off"
+    }
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
     }
   }
 }

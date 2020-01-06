@@ -2,10 +2,36 @@ const url = require('url')
 const pify = require('pify')
 const request = pify(require('request'))
 
-function getApiHost(hostname, isEnterprise) {
-  return isEnterprise
-    ? url.resolve(hostname, '/api/v3')
-    : hostname.replace(/:\/\//, '://api.')
+/**
+ * Get the host based on public or enterprise GitHub.
+ * https://developer.github.com/enterprise/2.17/v3/#current-version
+ *
+ * @param {String} hostname - Hostname from config.
+ * @returns {String} - Host for GitHub API.
+ */
+function getApiHost(hostname) {
+  if (!hostname) {
+    hostname = 'https://github.com'
+  }
+
+  if (hostname !== 'https://github.com') {
+    // Assume Github Enterprise
+    return url.resolve(hostname, '/api/v3')
+  }
+
+  return hostname.replace(/:\/\//, '://api.')
+}
+
+function getRequestHeaders(optionalPrivateToken = '') {
+  const requestHeaders = {
+    'User-Agent': 'request',
+  }
+
+  if (optionalPrivateToken && optionalPrivateToken.length > 0) {
+    requestHeaders.Authorization = `token ${optionalPrivateToken}`
+  }
+
+  return requestHeaders
 }
 
 function getNextLink(link) {
@@ -22,13 +48,11 @@ function getNextLink(link) {
   return nextLink.split(';')[0].slice(1, -1)
 }
 
-function getContributorsPage(githubUrl) {
+function getContributorsPage(githubUrl, optionalPrivateToken) {
   return request
     .get({
       url: githubUrl,
-      headers: {
-        'User-Agent': 'request',
-      },
+      headers: getRequestHeaders(optionalPrivateToken),
     })
     .then(res => {
       const body = JSON.parse(res.body)
@@ -51,27 +75,39 @@ function getContributorsPage(githubUrl) {
     })
 }
 
-const getUserInfo = function(username, hostname, isEnterprise) {
-  /* eslint-disable complexity */
-  if (!hostname) {
-    hostname = 'https://github.com'
+const getUserInfo = function(username, hostname, optionalPrivateToken) {
+  if (!username) {
+    throw new Error(
+      `No login when adding a contributor. Please specify a username.`,
+    )
   }
 
-  const root = getApiHost(hostname, isEnterprise)
+  const root = getApiHost(hostname)
   return request
     .get({
       url: `${root}/users/${username}`,
-      headers: {
-        'User-Agent': 'request',
-      },
+      headers: getRequestHeaders(optionalPrivateToken),
     })
     .then(res => {
       const body = JSON.parse(res.body)
+
       let profile = body.blog || body.html_url
+
+      // Check for authentication required
+      if (
+        (!profile && body.message.includes('Must authenticate')) ||
+        res.statusCode === 401
+      ) {
+        throw new Error(
+          `Missing authentication for GitHub API. Did you set PRIVATE_TOKEN?`,
+        )
+      }
 
       // Github throwing specific errors as 200...
       if (!profile && body.message) {
-        throw new Error(body.message)
+        throw new Error(
+          `Login not found when adding a contributor for username - ${username}.`,
+        )
       }
 
       profile = profile.startsWith('http') ? profile : `http://${profile}`
@@ -85,15 +121,10 @@ const getUserInfo = function(username, hostname, isEnterprise) {
     })
 }
 
-const getContributors = function(owner, name, hostname, isEnterprise) {
-  if (!hostname) {
-    hostname = 'https://github.com'
-  }
-
-  const root = getApiHost(hostname, isEnterprise)
-  const githubUrl = `${root}/repos/${owner}/${name}/contributors?per_page=100`
-
-  return getContributorsPage(githubUrl)
+const getContributors = function(owner, name, hostname, optionalPrivateToken) {
+  const root = getApiHost(hostname)
+  const contributorsUrl = `${root}/repos/${owner}/${name}/contributors?per_page=100`
+  return getContributorsPage(contributorsUrl, optionalPrivateToken)
 }
 
 module.exports = {

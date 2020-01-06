@@ -29,6 +29,10 @@ const defaultTypes = function(repoType) {
       symbol: '🖋',
       description: 'Content',
     },
+    data: {
+      symbol: '🔣',
+      description: 'Data',
+    },
     design: {
       symbol: '🎨',
       description: 'Design',

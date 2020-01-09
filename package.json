@@ -60,7 +60,7 @@
     "git-cz": "^3.0.0",
     "kcd-scripts": "^2.0.0",
     "nock": "^11.1.0",
-    "semantic-release": "^15.13.2"
+    "semantic-release": "^16.0.0"
   },
   "eslintIgnore": [
     "node_modules",

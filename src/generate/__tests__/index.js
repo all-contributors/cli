@@ -60,6 +60,26 @@ test('split contributors into multiples lines when there are too many', () => {
   expect(result).toMatchSnapshot()
 })
 
+test('sorts the list of contributors if contributorsSortAlphabetically=true', () => {
+  const {kentcdodds, bogas04} = contributors
+  const {options, jfmengels, content} = fixtures()
+
+  const resultPreSorted = generate(
+    options,
+    [bogas04, jfmengels, kentcdodds],
+    content,
+  )
+
+  options.contributorsSortAlphabetically = true
+  const resultAutoSorted = generate(
+    options,
+    [jfmengels, kentcdodds, bogas04],
+    content,
+  )
+
+  expect(resultPreSorted).toEqual(resultAutoSorted)
+})
+
 test('not inject anything if there is no tags to inject content in', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()

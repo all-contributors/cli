@@ -44,7 +44,7 @@
   "dependencies": {
     "@babel/runtime": "^7.7.6",
     "async": "^3.0.1",
-    "chalk": "^3.0.0",
+    "chalk": "^4.0.0",
     "didyoumean": "^1.2.1",
     "inquirer": "^7.0.4",
     "json-fixer": "^1.4.0",

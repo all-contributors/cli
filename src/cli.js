@@ -16,7 +16,7 @@ const util = require('./util')
 const repo = require('./repo')
 const updateContributors = require('./contributors')
 const {getContributors} = require('./discover')
-const learner = require('./discover/learner')
+const {getLearner} = require('./discover/learner')
 
 const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
@@ -130,7 +130,6 @@ function checkContributors(argv) {
       configData.repoHost,
     )
     .then(repoContributors => {
-      // console.dir(repoContributors) //['jfmengels', 'jakebolam', ...]
       const checkKey = repo.getCheckKey(configData.repoType)
       const knownContributions = configData.contributors.reduce((obj, item) => {
         obj[item[checkKey]] = item.contributions
@@ -167,120 +166,97 @@ function checkContributors(argv) {
     })
 }
 
-function fetchContributors(argv) {
-  // console.log('argv=', argv);
-  // const configData = util.configFile.readConfig(argv.config)
-  // console.log('configData')
-  // console.dir(configData)
+async function fetchContributors(argv) {
+  const {reviewers, commitAuthors, issueCreators} = await getContributors(
+    argv.projectOwner,
+    argv.projectName,
+  )
+  const args = {...argv, _: []}
+  const contributorsToAdd = []
+  const learner = await getLearner()
 
-  return getContributors(argv.projectOwner, argv.projectName).then(
-    repoContributors => {
-      // repoContributors = {prCreators, prCommentators, issueCreators, issueCommentators, reviewers, commitAuthors, commitCommentators}
-      // console.dir(repoContributors)
+  reviewers.forEach(usr => {
+    contributorsToAdd.push({login: usr.login, contributions: ['review']})
 
-      // const checkKey = repo.getCheckKey(configData.repoType)
-      // const knownContributions = configData.contributors.reduce((obj, item) => {
-      //   obj[item[checkKey]] = item.contributions
-      //   return obj
-      // }, {})
-      // console.log('knownContributions', knownContributions) //{ jfmengels: ['code', 'test', 'doc'], ...}
-      // const knownContributors = configData.contributors.map(
-      //   contributor => contributor[checkKey],
-      // )
-      // console.log('knownContributors', knownContributors) //['kentcdodds', 'ben-eb', ...]
+    console.log(
+      `Adding ${chalk.underline('Reviewer')} ${chalk.blue(usr.login)}`,
+    )
+  })
 
-      // let contributors = new Set(
-      //   repoContributors.prCreators.map(usr => usr.login),
-      // )
+  issueCreators.forEach(usr => {
+    const contributor = {
+      login: usr.login,
+      contributions: [],
+    }
 
-      // repoContributors.issueCreators.forEach(usr => contributors.add(usr.login))
-      // repoContributors.reviewers.forEach(usr => contributors.add(usr.login))
-      // repoContributors.commitAuthors.forEach(usr => contributors.add(usr.login))
-      // contributors = Array.from(contributors)
+    usr.labels.forEach(lbl => {
+      const guessedCategory = learner.classify(lbl).find(c => c && c !== 'null')
 
-      // console.log('ctbs=', contributors);
-
-      //~1. Auto-add reviewers for review~
-      //~2. Auto-add issue creators for any categories found~
-      //~3. Auto-add commit authors~
-      //4. Roll onto other contribution categories following https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
-
-      const args = {...argv, _: []}
-      const contributorsToAdd = []
-      repoContributors.reviewers.forEach(usr => {
-        // args._ = ['add', usr.login, 'review']
-        // addContribution(args)
-        contributorsToAdd.push({login: usr.login, contributions: ['review']})
-        // console.log(
-        //   `Adding ${chalk.underline('Reviewer')} ${chalk.blue(usr.login)}`,
-        // )
-      })
-
-      repoContributors.issueCreators.forEach(usr => {
-        // console.log('usr=', usr.login, 'labels=', usr.labels)
-        const contributor = {
-          login: usr.login,
-          contributions: [],
-        }
-        usr.labels.forEach(lbl => {
-          const guesses = learner.classify(lbl).filter(c => c && c !== 'null')
-          if (guesses.length) {
-            const category = guesses[0]
-            // args._ = ['', usr.login, category]
-            // addContribution(args)
-            if (!contributor.contributions.includes(category))
-              contributor.contributions.push(category)
-            // console.log(
-            //   `Adding ${chalk.blue(usr.login)} for ${chalk.underline(category)}`,
-            // )
-          } //else console.warn(`Oops, I couldn't find any category for the "${lbl}" label`)
-        })
-        const existingContributor = contributorsToAdd.filter(
-          ctrb => ctrb.login === usr.login,
+      if (!guessedCategory) {
+        console.warn(
+          `Oops, I couldn't find any category for the "${lbl}" label`,
         )
-        if (existingContributor.length) {
-          existingContributor[0].contributions = [
-            ...new Set(
-              existingContributor[0].contributions.concat(
-                contributor.contributions,
-              ),
-            ),
-          ]
-        } else contributorsToAdd.push(contributor)
-      })
 
-      repoContributors.commitAuthors.forEach(usr => {
-        // const contributor = {
-        //   login: usr.login,
-        //   contributions: [],
-        // }
-        // console.log('commit auth:', usr)
-        const existingContributor = contributorsToAdd.filter(
-          ctrb => ctrb.login === usr.login,
-        )
-        if (existingContributor.length) {
-          //there's no label or commit message info so use only code for now
-          if (!existingContributor[0].contributions.includes('code')) {
-            existingContributor[0].contributions.push('code')
-          }
-        } else
-          contributorsToAdd.push({login: usr.login, contributions: ['code']})
-      })
+        return
+      }
 
-      // console.log('contributorsToAdd=', contributorsToAdd)
-      contributorsToAdd.forEach(contributor => {
+      if (!contributor.contributions.includes(guessedCategory)) {
+        contributor.contributions.push(guessedCategory)
+
         console.log(
-          `Adding ${chalk.blue(contributor.login)} for ${chalk.underline(
-            contributor.contributions.join('/'),
+          `Adding ${chalk.blue(usr.login)} for ${chalk.underline(
+            guessedCategory,
           )}`,
         )
-        args._ = ['', contributor.login, contributor.contributions.join(',')]
-        // if (contributor.contributions.length) addContribution(args)
-        // else console.log('Skipping', contributor.login)
-      })
-    },
-    err => console.error('fetch error:', err),
-  )
+      }
+    })
+
+    const existingContributor = contributorsToAdd.find(
+      c => c.login === usr.login,
+    )
+
+    if (existingContributor) {
+      existingContributor.contributions.push(...contributor.contributions)
+    } else {
+      contributorsToAdd.push(contributor)
+    }
+  })
+
+  commitAuthors.forEach(usr => {
+    const existingContributor = contributorsToAdd.find(
+      c => c.login === usr.login,
+    )
+
+    if (existingContributor) {
+      // There's no label or commit message info so use only code for now
+      if (!existingContributor.contributions.includes('code')) {
+        existingContributor.contributions.push('code')
+      }
+    } else {
+      contributorsToAdd.push({login: usr.login, contributions: ['code']})
+    }
+  })
+
+  // TODO: Roll onto other contribution categories following https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
+
+  for (const contributor of contributorsToAdd) {
+    if (!contributor.contributions.length) {
+      console.log('Skipping', contributor.login)
+
+      return
+    }
+
+    console.log(
+      `Adding ${chalk.blue(contributor.login)} for ${chalk.underline(
+        contributor.contributions.join('/'),
+      )}`,
+    )
+
+    args._ = ['', contributor.login, contributor.contributions.join(',')]
+
+    /* eslint-disable no-await-in-loop */
+    await addContribution(args)
+  }
 }
 
 function onError(error) {

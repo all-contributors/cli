@@ -45,6 +45,11 @@ function formatLine(contributors) {
 
 function generateContributorsList(options, contributors) {
   return _.flow(
+    _.sortBy(function(contributor) {
+      if (options.contributorsSortAlphabetically) {
+        return contributor.name
+      }
+    }),
     _.map(function formatEveryContributor(contributor) {
       return formatContributor(options, contributor)
     }),

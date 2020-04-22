@@ -35,6 +35,12 @@ const yargv = yargs
   .boolean('commit')
   .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
+  .option('contributorsSortAlphabetically', {
+    type: 'boolean',
+    default: false,
+    description:
+      'Sort the list of contributors alphabetically in the generated list',
+  })
   .default('contributors', [])
   .default('config', defaultRCFile)
   .config('config', configPath => {

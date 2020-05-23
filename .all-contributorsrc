@@ -380,6 +380,26 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "tylerkrupicka",
+      "name": "Tyler Krupicka",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5761061?s=460&v=4",
+      "profile": "https://github.com/tylerkrupicka",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "smoia",
+      "name": "Stefano Moia",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/35300580?v=4",
+      "profile": "https://github.com/smoia",
+      "contributions": [
+        "code"
+      ]
     }
-  ]
+  ],
+  "skipCi": true
 }

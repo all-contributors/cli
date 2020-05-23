@@ -66,9 +66,11 @@ function getContributorsPage(githubUrl, optionalPrivateToken) {
 
       const nextLink = getNextLink(res.headers.link)
       if (nextLink) {
-        return getContributorsPage(nextLink).then(nextContributors => {
-          return contributorsIds.concat(nextContributors)
-        })
+        return getContributorsPage(nextLink, optionalPrivateToken).then(
+          nextContributors => {
+            return contributorsIds.concat(nextContributors)
+          },
+        )
       }
 
       return contributorsIds

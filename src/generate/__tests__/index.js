@@ -60,6 +60,26 @@ test('split contributors into multiples lines when there are too many', () => {
   expect(result).toMatchSnapshot()
 })
 
+test('sorts the list of contributors if contributorsSortAlphabetically=true', () => {
+  const {kentcdodds, bogas04} = contributors
+  const {options, jfmengels, content} = fixtures()
+
+  const resultPreSorted = generate(
+    options,
+    [bogas04, jfmengels, kentcdodds],
+    content,
+  )
+
+  options.contributorsSortAlphabetically = true
+  const resultAutoSorted = generate(
+    options,
+    [jfmengels, kentcdodds, bogas04],
+    content,
+  )
+
+  expect(resultPreSorted).toEqual(resultAutoSorted)
+})
+
 test('not inject anything if there is no tags to inject content in', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()
@@ -143,7 +163,9 @@ test('replace all-contributors badge if present', () => {
     'Badges',
     [
       '[![version](https://img.shields.io/npm/v/all-contributors-cli.svg?style=flat-square)](http://npm.im/all-contributors-cli)',
-      '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)',
+      '<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->\n',
+      '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)\n',
+      '<!-- ALL-CONTRIBUTORS-BADGE:END -->\n',
       '[![version](https://img.shields.io/npm/v/all-contributors-cli.svg?style=flat-square)](http://npm.im/all-contributors-cli)',
     ].join(''),
     '',
@@ -155,7 +177,9 @@ test('replace all-contributors badge if present', () => {
     'Badges',
     [
       '[![version](https://img.shields.io/npm/v/all-contributors-cli.svg?style=flat-square)](http://npm.im/all-contributors-cli)',
-      '[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)',
+      '<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->\n',
+      '[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)\n',
+      '<!-- ALL-CONTRIBUTORS-BADGE:END -->\n',
       '[![version](https://img.shields.io/npm/v/all-contributors-cli.svg?style=flat-square)](http://npm.im/all-contributors-cli)',
     ].join(''),
     '',

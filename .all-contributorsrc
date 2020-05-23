@@ -352,6 +352,54 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dexpota",
+      "name": "Fabrizio",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/7031675?v=4",
+      "profile": "https://www.destro.me",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "MarceloAlves",
+      "name": "Marcelo Alves",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/216782?v=4",
+      "profile": "https://github.com/marceloalves",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "phacks",
+      "name": "Nicolas Goutay",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2587348?v=4",
+      "profile": "https://phacks.dev/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "tylerkrupicka",
+      "name": "Tyler Krupicka",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5761061?s=460&v=4",
+      "profile": "https://github.com/tylerkrupicka",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "smoia",
+      "name": "Stefano Moia",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/35300580?v=4",
+      "profile": "https://github.com/smoia",
+      "contributions": [
+        "code"
+      ]
     }
-  ]
+  ],
+  "skipCi": true
 }

@@ -5,6 +5,11 @@
   "repoType": "github",
   "commit": false,
   "contributorsPerLine": 6,
+  "files": [
+    "README.md"
+  ],
+  "repoHost": "https://github.com",
+  "commitConvention": "angular",
   "contributors": [
     {
       "login": "jfmengels",
@@ -302,10 +307,99 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "cezaraugusto",
+      "name": "Cezar Augusto",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/4672033?v=4",
+      "profile": "https://cezaraugusto.net/",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "JReinhold",
+      "name": "Jeppe Reinhold",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5678122?v=4",
+      "profile": "https://reinhold.is",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "rachelcarmena",
+      "name": "Rachel M. Carmena",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/22792183?v=4",
+      "profile": "https://rachelcarmena.github.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "simon300000",
+      "name": "simon3000",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/12656264?v=4",
+      "profile": "https://github.com/simon300000",
+      "contributions": [
+        "test"
+      ]
+    },
+    {
+      "login": "SnO2WMaN",
+      "name": "SnO₂WMaN",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/15155608?v=4",
+      "profile": "https://sno2wman.dev/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dexpota",
+      "name": "Fabrizio",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/7031675?v=4",
+      "profile": "https://www.destro.me",
+      "contributions": [
+        "bug",
+        "code"
+      ]
+    },
+    {
+      "login": "MarceloAlves",
+      "name": "Marcelo Alves",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/216782?v=4",
+      "profile": "https://github.com/marceloalves",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "phacks",
+      "name": "Nicolas Goutay",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/2587348?v=4",
+      "profile": "https://phacks.dev/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "tylerkrupicka",
+      "name": "Tyler Krupicka",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/5761061?s=460&v=4",
+      "profile": "https://github.com/tylerkrupicka",
+      "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "smoia",
+      "name": "Stefano Moia",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/35300580?v=4",
+      "profile": "https://github.com/smoia",
+      "contributions": [
+        "code"
+      ]
     }
   ],
-  "files": [
-    "README.md"
-  ],
-  "repoHost": "https://github.com"
+  "skipCi": true
 }

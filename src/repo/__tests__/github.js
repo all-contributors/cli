@@ -80,13 +80,24 @@ test('Throw error when non existent username is provided', async () => {
       documentation_url:
         'https://developer.github.com/v3/users/#get-a-single-user',
     })
-  try {
-    await getUserInfo(username)
-  } catch (error) {
-    expect(error.message).toEqual(
-      `Login not found when adding a contributor for username - ${username}.`,
-    )
-  }
+  await expect(getUserInfo(username)).rejects.toThrow(
+    `Login not found when adding a contributor for username - ${username}.`,
+  )
+})
+
+test('Throw error when missing enterprise authentication', async () => {
+  const username = 'notauthenticated'
+  nock('http://github.myhost.com:3000/api/v3')
+    .get(`/users/${username}`)
+    .reply(401, {
+      message: 'Must authenticate to access this API.',
+      documentation_url: 'https://developer.github.com/enterprise/2.17/v3',
+    })
+  await expect(
+    getUserInfo(username, 'http://github.myhost.com:3000'),
+  ).rejects.toThrow(
+    `Missing authentication for GitHub API. Did you set PRIVATE_TOKEN?`,
+  )
 })
 
 test('handle github errors', async () => {
@@ -178,7 +189,7 @@ test('append http when no absolute link is provided', async () => {
 })
 
 test('retrieve user from a different github registry', async () => {
-  nock('http://api.github.myhost.com:3000')
+  nock('http://github.myhost.com:3000/api/v3')
     .get('/users/nodisplayname')
     .reply(200, {
       login: 'nodisplayname',

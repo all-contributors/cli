@@ -1,11 +1,12 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [The problem](#the-problem)
-- [This solution](#this-solution)
-- [Using the all-contributors-cli](#using-the-all-contributors-cli)
-- [Contributors ✨](#contributors-%e2%9c%a8)
-- [LICENSE](#license)
+- [ all-contributors-cli ](#all-contributors-cli)
+  - [The problem](#the-problem)
+  - [This solution](#this-solution)
+  - [Using the all-contributors-cli](#using-the-all-contributors-cli)
+  - [Contributors ✨](#contributors-)
+  - [LICENSE](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -128,7 +129,7 @@ Thanks goes to these wonderful people
   </tr>
   <tr>
     <td align="center"><a href="https://www.destro.me"><img src="https://avatars1.githubusercontent.com/u/7031675?v=4" width="100px;" alt=""/><br /><sub><b>Fabrizio</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Adexpota" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=dexpota" title="Code">💻</a></td>
-    <td align="center"><a href="https://github.com/marceloalves"><img src="https://avatars1.githubusercontent.com/u/216782?v=4" width="100px;" alt=""/><br /><sub><b>Marcelo Alves</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=MarceloAlves" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/marceloalves"><img src="https://avatars1.githubusercontent.com/u/216782?v=4" width="100px;" alt=""/><br /><sub><b>Marcelo Alves</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=MarceloAlves" title="Code">💻</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=MarceloAlves" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://phacks.dev/"><img src="https://avatars1.githubusercontent.com/u/2587348?v=4" width="100px;" alt=""/><br /><sub><b>Nicolas Goutay</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=phacks" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/tylerkrupicka"><img src="https://avatars1.githubusercontent.com/u/5761061?s=460&v=4" width="100px;" alt=""/><br /><sub><b>Tyler Krupicka</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=tylerkrupicka" title="Code">💻</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=tylerkrupicka" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/smoia"><img src="https://avatars3.githubusercontent.com/u/35300580?v=4" width="100px;" alt=""/><br /><sub><b>Stefano Moia</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=smoia" title="Code">💻</a></td>
@@ -137,6 +138,7 @@ Thanks goes to these wonderful people
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the

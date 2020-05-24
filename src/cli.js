@@ -107,7 +107,7 @@ async function addContribution(argv) {
   let data
 
   try {
-    data = updateContributors(argv, username, contributions)
+    data = await updateContributors(argv, username, contributions)
   } catch (error) {
     return console.error('Contributor Update fail:', error)
   }

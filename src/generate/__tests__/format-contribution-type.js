@@ -50,6 +50,15 @@ test('return link to issues', () => {
   expect(formatContributionType(options, contributor, 'bug')).toBe(expected)
 })
 
+test('return link to reviews', () => {
+  const contributor = contributors.kentcdodds
+  const {options} = fixtures()
+  const expected =
+    '<a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>'
+
+  expect(formatContributionType(options, contributor, 'review')).toBe(expected)
+})
+
 test('make any symbol into a link if contribution is an object', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()

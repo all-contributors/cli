@@ -5,10 +5,6 @@ const path = require('path')
 const yargs = require('yargs')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
-const didYouMean = require('didyoumean')
-
-// Setting edit length to be 60% of the input string's length
-didYouMean.threshold = 0.6
 
 const init = require('./init')
 const generate = require('./generate')
@@ -26,6 +22,7 @@ const yargv = yargs
   .alias('h', 'help')
   .alias('v', 'version')
   .version()
+  .recommendCommands()
   .command('generate', 'Generate the list of contributors')
   .usage('Usage: $0 generate')
   .command('add', 'add a new contributor')
@@ -40,6 +37,12 @@ const yargv = yargs
   .boolean('commit')
   .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
+  .option('contributorsSortAlphabetically', {
+    type: 'boolean',
+    default: false,
+    description:
+      'Sort the list of contributors alphabetically in the generated list',
+  })
   .default('contributors', [])
   .default('config', defaultRCFile)
   .config('config', configPath => {
@@ -57,7 +60,6 @@ function onError(error) {
     console.error(error.message)
     process.exit(1)
   }
-
   process.exit(0)
 }
 
@@ -100,7 +102,7 @@ async function addContribution(argv) {
     '$0': '../all-contributors-cli/src/cli.js'
   }
   */
-  const username = argv._[1]
+  const username = argv._[1] === undefined ? undefined : String(argv._[1])
   const contributions = argv._[2]
 
   // Add or update contributor in the config file
@@ -332,7 +334,6 @@ promptForCommand(yargv)
       case 'fetch':
         return fetchContributors(yargv)
       default:
-        suggestCommands(command)
         throw new Error(`Unknown command ${command}`)
     }
   })

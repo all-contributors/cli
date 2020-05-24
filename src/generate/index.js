@@ -45,6 +45,11 @@ function formatLine(contributors) {
 
 function generateContributorsList(options, contributors) {
   return _.flow(
+    _.sortBy(contributor => {
+      if (options.contributorsSortAlphabetically) {
+        return contributor.name
+      }
+    }),
     _.map(function formatEveryContributor(contributor) {
       return formatContributor(options, contributor)
     }),
@@ -81,7 +86,9 @@ function replaceBadge(newContent) {
     }
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
+      '\n',
       newContent,
+      '\n',
       previousContent.slice(startOfClosingTagIndex),
     ].join('')
   }

@@ -52,19 +52,27 @@ const yargv = yargs
     }
   }).argv
 
+function onError(error) {
+  if (error) {
+    console.error(error.message)
+    process.exit(1)
+  }
+
+  process.exit(0)
+}
+
 function suggestCommands(cmd) {
   const availableCommands = ['generate', 'add', 'init', 'check']
   const suggestion = didYouMean(cmd, availableCommands)
 
-  if (suggestion) {
-    console.log(chalk.bold(`Did you mean ${suggestion}`))
-  }
+  if (suggestion) console.log(chalk.bold(`Did you mean ${suggestion}`))
 }
 
 function startGeneration(argv) {
   return Promise.all(
     argv.files.map(file => {
       const filePath = path.join(cwd, file)
+
       return util.markdown.read(filePath).then(fileContent => {
         const newFileContent = generate(argv, argv.contributors, fileContent)
         return util.markdown.write(filePath, newFileContent)
@@ -73,7 +81,7 @@ function startGeneration(argv) {
   )
 }
 
-function addContribution(argv) {
+async function addContribution(argv) {
   /* Example: (for clarity & debugging purposes)
   {
     _: [ 'add' ],
@@ -94,76 +102,79 @@ function addContribution(argv) {
   */
   const username = argv._[1]
   const contributions = argv._[2]
+
   // Add or update contributor in the config file
-  return updateContributors(argv, username, contributions).then(
-    data => {
-      argv.contributors = data.contributors
-      /* Example
-     [ { login: 'Berkmann18',
-     name: 'Maximilian Berkmann',
-     avatar_url: 'https://avatars0.githubusercontent.com/u/8260834?v=4',
-     profile: 'http://maxcubing.wordpress.com',
-     contributions: [ 'code', 'ideas' ] },
-     { already in argv.contributors } ]
-    */
-      return startGeneration(argv).then(
-        () => {
-          if (argv.commit) {
-            return util.git.commit(argv, data)
-          }
-        },
-        err => console.error('Generation fail:', err),
-      )
-    },
-    err => console.error('Contributor Update fail:', err),
-  )
+  let data
+
+  try {
+    data = updateContributors(argv, username, contributions)
+  } catch (error) {
+    return console.error('Contributor Update fail:', error)
+  }
+
+  argv.contributors = data.contributors
+
+  /* Example
+   [ { login: 'Berkmann18',
+   name: 'Maximilian Berkmann',
+   avatar_url: 'https://avatars0.githubusercontent.com/u/8260834?v=4',
+   profile: 'http://maxcubing.wordpress.com',
+   contributions: [ 'code', 'ideas' ] },
+   { already in argv.contributors } ]
+  */
+
+  try {
+    await startGeneration(argv)
+
+    return argv.commit ? util.git.commit(argv, data) : null
+  } catch (error) {
+    console.error('Generation fail:', error)
+  }
 }
 
-function checkContributors(argv) {
+async function checkContributors(argv) {
   const configData = util.configFile.readConfig(argv.config)
 
-  return repo
-    .getContributors(
-      configData.projectOwner,
-      configData.projectName,
-      configData.repoType,
-      configData.repoHost,
+  const repoContributors = await repo.getContributors(
+    configData.projectOwner,
+    configData.projectName,
+    configData.repoType,
+    configData.repoHost,
+  )
+
+  const checkKey = repo.getCheckKey(configData.repoType)
+  const knownContributions = configData.contributors.reduce((obj, item) => {
+    obj[item[checkKey]] = item.contributions
+    return obj
+  }, {})
+  const knownContributors = configData.contributors.map(
+    contributor => contributor[checkKey],
+  )
+
+  const missingInConfig = repoContributors.filter(
+    key => !knownContributors.includes(key),
+  )
+  const missingFromRepo = knownContributors.filter(key => {
+    return (
+      !repoContributors.includes(key) &&
+      (knownContributions[key].includes('code') ||
+        knownContributions[key].includes('test'))
     )
-    .then(repoContributors => {
-      const checkKey = repo.getCheckKey(configData.repoType)
-      const knownContributions = configData.contributors.reduce((obj, item) => {
-        obj[item[checkKey]] = item.contributions
-        return obj
-      }, {})
-      const knownContributors = configData.contributors.map(
-        contributor => contributor[checkKey],
-      )
+  })
 
-      const missingInConfig = repoContributors.filter(
-        key => !knownContributors.includes(key),
-      )
-      const missingFromRepo = knownContributors.filter(key => {
-        return (
-          !repoContributors.includes(key) &&
-          (knownContributions[key].includes('code') ||
-            knownContributions[key].includes('test'))
-        )
-      })
+  if (missingInConfig.length) {
+    process.stdout.write(
+      chalk.bold('Missing contributors in .all-contributorsrc:\n'),
+    )
+    process.stdout.write(`    ${missingInConfig.join(', ')}\n`)
+  }
 
-      if (missingInConfig.length) {
-        process.stdout.write(
-          chalk.bold('Missing contributors in .all-contributorsrc:\n'),
-        )
-        process.stdout.write(`    ${missingInConfig.join(', ')}\n`)
-      }
-
-      if (missingFromRepo.length) {
-        process.stdout.write(
-          chalk.bold('Unknown contributors found in .all-contributorsrc:\n'),
-        )
-        process.stdout.write(`${missingFromRepo.join(', ')}\n`)
-      }
-    })
+  if (missingFromRepo.length) {
+    process.stdout.write(
+      chalk.bold('Unknown contributors found in .all-contributorsrc:\n'),
+    )
+    process.stdout.write(`${missingFromRepo.join(', ')}\n`)
+  }
 }
 
 async function fetchContributors(argv) {
@@ -190,7 +201,9 @@ async function fetchContributors(argv) {
     }
 
     usr.labels.forEach(lbl => {
-      const guessedCategory = learner.classify(lbl).find(c => c && c !== 'null')
+      const guessedCategory = learner
+        .classify(lbl)
+        .find(ctr => ctr && ctr !== 'null')
 
       if (!guessedCategory) {
         console.warn(
@@ -212,7 +225,7 @@ async function fetchContributors(argv) {
     })
 
     const existingContributor = contributorsToAdd.find(
-      c => c.login === usr.login,
+      ctr => ctr.login === usr.login,
     )
 
     if (existingContributor) {
@@ -224,7 +237,7 @@ async function fetchContributors(argv) {
 
   commitAuthors.forEach(usr => {
     const existingContributor = contributorsToAdd.find(
-      c => c.login === usr.login,
+      ctr => ctr.login === usr.login,
     )
 
     if (existingContributor) {
@@ -243,31 +256,34 @@ async function fetchContributors(argv) {
     if (!contributor.contributions.length) {
       console.log('Skipping', contributor.login)
 
-      return
+      continue
     }
+
+    // Format contributor contributions
+    const contributions = contributor.contributions.join('/')
 
     console.log(
       `Adding ${chalk.blue(contributor.login)} for ${chalk.underline(
-        contributor.contributions.join('/'),
+        contributions,
       )}`,
     )
 
     args._ = ['', contributor.login, contributor.contributions.join(',')]
 
-    /* eslint-disable no-await-in-loop */
-    await addContribution(args)
+    try {
+      /* eslint-disable no-await-in-loop */
+      await addContribution(args)
+    } catch (error) {
+      console.error(
+        `Adding ${chalk.blue(contributor.login)} for ${chalk.underline(
+          contributions,
+        )} Failed: ${JSON.stringify(error)}`,
+      )
+    }
   }
 }
 
-function onError(error) {
-  if (error) {
-    console.error(error.message)
-    process.exit(1)
-  }
-  process.exit(0)
-}
-
-function promptForCommand(argv) {
+async function promptForCommand(argv) {
   const questions = [
     {
       type: 'list',
@@ -297,9 +313,9 @@ function promptForCommand(argv) {
     },
   ]
 
-  return inquirer.prompt(questions).then(answers => {
-    return answers.command || argv._[0]
-  })
+  const answers = await inquirer.prompt(questions)
+
+  return answers.command || argv._[0]
 }
 
 promptForCommand(yargv)

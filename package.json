@@ -49,7 +49,6 @@
     "clui": "^0.3.6",
     "didyoumean": "^1.2.1",
     "name-your-contributors": "^3.8.3",
-    "inquirer": "^6.2.1",
     "json-fixer": "^1.4.1",
     "inquirer": "^7.0.4",
     "lodash": "^4.11.2",

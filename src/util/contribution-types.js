@@ -7,6 +7,10 @@ const defaultTypes = function(repoType) {
       symbol: '️️️️♿️',
       description: 'Accessibility',
     },
+    audio: {
+      symbol: '🔊',
+      description: 'Audio',
+    },
     blog: {
       symbol: '📝',
       description: 'Blogposts',

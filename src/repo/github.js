@@ -1,6 +1,7 @@
 const url = require('url')
 const pify = require('pify')
 const request = pify(require('request'))
+const { parseHttpUrl, isValidHttpUrl } = require('../util/url')
 
 /**
  * Get the host based on public or enterprise GitHub.
@@ -93,7 +94,7 @@ const getUserInfo = function(username, hostname, optionalPrivateToken) {
     .then(res => {
       const body = JSON.parse(res.body)
 
-      let profile = body.blog || body.html_url
+      let profile = isValidHttpUrl(body.blog) ? body.blog : body.html_url
 
       // Check for authentication required
       if (
@@ -112,7 +113,7 @@ const getUserInfo = function(username, hostname, optionalPrivateToken) {
         )
       }
 
-      profile = profile.startsWith('http') ? profile : `http://${profile}`
+      profile = parseHttpUrl(profile)
 
       return {
         login: body.login,

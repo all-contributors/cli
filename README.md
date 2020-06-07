@@ -134,14 +134,16 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://anandchowdhary.com/?utm_source=github&utm_campaign=about-link"><img src="https://avatars3.githubusercontent.com/u/2841780?v=4" width="100px;" alt=""/><br /><sub><b>Anand Chowdhary</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=AnandChowdhary" title="Tests">⚠️</a> <a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3AAnandChowdhary" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=AnandChowdhary" title="Code">💻</a></td>
     <td align="center"><a href="https://phacks.dev/"><img src="https://avatars1.githubusercontent.com/u/2587348?v=4" width="100px;" alt=""/><br /><sub><b>Nicolas Goutay</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=phacks" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/tylerkrupicka"><img src="https://avatars1.githubusercontent.com/u/5761061?s=460&v=4" width="100px;" alt=""/><br /><sub><b>Tyler Krupicka</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=tylerkrupicka" title="Code">💻</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=tylerkrupicka" title="Tests">⚠️</a></td>
+  </tr>
+  <tr>
     <td align="center"><a href="https://github.com/smoia"><img src="https://avatars3.githubusercontent.com/u/35300580?v=4" width="100px;" alt=""/><br /><sub><b>Stefano Moia</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=smoia" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/ilai-deutel"><img src="https://avatars0.githubusercontent.com/u/10098207?v=4" width="100px;" alt=""/><br /><sub><b>Ilaï Deutel</b></sub></a><br /><a href="#platform-ilai-deutel" title="Packaging/porting to new platform">📦</a></td>
+    <td align="center"><a href="https://github.com/k3nsei"><img src="https://avatars2.githubusercontent.com/u/190422?v=4" width="100px;" alt=""/><br /><sub><b>Piotr Stępniewski</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Ak3nsei" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=k3nsei" title="Code">💻</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=k3nsei" title="Tests">⚠️</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the

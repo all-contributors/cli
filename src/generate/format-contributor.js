@@ -2,7 +2,7 @@ const _ = require('lodash/fp')
 const formatContributionType = require('./format-contribution-type')
 
 const avatarTemplate = _.template(
-  '<img src="<%= contributor.avatar_url %>" width="<%= options.imageSize %>px;" alt=""/>',
+  '<img src="<%= contributor.avatar_url %>?s=<%= options.imageSize %>" width="<%= options.imageSize %>px;" alt=""/>',
 )
 const avatarBlockTemplate = _.template(
   '<a href="<%= contributor.profile %>"><%= avatar %><br /><sub><b><%= name %></b></sub></a>',

@@ -465,6 +465,15 @@
       "contributions": [
         "review"
       ]
+    },
+    {
+      "login": "pavelloz",
+      "name": "Paweł Kowalski",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/546845?v=4",
+      "profile": "https://github.com/pavelloz",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "skipCi": true

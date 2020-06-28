@@ -141,12 +141,12 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://github.com/k3nsei"><img src="https://avatars2.githubusercontent.com/u/190422?v=4" width="100px;" alt=""/><br /><sub><b>Piotr Stępniewski</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Ak3nsei" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=k3nsei" title="Code">💻</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=k3nsei" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://dev.to/gr2m"><img src="https://avatars3.githubusercontent.com/u/39992?v=4" width="100px;" alt=""/><br /><sub><b>Gregor Martynus</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Agr2m" title="Reviewed Pull Requests">👀</a> <a href="#question-gr2m" title="Answering Questions">💬</a></td>
     <td align="center"><a href="https://sinchang.me/"><img src="https://avatars0.githubusercontent.com/u/3297859?v=4" width="100px;" alt=""/><br /><sub><b>Jeff Wen</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Asinchang" title="Reviewed Pull Requests">👀</a></td>
+    <td align="center"><a href="https://github.com/pavelloz"><img src="https://avatars1.githubusercontent.com/u/546845?v=4" width="100px;" alt=""/><br /><sub><b>Paweł Kowalski</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=pavelloz" title="Code">💻</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-enable -->
 <!-- prettier-ignore-end -->
-
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the

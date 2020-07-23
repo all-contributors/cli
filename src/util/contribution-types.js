@@ -1,7 +1,7 @@
 const _ = require('lodash/fp')
 const repo = require('../repo')
 
-const defaultTypes = function (repoType) {
+const defaultTypes = function(repoType) {
   return {
     a11y: {
       symbol: '️️️️♿️',
@@ -135,6 +135,6 @@ const defaultTypes = function (repoType) {
   }
 }
 
-module.exports = function (options) {
+module.exports = function(options) {
   return _.assign(defaultTypes(options.repoType), options.types)
 }

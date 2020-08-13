@@ -57,7 +57,7 @@ function getContributorsPage(githubUrl, optionalPrivateToken) {
     }
 
     return res.json().then(body => {
-      if (res.statusCode >= 400 || !res.ok) {
+      if (res.status >= 400 || !res.ok) {
         throw new Error(body.message)
       }
       const contributorsIds = body.map(contributor => contributor.login)
@@ -76,7 +76,7 @@ function getContributorsPage(githubUrl, optionalPrivateToken) {
   })
 }
 
-const getUserInfo = function(username, hostname, optionalPrivateToken) {
+const getUserInfo = function (username, hostname, optionalPrivateToken) {
   if (!username) {
     throw new Error(
       `No login when adding a contributor. Please specify a username.`,
@@ -115,11 +115,11 @@ const getUserInfo = function(username, hostname, optionalPrivateToken) {
         avatar_url: body.avatar_url,
         profile,
       }
-    })
+    }),
   )
 }
 
-const getContributors = function(owner, name, hostname, optionalPrivateToken) {
+const getContributors = function (owner, name, hostname, optionalPrivateToken) {
   const root = getApiHost(hostname)
   const contributorsUrl = `${root}/repos/${owner}/${name}/contributors?per_page=100`
   return getContributorsPage(contributorsUrl, optionalPrivateToken)

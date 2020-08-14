@@ -8,7 +8,7 @@ const addPrivateToken = (url, privateToken = '') => {
     .replace('&', '?')
 }
 
-const getUserInfo = function(username, hostname, privateToken) {
+const getUserInfo = function (username, hostname, privateToken) {
   /* eslint-disable complexity */
   if (!hostname) {
     hostname = 'https://gitlab.com'
@@ -46,11 +46,11 @@ const getUserInfo = function(username, hostname, privateToken) {
           ? user.web_url
           : `http://${user.web_url}`,
       }
-    })
+    }),
   )
 }
 
-const getContributors = function(owner, name, hostname, privateToken) {
+const getContributors = function (owner, name, hostname, privateToken) {
   if (!hostname) {
     hostname = 'https://gitlab.com'
   }
@@ -94,7 +94,7 @@ const getContributors = function(owner, name, hostname, privateToken) {
           return contributors.map(item => item.name)
         })
       })
-    })
+    }),
   )
 }
 

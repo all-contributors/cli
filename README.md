@@ -143,6 +143,9 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://sinchang.me/"><img src="https://avatars0.githubusercontent.com/u/3297859?v=4" width="100px;" alt=""/><br /><sub><b>Jeff Wen</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Asinchang" title="Reviewed Pull Requests">👀</a></td>
     <td align="center"><a href="https://github.com/pavelloz"><img src="https://avatars1.githubusercontent.com/u/546845?v=4" width="100px;" alt=""/><br /><sub><b>Paweł Kowalski</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=pavelloz" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://dlaa.me/"><img src="https://avatars1.githubusercontent.com/u/1828270?v=4" width="100px;" alt=""/><br /><sub><b>David Anson</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3ADavidAnson" title="Bug reports">🐛</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-enable -->

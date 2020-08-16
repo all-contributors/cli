@@ -53,7 +53,7 @@ function getContributorsPage(githubUrl, optionalPrivateToken) {
     headers: getFetchHeaders(optionalPrivateToken),
   }).then(res => {
     if (res.status === 404 || res.status >= 500) {
-      throw new Error('No contributors found on the GitLab repository')
+      throw new Error('No contributors found on the GitHub repository')
     }
 
     return res.json().then(body => {

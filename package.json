@@ -49,8 +49,8 @@
     "inquirer": "^7.0.4",
     "json-fixer": "^1.5.1",
     "lodash": "^4.11.2",
+    "node-fetch": "^2.6.0",
     "pify": "^5.0.0",
-    "request": "^2.72.0",
     "yargs": "^15.0.1"
   },
   "devDependencies": {

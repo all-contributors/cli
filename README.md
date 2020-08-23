@@ -149,6 +149,9 @@ Thanks goes to these wonderful people
   <tr>
     <td align="center"><a href="https://dlaa.me/"><img src="https://avatars1.githubusercontent.com/u/1828270?v=4" width="100px;" alt=""/><br /><sub><b>David Anson</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3ADavidAnson" title="Bug reports">🐛</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://www.linkedin.com/in/mloning/"><img src="https://avatars3.githubusercontent.com/u/21020482?v=4" width="100px;" alt=""/><br /><sub><b>Markus Löning</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=mloning" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->

@@ -143,6 +143,7 @@ test('inject nothing if there are no contributors', () => {
     '<!-- markdownlint-disable -->',
     '<!-- markdownlint-restore -->',
     '<!-- prettier-ignore-end -->',
+    '',
     '<!-- ALL-CONTRIBUTORS-LIST:END -->',
     '',
     'Thanks a lot everyone!',

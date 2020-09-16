@@ -501,6 +501,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "melink14",
+      "name": "Erek Speed",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1176550?v=4",
+      "profile": "https://erekspeed.com",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "skipCi": true

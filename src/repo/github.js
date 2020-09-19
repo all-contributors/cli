@@ -102,9 +102,11 @@ const getUserInfo = function (username, hostname, optionalPrivateToken) {
 
       // Github throwing specific errors as 200...
       if (!profile && body.message) {
-        throw new Error(
-          `Login not found when adding a contributor for username - ${username}.`,
-        )
+        if (body.message.toLowerCase().includes('api rate limit exceeded')) {
+          throw new Error(body.message)
+        } else {
+          throw new Error(`The username ${username} doesn't exist on github.`)
+        }
       }
 
       profile = parseHttpUrl(profile)

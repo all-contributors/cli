@@ -77,7 +77,7 @@ test('Throw error when non existent username is provided', async () => {
       'https://developer.github.com/v3/users/#get-a-single-user',
   })
   await expect(getUserInfo(username)).rejects.toThrow(
-    `The username ${username} doesn't exist on github.`,
+    `The username ${username} doesn't exist on GitHub.`,
   )
 })
 

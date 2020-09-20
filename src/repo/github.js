@@ -105,7 +105,7 @@ const getUserInfo = function (username, hostname, optionalPrivateToken) {
         if (body.message.toLowerCase().includes('api rate limit exceeded')) {
           throw new Error(body.message)
         } else {
-          throw new Error(`The username ${username} doesn't exist on github.`)
+          throw new Error(`The username ${username} doesn't exist on GitHub.`)
         }
       }
 

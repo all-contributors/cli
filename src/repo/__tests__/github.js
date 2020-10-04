@@ -96,7 +96,7 @@ test('Throw error when missing enterprise authentication', async () => {
   )
 })
 
-test('handle API rate github errors', async () => {
+test('handle API rate GitHub errors', async () => {
   const githubErrorMessage =
     "API rate limit exceeded for 0.0.0.0. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details."
   nock('https://api.github.com').get('/users/nodisplayname').reply(200, {
@@ -177,7 +177,7 @@ test('append http when no absolute link is provided', async () => {
   expect(info.profile).toBe('http://www.github.com/nodisplayname')
 })
 
-test('retrieve user from a different github registry', async () => {
+test('retrieve user from a different GitHub registry', async () => {
   nock('http://github.myhost.com:3000/api/v3')
     .get('/users/nodisplayname')
     .reply(200, {

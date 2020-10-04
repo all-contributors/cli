@@ -66,6 +66,7 @@ function startGeneration(argv) {
 }
 
 function addContribution(argv) {
+  util.configFile.readConfig(argv.config) // ensure the config file exists
   const username = argv._[1] === undefined ? undefined : String(argv._[1])
   const contributions = argv._[2]
   // Add or update contributor in the config file

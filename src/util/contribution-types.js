@@ -74,6 +74,10 @@ const defaultTypes = function(repoType) {
       symbol: '🚧',
       description: 'Maintenance',
     },
+    mentoring: {
+      symbol: '🧑‍🏫',
+      description: 'Mentoring',
+    },
     platform: {
       symbol: '📦',
       description: 'Packaging/porting to new platform',

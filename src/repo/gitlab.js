@@ -1,5 +1,4 @@
-const pify = require('pify')
-const request = pify(require('request'))
+const fetch = require('node-fetch')
 
 const addPrivateToken = (url, privateToken = '') => {
   if (privateToken === '') return url
@@ -9,25 +8,24 @@ const addPrivateToken = (url, privateToken = '') => {
     .replace('&', '?')
 }
 
-const getUserInfo = function(username, hostname, privateToken) {
+const getUserInfo = function (username, hostname, privateToken) {
   /* eslint-disable complexity */
   if (!hostname) {
     hostname = 'https://gitlab.com'
   }
 
-  return request
-    .get({
-      url: addPrivateToken(
-        `${hostname}/api/v4/users?username=${username}`,
-        privateToken,
-      ),
+  return fetch(
+    addPrivateToken(
+      `${hostname}/api/v4/users?username=${username}`,
+      privateToken,
+    ),
+    {
       headers: {
-        'User-Agent': 'request',
+        'User-Agent': 'node-fetch',
       },
-    })
-    .then(res => {
-      const body = JSON.parse(res.body)
-
+    },
+  ).then(res =>
+    res.json().then(body => {
       // Gitlab returns an array of users. If it is empty, it means the username provided does not exist
       if (!body || body.length === 0) {
         throw new Error(`User ${username} not found`)
@@ -48,27 +46,20 @@ const getUserInfo = function(username, hostname, privateToken) {
           ? user.web_url
           : `http://${user.web_url}`,
       }
-    })
+    }),
+  )
 }
 
-const getContributors = function(owner, name, hostname, privateToken) {
+const getContributors = function (owner, name, hostname, privateToken) {
   if (!hostname) {
     hostname = 'https://gitlab.com'
   }
 
-  return request
-    .get({
-      url: addPrivateToken(
-        `${hostname}/api/v4/projects?search=${name}`,
-        privateToken,
-      ),
-      headers: {
-        'User-Agent': 'request',
-      },
-    })
-    .then(res => {
-      const projects = JSON.parse(res.body)
-
+  return fetch(
+    addPrivateToken(`${hostname}/api/v4/projects?search=${name}`, privateToken),
+    {headers: {'User-Agent': 'node-fetch'}},
+  ).then(res =>
+    res.json().then(projects => {
       // Gitlab returns an array of users. If it is empty, it means the username provided does not exist
       if (!projects || projects.length === 0) {
         throw new Error(`Project ${owner}/${name} not found`)
@@ -86,27 +77,25 @@ const getContributors = function(owner, name, hostname, privateToken) {
         throw new Error(`Project ${owner}/${name} not found`)
       }
 
-      return request
-        .get({
-          url: addPrivateToken(
-            `${hostname}/api/v4/projects/${project.id}/repository/contributors`,
-            privateToken,
-          ),
-          headers: {
-            'User-Agent': 'request',
-          },
-        })
-        .then(newRes => {
-          const contributors = JSON.parse(newRes.body)
-          if (newRes.statusCode >= 400) {
-            if (newRes.statusCode === 404) {
-              throw new Error('No contributors found on the GitLab repository')
-            }
+      return fetch(
+        addPrivateToken(
+          `${hostname}/api/v4/projects/${project.id}/repository/contributors`,
+          privateToken,
+        ),
+        {headers: {'User-Agent': 'node-fetch'}},
+      ).then(newRes => {
+        if (newRes.status === 404 || newRes.status >= 500) {
+          throw new Error('No contributors found on the GitLab repository')
+        }
+        return newRes.json().then(contributors => {
+          if (newRes.status >= 400 || !newRes.ok) {
             throw new Error(contributors.message)
           }
           return contributors.map(item => item.name)
         })
-    })
+      })
+    }),
+  )
 }
 
 module.exports = {

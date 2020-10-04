@@ -1,7 +1,6 @@
 const url = require('url')
-const pify = require('pify')
-const request = pify(require('request'))
-const { parseHttpUrl, isValidHttpUrl } = require('../util/url')
+const fetch = require('node-fetch')
+const {parseHttpUrl, isValidHttpUrl} = require('../util/url')
 
 /**
  * Get the host based on public or enterprise GitHub.
@@ -23,16 +22,16 @@ function getApiHost(hostname) {
   return hostname.replace(/:\/\//, '://api.')
 }
 
-function getRequestHeaders(optionalPrivateToken = '') {
-  const requestHeaders = {
-    'User-Agent': 'request',
+function getFetchHeaders(optionalPrivateToken = '') {
+  const fetchHeaders = {
+    'User-Agent': 'node-fetch',
   }
 
   if (optionalPrivateToken && optionalPrivateToken.length > 0) {
-    requestHeaders.Authorization = `token ${optionalPrivateToken}`
+    fetchHeaders.Authorization = `token ${optionalPrivateToken}`
   }
 
-  return requestHeaders
+  return fetchHeaders
 }
 
 function getNextLink(link) {
@@ -50,22 +49,20 @@ function getNextLink(link) {
 }
 
 function getContributorsPage(githubUrl, optionalPrivateToken) {
-  return request
-    .get({
-      url: githubUrl,
-      headers: getRequestHeaders(optionalPrivateToken),
-    })
-    .then(res => {
-      const body = JSON.parse(res.body)
-      if (res.statusCode >= 400) {
-        if (res.statusCode === 404) {
-          throw new Error('No contributors found on the GitHub repository')
-        }
+  return fetch(githubUrl, {
+    headers: getFetchHeaders(optionalPrivateToken),
+  }).then(res => {
+    if (res.status === 404 || res.status >= 500) {
+      throw new Error('No contributors found on the GitHub repository')
+    }
+
+    return res.json().then(body => {
+      if (res.status >= 400 || !res.ok) {
         throw new Error(body.message)
       }
       const contributorsIds = body.map(contributor => contributor.login)
 
-      const nextLink = getNextLink(res.headers.link)
+      const nextLink = getNextLink(res.headers.get('link'))
       if (nextLink) {
         return getContributorsPage(nextLink, optionalPrivateToken).then(
           nextContributors => {
@@ -76,9 +73,10 @@ function getContributorsPage(githubUrl, optionalPrivateToken) {
 
       return contributorsIds
     })
+  })
 }
 
-const getUserInfo = function(username, hostname, optionalPrivateToken) {
+const getUserInfo = function (username, hostname, optionalPrivateToken) {
   if (!username) {
     throw new Error(
       `No login when adding a contributor. Please specify a username.`,
@@ -86,20 +84,16 @@ const getUserInfo = function(username, hostname, optionalPrivateToken) {
   }
 
   const root = getApiHost(hostname)
-  return request
-    .get({
-      url: `${root}/users/${username}`,
-      headers: getRequestHeaders(optionalPrivateToken),
-    })
-    .then(res => {
-      const body = JSON.parse(res.body)
-
+  return fetch(`${root}/users/${username}`, {
+    headers: getFetchHeaders(optionalPrivateToken),
+  }).then(res =>
+    res.json().then(body => {
       let profile = isValidHttpUrl(body.blog) ? body.blog : body.html_url
 
       // Check for authentication required
       if (
         (!profile && body.message.includes('Must authenticate')) ||
-        res.statusCode === 401
+        res.status === 401
       ) {
         throw new Error(
           `Missing authentication for GitHub API. Did you set PRIVATE_TOKEN?`,
@@ -108,9 +102,11 @@ const getUserInfo = function(username, hostname, optionalPrivateToken) {
 
       // Github throwing specific errors as 200...
       if (!profile && body.message) {
-        throw new Error(
-          `Login not found when adding a contributor for username - ${username}.`,
-        )
+        if (body.message.toLowerCase().includes('api rate limit exceeded')) {
+          throw new Error(body.message)
+        } else {
+          throw new Error(`The username ${username} doesn't exist on GitHub.`)
+        }
       }
 
       profile = parseHttpUrl(profile)
@@ -121,10 +117,11 @@ const getUserInfo = function(username, hostname, optionalPrivateToken) {
         avatar_url: body.avatar_url,
         profile,
       }
-    })
+    }),
+  )
 }
 
-const getContributors = function(owner, name, hostname, optionalPrivateToken) {
+const getContributors = function (owner, name, hostname, optionalPrivateToken) {
   const root = getApiHost(hostname)
   const contributorsUrl = `${root}/repos/${owner}/${name}/contributors?per_page=100`
   return getContributorsPage(contributorsUrl, optionalPrivateToken)

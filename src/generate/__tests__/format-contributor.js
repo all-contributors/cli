@@ -68,7 +68,7 @@ test('format contributor with pipes in their name', () => {
   expect(formatContributor(options, contributor)).toBe(expected)
 })
 
-test('format contributor with no github account', () => {
+test('format contributor with no GitHub account', () => {
   const contributor = contributors.nologin
   const {options} = fixtures()
 

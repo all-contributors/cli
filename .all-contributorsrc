@@ -437,6 +437,15 @@
       ]
     },
     {
+      "login": "jdalrymple",
+      "name": "Justin Dalrymple",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3743662?v=4",
+      "profile": "https://github.com/jdalrymple",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "k3nsei",
       "name": "Piotr Stępniewski",
       "avatar_url": "https://avatars2.githubusercontent.com/u/190422?v=4",
@@ -503,6 +512,15 @@
       ]
     },
     {
+      "login": "melink14",
+      "name": "Erek Speed",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1176550?v=4",
+      "profile": "https://erekspeed.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "shairez",
       "name": "Shai Reznik",
       "avatar_url": "https://avatars1.githubusercontent.com/u/1430726?v=4",
@@ -519,6 +537,7 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/3101914?v=4",
       "profile": "https://darekkay.com",
       "contributions": [
+        "code",
         "test"
       ]
     }

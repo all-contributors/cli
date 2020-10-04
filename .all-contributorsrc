@@ -535,9 +535,10 @@
       "login": "darekkay",
       "name": "Darek Kay",
       "avatar_url": "https://avatars0.githubusercontent.com/u/3101914?v=4",
-      "profile": "https://darekkay.com/",
+      "profile": "https://darekkay.com",
       "contributions": [
-        "code"
+        "code",
+        "test"
       ]
     }
   ],

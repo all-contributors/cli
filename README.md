@@ -148,6 +148,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://dlaa.me/"><img src="https://avatars1.githubusercontent.com/u/1828270?v=4" width="100px;" alt=""/><br /><sub><b>David Anson</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3ADavidAnson" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://favware.tech/"><img src="https://avatars3.githubusercontent.com/u/4019718?v=4" width="100px;" alt=""/><br /><sub><b>Jeroen Claassens</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=Favna" title="Code">💻</a></td>
     <td align="center"><a href="http://www.hirez.io"><img src="https://avatars1.githubusercontent.com/u/1430726?v=4" width="100px;" alt=""/><br /><sub><b>Shai Reznik</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Ashairez" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=shairez" title="Code">💻</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=shairez" title="Tests">⚠️</a></td>
+    <td align="center"><a href="https://darekkay.com"><img src="https://avatars0.githubusercontent.com/u/3101914?v=4" width="100px;" alt=""/><br /><sub><b>Darek Kay</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=darekkay" title="Tests">⚠️</a></td>
   </tr>
 </table>
 

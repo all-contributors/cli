@@ -99,6 +99,10 @@ const defaultTypes = function(repoType) {
       description: 'Reviewed Pull Requests',
       link: repo.getLinkToReviews(repoType),
     },
+    question: {
+      symbol: ':microscope:',
+      description: 'Research',
+    },
     security: {
       symbol: '🛡️',
       description: 'Security',

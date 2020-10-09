@@ -95,7 +95,7 @@ const defaultTypes = function(repoType) {
       description: 'Answering Questions',
     },
     research: {
-      symbol: ':microscope:',
+      symbol: '🔬',
       description: 'Research',
     },
     review: {

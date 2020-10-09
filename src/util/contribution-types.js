@@ -94,6 +94,10 @@ const defaultTypes = function(repoType) {
       symbol: '💬',
       description: 'Answering Questions',
     },
+    research: {
+      symbol: '🔬',
+      description: 'Research',
+    },
     review: {
       symbol: '👀',
       description: 'Reviewed Pull Requests',

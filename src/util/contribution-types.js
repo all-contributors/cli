@@ -7,6 +7,10 @@ const defaultTypes = function(repoType) {
       symbol: '️️️️♿️',
       description: 'Accessibility',
     },
+    audio: {
+      symbol: '🔊',
+      description: 'Audio',
+    },
     blog: {
       symbol: '📝',
       description: 'Blogposts',
@@ -70,6 +74,10 @@ const defaultTypes = function(repoType) {
       symbol: '🚧',
       description: 'Maintenance',
     },
+    mentoring: {
+      symbol: '🧑‍🏫',
+      description: 'Mentoring',
+    },
     platform: {
       symbol: '📦',
       description: 'Packaging/porting to new platform',
@@ -85,6 +93,10 @@ const defaultTypes = function(repoType) {
     question: {
       symbol: '💬',
       description: 'Answering Questions',
+    },
+    research: {
+      symbol: '🔬',
+      description: 'Research',
     },
     review: {
       symbol: '👀',

@@ -258,7 +258,9 @@
         "infra",
         "code",
         "doc",
-        "test"
+        "test",
+        "review",
+        "question"
       ]
     },
     {
@@ -269,7 +271,11 @@
       "contributions": [
         "code",
         "test",
-        "doc"
+        "doc",
+        "tool",
+        "maintenance",
+        "review",
+        "question"
       ]
     },
     {
@@ -364,11 +370,32 @@
       ]
     },
     {
+      "login": "kharaone",
+      "name": "kharaone",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/6599271?v=4",
+      "profile": "https://github.com/kharaone",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "MarceloAlves",
       "name": "Marcelo Alves",
       "avatar_url": "https://avatars1.githubusercontent.com/u/216782?v=4",
       "profile": "https://github.com/marceloalves",
       "contributions": [
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "AnandChowdhary",
+      "name": "Anand Chowdhary",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/2841780?v=4",
+      "profile": "https://anandchowdhary.com/?utm_source=github&utm_campaign=about-link",
+      "contributions": [
+        "test",
+        "bug",
         "code"
       ]
     },
@@ -398,6 +425,120 @@
       "profile": "https://github.com/smoia",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "ilai-deutel",
+      "name": "Ilaï Deutel",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/10098207?v=4",
+      "profile": "https://github.com/ilai-deutel",
+      "contributions": [
+        "platform"
+      ]
+    },
+    {
+      "login": "jdalrymple",
+      "name": "Justin Dalrymple",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/3743662?v=4",
+      "profile": "https://github.com/jdalrymple",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "k3nsei",
+      "name": "Piotr Stępniewski",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/190422?v=4",
+      "profile": "https://github.com/k3nsei",
+      "contributions": [
+        "bug",
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "gr2m",
+      "name": "Gregor Martynus",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/39992?v=4",
+      "profile": "https://dev.to/gr2m",
+      "contributions": [
+        "review",
+        "question"
+      ]
+    },
+    {
+      "login": "sinchang",
+      "name": "Jeff Wen",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/3297859?v=4",
+      "profile": "https://sinchang.me/",
+      "contributions": [
+        "review"
+      ]
+    },
+    {
+      "login": "pavelloz",
+      "name": "Paweł Kowalski",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/546845?v=4",
+      "profile": "https://github.com/pavelloz",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "mloning",
+      "name": "Markus Löning",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/21020482?v=4",
+      "profile": "https://www.linkedin.com/in/mloning/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "DavidAnson",
+      "name": "David Anson",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1828270?v=4",
+      "profile": "https://dlaa.me/",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "Favna",
+      "name": "Jeroen Claassens",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/4019718?v=4",
+      "profile": "https://favware.tech/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "melink14",
+      "name": "Erek Speed",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/1176550?v=4",
+      "profile": "https://erekspeed.com",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "shairez",
+      "name": "Shai Reznik",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/1430726?v=4",
+      "profile": "http://www.hirez.io",
+      "contributions": [
+        "bug",
+        "code",
+        "test"
+      ]
+    },
+    {
+      "login": "darekkay",
+      "name": "Darek Kay",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/3101914?v=4",
+      "profile": "https://darekkay.com",
+      "contributions": [
+        "code",
+        "test"
       ]
     }
   ],

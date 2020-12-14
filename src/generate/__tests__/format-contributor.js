@@ -20,7 +20,7 @@ test('format a simple contributor', () => {
   const {options} = fixtures()
 
   const expected =
-    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt=""/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>'
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684?s=150" width="150px;" alt=""/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
@@ -30,7 +30,7 @@ test('format contributor with complex contribution types', () => {
   const {options} = fixtures()
 
   const expected =
-    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt=""/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=kentcdodds" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a> <a href="#question-kentcdodds" title="Answering Questions">💬</a>'
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684?s=150" width="150px;" alt=""/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=kentcdodds" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a> <a href="#question-kentcdodds" title="Answering Questions">💬</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
@@ -53,8 +53,7 @@ test('default image size to 100', () => {
   delete options.imageSize
 
   const expected =
-    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684" width="100px;" alt=""/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>'
-
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684?s=100" width="100px;" alt=""/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
@@ -64,17 +63,17 @@ test('format contributor with pipes in their name', () => {
   const {options} = fixtures()
 
   const expected =
-    '<a href="http://github.com/chrisinajar"><img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt=""/><br /><sub><b>Who &#124; Needs &#124; Pipes?</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=pipey" title="Documentation">📖</a>'
+    '<a href="http://github.com/chrisinajar"><img src="https://avatars1.githubusercontent.com/u/1500684?s=150" width="150px;" alt=""/><br /><sub><b>Who &#124; Needs &#124; Pipes?</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=pipey" title="Documentation">📖</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
 
-test('format contributor with no github account', () => {
+test('format contributor with no GitHub account', () => {
   const contributor = contributors.nologin
   const {options} = fixtures()
 
   const expected =
-    '<img src="https://avatars1.githubusercontent.com/u/1500684" width="150px;" alt=""/><br /><sub><b>No Github Account</b></sub><br /><a href="#translation" title="Translation">🌍</a>'
+    '<img src="https://avatars1.githubusercontent.com/u/1500684?s=150" width="150px;" alt=""/><br /><sub><b>No Github Account</b></sub><br /><a href="#translation" title="Translation">🌍</a>'
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })

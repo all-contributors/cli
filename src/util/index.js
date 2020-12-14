@@ -3,4 +3,5 @@ module.exports = {
   contributionTypes: require('./contribution-types'),
   git: require('./git'),
   markdown: require('./markdown'),
+  url: require('./url'),
 }

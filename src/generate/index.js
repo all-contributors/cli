@@ -29,9 +29,9 @@ function injectListBetweenTags(newContent) {
       '\n<!-- prettier-ignore-start -->',
       '\n<!-- markdownlint-disable -->',
       newContent,
-      '<!-- markdownlint-enable -->',
+      '<!-- markdownlint-restore -->',
       '\n<!-- prettier-ignore-end -->',
-      '\n',
+      '\n\n',
       previousContent.slice(startOfClosingTagIndex),
     ].join('')
   }
@@ -46,7 +46,7 @@ function formatLine(contributors) {
 function generateContributorsList(options, contributors) {
   const contributorsPerLine = options.contributorsPerLine || 7
   return _.flow(
-    _.sortBy(function(contributor) {
+    _.sortBy(contributor => {
       if (options.contributorsSortAlphabetically) {
         return contributor.name
       }

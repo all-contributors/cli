@@ -24,11 +24,13 @@ function injectListBetweenTags(newContent) {
     ) {
       return previousContent
     }
+    const startIndent = max(0, previousContent.LastIndexOf('\n', startOfOpeningTagIndex))
+    const nbSpaces = startOfOpeningTagIndex - min(startOfOpeningTagIndex, startIndent)
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n<!-- prettier-ignore-start -->',
       '\n<!-- markdownlint-disable -->',
-      newContent,
+      newContent.replace('\n', '\n'+ ' '.repeat(nbSpaces)),
       '<!-- markdownlint-restore -->',
       '\n<!-- prettier-ignore-end -->',
       '\n\n',
@@ -84,10 +86,12 @@ function replaceBadge(newContent) {
     ) {
       return previousContent
     }
+    const startIndent = max(0, previousContent.LastIndexOf('\n', startOfOpeningTagIndex))
+    const nbSpaces = startOfOpeningTagIndex - min(startOfOpeningTagIndex, startIndent)
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n',
-      newContent,
+      newContent.replace('\n', '\n'+ ' '.repeat(nbSpaces)),
       '\n',
       previousContent.slice(startOfClosingTagIndex),
     ].join('')

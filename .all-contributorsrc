@@ -558,6 +558,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "vapurrmaid",
+      "name": "G r e y",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11184711?v=4",
+      "profile": "https://vapurrmaid.ca",
+      "contributions": [
+        "security",
+        "bug"
+      ]
     }
   ],
   "skipCi": true

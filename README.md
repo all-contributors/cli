@@ -155,6 +155,7 @@ Thanks goes to these wonderful people
     <td align="center"><a href="https://darekkay.com"><img src="https://avatars0.githubusercontent.com/u/3101914?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Darek Kay</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=darekkay" title="Code">💻</a> <a href="https://github.com/all-contributors/all-contributors-cli/commits?author=darekkay" title="Tests">⚠️</a></td>
     <td align="center"><a href="https://github.com/LaChapeliere"><img src="https://avatars2.githubusercontent.com/u/7062546?v=4?s=100" width="100px;" alt=""/><br /><sub><b>LaChapeliere</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=LaChapeliere" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/SirWindfield"><img src="https://avatars.githubusercontent.com/u/5113257?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SirWindfield</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=SirWindfield" title="Code">💻</a></td>
+    <td align="center"><a href="https://vapurrmaid.ca"><img src="https://avatars.githubusercontent.com/u/11184711?v=4?s=100" width="100px;" alt=""/><br /><sub><b>G r e y</b></sub></a><br /><a href="#security-vapurrmaid" title="Security">🛡️</a> <a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Avapurrmaid" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 

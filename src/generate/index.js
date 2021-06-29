@@ -30,7 +30,7 @@ function injectListBetweenTags(newContent) {
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n<!-- prettier-ignore-start -->',
       '\n<!-- markdownlint-disable -->',
-      newContent.replace('\n', '\n'+ ' '.repeat(nbSpaces)),
+      newContent.replace('\n', '\n' + ' '.repeat(nbSpaces)),
       '<!-- markdownlint-restore -->',
       '\n<!-- prettier-ignore-end -->',
       '\n\n',

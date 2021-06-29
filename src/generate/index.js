@@ -24,8 +24,8 @@ function injectListBetweenTags(newContent) {
     ) {
       return previousContent
     }
-    const startIndent = max(0, previousContent.LastIndexOf('\n', startOfOpeningTagIndex))
-    const nbSpaces = startOfOpeningTagIndex - min(startOfOpeningTagIndex, startIndent)
+    const startIndent = Math.max(0, previousContent.lastIndexOf('\n', startOfOpeningTagIndex))
+    const nbSpaces = startOfOpeningTagIndex - Math.min(startOfOpeningTagIndex, startIndent)
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n<!-- prettier-ignore-start -->',

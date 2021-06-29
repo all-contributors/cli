@@ -91,7 +91,7 @@ function replaceBadge(newContent) {
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n',
-      newContent.replace('\n', '\n'+ ' '.repeat(nbSpaces)),
+      newContent.replace('\n', '\n' + ' '.repeat(nbSpaces)),
       '\n',
       previousContent.slice(startOfClosingTagIndex),
     ].join('')

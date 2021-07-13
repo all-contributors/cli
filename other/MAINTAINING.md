@@ -41,7 +41,7 @@ as you want/need to. Nobody can ask any more of you than that.
 As a maintainer, you're fine to make your branches on the main repo or on your own fork. Either
 way is fine.
 
-When we receive a pull request, a GitHub Actions build is kicked off automatically (see the `.github/`
+When we receive a pull request, a Circle CI build is kicked off automatically (see the `.circleci/`
 directory for what runs in the CI pipeline). We avoid merging anything that breaks the CI pipeline.
 
 Please review PRs and focus on the code rather than the individual. You never know when this is
@@ -56,7 +56,7 @@ about that.
 
 ## Release
 
-Our releases are automatic. They happen whenever code lands into `master`. A GitHub Actions build
+Our releases are automatic. They happen whenever code lands into `master`. A Circle CI build
 build gets kicked off and if it's successful, a tool called
 [`semantic-release`](https://github.com/semantic-release/semantic-release) is used to
 automatically publish a new release to npm as well as a changelog to GitHub. It is only able to

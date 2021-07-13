@@ -19,7 +19,7 @@
     "test": "kcd-scripts test",
     "validate": "kcd-scripts validate",
     "commit": "git-cz",
-    "start": "node ./dist/cli.js",
+    "start": "./dist/cli.js",
     "dev": "./src/cli.js"
   },
   "husky": {

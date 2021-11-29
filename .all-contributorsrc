@@ -1,6 +1,6 @@
 {
   "projectOwner": "all-contributors",
-  "projectName": "all-contributors-cli",
+  "projectName": "cli",
   "imageSize": 100,
   "repoType": "github",
   "commit": false,
@@ -566,6 +566,15 @@
       "profile": "https://vapurrmaid.ca",
       "contributions": [
         "security"
+      ]
+    },
+    {
+      "login": "Lucas-C",
+      "name": "Lucas Cimon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/925560?v=4",
+      "profile": "https://chezsoi.org/lucas/blog/",
+      "contributions": [
+        "doc"
       ]
     }
   ],

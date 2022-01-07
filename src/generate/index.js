@@ -55,9 +55,9 @@ function generateContributorsList(options, contributors) {
     }),
     _.chunk(options.contributorsPerLine),
     _.map(formatLine),
-    _.join('\n  </tr>\n  <tr>\n    '),
+    _.join('\n      </tr>\n      <tr>\n    '),
     newContent => {
-      return `\n<table>\n  <tr>\n    ${newContent}\n  </tr>\n</table>\n\n`
+      return `\n<table>\n  \n<tbody>\n    <tr>\n      ${newContent}\n      </tr>\n    </tobdy>\n  </table>\n\n`
     },
   )(contributors)
 }

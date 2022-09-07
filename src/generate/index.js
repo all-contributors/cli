@@ -3,7 +3,7 @@ const formatBadge = require('./format-badge')
 const formatContributor = require('./format-contributor')
 
 function injectListBetweenTags(newContent) {
-  return function(previousContent) {
+  return function (previousContent) {
     const tagToLookFor = `<!-- ALL-CONTRIBUTORS-LIST:`
     const closingTag = '-->'
     const startOfOpeningTagIndex = previousContent.indexOf(
@@ -39,7 +39,7 @@ function injectListBetweenTags(newContent) {
 
 function formatLine(contributors) {
   return `<td align="center">${contributors.join(
-    '</td>\n    <td align="center">',
+    '</td>\n      <td align="center">',
   )}</td>`
 }
 
@@ -55,15 +55,15 @@ function generateContributorsList(options, contributors) {
     }),
     _.chunk(options.contributorsPerLine),
     _.map(formatLine),
-    _.join('\n  </tr>\n  <tr>\n    '),
+    _.join('\n    </tr>\n    <tr>\n      '),
     newContent => {
-      return `\n<table>\n  <tr>\n    ${newContent}\n  </tr>\n</table>\n\n`
+      return `\n<table>\n  <tbody>\n    <tr>\n      ${newContent}\n    </tr>\n  </tobdy>\n</table>\n\n`
     },
   )(contributors)
 }
 
 function replaceBadge(newContent) {
-  return function(previousContent) {
+  return function (previousContent) {
     const tagToLookFor = `<!-- ALL-CONTRIBUTORS-BADGE:`
     const closingTag = '-->'
     const startOfOpeningTagIndex = previousContent.indexOf(

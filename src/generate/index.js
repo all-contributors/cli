@@ -58,7 +58,7 @@ function generateContributorsList(options, contributors) {
     _.map(formatLine),
     _.join('\n    </tr>\n    <tr>\n      '),
     newContent => {
-      return `\n<table>\n  <tbody>\n    <tr>\n      ${newContent}\n    </tr>\n  </tobdy>\n</table>\n\n`
+      return `\n<table>\n  <tbody>\n    <tr>\n      ${newContent}\n    </tr>\n  </tbody>\n</table>\n\n`
     },
   )(contributors)
 }

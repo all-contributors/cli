@@ -17,7 +17,7 @@ These people contributed to the project:
       <td align=\\"center\\">Divjot Singh is awesome!</td>
       <td align=\\"center\\">Jeroen Engels is awesome!</td>
     </tr>
-  </tobdy>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->
@@ -51,7 +51,7 @@ These people contributed to the project:
       <td align=\\"center\\">Kent C. Dodds is awesome!</td>
       <td align=\\"center\\">Kent C. Dodds is awesome!</td>
     </tr>
-  </tobdy>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->

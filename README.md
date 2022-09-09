@@ -43,8 +43,8 @@
     </tbody>
 </table>
 
-[![Build Status](https://img.shields.io/circleci/project/all-contributors/all-contributors-cli/master.svg)](https://circleci.com/gh/all-contributors/workflows/all-contributors-cli/tree/master)
-[![Code Coverage](https://img.shields.io/codecov/c/github/all-contributors/all-contributors-cli.svg)](https://codecov.io/github/all-contributors/all-contributors-cli)
+[![Build Status](https://dl.circleci.com/status-badge/img/gh/all-contributors/cli/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/all-contributors/cli/tree/master)
+[![Code Coverage](https://codecov.io/gh/all-contributors/cli/branch/master/graph/badge.svg?token=jHIrCqevli)](https://codecov.io/gh/all-contributors/cli)
 [![Version](https://img.shields.io/npm/v/all-contributors-cli.svg)](https://www.npmjs.com/package/all-contributors-cli)
 [![Downloads](https://img.shields.io/npm/dm/all-contributors-cli.svg)](http://www.npmtrends.com/all-contributors-cli)
 [![AUR Version](https://img.shields.io/aur/version/all-contributors-cli.svg)](https://aur.archlinux.org/packages/all-contributors-cli)

@@ -125,7 +125,7 @@ function checkContributors(argv) {
 
 function onError(error) {
   if (error) {
-    console.error(error.message)
+    console.error(error.stack || error.message || error)
     process.exit(1)
   }
   process.exit(0)

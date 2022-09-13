@@ -58,9 +58,7 @@ async function rejects(promise) {
 }
 
 test('handle errors', async () => {
-  nock('https://api.github.com')
-    .get('/users/nodisplayname')
-    .replyWithError(404)
+  nock('https://api.github.com').get('/users/nodisplayname').replyWithError(404)
 
   await rejects(getUserInfo('nodisplayname'))
 })
@@ -73,43 +71,49 @@ test('Throw error when no username is provided', () => {
 
 test('Throw error when non existent username is provided', async () => {
   const username = 'thisusernamedoesntexist'
-  nock('https://api.github.com')
-    .get(`/users/${username}`)
-    .reply(404, {
-      message: 'Not Found',
-      documentation_url:
-        'https://developer.github.com/v3/users/#get-a-single-user',
-    })
-  try {
-    await getUserInfo(username)
-  } catch (error) {
-    expect(error.message).toEqual(
-      `Login not found when adding a contributor for username - ${username}.`,
-    )
-  }
+  nock('https://api.github.com').get(`/users/${username}`).reply(404, {
+    message: 'Not Found',
+    documentation_url:
+      'https://developer.github.com/v3/users/#get-a-single-user',
+  })
+  await expect(getUserInfo(username)).rejects.toThrow(
+    `The username ${username} doesn't exist on GitHub.`,
+  )
 })
 
-test('handle github errors', async () => {
-  nock('https://api.github.com')
-    .get('/users/nodisplayname')
-    .reply(200, {
-      message:
-        "API rate limit exceeded for 0.0.0.0. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details.)",
-      documentation_url: 'https://developer.github.com/v3/#rate-limiting',
+test('Throw error when missing enterprise authentication', async () => {
+  const username = 'notauthenticated'
+  nock('http://github.myhost.com:3000/api/v3')
+    .get(`/users/${username}`)
+    .reply(401, {
+      message: 'Must authenticate to access this API.',
+      documentation_url: 'https://developer.github.com/enterprise/2.17/v3',
     })
+  await expect(
+    getUserInfo(username, 'http://github.myhost.com:3000'),
+  ).rejects.toThrow(
+    `Missing authentication for GitHub API. Did you set PRIVATE_TOKEN?`,
+  )
+})
 
-  await rejects(getUserInfo('nodisplayname'))
+test('handle API rate GitHub errors', async () => {
+  const githubErrorMessage =
+    "API rate limit exceeded for 0.0.0.0. (But here's the good news: Authenticated requests get a higher rate limit. Check out the documentation for more details."
+  nock('https://api.github.com').get('/users/nodisplayname').reply(200, {
+    message: githubErrorMessage,
+    documentation_url: 'https://developer.github.com/v3/#rate-limiting',
+  })
+
+  await expect(getUserInfo('nodisplayname')).rejects.toThrow(githubErrorMessage)
 })
 
 test('fill in the name when null is returned', async () => {
-  nock('https://api.github.com')
-    .get('/users/nodisplayname')
-    .reply(200, {
-      login: 'nodisplayname',
-      name: null,
-      avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
-      html_url: 'https://github.com/nodisplayname',
-    })
+  nock('https://api.github.com').get('/users/nodisplayname').reply(200, {
+    login: 'nodisplayname',
+    name: null,
+    avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
+    html_url: 'https://github.com/nodisplayname',
+  })
 
   const info = await getUserInfo('nodisplayname')
   expect(info.name).toBe('nodisplayname')
@@ -150,35 +154,31 @@ test('attaches no token when not supplied', async () => {
 })
 
 test('fill in the name when an empty string is returned', async () => {
-  nock('https://api.github.com')
-    .get('/users/nodisplayname')
-    .reply(200, {
-      login: 'nodisplayname',
-      name: '',
-      avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
-      html_url: 'https://github.com/nodisplayname',
-    })
+  nock('https://api.github.com').get('/users/nodisplayname').reply(200, {
+    login: 'nodisplayname',
+    name: '',
+    avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
+    html_url: 'https://github.com/nodisplayname',
+  })
 
   const info = await getUserInfo('nodisplayname')
   expect(info.name).toBe('nodisplayname')
 })
 
 test('append http when no absolute link is provided', async () => {
-  nock('https://api.github.com')
-    .get('/users/nodisplayname')
-    .reply(200, {
-      login: 'nodisplayname',
-      name: '',
-      avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
-      html_url: 'www.github.com/nodisplayname',
-    })
+  nock('https://api.github.com').get('/users/nodisplayname').reply(200, {
+    login: 'nodisplayname',
+    name: '',
+    avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
+    html_url: 'www.github.com/nodisplayname',
+  })
 
   const info = await getUserInfo('nodisplayname')
   expect(info.profile).toBe('http://www.github.com/nodisplayname')
 })
 
-test('retrieve user from a different github registry', async () => {
-  nock('http://api.github.myhost.com:3000')
+test('retrieve user from a different GitHub registry', async () => {
+  nock('http://github.myhost.com:3000/api/v3')
     .get('/users/nodisplayname')
     .reply(200, {
       login: 'nodisplayname',

@@ -1,4 +1,19 @@
-> [There is now a GitHub Bot](https://github.com/all-contributors/all-contributors-bot) for automating the maintenance of your contributors table ✨<br />Say goodbye to command line tool dependencies and hello to the [@all-contributors bot 🤖](https://github.com/all-contributors/all-contributors-bot)
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [ all-contributors-cli ](#all-contributors-cli)
+  - [The problem](#the-problem)
+  - [This solution](#this-solution)
+  - [Using the all-contributors-cli](#using-the-all-contributors-cli)
+  - [Contributors ✨](#contributors-)
+  - [LICENSE](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+> [There is now a GitHub Bot](https://github.com/all-contributors/all-contributors-bot)
+> for automating the maintenance of your contributors table ✨<br />Say goodbye
+> to command line tool dependencies and hello to the
+> [@all-contributors bot 🤖](https://github.com/all-contributors/all-contributors-bot)
 
 <h1 align="center">
   all-contributors-cli
@@ -28,17 +43,19 @@
     </tbody>
 </table>
 
-[![Build Status](https://img.shields.io/circleci/project/all-contributors/all-contributors-cli/master.svg)](https://circleci.com/gh/all-contributors/workflows/all-contributors-cli/tree/master)
-[![Code Coverage](https://img.shields.io/codecov/c/github/all-contributors/all-contributors-cli.svg)](https://codecov.io/github/all-contributors/all-contributors-cli)
+[![Build Status](https://dl.circleci.com/status-badge/img/gh/all-contributors/cli/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/all-contributors/cli/tree/master)
+[![Code Coverage](https://codecov.io/gh/all-contributors/cli/branch/master/graph/badge.svg?token=jHIrCqevli)](https://codecov.io/gh/all-contributors/cli)
 [![Version](https://img.shields.io/npm/v/all-contributors-cli.svg)](https://www.npmjs.com/package/all-contributors-cli)
 [![Downloads](https://img.shields.io/npm/dm/all-contributors-cli.svg)](http://www.npmtrends.com/all-contributors-cli)
-[![All Contributors](https://img.shields.io/badge/all_contributors-30-orange.svg?style=flat-square)](#contributors)
+[![AUR Version](https://img.shields.io/aur/version/all-contributors-cli.svg)](https://aur.archlinux.org/packages/all-contributors-cli)
+[![All Contributors](https://img.shields.io/badge/all_contributors-37-orange.svg?style=flat-square)](#contributors-)
 [![Star on Github](https://img.shields.io/github/stars/all-contributors/all-contributors-cli.svg?style=social)](https://github.com/all-contributors/all-contributors-cli/stargazers)
 
 ## The problem
 
-You want to implement the [All Contributors][all-contributors] spec, but don't
-want to maintain the table by hand
+You want to implement the
+[All Contributors](https://github.com/all-contributors/all-contributors) spec,
+but don't want to maintain the table by hand
 
 ## This solution
 
@@ -48,9 +65,12 @@ specification for your GitHub or GitLab repository.
 
 ## Using the all-contributors-cli
 
-If you're looking to use the cli, head over to [the cli docs on allcontributors.org](https://allcontributors.org/docs/en/cli/overview). The all-contributors website contains all the information required to install, configure and use the all-contributors-cli.
+If you're looking to use the cli, head over to
+[the cli docs on allcontributors.org](https://allcontributors.org/docs/en/cli/overview).
+The all-contributors website contains all the information required to install,
+configure and use the all-contributors-cli.
 
-## Contributors
+## Contributors ✨
 
 Thanks goes to these wonderful people
 ([emoji key](https://allcontributors.org/docs/en/emoji-key)):

@@ -3,6 +3,14 @@ const repo = require('../repo')
 
 const defaultTypes = function(repoType) {
   return {
+    a11y: {
+      symbol: '️️️️♿️',
+      description: 'Accessibility',
+    },
+    audio: {
+      symbol: '🔊',
+      description: 'Audio',
+    },
     blog: {
       symbol: '📝',
       description: 'Blogposts',
@@ -24,6 +32,10 @@ const defaultTypes = function(repoType) {
     content: {
       symbol: '🖋',
       description: 'Content',
+    },
+    data: {
+      symbol: '🔣',
+      description: 'Data',
     },
     design: {
       symbol: '🎨',
@@ -62,6 +74,10 @@ const defaultTypes = function(repoType) {
       symbol: '🚧',
       description: 'Maintenance',
     },
+    mentoring: {
+      symbol: '🧑‍🏫',
+      description: 'Mentoring',
+    },
     platform: {
       symbol: '📦',
       description: 'Packaging/porting to new platform',
@@ -78,9 +94,14 @@ const defaultTypes = function(repoType) {
       symbol: '💬',
       description: 'Answering Questions',
     },
+    research: {
+      symbol: '🔬',
+      description: 'Research',
+    },
     review: {
       symbol: '👀',
       description: 'Reviewed Pull Requests',
+      link: repo.getLinkToReviews(repoType),
     },
     security: {
       symbol: '🛡️',

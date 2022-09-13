@@ -5,10 +5,6 @@ const path = require('path')
 const yargs = require('yargs')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
-const didYouMean = require('didyoumean')
-
-// Setting edit length to be 60% of the input string's length
-didYouMean.threshold = 0.6
 
 const init = require('./init')
 const generate = require('./generate')
@@ -20,24 +16,27 @@ const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
 
 const yargv = yargs
+  .scriptName('all-contributors')
   .help('help')
   .alias('h', 'help')
   .alias('v', 'version')
   .version()
-  .command('generate', 'Generate the list of contributors')
-  .usage('Usage: $0 generate')
-  .command('add', 'add a new contributor')
-  .usage('Usage: $0 add <username> <contribution>')
-  .command('init', 'Prepare the project to be used with this tool')
-  .usage('Usage: $0 init')
+  .recommendCommands()
+  .command('generate', `Generate the list of contributors\n\nUSAGE: all-contributors generate`)
+  .command('add', `Add a new contributor\n\nUSAGE: all-contributors add <username> <comma-separated contributions>`)
+  .command('init', `Prepare the project to be used with this tool\n\nUSAGE: all-contributors init`)
   .command(
     'check',
-    'Compares contributors from the repository with the ones credited in .all-contributorsrc',
-  )
-  .usage('Usage: $0 check')
+    `Compare contributors from the repository with the ones credited in .all-contributorsrc'\n\nUSAGE: all-contributors check`)
   .boolean('commit')
   .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
+  .option('contributorsSortAlphabetically', {
+    type: 'boolean',
+    default: false,
+    description:
+      'Sort the list of contributors alphabetically in the generated list',
+  })
   .default('contributors', [])
   .default('config', defaultRCFile)
   .config('config', configPath => {
@@ -49,15 +48,6 @@ const yargv = yargs
       }
     }
   }).argv
-
-function suggestCommands(cmd) {
-  const availableCommands = ['generate', 'add', 'init', 'check']
-  const suggestion = didYouMean(cmd, availableCommands)
-
-  if (suggestion) {
-    console.log(chalk.bold(`Did you mean ${suggestion}`))
-  }
-}
 
 function startGeneration(argv) {
   return Promise.all(
@@ -72,7 +62,8 @@ function startGeneration(argv) {
 }
 
 function addContribution(argv) {
-  const username = argv._[1]
+  util.configFile.readConfig(argv.config) // ensure the config file exists
+  const username = argv._[1] === undefined ? undefined : String(argv._[1])
   const contributions = argv._[2]
   // Add or update contributor in the config file
   return updateContributors(argv, username, contributions).then(data => {
@@ -134,7 +125,7 @@ function checkContributors(argv) {
 
 function onError(error) {
   if (error) {
-    console.error(error.message)
+    console.error(error.stack || error.message || error)
     process.exit(1)
   }
   process.exit(0)
@@ -183,7 +174,6 @@ promptForCommand(yargv)
       case 'check':
         return checkContributors(yargv)
       default:
-        suggestCommands(command)
         throw new Error(`Unknown command ${command}`)
     }
   })

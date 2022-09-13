@@ -2,11 +2,9 @@ const _ = require('lodash/fp')
 const formatBadge = require('./format-badge')
 const formatContributor = require('./format-contributor')
 
-const badgeRegex = /\[!\[All Contributors\]\([a-zA-Z0-9\-./_:?=]+\)\]\(#\w+\)/
-
 function injectListBetweenTags(newContent) {
-  return function(previousContent) {
-    const tagToLookFor = '<!-- ALL-CONTRIBUTORS-LIST:'
+  return function (previousContent) {
+    const tagToLookFor = `<!-- ALL-CONTRIBUTORS-LIST:`
     const closingTag = '-->'
     const startOfOpeningTagIndex = previousContent.indexOf(
       `${tagToLookFor}START`,
@@ -28,8 +26,12 @@ function injectListBetweenTags(newContent) {
     }
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
-      '\n<!-- prettier-ignore -->',
+      '\n<!-- prettier-ignore-start -->',
+      '\n<!-- markdownlint-disable -->',
       newContent,
+      '<!-- markdownlint-restore -->',
+      '\n<!-- prettier-ignore-end -->',
+      '\n\n',
       previousContent.slice(startOfClosingTagIndex),
     ].join('')
   }
@@ -57,12 +59,17 @@ function generateContributorsList(options, contributors) {
   const tableFooter = formatFooter(options)
 
   return _.flow(
+    _.sortBy(contributor => {
+      if (options.contributorsSortAlphabetically) {
+        return contributor.name
+      }
+    }),
     _.map(function formatEveryContributor(contributor) {
       return formatContributor(options, contributor)
     }),
-    _.chunk(options.contributorsPerLine),
+    _.chunk(contributorsPerLine),
     _.map(formatLine),
-    _.join('</tr><tr>'),
+    _.join('\n    </tr>\n    <tr>\n      '),
     newContent => {
       return `\n<table><tbody><tr>${newContent}</tr>\n${tableFooter}\n</tbody></table>\n`
     },
@@ -70,16 +77,34 @@ function generateContributorsList(options, contributors) {
 }
 
 function replaceBadge(newContent) {
-  return function(previousContent) {
-    const regexResult = badgeRegex.exec(previousContent)
-    if (!regexResult) {
+  return function (previousContent) {
+    const tagToLookFor = `<!-- ALL-CONTRIBUTORS-BADGE:`
+    const closingTag = '-->'
+    const startOfOpeningTagIndex = previousContent.indexOf(
+      `${tagToLookFor}START`,
+    )
+    const endOfOpeningTagIndex = previousContent.indexOf(
+      closingTag,
+      startOfOpeningTagIndex,
+    )
+    const startOfClosingTagIndex = previousContent.indexOf(
+      `${tagToLookFor}END`,
+      endOfOpeningTagIndex,
+    )
+    if (
+      startOfOpeningTagIndex === -1 ||
+      endOfOpeningTagIndex === -1 ||
+      startOfClosingTagIndex === -1
+    ) {
       return previousContent
     }
-    return (
-      previousContent.slice(0, regexResult.index) +
-      newContent +
-      previousContent.slice(regexResult.index + regexResult[0].length)
-    )
+    return [
+      previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
+      '\n',
+      newContent,
+      '\n',
+      previousContent.slice(startOfClosingTagIndex),
+    ].join('')
   }
 }
 

@@ -38,19 +38,20 @@ function injectListBetweenTags(newContent) {
 }
 
 function formatLine(contributors) {
-   return `<td align="center">${contributors.join('</td><td align="center">')}</td>`
+  return `<td align="center">${contributors.join(
+    '</td>\n      <td align="center">',
+  )}</td>`
 }
-
 
 function formatFooter(options) {
   if (!options.linkToUsage) {
     return ''
   }
-  const smallLogoURL = 'https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg'
-  const linkToAllContributors = 'https://all-contributors.js.org'
+  const smallLogoURL =
+    'https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg'
   const linkToBotAdd = 'https://all-contributors.js.org/docs/en/bot/usage'
 
-    return `<tr>
+  return `<tr>
         <td size="13px" colspan="${options.contributorsPerLine}"><img src="${smallLogoURL}" > <a href="${linkToBotAdd}">Add your contribution</a></td>
     </tr>`
 }
@@ -67,11 +68,11 @@ function generateContributorsList(options, contributors) {
     _.map(function formatEveryContributor(contributor) {
       return formatContributor(options, contributor)
     }),
-    _.chunk(contributorsPerLine),
+    _.chunk(options.contributorsPerLine),
     _.map(formatLine),
     _.join('\n    </tr>\n    <tr>\n      '),
     newContent => {
-      return `\n<table><tbody><tr>${newContent}</tr>\n${tableFooter}\n</tbody></table>\n`
+      return `\n<table>\n  <tbody>\n    <tr>\n      ${newContent}\n    </tr>\n  </tbody>\n  <tfoot>\n    ${tableFooter}\n  </tfoot>\n</table>\n\n`
     },
   )(contributors)
 }

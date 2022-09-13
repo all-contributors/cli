@@ -31,6 +31,43 @@ These people contributed to the project:
 Thanks a lot everyone!"
 `;
 
+exports[`replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors with linkToUsage 1`] = `
+"# project
+
+Description
+
+## Contributors
+These people contributed to the project:
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center">Kent C. Dodds is awesome!</td>
+      <td align="center">Divjot Singh is awesome!</td>
+      <td align="center">Jeroen Engels is awesome!</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td size="13px">
+        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
+          <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
+        </img>
+      </td>
+    </tr>
+  </tfoot>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Thanks a lot everyone!"
+`;
+
 exports[`split contributors into multiples lines when there are too many 1`] = `
 "# project
 
@@ -57,6 +94,49 @@ These people contributed to the project:
   </tbody>
   <tfoot>
     
+  </tfoot>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Thanks a lot everyone!"
+`;
+
+exports[`split contributors into multiples lines when there are too many with linkToUsage 1`] = `
+"# project
+
+Description
+
+## Contributors
+These people contributed to the project:
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+    </tr>
+    <tr>
+      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td size="13px">
+        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
+          <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
+        </img>
+      </td>
+    </tr>
   </tfoot>
 </table>
 

@@ -10,7 +10,7 @@ function readConfig(configPath) {
       config.repoType = 'github'
     }
     if (!('commitConvention' in config)) {
-      config.commitConvention = 'none'
+      config.commitConvention = 'angular'
     }
     if (changed) {
       //Updates the file with fixes
@@ -20,9 +20,7 @@ function readConfig(configPath) {
   } catch (error) {
     if (error instanceof SyntaxError) {
       throw new SyntaxError(
-        `Configuration file has malformed JSON: ${configPath}. Error:: ${
-          error.message
-        }`,
+        `Configuration file has malformed JSON: ${configPath}. Error:: ${error.message}`,
       )
     }
     if (error.code === 'ENOENT') {

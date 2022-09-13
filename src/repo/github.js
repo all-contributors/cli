@@ -45,7 +45,7 @@ function getNextLink(link) {
     return null
   }
 
-  return nextLink.split(';')[0].slice(1, -1)
+  return nextLink.split(';')[0].trim().slice(1, -1)
 }
 
 function getContributorsPage(githubUrl, optionalPrivateToken) {

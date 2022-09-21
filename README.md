@@ -160,6 +160,9 @@ Thanks goes to these wonderful people
       <td align="center"><a href="https://chezsoi.org/lucas/blog/"><img src="https://avatars.githubusercontent.com/u/925560?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lucas Cimon</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=Lucas-C" title="Documentation">📖</a></td>
       <td align="center"><a href="http://www.joshuakgoldberg.com"><img src="https://avatars.githubusercontent.com/u/3335181?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Josh Goldberg</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3AJoshuaKGoldberg" title="Bug reports">🐛</a></td>
     </tr>
+    <tr>
+      <td align="center"><a href="https://tenshiamd.com"><img src="https://avatars.githubusercontent.com/u/13580338?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Angel Aviel Domaoan</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=tenshiAMD" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3AtenshiAMD" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/all-contributors/cli/commits?author=tenshiAMD" title="Documentation">📖</a></td>
+    </tr>
   </tbody>
 </table>
 

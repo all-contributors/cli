@@ -17,7 +17,9 @@ const contributorTemplate = _.template(
 const defaultImageSize = 100
 
 function defaultTemplate(templateData) {
-  const name = escapeName(templateData.contributor.name)
+  const rawName =
+    templateData.contributor.name || templateData.contributor.login
+  const name = escapeName(rawName)
   const avatar = avatarTemplate(
     _.assign(templateData, {
       name,

@@ -77,3 +77,13 @@ test('format contributor with no GitHub account', () => {
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
+
+test('format contributor with no complete name', () => {
+  const contributor = contributors.nocompletename
+  const {options} = fixtures()
+
+  const expected =
+    '<img src="https://avatars1.githubusercontent.com/u/1500684?s=150" width="150px;" alt="nocompletename"/><br /><sub><b>nocompletename</b></sub><br /><a href="#translation-nocompletename" title="Translation">🌍</a>'
+
+  expect(formatContributor(options, contributor)).toBe(expected)
+})

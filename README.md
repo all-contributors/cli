@@ -81,7 +81,39 @@ Thanks goes to these wonderful people
 	<tr>		
         <td size="13px" colspan="6"><img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg" > <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contribution</a></td>
     </tr>
-</tbody></table>
+    <tr>
+      <td align="center"><a href="https://github.com/smoia"><img src="https://avatars3.githubusercontent.com/u/35300580?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Stefano Moia</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=smoia" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/ilai-deutel"><img src="https://avatars0.githubusercontent.com/u/10098207?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ilaï Deutel</b></sub></a><br /><a href="#platform-ilai-deutel" title="Packaging/porting to new platform">📦</a></td>
+      <td align="center"><a href="https://github.com/jdalrymple"><img src="https://avatars3.githubusercontent.com/u/3743662?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Justin Dalrymple</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=jdalrymple" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/k3nsei"><img src="https://avatars2.githubusercontent.com/u/190422?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Piotr Stępniewski</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Ak3nsei" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/commits?author=k3nsei" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/commits?author=k3nsei" title="Tests">⚠️</a></td>
+      <td align="center"><a href="https://dev.to/gr2m"><img src="https://avatars3.githubusercontent.com/u/39992?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Gregor Martynus</b></sub></a><br /><a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3Agr2m" title="Reviewed Pull Requests">👀</a> <a href="#question-gr2m" title="Answering Questions">💬</a></td>
+      <td align="center"><a href="https://sinchang.me/"><img src="https://avatars0.githubusercontent.com/u/3297859?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jeff Wen</b></sub></a><br /><a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3Asinchang" title="Reviewed Pull Requests">👀</a></td>
+    </tr>
+    <tr>
+      <td align="center"><a href="https://github.com/pavelloz"><img src="https://avatars1.githubusercontent.com/u/546845?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Paweł Kowalski</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=pavelloz" title="Code">💻</a></td>
+      <td align="center"><a href="https://www.linkedin.com/in/mloning/"><img src="https://avatars3.githubusercontent.com/u/21020482?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Markus Löning</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=mloning" title="Code">💻</a></td>
+      <td align="center"><a href="https://dlaa.me/"><img src="https://avatars1.githubusercontent.com/u/1828270?v=4?s=100" width="100px;" alt=""/><br /><sub><b>David Anson</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3ADavidAnson" title="Bug reports">🐛</a></td>
+      <td align="center"><a href="https://favware.tech/"><img src="https://avatars3.githubusercontent.com/u/4019718?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jeroen Claassens</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=Favna" title="Code">💻</a></td>
+      <td align="center"><a href="https://erekspeed.com"><img src="https://avatars3.githubusercontent.com/u/1176550?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Erek Speed</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=melink14" title="Code">💻</a></td>
+      <td align="center"><a href="http://www.hirez.io"><img src="https://avatars1.githubusercontent.com/u/1430726?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Shai Reznik</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Ashairez" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/commits?author=shairez" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/commits?author=shairez" title="Tests">⚠️</a></td>
+    </tr>
+    <tr>
+      <td align="center"><a href="https://darekkay.com"><img src="https://avatars0.githubusercontent.com/u/3101914?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Darek Kay</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=darekkay" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/commits?author=darekkay" title="Tests">⚠️</a></td>
+      <td align="center"><a href="https://github.com/LaChapeliere"><img src="https://avatars2.githubusercontent.com/u/7062546?v=4?s=100" width="100px;" alt=""/><br /><sub><b>LaChapeliere</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=LaChapeliere" title="Code">💻</a></td>
+      <td align="center"><a href="https://github.com/SirWindfield"><img src="https://avatars.githubusercontent.com/u/5113257?v=4?s=100" width="100px;" alt=""/><br /><sub><b>SirWindfield</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=SirWindfield" title="Code">💻</a></td>
+      <td align="center"><a href="https://vapurrmaid.ca"><img src="https://avatars.githubusercontent.com/u/11184711?v=4?s=100" width="100px;" alt=""/><br /><sub><b>G r e y</b></sub></a><br /><a href="#security-vapurrmaid" title="Security">🛡️</a></td>
+      <td align="center"><a href="https://chezsoi.org/lucas/blog/"><img src="https://avatars.githubusercontent.com/u/925560?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Lucas Cimon</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=Lucas-C" title="Documentation">📖</a></td>
+      <td align="center"><a href="http://www.joshuakgoldberg.com"><img src="https://avatars.githubusercontent.com/u/3335181?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Josh Goldberg</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3AJoshuaKGoldberg" title="Bug reports">🐛</a></td>
+    </tr>
+    <tr>
+      <td align="center"><a href="https://tenshiamd.com"><img src="https://avatars.githubusercontent.com/u/13580338?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Angel Aviel Domaoan</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=tenshiAMD" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3AtenshiAMD" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/all-contributors/cli/commits?author=tenshiAMD" title="Documentation">📖</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 This project follows the

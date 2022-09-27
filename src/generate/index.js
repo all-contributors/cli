@@ -51,7 +51,7 @@ function formatFooter(options) {
     'https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg'
   const linkToBotAdd = 'https://all-contributors.js.org/docs/en/bot/usage'
 
-  return `<tr>\n      <td size="13px">\n        <img src="${smallLogoURL}">\n          <a href="${linkToBotAdd}">Add your contributions</a>\n        </img>\n      </td>\n    </tr>`
+  return `<tr>\n      <td align="center" size="13px" colspan="${options.contributorsPerLine}">\n        <img src="${smallLogoURL}">\n          <a href="${linkToBotAdd}">Add your contributions</a>\n        </img>\n      </td>\n    </tr>`
 }
 
 function generateContributorsList(options, contributors) {

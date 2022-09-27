@@ -597,6 +597,15 @@
         "review",
         "doc"
       ]
+    },
+    {
+      "login": "12rambau",
+      "name": "Rambaud Pierrick",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12596392?v=4",
+      "profile": "https://12rambau.github.io/web-resume/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "skipCi": true

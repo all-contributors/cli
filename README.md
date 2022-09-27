@@ -164,7 +164,8 @@ Thanks goes to these wonderful people
       <td align="center"><a href="http://www.joshuakgoldberg.com"><img src="https://avatars.githubusercontent.com/u/3335181?v=4?s=100" width="100px;" alt="Josh Goldberg"/><br /><sub><b>Josh Goldberg</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3AJoshuaKGoldberg" title="Bug reports">🐛</a></td>
     </tr>
     <tr>
-      <td align="center"><a href="https://tenshiamd.com"><img src="https://avatars.githubusercontent.com/u/13580338?v=4?s=100" width="100px;" alt="Angel Aviel Domaoan"/><br /><sub><b>Angel Aviel Domaoan</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=tenshiAMD" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3AtenshiAMD" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/all-contributors/cli/commits?author=tenshiAMD" title="Documentation">📖</a></td>
+      <td align="center"><a href="https://tenshiamd.com"><img src="https://avatars.githubusercontent.com/u/13580338?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Angel Aviel Domaoan</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=tenshiAMD" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3AtenshiAMD" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/all-contributors/cli/commits?author=tenshiAMD" title="Documentation">📖</a></td>
+      <td align="center"><a href="https://12rambau.github.io/web-resume/"><img src="https://avatars.githubusercontent.com/u/12596392?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Rambaud Pierrick</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=12rambau" title="Code">💻</a></td>
     </tr>
   </tbody>
   <tfoot>

@@ -44,16 +44,16 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align="center">Kent C. Dodds is awesome!</td>
-      <td align="center">Divjot Singh is awesome!</td>
-      <td align="center">Jeroen Engels is awesome!</td>
+      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\">Divjot Singh is awesome!</td>
+      <td align=\\"center\\">Jeroen Engels is awesome!</td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
-      <td size="13px">
-        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
-          <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
+      <td size=\\"13px\\">
+        <img src=\\"https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg\\">
+          <a href=\\"https://all-contributors.js.org/docs/en/bot/usage\\">Add your contributions</a>
         </img>
       </td>
     </tr>
@@ -131,9 +131,9 @@ These people contributed to the project:
   </tbody>
   <tfoot>
     <tr>
-      <td size="13px">
-        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
-          <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
+      <td size=\\"13px\\">
+        <img src=\\"https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg\\">
+          <a href=\\"https://all-contributors.js.org/docs/en/bot/usage\\">Add your contributions</a>
         </img>
       </td>
     </tr>

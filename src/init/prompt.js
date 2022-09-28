@@ -86,6 +86,12 @@ const questions = [
     choices: Object.values(conventions),
     default: 'angular',
   },
+  {
+    type: 'confirm',
+    name: 'linkToUsage',
+    message: 'Do you want to add a footer with link to usage?',
+    default: true,
+  },
 ]
 
 const uniqueFiles = _.flow(_.compact, _.uniq)
@@ -113,7 +119,7 @@ module.exports = function prompt() {
           commitConvention: answers.commitConvention,
           contributors: [],
           contributorsPerLine: 7,
-          linkToUsage: true,
+          linkToUsage: answers.linkToUsage,
         },
         contributorFile: answers.contributorFile,
         badgeFile: answers.badgeFile,

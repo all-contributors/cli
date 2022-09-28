@@ -43,6 +43,15 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of c
   expect(result).toMatchSnapshot()
 })
 
+test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors with linkToUsage', () => {
+  const {kentcdodds, bogas04} = contributors
+  const {options, jfmengels, content} = fixtures()
+  const contributorList = [kentcdodds, bogas04, jfmengels]
+  const result = generate(Object.assign(options, { linkToUsage: true }), contributorList, content)
+
+  expect(result).toMatchSnapshot()
+})
+
 test('split contributors into multiples lines when there are too many', () => {
   const {kentcdodds} = contributors
   const {options, content} = fixtures()
@@ -56,6 +65,23 @@ test('split contributors into multiples lines when there are too many', () => {
     kentcdodds,
   ]
   const result = generate(options, contributorList, content)
+
+  expect(result).toMatchSnapshot()
+})
+
+test('split contributors into multiples lines when there are too many with linkToUsage', () => {
+  const {kentcdodds} = contributors
+  const {options, content} = fixtures()
+  const contributorList = [
+    kentcdodds,
+    kentcdodds,
+    kentcdodds,
+    kentcdodds,
+    kentcdodds,
+    kentcdodds,
+    kentcdodds,
+  ]
+  const result = generate(Object.assign(options, { linkToUsage: true }), contributorList, content)
 
   expect(result).toMatchSnapshot()
 })

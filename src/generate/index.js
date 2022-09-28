@@ -49,8 +49,20 @@ function formatLine(contributors) {
   )}</td>`
 }
 
+function formatFooter(options) {
+  if (!options.linkToUsage) {
+    return ''
+  }
+  const smallLogoURL =
+    'https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg'
+  const linkToBotAdd = 'https://all-contributors.js.org/docs/en/bot/usage'
+
+  return `<tr>\n      <td align="center" size="13px" colspan="${options.contributorsPerLine}">\n        <img src="${smallLogoURL}">\n          <a href="${linkToBotAdd}">Add your contributions</a>\n        </img>\n      </td>\n    </tr>`
+}
+
 function generateContributorsList(options, contributors) {
-  const contributorsPerLine = options.contributorsPerLine || 7
+  const tableFooter = formatFooter(options)
+
   return _.flow(
     _.sortBy(contributor => {
       if (options.contributorsSortAlphabetically) {
@@ -60,11 +72,11 @@ function generateContributorsList(options, contributors) {
     _.map(function formatEveryContributor(contributor) {
       return formatContributor(options, contributor)
     }),
-    _.chunk(contributorsPerLine),
+    _.chunk(options.contributorsPerLine),
     _.map(formatLine),
     _.join('\n    </tr>\n    <tr>\n      '),
     newContent => {
-      return `\n<table>\n  <tbody>\n    <tr>\n      ${newContent}\n    </tr>\n  </tbody>\n</table>\n\n`
+      return `\n<table>\n  <tbody>\n    <tr>\n      ${newContent}\n    </tr>\n  </tbody>\n  <tfoot>\n    ${tableFooter}\n  </tfoot>\n</table>\n\n`
     },
   )(contributors)
 }

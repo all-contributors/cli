@@ -3,7 +3,7 @@ const formatBadge = require('./format-badge')
 const formatContributor = require('./format-contributor')
 
 function injectListBetweenTags(newContent) {
-  return function (previousContent) {
+  return function(previousContent) {
     const tagToLookFor = `<!-- ALL-CONTRIBUTORS-LIST:`
     const closingTag = '-->'
     const startOfOpeningTagIndex = previousContent.indexOf(
@@ -24,28 +24,24 @@ function injectListBetweenTags(newContent) {
     ) {
       return previousContent
     }
-    const startIndent = Math.max(
-      0,
-      previousContent.lastIndexOf('\n', startOfOpeningTagIndex),
-    )
-    const nbSpaces =
-      startOfOpeningTagIndex - Math.min(startOfOpeningTagIndex, startIndent)
+    const startIndent = Math.max(0, previousContent.lastIndexOf('\n', startOfOpeningTagIndex))
+    const nbSpaces = startOfOpeningTagIndex - Math.min(startOfOpeningTagIndex, startIndent)
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
-      '\n<!-- prettier-ignore-start -->',
-      '\n<!-- markdownlint-disable -->',
-      newContent.replace('\n', `\n${' '.repeat(nbSpaces - 1)}`),
-      '<!-- markdownlint-restore -->',
-      '\n<!-- prettier-ignore-end -->',
+      `\n${  ' '.repeat(nbSpaces - 1)  }<!-- prettier-ignore-start -->`,
+      `\n${  ' '.repeat(nbSpaces - 1)  }<!-- markdownlint-disable -->`,
+      ' '.repeat(nbSpaces - 1) + newContent.replace('\n', `\n${  ' '.repeat(nbSpaces)}`).replace('</table>', `${' '.repeat(nbSpaces)  }</table>`),
+      `${' '.repeat(nbSpaces - 1) }<!-- markdownlint-restore -->`,
+      `\n${  ' '.repeat(nbSpaces - 1)  }<!-- prettier-ignore-end -->`,
       '\n\n',
-      previousContent.slice(startOfClosingTagIndex),
+      ' '.repeat(nbSpaces - 1) + previousContent.slice(startOfClosingTagIndex),
     ].join('')
   }
 }
 
 function formatLine(contributors) {
   return `<td align="center">${contributors.join(
-    '</td>\n      <td align="center">',
+    '</td>\n    <td align="center">',
   )}</td>`
 }
 
@@ -82,7 +78,7 @@ function generateContributorsList(options, contributors) {
 }
 
 function replaceBadge(newContent) {
-  return function (previousContent) {
+  return function(previousContent) {
     const tagToLookFor = `<!-- ALL-CONTRIBUTORS-BADGE:`
     const closingTag = '-->'
     const startOfOpeningTagIndex = previousContent.indexOf(
@@ -103,18 +99,14 @@ function replaceBadge(newContent) {
     ) {
       return previousContent
     }
-    const startIndent = Math.max(
-      0,
-      previousContent.lastIndexOf('\n', startOfOpeningTagIndex),
-    )
-    const nbSpaces =
-      startOfOpeningTagIndex - Math.min(startOfOpeningTagIndex, startIndent)
+    const startIndent = Math.max(0, previousContent.lastIndexOf('\n', startOfOpeningTagIndex))
+    const nbSpaces = startOfOpeningTagIndex - Math.min(startOfOpeningTagIndex, startIndent)
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n',
-      newContent.replace('\n', `\n${' '.repeat(nbSpaces)}`),
+      ' '.repeat(nbSpaces - 1) + newContent.replace('\n', `\n${  ' '.repeat(nbSpaces)}`),
       '\n',
-      previousContent.slice(startOfClosingTagIndex),
+      ' '.repeat(nbSpaces - 1) + previousContent.slice(startOfClosingTagIndex),
     ].join('')
   }
 }

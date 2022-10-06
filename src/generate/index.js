@@ -62,6 +62,7 @@ function formatFooter(options) {
 
 function generateContributorsList(options, contributors) {
   const tableFooter = formatFooter(options)
+  let tableFooterContent = ''
 
   return _.flow(
     _.sortBy(contributor => {
@@ -76,7 +77,10 @@ function generateContributorsList(options, contributors) {
     _.map(formatLine),
     _.join('\n    </tr>\n    <tr>\n      '),
     newContent => {
-      return `\n<table>\n  <tbody>\n    <tr>\n      ${newContent}\n    </tr>\n  </tbody>\n  <tfoot>\n    ${tableFooter}\n  </tfoot>\n</table>\n\n`
+      if (options.linkToUsage) {
+        tableFooterContent = `  <tfoot>\n    ${tableFooter}\n  </tfoot>\n`
+      }
+      return `\n<table>\n  <tbody>\n    <tr>\n      ${newContent}\n    </tr>\n  </tbody>\n${tableFooterContent}</table>\n\n`
     },
   )(contributors)
 }

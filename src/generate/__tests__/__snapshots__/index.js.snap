@@ -18,9 +18,6 @@ These people contributed to the project:
       <td align=\\"center\\">Jeroen Engels is awesome!</td>
     </tr>
   </tbody>
-  <tfoot>
-    
-  </tfoot>
 </table>
 
 <!-- markdownlint-restore -->
@@ -68,6 +65,34 @@ These people contributed to the project:
 Thanks a lot everyone!"
 `;
 
+exports[`replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors without linkToUsage 1`] = `
+"# project
+
+Description
+
+## Contributors
+These people contributed to the project:
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\">Divjot Singh is awesome!</td>
+      <td align=\\"center\\">Jeroen Engels is awesome!</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Thanks a lot everyone!"
+`;
+
 exports[`split contributors into multiples lines when there are too many 1`] = `
 "# project
 
@@ -92,9 +117,6 @@ These people contributed to the project:
       <td align=\\"center\\">Kent C. Dodds is awesome!</td>
     </tr>
   </tbody>
-  <tfoot>
-    
-  </tfoot>
 </table>
 
 <!-- markdownlint-restore -->

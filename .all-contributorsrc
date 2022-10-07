@@ -607,6 +607,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "klieret",
+      "name": "Kilian Lieret",
+      "avatar_url": "https://avatars.githubusercontent.com/u/13602468?v=4",
+      "profile": "https://www.lieret.net",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "skipCi": true

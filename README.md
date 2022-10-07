@@ -166,8 +166,18 @@ Thanks goes to these wonderful people
     <tr>
       <td align="center"><a href="https://tenshiamd.com"><img src="https://avatars.githubusercontent.com/u/13580338?v=4?s=100" width="100px;" alt="Angel Aviel Domaoan"/><br /><sub><b>Angel Aviel Domaoan</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=tenshiAMD" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3AtenshiAMD" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/all-contributors/cli/commits?author=tenshiAMD" title="Documentation">📖</a> <a href="https://github.com/all-contributors/cli/commits?author=tenshiAMD" title="Tests">⚠️</a></td>
       <td align="center"><a href="https://12rambau.github.io/web-resume/"><img src="https://avatars.githubusercontent.com/u/12596392?v=4?s=100" width="100px;" alt="Rambaud Pierrick"/><br /><sub><b>Rambaud Pierrick</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=12rambau" title="Code">💻</a></td>
+      <td align="center"><a href="https://www.lieret.net"><img src="https://avatars.githubusercontent.com/u/13602468?v=4?s=100" width="100px;" alt="Kilian Lieret"/><br /><sub><b>Kilian Lieret</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Aklieret" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+      <td align="center" size="13px" colspan="6">
+        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
+          <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
+        </img>
+      </td>
+    </tr>
+  </tfoot>
 </table>
 
 <!-- markdownlint-restore -->

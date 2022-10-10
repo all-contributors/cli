@@ -13,9 +13,9 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Divjot Singh is awesome!</td>
-      <td align=\\"center\\">Jeroen Engels is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Divjot Singh is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Jeroen Engels is awesome!</td>
     </tr>
   </tbody>
 </table>
@@ -41,9 +41,9 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Divjot Singh is awesome!</td>
-      <td align=\\"center\\">Jeroen Engels is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Divjot Singh is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Jeroen Engels is awesome!</td>
     </tr>
   </tbody>
   <tfoot>
@@ -78,9 +78,9 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Divjot Singh is awesome!</td>
-      <td align=\\"center\\">Jeroen Engels is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Divjot Singh is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Jeroen Engels is awesome!</td>
     </tr>
   </tbody>
 </table>
@@ -106,15 +106,15 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
     </tr>
     <tr>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
     </tr>
   </tbody>
 </table>
@@ -140,15 +140,15 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
     </tr>
     <tr>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
     </tr>
   </tbody>
   <tfoot>
@@ -160,6 +160,34 @@ These people contributed to the project:
       </td>
     </tr>
   </tfoot>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Thanks a lot everyone!"
+`;
+
+exports[`validate if cell width attribute is floored correctly 1`] = `
+"# project
+
+Description
+
+## Contributors
+These people contributed to the project:
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"14.28%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"14.28%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"14.28%\\">Kent C. Dodds is awesome!</td>
+    </tr>
+  </tbody>
 </table>
 
 <!-- markdownlint-restore -->

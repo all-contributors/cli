@@ -238,3 +238,18 @@ test('replace all-contributors badge if present', () => {
 
   expect(result).toBe(expected)
 })
+
+test('validate if cell width attribute is floored correctly', () => {
+  const {kentcdodds} = contributors
+  const {options, content} = fixtures()
+  const contributorList = [
+    kentcdodds,
+    kentcdodds,
+    kentcdodds,
+  ]
+
+  options.contributorsPerLine = 7
+  const result = generate(options, contributorList, content)
+
+  expect(result).toMatchSnapshot()
+})

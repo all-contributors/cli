@@ -1,4 +1,5 @@
 const _ = require('lodash/fp')
+const floor = require('lodash/floor')
 const formatBadge = require('./format-badge')
 const formatContributor = require('./format-contributor')
 
@@ -43,9 +44,12 @@ function injectListBetweenTags(newContent) {
   }
 }
 
-function formatLine(contributors) {
-  return `<td align="center">${contributors.join(
-    '</td>\n      <td align="center">',
+function formatLine(options, contributors) {
+  const width = floor(_.divide(100)(options.contributorsPerLine), 2)
+  const attributes = `align="center" valign="top" width="${width}%"`
+
+  return `<td ${attributes}>${contributors.join(
+    `</td>\n      <td ${attributes}>`,
   )}</td>`
 }
 
@@ -74,7 +78,9 @@ function generateContributorsList(options, contributors) {
       return formatContributor(options, contributor)
     }),
     _.chunk(options.contributorsPerLine),
-    _.map(formatLine),
+    _.map((currentLineContributors) => formatLine(
+      options, currentLineContributors
+    )),
     _.join('\n    </tr>\n    <tr>\n      '),
     newContent => {
       if (options.linkToUsage) {

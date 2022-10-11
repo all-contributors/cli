@@ -625,6 +625,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "qyurila",
+      "name": "QriLa | Hyeon Gu",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68494132?v=4",
+      "profile": "https://rea9lizer.carrd.co",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "skipCi": true

@@ -168,6 +168,7 @@ Thanks goes to these wonderful people
       <td align="center"><a href="https://12rambau.github.io/web-resume/"><img src="https://avatars.githubusercontent.com/u/12596392?v=4?s=100" width="100px;" alt="Rambaud Pierrick"/><br /><sub><b>Rambaud Pierrick</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=12rambau" title="Code">💻</a></td>
       <td align="center"><a href="https://www.lieret.net"><img src="https://avatars.githubusercontent.com/u/13602468?v=4?s=100" width="100px;" alt="Kilian Lieret"/><br /><sub><b>Kilian Lieret</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Aklieret" title="Bug reports">🐛</a></td>
       <td align="center"><a href="https://github.com/KnorpelSenf"><img src="https://avatars.githubusercontent.com/u/12952387?v=4?s=100" width="100px;" alt="KnorpelSenf"/><br /><sub><b>KnorpelSenf</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3AKnorpelSenf" title="Bug reports">🐛</a></td>
+      <td align="center"><a href="https://rea9lizer.carrd.co"><img src="https://avatars.githubusercontent.com/u/68494132?v=4?s=100" width="100px;" alt="QriLa &#124; Hyeon Gu"/><br /><sub><b>QriLa &#124; Hyeon Gu</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=qyurila" title="Code">💻</a></td>
     </tr>
   </tbody>
   <tfoot>

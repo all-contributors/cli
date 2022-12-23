@@ -1,5 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`replace the content between the ALL-CONTRIBUTORS-LIST tags by a custom wrapper around the list of contributors contained in the "bodyContent" tag 1`] = `
+"# project
+
+Description
+
+## Contributors
+These people contributed to the project:
+<!-- ALL-CONTRIBUTORS-LIST:START -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<p>
+    <tr>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Divjot Singh is awesome!</td>
+      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Jeroen Engels is awesome!</td>
+    </tr>
+</p>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+Thanks a lot everyone!"
+`;
+
 exports[`replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors 1`] = `
 "# project
 

@@ -69,18 +69,21 @@ function generateContributorsList(options, contributors) {
   let tableFooterContent = ''
 
   return _.flow(
-    _.sortBy(contributor => {
+    c => {
       if (options.contributorsSortAlphabetically) {
-        return contributor.name
+        c.sort((a, b) =>
+          a.name.localeCompare(b.name, options.contributorsSortLocale),
+        )
       }
-    }),
+      return c
+    },
     _.map(function formatEveryContributor(contributor) {
       return formatContributor(options, contributor)
     }),
     _.chunk(options.contributorsPerLine),
-    _.map((currentLineContributors) => formatLine(
-      options, currentLineContributors
-    )),
+    _.map(currentLineContributors =>
+      formatLine(options, currentLineContributors),
+    ),
     _.join('\n    </tr>\n    <tr>\n      '),
     newContent => {
       if (options.linkToUsage) {

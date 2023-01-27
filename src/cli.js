@@ -22,12 +22,22 @@ const yargv = yargs
   .alias('v', 'version')
   .version()
   .recommendCommands()
-  .command('generate', `Generate the list of contributors\n\nUSAGE: all-contributors generate`)
-  .command('add', `Add a new contributor\n\nUSAGE: all-contributors add <username> <comma-separated contributions>`)
-  .command('init', `Prepare the project to be used with this tool\n\nUSAGE: all-contributors init`)
+  .command(
+    'generate',
+    `Generate the list of contributors\n\nUSAGE: all-contributors generate`,
+  )
+  .command(
+    'add',
+    `Add a new contributor\n\nUSAGE: all-contributors add <username> <comma-separated contributions>`,
+  )
+  .command(
+    'init',
+    `Prepare the project to be used with this tool\n\nUSAGE: all-contributors init`,
+  )
   .command(
     'check',
-    `Compare contributors from the repository with the ones credited in .all-contributorsrc'\n\nUSAGE: all-contributors check`)
+    `Compare contributors from the repository with the ones credited in .all-contributorsrc'\n\nUSAGE: all-contributors check`,
+  )
   .boolean('commit')
   .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
@@ -36,6 +46,12 @@ const yargv = yargs
     default: false,
     description:
       'Sort the list of contributors alphabetically in the generated list',
+  })
+  .option('contributorsSortLocale', {
+    type: 'string',
+    default: undefined,
+    description:
+      'Locale to use for sorting the contributors alphabetically in the generated list',
   })
   .default('contributors', [])
   .default('config', defaultRCFile)

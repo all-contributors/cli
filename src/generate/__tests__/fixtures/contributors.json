@@ -34,5 +34,12 @@
     "name": "Wildly Misconfigured",
     "avatar_url": "https://avatars1.githubusercontent.com/u/1500684",
     "contributions": ["plumbis"]
+  },
+  "name_with_quotes": {
+    "login": "namelastname",
+    "name": "Name \"Nickname\" Lastname",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/1500684",
+    "profile": "http://github.com/namelastname",
+    "contributions": ["doc"]
   }
 }

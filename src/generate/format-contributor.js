@@ -44,7 +44,9 @@ function defaultTemplate(templateData) {
 }
 
 function escapeName(name) {
-  return name.replace(new RegExp('\\|', 'g'), '&#124;')
+  return name
+    .replace(new RegExp('\\|', 'g'), '&#124;')
+    .replace(new RegExp('\\"', 'g'), '&quot;')
 }
 
 module.exports = function formatContributor(options, contributor) {

@@ -634,6 +634,17 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "dwmkerr",
+      "name": "Dave Kerr",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1926984?v=4",
+      "profile": "http://www.dwmkerr.com",
+      "contributions": [
+        "bug",
+        "test",
+        "code"
+      ]
     }
   ],
   "skipCi": true

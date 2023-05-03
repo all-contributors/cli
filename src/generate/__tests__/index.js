@@ -69,6 +69,19 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of c
   expect(result).toMatchSnapshot()
 })
 
+test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a custom wrapper around the list of contributors contained in the "bodyContent" tag', () => {
+  const {kentcdodds, bogas04} = contributors
+  const {options, jfmengels, content} = fixtures()
+  const contributorList = [kentcdodds, bogas04, jfmengels]
+  const result = generate(
+    Object.assign(options, { wrapperTemplate: '<p><%= bodyContent %></p>'}),
+    contributorList,
+    content,
+  )
+
+  expect(result).toMatchSnapshot()
+})
+
 test('split contributors into multiples lines when there are too many', () => {
   const {kentcdodds} = contributors
   const {options, content} = fixtures()

@@ -87,3 +87,12 @@ test('format contributor with no complete name', () => {
 
   expect(formatContributor(options, contributor)).toBe(expected)
 })
+
+test('format contributor with quotes in name', () => {
+  const contributor = contributors.name_with_quotes
+  const {options} = fixtures()
+
+  const expected =
+    '<a href="http://github.com/namelastname"><img src="https://avatars1.githubusercontent.com/u/1500684?s=150" width="150px;" alt="Name &quot;Nickname&quot; Lastname"/><br /><sub><b>Name &quot;Nickname&quot; Lastname</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=namelastname" title="Documentation">📖</a>'
+  expect(formatContributor(options, contributor)).toBe(expected)
+})

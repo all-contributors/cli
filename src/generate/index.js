@@ -66,6 +66,10 @@ function formatFooter(options) {
 
 function generateContributorsList(options, contributors) {
   const tableFooter = formatFooter(options)
+  const defaultWrapperTemplate =  _.template('\n<table>\n  <tbody><%= bodyContent %>  </tbody>\n<%= tableFooterContent %></table>\n\n')
+  const wrapperTemplate = options.wrapperTemplate ? _.template(`\n${options.wrapperTemplate}\n\n`) : defaultWrapperTemplate
+  const seperator = options.wrapperTemplate ? '\n    </tr><br />\n    <tr>\n      ' : '\n    </tr>\n    <tr>\n      '
+
   let tableFooterContent = ''
 
   return _.flow(
@@ -81,12 +85,15 @@ function generateContributorsList(options, contributors) {
     _.map((currentLineContributors) => formatLine(
       options, currentLineContributors
     )),
-    _.join('\n    </tr>\n    <tr>\n      '),
+    _.join(seperator),
     newContent => {
       if (options.linkToUsage) {
         tableFooterContent = `  <tfoot>\n    ${tableFooter}\n  </tfoot>\n`
       }
-      return `\n<table>\n  <tbody>\n    <tr>\n      ${newContent}\n    </tr>\n  </tbody>\n${tableFooterContent}</table>\n\n`
+
+      const bodyContent = `\n    <tr>\n      ${newContent}\n    </tr>\n`
+
+      return wrapperTemplate({ bodyContent, tableFooterContent})
     },
   )(contributors)
 }
@@ -135,6 +142,7 @@ module.exports = function generate(options, contributors, fileContent) {
       ? '\n'
       : generateContributorsList(options, contributors)
   const badge = formatBadge(options, contributors)
+
   return _.flow(
     injectListBetweenTags(contributorsList),
     replaceBadge(badge),

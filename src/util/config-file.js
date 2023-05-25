@@ -2,6 +2,7 @@ const fs = require('fs')
 const pify = require('pify')
 const _ = require('lodash/fp')
 const jf = require('json-fixer')
+const {formatConfig} = require('./formatting')
 
 function readConfig(configPath) {
   try {
@@ -14,7 +15,7 @@ function readConfig(configPath) {
     }
     if (changed) {
       //Updates the file with fixes
-      fs.writeFileSync(configPath, JSON.stringify(config, null, 2))
+      fs.writeFileSync(configPath, formatConfig(config))
     }
     return config
   } catch (error) {
@@ -43,7 +44,7 @@ function writeConfig(configPath, content) {
       `Error! Project files was overridden and is empty in ${configPath}`,
     )
   }
-  return pify(fs.writeFile)(configPath, `${JSON.stringify(content, null, 2)}\n`)
+  return pify(fs.writeFile)(configPath, `${formatConfig(content)}\n`)
 }
 
 function writeContributors(configPath, contributors) {

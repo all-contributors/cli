@@ -171,6 +171,9 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="16.66%"><a href="https://rea9lizer.carrd.co"><img src="https://avatars.githubusercontent.com/u/68494132?v=4?s=100" width="100px;" alt="QriLa &#124; Hyeon Gu"/><br /><sub><b>QriLa &#124; Hyeon Gu</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=qyurila" title="Code">💻</a></td>
       <td align="center" valign="top" width="16.66%"><a href="http://www.dwmkerr.com"><img src="https://avatars.githubusercontent.com/u/1926984?v=4?s=100" width="100px;" alt="Dave Kerr"/><br /><sub><b>Dave Kerr</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Adwmkerr" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/commits?author=dwmkerr" title="Tests">⚠️</a> <a href="https://github.com/all-contributors/cli/commits?author=dwmkerr" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/schweden1997"><img src="https://avatars.githubusercontent.com/u/6765735?v=4?s=100" width="100px;" alt="Marco De Gaetano"/><br /><sub><b>Marco De Gaetano</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Aschweden1997" title="Bug reports">🐛</a></td>
+    </tr>
   </tbody>
   <tfoot>
     <tr>

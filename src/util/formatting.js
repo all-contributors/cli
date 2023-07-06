@@ -1,4 +1,4 @@
-function formatConfig(configPath, content) {
+function formatConfig(content, configPath) {
   const stringified = JSON.stringify(content, null, 2)
   try {
     const prettier = require('prettier')

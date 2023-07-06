@@ -23,13 +23,13 @@ const presentConfigFileExpected = `{
 `
 
 test('falls back to JSON.stringify when the configPath cannot resolve to a config', () => {
-  expect(formatting.formatConfig(absentFile, content)).toBe(
+  expect(formatting.formatConfig(content, absentFile)).toBe(
     absentConfigFileExpected,
   )
 })
 
 test('uses Prettier when the configPath can resolve to a config', () => {
-  expect(formatting.formatConfig(presentFile, content)).toBe(
+  expect(formatting.formatConfig(content, presentFile)).toBe(
     presentConfigFileExpected,
   )
 })

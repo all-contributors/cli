@@ -94,24 +94,6 @@ function startGeneration(argv) {
 async function addContribution(argv) {
   util.configFile.readConfig(argv.config) // ensure the config file exists
   const username = argv._[1] === undefined ? undefined : String(argv._[1])
-  /* Example: (for clarity & debugging purposes)
-  {
-    _: [ 'add' ],
-    projectName: 'cz-cli',
-    projectOwner: 'commitizen',
-    repoType: 'github',
-    repoHost: 'https://github.com',
-    files: [ 'AC.md' ],
-    imageSize: 100,
-    commit: false,
-    commitConvention: 'angular',
-    contributors: [],
-    contributorsPerLine: 7,
-    'contributors-per-line': 7,
-    config: '/mnt/c/Users/max/Projects/cz-cli/.all-contributorsrc',
-    '$0': '../all-contributors-cli/src/cli.js'
-  }
-  */
   const contributions = argv._[2]
 
   // Add or update contributor in the config file
@@ -124,7 +106,6 @@ async function addContribution(argv) {
   }
 
   argv.contributors = data.contributors
-
   /* Example
    [ { login: 'Berkmann18',
    name: 'Maximilian Berkmann',
@@ -291,7 +272,6 @@ async function fetchContributors(argv) {
       contributorsToAdd.push({login: usr.login, contributions: ['code']})
     }
   })
-
   // TODO: Roll onto other contribution categories following https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
 
   info('Finalising')

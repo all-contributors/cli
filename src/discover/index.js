@@ -18,7 +18,6 @@ const getContributors = async function (owner, name, cacheResult = false) {
     commits: true,
   }
 
-  // console.log('info provided:', options);
   if (cacheResult) {
     const nycOutputPath = join(__dirname, './nyc-output.json')
     if (existsSync(nycOutputPath)) {

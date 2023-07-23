@@ -5,6 +5,7 @@ const path = require('path')
 const yargs = require('yargs')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
+const didYouMean = require('didyoumean')
 
 const init = require('./init')
 const generate = require('./generate')
@@ -24,12 +25,22 @@ const yargv = yargs
   .alias('v', 'version')
   .version()
   .recommendCommands()
-  .command('generate', `Generate the list of contributors\n\nUSAGE: all-contributors generate`)
-  .command('add', `Add a new contributor\n\nUSAGE: all-contributors add <username> <comma-separated contributions>`)
-  .command('init', `Prepare the project to be used with this tool\n\nUSAGE: all-contributors init`)
+  .command(
+    'generate',
+    `Generate the list of contributors\n\nUSAGE: all-contributors generate`,
+  )
+  .command(
+    'add',
+    `Add a new contributor\n\nUSAGE: all-contributors add <username> <comma-separated contributions>`,
+  )
+  .command(
+    'init',
+    `Prepare the project to be used with this tool\n\nUSAGE: all-contributors init`,
+  )
   .command(
     'check',
-    `Compare contributors from the repository with the ones credited in .all-contributorsrc'\n\nUSAGE: all-contributors check`)
+    `Compare contributors from the repository with the ones credited in .all-contributorsrc'\n\nUSAGE: all-contributors check`,
+  )
   .boolean('commit')
   .default('files', ['README.md'])
   .default('contributorsPerLine', 7)
@@ -177,10 +188,11 @@ async function checkContributors(argv) {
 }
 
 async function fetchContributors(argv) {
-  const {reviewers, commitAuthors, issueCreators} = await getContributors(
-    argv.projectOwner,
-    argv.projectName,
-  )
+  const {
+    reviewers,
+    commitAuthors,
+    issueCreators /* , prCreators */,
+  } = await getContributors(argv.projectOwner, argv.projectName, true)
   const args = {...argv, _: []}
   const contributorsToAdd = []
   const learner = await getLearner()
@@ -193,35 +205,40 @@ async function fetchContributors(argv) {
     )
   })
 
+  const guessCategories = (item, itemType, contributor) => {
+    const guessedCategory = learner
+      .classify(item)
+      .find(ctr => ctr && ctr !== 'null')
+
+    if (!guessedCategory) {
+      console.warn(
+        `Oops, I couldn't find any category for the "${item}" ${itemType}`,
+      )
+
+      return
+    }
+
+    if (!contributor.contributions.includes(guessedCategory)) {
+      contributor.contributions.push(guessedCategory)
+
+      console.log(
+        `Adding ${chalk.blue(contributor.login)} for ${chalk.underline(
+          guessedCategory,
+        )}`,
+      )
+    }
+  }
+
   issueCreators.forEach(usr => {
     const contributor = {
       login: usr.login,
       contributions: [],
     }
+    //TODO: Look at the titles field and categories based on that.
 
-    usr.labels.forEach(lbl => {
-      const guessedCategory = learner
-        .classify(lbl)
-        .find(ctr => ctr && ctr !== 'null')
+    usr.labels.forEach(label => guessCategories(label, 'label', contributor))
 
-      if (!guessedCategory) {
-        console.warn(
-          `Oops, I couldn't find any category for the "${lbl}" label`,
-        )
-
-        return
-      }
-
-      if (!contributor.contributions.includes(guessedCategory)) {
-        contributor.contributions.push(guessedCategory)
-
-        console.log(
-          `Adding ${chalk.blue(usr.login)} for ${chalk.underline(
-            guessedCategory,
-          )}`,
-        )
-      }
-    })
+    usr.titles.forEach(title => guessCategories(title, 'title', contributor))
 
     const existingContributor = contributorsToAdd.find(
       ctr => ctr.login === usr.login,
@@ -234,6 +251,7 @@ async function fetchContributors(argv) {
     }
   })
 
+  //TODO Look at prCreators (including its titles field) and add contributions from there
   commitAuthors.forEach(usr => {
     const existingContributor = contributorsToAdd.find(
       ctr => ctr.login === usr.login,
@@ -331,6 +349,7 @@ promptForCommand(yargv)
       case 'fetch':
         return fetchContributors(yargv)
       default:
+        suggestCommands(command)
         throw new Error(`Unknown command ${command}`)
     }
   })

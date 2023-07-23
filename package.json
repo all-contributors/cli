@@ -53,6 +53,7 @@
     "json-fixer": "^1.6.8",
     "lodash": "^4.11.2",
     "name-your-contributors": "^3.10.0",
+    "nclr": "^2.2.5",
     "node-fetch": "^2.6.0",
     "pify": "^5.0.0",
     "yargs": "^15.0.1",

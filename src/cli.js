@@ -6,6 +6,7 @@ const yargs = require('yargs')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
 const didYouMean = require('didyoumean')
+const {info, warn, use} = require('nclr')
 
 const init = require('./init')
 const generate = require('./generate')
@@ -191,7 +192,8 @@ async function fetchContributors(argv) {
   const {
     reviewers,
     commitAuthors,
-    issueCreators /* , prCreators */,
+    issueCreators,
+    prCreators,
   } = await getContributors(argv.projectOwner, argv.projectName, true)
   const args = {...argv, _: []}
   const contributorsToAdd = []
@@ -201,18 +203,21 @@ async function fetchContributors(argv) {
     contributorsToAdd.push({login: usr.login, contributions: ['review']})
 
     console.log(
-      `Adding ${chalk.underline('Reviewer')} ${chalk.blue(usr.login)}`,
+      `Including ${chalk.underline('Reviewer')} ${use('info', usr.login)}`,
     )
   })
 
   const guessCategories = (item, itemType, contributor) => {
     const guessedCategory = learner
       .classify(item)
-      .find(ctr => ctr && ctr !== 'null')
+      .find(ctr => ctr && ctr !== 'null' && ctr !== 'undefined')
 
     if (!guessedCategory) {
-      console.warn(
-        `Oops, I couldn't find any category for the "${item}" ${itemType}`,
+      warn(
+        `Oops, I couldn't find any category for the "${use(
+          'inp',
+          item,
+        )}" ${itemType}`,
       )
 
       return
@@ -222,22 +227,21 @@ async function fetchContributors(argv) {
       contributor.contributions.push(guessedCategory)
 
       console.log(
-        `Adding ${chalk.blue(contributor.login)} for ${chalk.underline(
+        `Including ${use('info', contributor.login)} for ${chalk.underline(
           guessedCategory,
-        )}`,
+        )}, based on "${use('inp', item)}"`,
       )
     }
   }
 
+  info('Looking at issue creators')
   issueCreators.forEach(usr => {
     const contributor = {
       login: usr.login,
       contributions: [],
     }
-    //TODO: Look at the titles field and categories based on that.
 
     usr.labels.forEach(label => guessCategories(label, 'label', contributor))
-
     usr.titles.forEach(title => guessCategories(title, 'title', contributor))
 
     const existingContributor = contributorsToAdd.find(
@@ -251,14 +255,35 @@ async function fetchContributors(argv) {
     }
   })
 
-  //TODO Look at prCreators (including its titles field) and add contributions from there
+  info('Looking at PR creators')
+  prCreators.forEach(usr => {
+    const contributor = {
+      login: usr.login,
+      contributions: [],
+    }
+
+    usr.labels.forEach(label => guessCategories(label, 'PR label', contributor))
+    usr.titles.forEach(title => guessCategories(title, 'PR title', contributor))
+
+    const existingContributor = contributorsToAdd.find(
+      ctr => ctr.login === usr.login,
+    )
+
+    if (existingContributor) {
+      existingContributor.contributions.push(...contributor.contributions)
+    } else {
+      contributorsToAdd.push(contributor)
+    }
+  })
+
+  info('Looking at commit authors')
   commitAuthors.forEach(usr => {
     const existingContributor = contributorsToAdd.find(
       ctr => ctr.login === usr.login,
     )
 
     if (existingContributor) {
-      // There's no label or commit message info so use only code for now
+      // TODO: See how the commit message could be added (this may require the full output) to not just assume it's a code contribution
       if (!existingContributor.contributions.includes('code')) {
         existingContributor.contributions.push('code')
       }
@@ -269,8 +294,12 @@ async function fetchContributors(argv) {
 
   // TODO: Roll onto other contribution categories following https://www.draw.io/#G1uL9saIuZl3rj8sOo9xsLOPByAe28qhwa
 
+  info('Finalising')
   for (const contributor of contributorsToAdd) {
-    if (!contributor.contributions.length) {
+    const isDependabotDuplicates = /dependabot(\[bot\]|-\w+)/.test(
+      contributor.login,
+    )
+    if (!contributor.contributions.length || isDependabotDuplicates) {
       console.log('Skipping', contributor.login)
 
       continue
@@ -280,7 +309,7 @@ async function fetchContributors(argv) {
     const contributions = contributor.contributions.join('/')
 
     console.log(
-      `Adding ${chalk.blue(contributor.login)} for ${chalk.underline(
+      `Adding ${use('info', contributor.login)} for ${chalk.underline(
         contributions,
       )}`,
     )
@@ -292,7 +321,7 @@ async function fetchContributors(argv) {
       await addContribution(args)
     } catch (error) {
       console.error(
-        `Adding ${chalk.blue(contributor.login)} for ${chalk.underline(
+        `Adding ${use('info', contributor.login)} for ${chalk.underline(
           contributions,
         )} Failed: ${JSON.stringify(error)}`,
       )

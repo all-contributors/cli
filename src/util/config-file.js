@@ -15,7 +15,7 @@ function readConfig(configPath) {
     }
     if (changed) {
       //Updates the file with fixes
-      fs.writeFileSync(configPath, formatConfig(config))
+      fs.writeFileSync(configPath, formatConfig(configPath, config))
     }
     return config
   } catch (error) {
@@ -44,7 +44,10 @@ function writeConfig(configPath, content) {
       `Error! Project files was overridden and is empty in ${configPath}`,
     )
   }
-  return pify(fs.writeFile)(configPath, `${formatConfig(content)}\n`)
+  return pify(fs.writeFile)(
+    configPath,
+    `${formatConfig(configPath, content)}\n`,
+  )
 }
 
 function writeContributors(configPath, contributors) {

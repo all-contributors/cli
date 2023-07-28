@@ -436,7 +436,11 @@
       "name": "Josh Goldberg",
       "avatar_url": "https://avatars.githubusercontent.com/u/3335181?v=4",
       "profile": "http://www.joshuakgoldberg.com",
-      "contributions": ["bug"]
+      "contributions": [
+        "bug",
+        "ideas",
+        "code"
+      ]
     },
     {
       "login": "tenshiAMD",
@@ -488,6 +492,7 @@
       "contributions": ["bug"]
     }
   ],
-  "skipCi": true
+  "skipCi": true,
+  "commitType": "docs"
 }
 

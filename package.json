@@ -42,16 +42,22 @@
   },
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
-    "@babel/runtime": "^7.7.6",
+    "@babel/runtime": "^7.22.6",
+    "ac-learn": "^1.7.0",
     "async": "^3.1.0",
     "chalk": "^4.0.0",
+    "ac-learn": "^1.0.3",
+    "clui": "^0.3.6",
     "didyoumean": "^1.2.1",
     "inquirer": "^7.3.3",
     "json-fixer": "^1.6.8",
     "lodash": "^4.11.2",
+    "name-your-contributors": "^3.10.0",
+    "nclr": "^2.2.5",
     "node-fetch": "^2.6.0",
     "pify": "^5.0.0",
-    "yargs": "^15.0.1"
+    "yargs": "^15.0.1",
+    "request": "^2.72.0"
   },
   "devDependencies": {
     "codecov": "^3.8.1",

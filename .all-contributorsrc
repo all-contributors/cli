@@ -490,6 +490,13 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/6765735?v=4",
       "profile": "https://github.com/schweden1997",
       "contributions": ["bug"]
+    },
+    {
+      "login": "KibbeWater",
+      "name": "Snow",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35224538?v=4",
+      "profile": "https://kibbewater.com",
+      "contributions": ["code", "bug"]
     }
   ],
   "skipCi": true,

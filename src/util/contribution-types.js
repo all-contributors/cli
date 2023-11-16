@@ -86,6 +86,10 @@ const defaultTypes = function (repoType) {
       symbol: '🔌',
       description: 'Plugin/utility libraries',
     },
+    productManagement: {
+      symbol: '🎯',
+      description: 'Product Management',
+    },
     projectManagement: {
       symbol: '📆',
       description: 'Project Management',

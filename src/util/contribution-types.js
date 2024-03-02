@@ -70,6 +70,10 @@ const defaultTypes = function (repoType) {
       symbol: '🚇',
       description: 'Infrastructure (Hosting, Build-Tools, etc)',
     },
+    leader: {
+      symbol: '🌟',
+      description: 'Leadership',
+    },
     maintenance: {
       symbol: '🚧',
       description: 'Maintenance',

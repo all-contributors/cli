@@ -124,6 +124,11 @@ const defaultTypes = function (repoType) {
       symbol: '🌍',
       description: 'Translation',
     },
+    triage: {
+      symbol: '🗂️',
+      description: 'Triage',
+      link: repo.getLinkToIssues(repoType),
+    },
     tutorial: {
       symbol: '✅',
       description: 'Tutorials',

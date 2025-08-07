@@ -46,7 +46,7 @@
     "async": "^3.2.6",
     "chalk": "^5.4.1",
     "didyoumean": "^1.2.2",
-    "inquirer": "^12.6.0",
+    "inquirer": "^12.9.0",
     "json-fixer": "^1.6.15",
     "lodash": "^4.17.21",
     "node-fetch": "^3.3.2",

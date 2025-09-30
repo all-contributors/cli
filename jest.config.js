@@ -9,5 +9,14 @@ module.exports = Object.assign(jestConfig, {
       statements: 50,
     },
   },
-  forceExit: true
+  forceExit: true,
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  globals: {
+    'ts-jest': {
+      useESM: true
+    }
+  },
+  transformIgnorePatterns: [
+    'node_modules/(?!(prettier)/)'
+  ]
 })

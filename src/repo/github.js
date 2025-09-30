@@ -1,5 +1,4 @@
 const url = require('url')
-const fetch = require('node-fetch')
 const {parseHttpUrl, isValidHttpUrl} = require('../util/url')
 
 /**

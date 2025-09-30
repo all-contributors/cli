@@ -45,7 +45,7 @@ test("LOREM doesn't exists", () => {
     ensureFileExists(file).then(data => {
       expect(data).toStrictEqual(file)
       return unlink(file, err => {
-        if (err) throw err
+        expect(err).toBeNull()
         done()
       })
     })

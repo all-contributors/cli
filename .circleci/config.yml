@@ -50,7 +50,12 @@ jobs:
       - prep_env
       - attach_workspace:
           at: ./
-      - run: yarn codecov
+      - run: 
+          name: Upload coverage to Codecov
+          command: |
+            curl -Os https://uploader.codecov.io/latest/linux/codecov
+            chmod +x codecov
+            ./codecov -t ${CODECOV_TOKEN}
       - run: yarn semantic-release
 workflows:
   version: 2

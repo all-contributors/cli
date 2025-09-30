@@ -42,27 +42,27 @@
   },
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
-    "@babel/runtime": "^7.27.1",
+    "@babel/runtime": "^7.28.4",
     "async": "^3.2.6",
-    "chalk": "^5.4.1",
+    "chalk": "^5.6.2",
     "didyoumean": "^1.2.2",
-    "inquirer": "^12.9.0",
+    "inquirer": "^12.9.6",
     "json-fixer": "^1.6.15",
     "lodash": "^4.17.21",
     "node-fetch": "^3.3.2",
     "pify": "^6.1.0",
-    "yargs": "^17.7.2"
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "codecov": "^3.8.1",
+    "codecov": "^3.8.2",
     "cz-conventional-changelog": "^3.3.0",
-    "git-cz": "^4.7.6",
-    "kcd-scripts": "^6.2.0",
-    "nock": "^12.0.0",
-    "semantic-release": "^17.0.8"
+    "git-cz": "^4.9.0",
+    "kcd-scripts": "^16.0.0",
+    "nock": "^14.0.10",
+    "semantic-release": "^24.2.9"
   },
   "optionalDependencies": {
-    "prettier": "^3"
+    "prettier": "^3.6.2"
   },
   "eslintIgnore": [
     "node_modules",
@@ -83,5 +83,6 @@
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  }
+  },
+  "packageManager": "pnpm@10.17.1"
 }

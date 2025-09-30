@@ -11,8 +11,10 @@ commands:
       - checkout:
           path: ~/repo
       - run:
-          name: Install pnpm
-          command: npm install -g pnpm@10.17.1
+          name: Enable pnpm via Corepack
+          command: |
+            sudo corepack enable
+            corepack prepare pnpm@10.17.1 --activate
       - restore_cache:
           name: Restore node_modules cache
           key:

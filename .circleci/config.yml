@@ -2,7 +2,7 @@ version: 2.1
 
 docker_defaults: &docker_defaults
   docker:
-    - image: cimg/node:16.17.0
+    - image: cimg/node:22.14
 
 commands:
   prep_env:
@@ -10,6 +10,9 @@ commands:
     steps:
       - checkout:
           path: ~/repo
+      - run:
+          name: Install pnpm
+          command: npm install -g pnpm@10.17.1
       - restore_cache:
           name: Restore node_modules cache
           key:
@@ -30,14 +33,14 @@ jobs:
     working_directory: ~/repo
     steps:
       - prep_env
-      - run: yarn install
+      - run: pnpm install
       - save_env_cache
   validate:
     <<: *docker_defaults
     working_directory: ~/repo
     steps:
       - prep_env
-      - run: yarn validate
+      - run: pnpm run validate
       - persist_to_workspace:
           root: ./
           paths:
@@ -56,7 +59,7 @@ jobs:
             curl -Os https://uploader.codecov.io/latest/linux/codecov
             chmod +x codecov
             ./codecov -t ${CODECOV_TOKEN}
-      - run: yarn semantic-release
+      - run: pnpm run semantic-release
 workflows:
   version: 2
   validate_and_deploy:

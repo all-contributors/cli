@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@5.4.3
+
 docker_defaults: &docker_defaults
   docker:
     - image: cimg/node:22.14
@@ -55,12 +58,7 @@ jobs:
       - prep_env
       - attach_workspace:
           at: ./
-      - run: 
-          name: Upload coverage to Codecov
-          command: |
-            curl -Os https://uploader.codecov.io/latest/linux/codecov
-            chmod +x codecov
-            ./codecov -t ${CODECOV_TOKEN}
+      - codecov/upload
       - run: pnpm run semantic-release
 workflows:
   version: 2

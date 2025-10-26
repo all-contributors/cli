@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@5.4.3
+
 docker_defaults: &docker_defaults
   docker:
     - image: cimg/node:16.17.0
@@ -50,7 +53,7 @@ jobs:
       - prep_env
       - attach_workspace:
           at: ./
-      - run: yarn codecov
+      - codecov/upload
       - run: yarn semantic-release
 workflows:
   version: 2

@@ -66,10 +66,10 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
 
 experimental:
   notify:
     branches:
       only:
-        - master
+        - main

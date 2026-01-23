@@ -10,7 +10,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=4"
+    "node": ">=22.22.0"
   },
   "scripts": {
     "add-contributor": "kcd-scripts contributors add",
@@ -59,7 +59,7 @@
     "git-cz": "^4.7.6",
     "kcd-scripts": "^6.2.0",
     "nock": "^12.0.0",
-    "semantic-release": "^17.0.8"
+    "semantic-release": "^25.0.2"
   },
   "optionalDependencies": {
     "prettier": "^2"

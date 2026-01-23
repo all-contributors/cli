@@ -2,7 +2,7 @@ version: 2.1
 
 docker_defaults: &docker_defaults
   docker:
-    - image: cimg/node:16.17.0
+    - image: cimg/node:22.22.0
 
 commands:
   prep_env:
@@ -66,10 +66,10 @@ workflows:
           filters:
             branches:
               only:
-                - master
+                - main
 
 experimental:
   notify:
     branches:
       only:
-        - master
+        - main

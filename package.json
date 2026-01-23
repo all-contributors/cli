@@ -51,7 +51,7 @@
     "lodash": "^4.11.2",
     "node-fetch": "^2.6.0",
     "pify": "^5.0.0",
-    "yargs": "^17.7.2"
+    "yargs": "^18.0.0"
   },
   "devDependencies": {
     "codecov": "^3.8.1",

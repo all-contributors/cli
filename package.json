@@ -10,7 +10,7 @@
     "dist"
   ],
   "engines": {
-    "node": ">=22.11.0"
+    "node": ">=22.21.4"
   },
   "scripts": {
     "add-contributor": "kcd-scripts contributors add",

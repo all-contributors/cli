@@ -173,6 +173,7 @@ Thanks goes to these wonderful people
     </tr>
     <tr>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/schweden1997"><img src="https://avatars.githubusercontent.com/u/6765735?v=4?s=100" width="100px;" alt="Marco De Gaetano"/><br /><sub><b>Marco De Gaetano</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Aschweden1997" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="http://www.leahwasser.com"><img src="https://avatars.githubusercontent.com/u/7649194?v=4?s=100" width="100px;" alt="Leah Wasser"/><br /><sub><b>Leah Wasser</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=lwasser" title="Documentation">📖</a></td>
     </tr>
   </tbody>
   <tfoot>

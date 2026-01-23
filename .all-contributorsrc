@@ -444,7 +444,9 @@
       "profile": "https://github.com/jdalrymple",
       "contributions": [
         "code",
-        "test"
+        "test",
+        "security",
+        "bug"
       ]
     },
     {

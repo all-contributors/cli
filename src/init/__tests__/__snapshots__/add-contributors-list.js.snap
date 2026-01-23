@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`create contributors section if content is empty 1`] = `
-"
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -13,11 +13,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!"
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 `;
 
 exports[`create contributors section if it is absent 1`] = `
-"# project
+# project
 
 Description
 ## Contributors ✨
@@ -31,11 +31,11 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!"
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
 `;
 
 exports[`insert list under contributors section 1`] = `
-"# project
+# project
 
 Description
 
@@ -46,5 +46,5 @@ Description
 <!-- markdownlint-disable -->
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->"
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 `;

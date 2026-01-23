@@ -1,5 +1,5 @@
 const _ = require('lodash/fp')
-const inquirer = require('inquirer')
+const inquirer = require('inquirer').default
 const util = require('../util')
 const repo = require('../repo')
 

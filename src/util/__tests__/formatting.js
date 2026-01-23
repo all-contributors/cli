@@ -14,13 +14,12 @@ const absentConfigFileExpected = `{
 
 const presentFile = path.join(__dirname, '__stubs__', 'file.json')
 const presentConfigFileExpected = `{
-	"contributors": [
-		{
-			"id": "abc123"
-		}
-	]
-}
-`
+  "contributors": [
+    {
+      "id": "abc123"
+    }
+  ]
+}`
 
 test('falls back to JSON.stringify when the configPath cannot resolve to a config', () => {
   expect(formatting.formatConfig(absentFile, content)).toBe(

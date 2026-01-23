@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`replace the content between the ALL-CONTRIBUTORS-LIST tags by a custom wrapper around the list of contributors contained in the "bodyContent" tag 1`] = `
-"# project
+# project
 
 Description
 
@@ -12,9 +12,9 @@ These people contributed to the project:
 <!-- markdownlint-disable -->
 <p>
     <tr>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Divjot Singh is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Jeroen Engels is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Divjot Singh is awesome!</td>
+      <td align="center" valign="top" width="20%">Jeroen Engels is awesome!</td>
     </tr>
 </p>
 
@@ -23,11 +23,11 @@ These people contributed to the project:
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-Thanks a lot everyone!"
+Thanks a lot everyone!
 `;
 
 exports[`replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors 1`] = `
-"# project
+# project
 
 Description
 
@@ -39,9 +39,9 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Divjot Singh is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Jeroen Engels is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Divjot Singh is awesome!</td>
+      <td align="center" valign="top" width="20%">Jeroen Engels is awesome!</td>
     </tr>
   </tbody>
 </table>
@@ -51,11 +51,11 @@ These people contributed to the project:
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-Thanks a lot everyone!"
+Thanks a lot everyone!
 `;
 
 exports[`replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors with linkToUsage 1`] = `
-"# project
+# project
 
 Description
 
@@ -67,16 +67,16 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Divjot Singh is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Jeroen Engels is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Divjot Singh is awesome!</td>
+      <td align="center" valign="top" width="20%">Jeroen Engels is awesome!</td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
-      <td align=\\"center\\" size=\\"13px\\" colspan=\\"5\\">
-        <img src=\\"https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg\\">
-          <a href=\\"https://all-contributors.js.org/docs/en/bot/usage\\">Add your contributions</a>
+      <td align="center" size="13px" colspan="5">
+        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
+          <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
         </img>
       </td>
     </tr>
@@ -88,11 +88,11 @@ These people contributed to the project:
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-Thanks a lot everyone!"
+Thanks a lot everyone!
 `;
 
 exports[`replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors without linkToUsage 1`] = `
-"# project
+# project
 
 Description
 
@@ -104,9 +104,9 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Divjot Singh is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Jeroen Engels is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Divjot Singh is awesome!</td>
+      <td align="center" valign="top" width="20%">Jeroen Engels is awesome!</td>
     </tr>
   </tbody>
 </table>
@@ -116,11 +116,11 @@ These people contributed to the project:
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-Thanks a lot everyone!"
+Thanks a lot everyone!
 `;
 
 exports[`split contributors into multiples lines when there are too many 1`] = `
-"# project
+# project
 
 Description
 
@@ -132,15 +132,15 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
     </tr>
     <tr>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
     </tr>
   </tbody>
 </table>
@@ -150,11 +150,11 @@ These people contributed to the project:
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-Thanks a lot everyone!"
+Thanks a lot everyone!
 `;
 
 exports[`split contributors into multiples lines when there are too many with linkToUsage 1`] = `
-"# project
+# project
 
 Description
 
@@ -166,22 +166,22 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
     </tr>
     <tr>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"20%\\">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="20%">Kent C. Dodds is awesome!</td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
-      <td align=\\"center\\" size=\\"13px\\" colspan=\\"5\\">
-        <img src=\\"https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg\\">
-          <a href=\\"https://all-contributors.js.org/docs/en/bot/usage\\">Add your contributions</a>
+      <td align="center" size="13px" colspan="5">
+        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
+          <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
         </img>
       </td>
     </tr>
@@ -193,11 +193,11 @@ These people contributed to the project:
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-Thanks a lot everyone!"
+Thanks a lot everyone!
 `;
 
 exports[`validate if cell width attribute is floored correctly 1`] = `
-"# project
+# project
 
 Description
 
@@ -209,9 +209,9 @@ These people contributed to the project:
 <table>
   <tbody>
     <tr>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"14.28%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"14.28%\\">Kent C. Dodds is awesome!</td>
-      <td align=\\"center\\" valign=\\"top\\" width=\\"14.28%\\">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="14.28%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="14.28%">Kent C. Dodds is awesome!</td>
+      <td align="center" valign="top" width="14.28%">Kent C. Dodds is awesome!</td>
     </tr>
   </tbody>
 </table>
@@ -221,5 +221,5 @@ These people contributed to the project:
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
-Thanks a lot everyone!"
+Thanks a lot everyone!
 `;

@@ -1,4 +1,3 @@
-const fetch = require('node-fetch')
 
 const addPrivateToken = (url, privateToken = '') => {
   if (privateToken === '') return url

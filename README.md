@@ -46,8 +46,8 @@
     </tbody>
 </table>
 
-[![Build Status](https://dl.circleci.com/status-badge/img/gh/all-contributors/cli/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/all-contributors/cli/tree/master)
-[![Code Coverage](https://codecov.io/gh/all-contributors/cli/branch/master/graph/badge.svg?token=jHIrCqevli)](https://codecov.io/gh/all-contributors/cli)
+[![Build Status](https://dl.circleci.com/status-badge/img/gh/all-contributors/cli/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/all-contributors/cli/tree/main)
+[![Code Coverage](https://codecov.io/gh/all-contributors/cli/branch/main/graph/badge.svg?token=jHIrCqevli)](https://codecov.io/gh/all-contributors/cli)
 [![Version](https://img.shields.io/npm/v/all-contributors-cli.svg)](https://www.npmjs.com/package/all-contributors-cli)
 [![Downloads](https://img.shields.io/npm/dm/all-contributors-cli.svg)](http://www.npmtrends.com/all-contributors-cli)
 [![AUR Version](https://img.shields.io/aur/version/all-contributors-cli.svg)](https://aur.archlinux.org/packages/all-contributors-cli)

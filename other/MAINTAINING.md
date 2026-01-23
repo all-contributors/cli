@@ -56,7 +56,7 @@ about that.
 
 ## Release
 
-Our releases are automatic. They happen whenever code lands into `master`. A Circle CI build
+Our releases are automatic. They happen whenever code lands into `main`. A Circle CI build
 build gets kicked off and if it's successful, a tool called
 [`semantic-release`](https://github.com/semantic-release/semantic-release) is used to
 automatically publish a new release to npm as well as a changelog to GitHub. It is only able to

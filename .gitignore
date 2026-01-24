@@ -8,6 +8,7 @@ dist
 
 # these cause more harm than good
 # when working with contributors
+pnpm-lock.yaml
 package-lock.json
 yarn.lock
 .vscode

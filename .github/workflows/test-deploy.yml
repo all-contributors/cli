@@ -1,0 +1,57 @@
+# This job will be configured to deploy once we decide how we
+# want to deploy this to npm. Until then, we will only run the test suite.
+# We still need access to npm but i did email the original devs about getting
+# that access.
+name: Deploy
+
+# i suggest we set this to deploy on release.
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    # Disabled until npm permissions are set up
+    # Note: When enabled, this should depend on test workflow passing
+    if: false && github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment:
+      name: npm-publish
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          fetch-depth: 0
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+        with:
+          version: 8
+
+      - name: Setup Node.js
+        uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Download coverage
+        uses: actions/download-artifact@37930b1c2abaa49bbe596cd826c3c89aef350131 # v7.0.0
+        with:
+          name: coverage
+          path: coverage/
+
+      - name: Upload to Codecov
+        uses: codecov/codecov-action@671740ac38dd9b0130fbe1cec585b89eea48d3de # v5.5
+        with:
+          directory: ./coverage
+          fail_ci_if_error: false
+      # Let's consider moving away from semantic-release and using a manual release strategy instead.
+      - name: Run semantic-release
+        run: pnpm semantic-release
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

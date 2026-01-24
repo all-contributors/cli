@@ -26,6 +26,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Debug installed packages
+        run: |
+          npm list --depth=0
+          echo "---"
+          npm list prettier
+
       - name: Build
         run: pnpm build
 

@@ -1,53 +1,44 @@
-import {unlink} from 'fs'
+import {unlink} from 'fs/promises'
 import {addContributorsList} from '../init-content'
 import ensureFileExists from '../file-exist'
 
-test('insert list under contributors section', () => {
-  const content = [
-    '# project',
-    '',
-    'Description',
-    '',
-    '## Contributors',
-    '',
-  ].join('\n')
-  const result = addContributorsList(content)
+describe('addContributorsList', () => {
+  test('insert list under contributors section', () => {
+    const content = [
+      '# project',
+      '',
+      'Description',
+      '',
+      '## Contributors',
+      '',
+    ].join('\n')
+    const result = addContributorsList(content)
 
-  expect(result).toMatchSnapshot()
-})
+    expect(result).toMatchSnapshot()
+  })
 
-test('create contributors section if it is absent', () => {
-  const content = ['# project', '', 'Description'].join('\n')
-  const result = addContributorsList(content)
+  test('create contributors section if content is empty', () => {
+    const content = ''
+    const result = addContributorsList(content)
 
-  expect(result).toMatchSnapshot()
-})
-
-test('create contributors section if content is empty', () => {
-  const content = ''
-  const result = addContributorsList(content)
-
-  expect(result).toMatchSnapshot()
-})
-
-test('README exists', () => {
-  return new Promise(done => {
-    const file = 'README.md'
-    ensureFileExists(file)
-      .then(data => expect(data).toStrictEqual(file))
-      .then(_ => done())
+    expect(result).toMatchSnapshot()
   })
 })
 
-test("LOREM doesn't exists", () => {
-  return new Promise(done => {
+describe('ensureFileExists', () => {
+  test('README exists', async () => {
+    const file = 'README.md'
+    const data = await ensureFileExists(file)
+
+    expect(data).toStrictEqual(file)
+  })
+
+  test("LOREM doesn't exists", async () => {
     const file = 'LOREM.md'
-    ensureFileExists(file).then(data => {
-      expect(data).toStrictEqual(file)
-      return unlink(file, err => {
-        if (err) throw err
-        done()
-      })
-    })
+    const data = await ensureFileExists(file)
+
+    expect(data).toStrictEqual(file)
+
+    await unlink(file)
   })
 })

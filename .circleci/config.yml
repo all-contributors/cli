@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@5.4.3
+
 docker_defaults: &docker_defaults
   docker:
     - image: cimg/node:22.22.0
@@ -25,7 +28,7 @@ commands:
             - node_modules/
 
 jobs:
-  node_modules:
+  install:
     <<: *docker_defaults
     working_directory: ~/repo
     steps:
@@ -50,16 +53,16 @@ jobs:
       - prep_env
       - attach_workspace:
           at: ./
-      - run: yarn codecov
+      - codecov/upload
       - run: yarn semantic-release
 workflows:
   version: 2
   validate_and_deploy:
     jobs:
-      - node_modules
+      - install
       - validate:
           requires:
-            - node_modules
+            - install
       - deploy:
           requires:
             - validate

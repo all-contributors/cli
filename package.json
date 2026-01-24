@@ -54,7 +54,6 @@
     "yargs": "^15.0.1"
   },
   "devDependencies": {
-    "codecov": "^3.8.1",
     "cz-conventional-changelog": "^3.3.0",
     "git-cz": "^4.7.6",
     "kcd-scripts": "^6.2.0",

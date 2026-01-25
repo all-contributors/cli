@@ -30,7 +30,7 @@ const NoFilesConfigFile = {
 }
 
 test('Reading an absent configuration file throws a helpful error', () => {
-  expect(() => configFile.readConfig(absentFile)).toThrowError(
+  expect(() => configFile.readConfig(absentFile)).toThrow(
     absentConfileFileExpected,
   )
 })

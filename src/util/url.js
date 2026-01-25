@@ -7,7 +7,7 @@ function isValidHttpUrl(input) {
     const url = new URL(input)
 
     return isHttpProtocol(url.protocol)
-  } catch (e) {
+  } catch {
     return false
   }
 }

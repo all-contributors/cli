@@ -9,7 +9,7 @@ function formatConfig(configPath, content) {
     return prettierConfig
       ? prettier.format(stringified, {...prettierConfig, parser: 'json'})
       : stringified
-  } catch (error) {
+  } catch {
     // If Prettier can't be required or throws in general,
     // assume it's not usable and we should fall back to JSON.stringify
     return stringified

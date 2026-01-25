@@ -56,6 +56,46 @@ The `--fix` flag will automatically fix many common issues like:
 **Note:** Some errors require manual fixes (e.g., unused variables, tests
 without assertions).
 
+### Pre-commit hooks
+
+The project uses Husky to run pre-commit hooks that automatically lint and fix
+staged files before each commit.
+
+**How it works:**
+
+1. When you run `git commit`, Husky intercepts the commit
+2. The pre-commit hook runs `lint-staged`
+3. `lint-staged` runs `eslint --fix` on all staged JavaScript/TypeScript files
+4. If linting passes, the commit proceeds; if it fails, the commit is blocked
+
+What this means... this workflow ensures that code is automatically linted and fixed before it's committed to version control.
+
+
+If you are encountering issues with the pre-commit hook, you can run the following command to manually lint and fix the files:
+
+```bash
+pnpm lint --fix
+```
+Or if it's really problematic, you can skip verification and commit anyway with the `--no-verify` flag.
+
+```bash
+git commit --no-verify
+```
+
+If you do this please ping one of the maintainers in the PR that you open so they can help you fix the issues!
+
+**Configuration:**
+
+- Husky configuration is in `package.json` under the `husky.hooks.pre-commit`
+  field
+- `lint-staged` configuration is in `package.json` under the `lint-staged`
+  field
+- The setup uses the native ESLint configuration (`eslint.config.mjs`)
+
+**Note:** Previously, the project used `kcd-scripts pre-commit` which handled
+both hook management and linting. We migrated to using `lint-staged` directly
+with our native ESLint config to avoid version conflicts.
+
 ### Dependencies
 
 The following packages are used for linting:

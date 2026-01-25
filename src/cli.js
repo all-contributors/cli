@@ -69,18 +69,23 @@ function startGeneration(argv) {
 }
 
 async function addContribution(argv) {
-  await util.configFile.readConfig(argv.config) // ensure the config file exists
+  // ensure the config file exists
+  await util.configFile.readConfig(argv.config)
+
   const username = argv._[1] === undefined ? undefined : String(argv._[1])
   const contributions = argv._[2]
+
   // Add or update contributor in the config file
-  return updateContributors(argv, username, contributions).then(data => {
-    argv.contributors = data.contributors
-    return startGeneration(argv).then(() => {
-      if (argv.commit) {
-        return util.git.commit(argv, data)
-      }
-    })
-  })
+  const data = updateContributors(argv, username, contributions)
+
+  argv.contributors = data.contributors
+
+  await startGeneration(argv)
+
+  // Commit if configured
+  if (argv.commit) {
+    return util.git.commit(argv, data)
+  }
 }
 
 async function checkContributors(argv) {

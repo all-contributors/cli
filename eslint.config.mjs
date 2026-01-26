@@ -5,6 +5,7 @@ import jestPlugin from 'eslint-plugin-jest'
 import globals from 'globals'
 
 export default [
+  { linterOptions: { reportUnusedDisableDirectives: "error" } },
   // Base config
   js.configs.recommended,
   prettier,
@@ -96,6 +97,6 @@ export default [
   },
   // Ignore patterns
   {
-    ignores: ['node_modules/**', 'coverage/**', 'dist/**', 'eslint.config.mjs'],
+    ignores: ['node_modules/**', 'coverage/**', 'dist/**'],
   },
 ]

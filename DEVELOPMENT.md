@@ -31,7 +31,7 @@ setup that replicates the same behavior.
 - Supports both CommonJS (source files) and ES modules (test files)
 
 Note: We should consider refacting the project to use ES modules instead of
-CommonJS (if everyone supports that) in the future for consistently.
+CommonJS (if everyone supports that) in the future for consistency.
 
 ### How to run the linter
 

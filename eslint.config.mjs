@@ -95,8 +95,5 @@ export default [
       'jest/prefer-to-have-length': 'warn',
     },
   },
-  // Ignore patterns
-  {
-    ignores: ['node_modules/**', 'coverage/**', 'dist/**'],
-  },
+  globalIgnores(['node_modules/**', 'coverage/**', 'dist/**', 'eslint.config.mjs'],
 ]

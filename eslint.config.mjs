@@ -1,5 +1,4 @@
 import js from '@eslint/js'
-import prettier from 'eslint-config-prettier'
 import importPlugin from 'eslint-plugin-import'
 import jestPlugin from 'eslint-plugin-jest'
 import globals from 'globals'

@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
 
 const path = require('path')
 const yargs = require('yargs')
@@ -15,39 +14,47 @@ const updateContributors = require('./contributors')
 const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
 
-const yargv = yargs
-  .scriptName('all-contributors')
-  .help('help')
-  .alias('h', 'help')
-  .alias('v', 'version')
-  .version()
-  .recommendCommands()
-  .command('generate', `Generate the list of contributors\n\nUSAGE: all-contributors generate`)
-  .command('add', `Add a new contributor\n\nUSAGE: all-contributors add <username> <comma-separated contributions>`)
-  .command('init', `Prepare the project to be used with this tool\n\nUSAGE: all-contributors init`)
-  .command(
-    'check',
-    `Compare contributors from the repository with the ones credited in .all-contributorsrc'\n\nUSAGE: all-contributors check`)
-  .boolean('commit')
-  .default('files', ['README.md'])
-  .default('contributorsPerLine', 7)
-  .option('contributorsSortAlphabetically', {
-    type: 'boolean',
-    default: false,
-    description:
-      'Sort the list of contributors alphabetically in the generated list',
-  })
-  .default('contributors', [])
-  .default('config', defaultRCFile)
-  .config('config', configPath => {
-    try {
-      return util.configFile.readConfig(configPath)
-    } catch (error) {
-      if (error instanceof SyntaxError || configPath !== defaultRCFile) {
-        onError(error)
-      }
-    }
-  }).argv
+function getArgs() {
+  return yargs
+    .scriptName('all-contributors')
+    .option('config', {
+      alias: 'c',
+      type: 'string',
+      default: defaultRCFile,
+      description: 'Path to config file',
+    })
+    .option('contributorsSortAlphabetically', {
+      type: 'boolean',
+      default: false,
+      description:
+        'Sort the list of contributors alphabetically in the generated list',
+    })
+    .help('help')
+    .alias('h', 'help')
+    .alias('v', 'version')
+    .version()
+    .recommendCommands()
+    .command(
+      'generate',
+      `Generate the list of contributors\n\nUSAGE: all-contributors generate`,
+    )
+    .command(
+      'add',
+      `Add a new contributor\n\nUSAGE: all-contributors add <username> <comma-separated contributions>`,
+    )
+    .command(
+      'init',
+      `Prepare the project to be used with this tool\n\nUSAGE: all-contributors init`,
+    )
+    .command(
+      'check',
+      `Compare contributors from the repository with the ones credited in .all-contributorsrc'\n\nUSAGE: all-contributors check`,
+    )
+    .boolean('commit')
+    .default('files', ['README.md'])
+    .default('contributorsPerLine', 7)
+    .default('contributors', []).argv
+}
 
 function startGeneration(argv) {
   return Promise.all(
@@ -61,23 +68,28 @@ function startGeneration(argv) {
   )
 }
 
-function addContribution(argv) {
-  util.configFile.readConfig(argv.config) // ensure the config file exists
+async function addContribution(argv) {
+  // ensure the config file exists
+  await util.configFile.readConfig(argv.config)
+
   const username = argv._[1] === undefined ? undefined : String(argv._[1])
   const contributions = argv._[2]
+
   // Add or update contributor in the config file
-  return updateContributors(argv, username, contributions).then(data => {
-    argv.contributors = data.contributors
-    return startGeneration(argv).then(() => {
-      if (argv.commit) {
-        return util.git.commit(argv, data)
-      }
-    })
-  })
+  const data = updateContributors(argv, username, contributions)
+
+  argv.contributors = data.contributors
+
+  await startGeneration(argv)
+
+  // Commit if configured
+  if (argv.commit) {
+    return util.git.commit(argv, data)
+  }
 }
 
-function checkContributors(argv) {
-  const configData = util.configFile.readConfig(argv.config)
+async function checkContributors(argv) {
+  const configData = await util.configFile.readConfig(argv.config)
 
   return repo
     .getContributors(
@@ -123,14 +135,6 @@ function checkContributors(argv) {
     })
 }
 
-function onError(error) {
-  if (error) {
-    console.error(error.stack || error.message || error)
-    process.exit(1)
-  }
-  process.exit(0)
-}
-
 function promptForCommand(argv) {
   const questions = [
     {
@@ -162,19 +166,28 @@ function promptForCommand(argv) {
   })
 }
 
-promptForCommand(yargv)
-  .then(command => {
+async function run() {
+  try {
+    const argv = getArgs()
+    const command = await promptForCommand(argv)
+
     switch (command) {
       case 'init':
         return init()
       case 'generate':
-        return startGeneration(yargv)
+        return startGeneration(argv)
       case 'add':
-        return addContribution(yargv)
+        return addContribution(argv)
       case 'check':
-        return checkContributors(yargv)
+        return checkContributors(argv)
       default:
         throw new Error(`Unknown command ${command}`)
     }
-  })
-  .catch(onError)
+  } catch (e) {
+    /* eslint-disable-next-line no-console */
+    console.error(e.stack || e.message || e)
+    process.exit(1)
+  }
+}
+
+run()

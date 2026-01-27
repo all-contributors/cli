@@ -1,22 +1,27 @@
-const fs = require('fs')
-const pify = require('pify')
-const _ = require('lodash/fp')
-const jf = require('json-fixer')
-const {formatConfig} = require('./formatting')
+import {readFile, writeFile} from 'fs/promises'
+import jf from 'json-fixer'
+import _ from 'lodash/fp'
+import {formatConfig} from './formatting'
 
-function readConfig(configPath) {
+export async function readConfig(configPath) {
   try {
-    const {data: config, changed} = jf(fs.readFileSync(configPath, 'utf-8'))
+    const configFileContents = await readFile(configPath, 'utf-8')
+    const {data: config, changed} = jf(configFileContents)
+
     if (!('repoType' in config)) {
       config.repoType = 'github'
     }
+
     if (!('commitConvention' in config)) {
       config.commitConvention = 'angular'
     }
+
     if (changed) {
+      const formatterConfig = await formatConfig(configPath, config)
       //Updates the file with fixes
-      fs.writeFileSync(configPath, formatConfig(configPath, config))
+      await writeFile(configPath, formatterConfig)
     }
+
     return config
   } catch (error) {
     if (error instanceof SyntaxError) {
@@ -24,17 +29,20 @@ function readConfig(configPath) {
         `Configuration file has malformed JSON: ${configPath}. Error:: ${error.message}`,
       )
     }
+
     if (error.code === 'ENOENT') {
       throw new Error(`Configuration file not found: ${configPath}`)
     }
+
     throw error
   }
 }
 
-function writeConfig(configPath, content) {
+export async function writeConfig(configPath, content) {
   if (!content.projectOwner) {
     throw new Error(`Error! Project owner is not set in ${configPath}`)
   }
+
   if (!content.projectName) {
     throw new Error(`Error! Project name is not set in ${configPath}`)
   }
@@ -44,25 +52,19 @@ function writeConfig(configPath, content) {
       `Error! Project files was overridden and is empty in ${configPath}`,
     )
   }
-  return pify(fs.writeFile)(
-    configPath,
-    `${formatConfig(configPath, content)}\n`,
-  )
+
+  return writeFile(configPath, `${await formatConfig(configPath, content)}\n`)
 }
 
-function writeContributors(configPath, contributors) {
+export async function writeContributors(configPath, contributors) {
   let config
+
   try {
-    config = readConfig(configPath)
+    config = await readConfig(configPath)
   } catch (error) {
     return Promise.reject(error)
   }
   const content = _.assign(config, {contributors})
-  return writeConfig(configPath, content)
-}
 
-module.exports = {
-  readConfig,
-  writeConfig,
-  writeContributors,
+  return writeConfig(configPath, content)
 }

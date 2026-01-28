@@ -4,12 +4,7 @@ import jestPlugin from 'eslint-plugin-jest'
 import globals from 'globals'
 import { defineConfig } from 'eslint/config';
 
-<<<<<<< HEAD
-export default [
-  { linterOptions: { reportUnusedDisableDirectives: "error" } },
-=======
 export default defineConfig([
->>>>>>> 93cf923 (enh: setup defineconfig for IDE)
   // Base config
   js.configs.recommended,
   prettier,

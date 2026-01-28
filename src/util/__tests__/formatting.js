@@ -1,5 +1,5 @@
 import path from 'path'
-import formatting from '../formatting'
+import {formatConfig} from '../formatting'
 
 const content = {contributors: [{id: 'abc123'}]}
 
@@ -19,17 +19,16 @@ const presentConfigFileExpected = `{
 			"id": "abc123"
 		}
 	]
-}
-`
+}`
 
-test('falls back to JSON.stringify when the configPath cannot resolve to a config', () => {
-  expect(formatting.formatConfig(absentFile, content)).toBe(
-    absentConfigFileExpected,
-  )
+test('falls back to JSON.stringify when the configPath cannot resolve to a config', async () => {
+  const output = await formatConfig(absentFile, content)
+
+  expect(output).toBe(absentConfigFileExpected)
 })
 
-test('uses Prettier when the configPath can resolve to a config', () => {
-  expect(formatting.formatConfig(presentFile, content)).toBe(
-    presentConfigFileExpected,
-  )
+test('uses Prettier when the configPath can resolve to a config', async () => {
+  const output = await formatConfig(presentFile, content)
+
+  expect(output).toBe(presentConfigFileExpected)
 })

@@ -1,7 +1,7 @@
-import configFile from '../config-file'
+import {writeConfig, readConfig, writeContributors} from '../config-file'
 
 const absentFile = './abc'
-const absentConfileFileExpected = `Configuration file not found: ${absentFile}`
+const absentConfigFileExpected = `Configuration file not found: ${absentFile}`
 const incompleteConfigFilePath = './.all-contributorsrc'
 const NoOwnerConfigFile = {
   projectOwner: '',
@@ -29,32 +29,36 @@ const NoFilesConfigFile = {
   files: [],
 }
 
-test('Reading an absent configuration file throws a helpful error', () => {
-  expect(() => configFile.readConfig(absentFile)).toThrow(
-    absentConfileFileExpected,
+test('Reading an absent configuration file throws a helpful error', async () => {
+  await expect(readConfig(absentFile)).rejects.toThrowError(
+    absentConfigFileExpected,
   )
 })
 
 test('Writing contributors in an absent configuration file throws a helpful error', async () => {
-  const resolvedError = await configFile
-    .writeContributors(absentFile, [])
-    .catch(e => e)
-  expect(resolvedError.message).toBe(absentConfileFileExpected)
+  await expect(writeContributors(absentFile, [])).rejects.toThrow(
+    absentConfigFileExpected,
+  )
 })
 
-test('Should throw error and not allow editing config file if project name or owner is not set', () => {
-  expect(() =>
-    configFile.writeConfig(incompleteConfigFilePath, NoOwnerConfigFile),
-  ).toThrow(`Error! Project owner is not set in ${incompleteConfigFilePath}`)
-  expect(() =>
-    configFile.writeConfig(incompleteConfigFilePath, NoNameConfigFile),
-  ).toThrow(`Error! Project name is not set in ${incompleteConfigFilePath}`)
+test('Should throw error and not allow editing config file if project name or owner is not set', async () => {
+  await expect(
+    writeConfig(incompleteConfigFilePath, NoOwnerConfigFile),
+  ).rejects.toThrow(
+    `Error! Project owner is not set in ${incompleteConfigFilePath}`,
+  )
+
+  await expect(
+    writeConfig(incompleteConfigFilePath, NoNameConfigFile),
+  ).rejects.toThrow(
+    `Error! Project name is not set in ${incompleteConfigFilePath}`,
+  )
 })
 
-test(`throws if 'files' was overridden in .all-contributorsrc and is empty`, () => {
-  expect(() =>
-    configFile.writeConfig(incompleteConfigFilePath, NoFilesConfigFile),
-  ).toThrow(
+test(`throws if 'files' was overridden in .all-contributorsrc and is empty`, async () => {
+  await expect(
+    writeConfig(incompleteConfigFilePath, NoFilesConfigFile),
+  ).rejects.toThrow(
     `Error! Project files was overridden and is empty in ${incompleteConfigFilePath}`,
   )
 })

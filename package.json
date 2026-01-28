@@ -16,7 +16,7 @@
     "add-contributor": "kcd-scripts contributors add",
     "build": "kcd-scripts build",
     "lint": "eslint .",
-    "test": "kcd-scripts test",
+    "test": "NODE_OPTIONS='--experimental-vm-modules' kcd-scripts test --watchAll=false",
     "validate": "kcd-scripts validate",
     "commit": "git-cz",
     "start": "./dist/cli.js",
@@ -54,7 +54,7 @@
     "lodash": "^4.11.2",
     "node-fetch": "^2.6.0",
     "pify": "^5.0.0",
-    "yargs": "^18.0.0"
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",

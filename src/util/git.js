@@ -53,12 +53,12 @@ const spawnGitCommand = pify((args, cb) => {
   })
 })
 
-function commit(options, data) {
+async function commit(options, data) {
   const files = options.files.concat(options.config)
   const absolutePathFiles = files.map(file => {
     return path.resolve(process.cwd(), file)
   })
-  const config = readConfig(options.config)
+  const config = await readConfig(options.config)
   const commitConvention = conventions[config.commitConvention]
 
   return spawnGitCommand(['add'].concat(absolutePathFiles)).then(() => {

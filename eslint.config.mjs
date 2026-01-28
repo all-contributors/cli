@@ -1,98 +1,33 @@
 import js from '@eslint/js'
+import { defineConfig, globalIgnores } from 'eslint/config'
 import importPlugin from 'eslint-plugin-import'
 import jestPlugin from 'eslint-plugin-jest'
 import globals from 'globals'
-import { defineConfig } from 'eslint/config';
 
 export default defineConfig([
-  // Base config
-  js.configs.recommended,
-  prettier,
+  globalIgnores(['coverage/**', 'dist/**']),
+  { linterOptions: { reportUnusedDisableDirectives: 'error' } },
   {
+    extends: [js.configs.recommended, importPlugin.flatConfigs.recommended],
+    files: ['**/*.{mjs,js}'],
     languageOptions: {
       ecmaVersion: 'latest',
-      sourceType: 'commonjs',
-      globals: {
-        ...globals.node,
-      },
-    },
-    plugins: {
-      import: importPlugin,
-    },
-    settings: {
-      'import/ignore': ['node_modules', '.json$', '.(scss|less|css|styl)$'],
+      globals: globals.node,
     },
     rules: {
-      // Custom overrides (from package.json eslintConfig)
-      camelcase: 'off',
-      'no-process-exit': 'off',
-      'import/extensions': 'off',
-      'func-names': 'off',
-      'consistent-return': 'off',
-
-      // Additional rules from KDS
-      'array-callback-return': 'error',
-      'block-scoped-var': 'error',
-      'dot-notation': 'error',
-      'no-array-constructor': 'error',
-      'no-eval': 'error',
-      'no-implied-eval': 'error',
-      'no-labels': 'error',
-      'no-lone-blocks': 'error',
-      'no-loop-func': 'error',
-      'no-new-func': 'error',
-      'no-return-assign': 'error',
-      'no-self-compare': 'error',
-      'no-sequences': 'error',
-      'no-throw-literal': 'error',
-      'no-undef-init': 'error',
-      'no-unused-expressions': 'off',
-      'no-useless-call': 'error',
-      'no-useless-concat': 'error',
-      'no-useless-return': 'error',
-      'no-var': 'error',
-      'no-void': 'off',
-      'prefer-const': 'error',
-      'require-yield': 'error',
-
-      // Import plugin rules (beyond recommended)
-      'import/no-duplicates': 'error',
+      'import/no-unresolved': ['error', { ignore: ['^eslint/'] }],
       'import/no-extraneous-dependencies': 'error',
-      'import/order': [
-        'warn',
-        {
-          groups: [
-            'builtin',
-            ['external', 'internal'],
-            'parent',
-            ['sibling', 'index'],
-          ],
-        },
-      ],
     },
   },
-  // Jest test files
   {
-    files: [
-      '**/__tests__/**/*.+(js|ts)?(x)',
-      '**/*.{spec,test}.+(js|ts)?(x)',
-    ],
-    plugins: {
-      jest: jestPlugin,
-    },
+    extends: [jestPlugin.configs['flat/recommended']],
+    files: ['**/__tests__/**/*.js'],
     languageOptions: {
-      sourceType: 'module',
-      globals: {
-        ...globals.jest,
-      },
+      globals: globals.jest,
     },
     rules: {
-      ...jestPlugin.configs.recommended.rules,
-      // Keep important jest rules
-      'jest/no-focused-tests': 'error',
-      'jest/no-disabled-tests': 'warn',
-      'jest/prefer-to-have-length': 'warn',
+      'jest/no-disabled-tests': 'error',
+      'jest/prefer-to-have-length': 'error',
     },
   },
-  globalIgnores(['node_modules/**', 'coverage/**', 'dist/**', 'eslint.config.mjs'],
-]
+])

@@ -27,11 +27,9 @@
       "pre-commit": "lint-staged"
     }
   },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix"
-    ]
-  },
+	"lint-staged": {
+		"*": "prettier --ignore-unknown --write"
+	},
   "repository": {
     "type": "git",
     "url": "https://github.com/all-contributors/all-contributors-cli.git"

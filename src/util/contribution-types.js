@@ -1,4 +1,3 @@
-const _ = require('lodash/fp')
 const repo = require('../repo')
 
 const defaultTypes = function (repoType) {
@@ -144,5 +143,5 @@ const defaultTypes = function (repoType) {
 }
 
 module.exports = function (options) {
-  return _.assign(defaultTypes(options.repoType), options.types)
+  return {...defaultTypes(options.repoType), ...options.types}
 }

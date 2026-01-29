@@ -1,4 +1,3 @@
-const _ = require('lodash/fp')
 const injectContentBetween = require('../util').markdown.injectContentBetween
 
 const badgeContent = [
@@ -25,14 +24,18 @@ function addBadge(lines) {
 }
 
 function splitAndRejoin(fn) {
-  return _.flow(_.split('\n'), fn, _.join('\n'))
+  return function (content) {
+    const lines = content.split('\n')
+    const result = fn(lines)
+    return result.join('\n')
+  }
 }
 
-const findContributorsSection = _.findIndex(
-  function isContributorsSection(str) {
+function findContributorsSection(lines) {
+  return lines.findIndex(function isContributorsSection(str) {
     return str.toLowerCase().indexOf('# contributors') === 1
-  },
-)
+  })
+}
 
 function addContributorsList(lines) {
   const insertionLine = findContributorsSection(lines)

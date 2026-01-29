@@ -50,7 +50,6 @@
     "@babel/runtime": "^7.7.6",
     "inquirer": "^7.3.3",
     "json-fixer": "^1.6.8",
-    "lodash": "^4.11.2",
     "node-fetch": "^2.6.0",
     "pify": "^5.0.0",
     "yargs": "^18.0.0",

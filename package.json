@@ -17,7 +17,6 @@
     "build": "kcd-scripts build",
     "lint": "eslint .",
     "test": "NODE_OPTIONS='--experimental-vm-modules' kcd-scripts test --watchAll=false",
-    "validate": "kcd-scripts validate",
     "commit": "git-cz",
     "start": "./dist/cli.js",
     "dev": "./src/cli.js"

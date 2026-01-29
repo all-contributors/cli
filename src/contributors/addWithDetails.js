@@ -9,7 +9,7 @@ module.exports = function addContributorWithDetails({
   avatar_url,
   profile,
 }) {
-  const infoFetcherNoNetwork = function() {
+  const infoFetcherNoNetwork = function () {
     return Promise.resolve({
       login,
       name,

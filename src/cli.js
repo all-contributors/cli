@@ -151,8 +151,7 @@ function promptForCommand(argv) {
           value: 'generate',
         },
         {
-          name:
-            'Compare contributors from the repository with the credited ones',
+          name: 'Compare contributors from the repository with the credited ones',
           value: 'check',
         },
       ],
@@ -184,7 +183,6 @@ async function run() {
         throw new Error(`Unknown command ${command}`)
     }
   } catch (e) {
-    /* eslint-disable-next-line no-console */
     console.error(e.stack || e.message || e)
     process.exit(1)
   }

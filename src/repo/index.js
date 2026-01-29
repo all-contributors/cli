@@ -1,7 +1,11 @@
 const githubAPI = require('./github')
 const gitlabAPI = require('./gitlab')
 
-const privateToken = (process.env && (process.env.ALL_CONTRIBUTORS_PRIVATE_TOKEN || process.env.PRIVATE_TOKEN)) || ''
+const privateToken =
+  (process.env &&
+    (process.env.ALL_CONTRIBUTORS_PRIVATE_TOKEN ||
+      process.env.PRIVATE_TOKEN)) ||
+  ''
 const SUPPORTED_REPO_TYPES = {
   github: {
     value: 'github',
@@ -33,7 +37,7 @@ const SUPPORTED_REPO_TYPES = {
   },
 }
 
-const getChoices = function() {
+const getChoices = function () {
   return Object.keys(SUPPORTED_REPO_TYPES)
     .map(key => SUPPORTED_REPO_TYPES[key])
     .map(item => {
@@ -44,7 +48,7 @@ const getChoices = function() {
     })
 }
 
-const getHostname = function(repoType, repoHost) {
+const getHostname = function (repoType, repoHost) {
   if (repoHost) {
     return repoHost
   } else if (repoType in SUPPORTED_REPO_TYPES) {
@@ -53,42 +57,42 @@ const getHostname = function(repoType, repoHost) {
   return null
 }
 
-const getCheckKey = function(repoType) {
+const getCheckKey = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].checkKey
   }
   return null
 }
 
-const getTypeName = function(repoType) {
+const getTypeName = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].name
   }
   return null
 }
 
-const getLinkToCommits = function(repoType) {
+const getLinkToCommits = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].linkToCommits
   }
   return null
 }
 
-const getLinkToIssues = function(repoType) {
+const getLinkToIssues = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].linkToIssues
   }
   return null
 }
 
-const getLinkToReviews = function(repoType) {
+const getLinkToReviews = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].linkToReviews
   }
   return null
 }
 
-const getUserInfo = function(username, repoType, repoHost) {
+const getUserInfo = function (username, repoType, repoHost) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].getUserInfo(
       username,
@@ -99,7 +103,7 @@ const getUserInfo = function(username, repoType, repoHost) {
   return null
 }
 
-const getContributors = function(owner, name, repoType, repoHost) {
+const getContributors = function (owner, name, repoType, repoHost) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].getContributors(
       owner,

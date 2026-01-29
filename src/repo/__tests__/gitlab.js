@@ -8,6 +8,8 @@ async function rejects(promise) {
   expect(error).toBeTruthy()
 }
 
+// TODO: Review whether to add explicit expect() or keep implicit assertion via helper
+// eslint-disable-next-line jest/expect-expect
 test('handle errors', async () => {
   nock('https://gitlab.com')
     .get('/api/v4/users?username=nodisplayname')
@@ -125,6 +127,8 @@ test('retrieve user from a gitlab registry that needs a token', async () => {
   expect(info.name).toBe('No Display Name')
 })
 
+// TODO: Review whether to add explicit expect() or keep implicit assertion via helper
+// eslint-disable-next-line jest/expect-expect
 test('handle error when no token is offered', async () => {
   nock('http://gitlab.needtoken.com:3000')
     .get('/api/v4/users?username=nodisplayname')

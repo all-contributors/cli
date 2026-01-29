@@ -25,18 +25,14 @@ function addBadge(lines) {
 }
 
 function splitAndRejoin(fn) {
-  return _.flow(
-    _.split('\n'),
-    fn,
-    _.join('\n'),
-  )
+  return _.flow(_.split('\n'), fn, _.join('\n'))
 }
 
-const findContributorsSection = _.findIndex(function isContributorsSection(
-  str,
-) {
-  return str.toLowerCase().indexOf('# contributors') === 1
-})
+const findContributorsSection = _.findIndex(
+  function isContributorsSection(str) {
+    return str.toLowerCase().indexOf('# contributors') === 1
+  },
+)
 
 function addContributorsList(lines) {
   const insertionLine = findContributorsSection(lines)

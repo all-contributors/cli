@@ -57,6 +57,8 @@ async function rejects(promise) {
   expect(error).toBeTruthy()
 }
 
+// TODO: Review whether to add explicit expect() or keep implicit assertion via helper
+// eslint-disable-next-line jest/expect-expect
 test('handle errors', async () => {
   nock('https://api.github.com').get('/users/nodisplayname').replyWithError(404)
 
@@ -119,6 +121,8 @@ test('fill in the name when null is returned', async () => {
   expect(info.name).toBe('nodisplayname')
 })
 
+// TODO: Review whether to add explicit expect() or keep implicit assertion via nock
+// eslint-disable-next-line jest/expect-expect
 test('attaches token when supplied', async () => {
   const mockAuthToken = 'myMock-token-adaskjda'
   nock('https://api.github.com')
@@ -131,6 +135,8 @@ test('attaches token when supplied', async () => {
   await getUserInfo('test-token', 'https://github.com', mockAuthToken)
 })
 
+// TODO: Review whether to add explicit expect() or keep implicit assertion via nock
+// eslint-disable-next-line jest/expect-expect
 test('attaches no token when supplied empty', async () => {
   nock('https://api.github.com')
     .matchHeader('authorization', '')
@@ -142,6 +148,8 @@ test('attaches no token when supplied empty', async () => {
   await getUserInfo('test-token', 'https://github.com', '')
 })
 
+// TODO: Review whether to add explicit expect() or keep implicit assertion via nock
+// eslint-disable-next-line jest/expect-expect
 test('attaches no token when not supplied', async () => {
   nock('https://api.github.com')
     .matchHeader('authorization', '')

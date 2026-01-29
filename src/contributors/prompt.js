@@ -38,7 +38,7 @@ function getQuestions(options, username, contributions) {
       name: 'contributions',
       message: 'What are the contribution types?',
       when: !contributions,
-      default: function(answers) {
+      default: function (answers) {
         // default values for contributions when updating existing users
         answers.username = answers.username || username
         return options.contributors
@@ -53,7 +53,7 @@ function getQuestions(options, username, contributions) {
           )
       },
       choices: contributionChoices(options),
-      validate: function(input, answers) {
+      validate: function (input, answers) {
         answers.username = answers.username || username
         const previousContributions = options.contributors
           .filter(

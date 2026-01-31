@@ -38,13 +38,13 @@ CommonJS (if everyone supports that) in the future for consistency.
 To check for linting errors you can run:
 
 ```bash
-pnpm lint
+npm run lint
 ```
 
 ESlint can automatically fix some errors. to fix errors automatically run:
 
 ```bash
-pnpm lint --fix
+npm run lint -- --fix
 ```
 
 The `--fix` flag will automatically fix many common issues like:
@@ -75,7 +75,7 @@ If you are encountering issues with the pre-commit hook, you can run the
 following command to manually lint and fix the files:
 
 ```bash
-pnpm lint --fix
+npm run lint -- --fix
 ```
 
 Or if it's really problematic, you can skip verification and commit anyway with
@@ -101,31 +101,15 @@ with our native ESLint config to avoid version conflicts.
 
 ### Dependencies
 
-The following packages are used for linting:
+The following packages are typical starters for linting a JavaScript project:
 
-- **eslint** — ESLint core (v9.39.2+)
+- **eslint** — ESLint core
 - **@eslint/js** — ESLint recommended rules configuration
 - **eslint-plugin-import** — Import/export rules for module resolution and best
   practices
 - **eslint-plugin-jest** — Jest-specific rules for test files
-- **eslint-config-prettier** — Disables ESLint rules that conflict with Prettier
-  formatting
-- **@rushstack/eslint-patch** — Module resolution patch for improved
-  import/export handling
 - **globals** — Provides properly formatted global variables for Node.js and
   Jest environments
-
-### Why these packages?
-
-The configuration is based on `eslint-config-kentcdodds`, which provides a
-comprehensive set of rules. We extracted the essential parts to create a
-maintainable native config that:
-
-- Catches common bugs and errors
-- Enforces consistent code style
-- Works with both CommonJS and ES modules
-- Integrates with Prettier for formatting
-- Provides Jest-specific linting for test files
 
 ### Configuration file
 

@@ -19,12 +19,8 @@
     "test": "NODE_OPTIONS='--experimental-vm-modules' kcd-scripts test --watchAll=false",
     "commit": "git-cz",
     "start": "./dist/cli.js",
+    "prepare": "husky",
     "dev": "./src/cli.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.js": [
@@ -61,7 +57,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
-    "@rushstack/eslint-patch": "^1.15.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",

@@ -15,6 +15,7 @@
   "scripts": {
     "add-contributor": "kcd-scripts contributors add",
     "build": "kcd-scripts build",
+    "knip": "knip",
     "lint": "kcd-scripts lint",
     "test": "NODE_OPTIONS='--experimental-vm-modules' kcd-scripts test --watchAll=false",
     "commit": "git-cz",
@@ -41,10 +42,7 @@
   },
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
-    "@babel/runtime": "^7.7.6",
-    "async": "^3.1.0",
     "chalk": "^5.6.2",
-    "didyoumean": "^1.2.1",
     "inquirer": "^7.3.3",
     "json-fixer": "^1.6.8",
     "lodash": "^4.11.2",
@@ -53,11 +51,10 @@
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "cz-conventional-changelog": "^3.3.0",
     "git-cz": "^4.7.6",
     "kcd-scripts": "^16.0.0",
-    "nock": "^12.0.0",
-    "semantic-release": "^25.0.2"
+    "knip": "^5.82.1",
+    "nock": "^12.0.0"
   },
   "optionalDependencies": {
     "prettier": "^3"
@@ -75,11 +72,6 @@
       "import/extensions": "off",
       "func-names": "off",
       "consistent-return": "off"
-    }
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
     }
   }
 }

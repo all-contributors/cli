@@ -7,7 +7,7 @@ function isValidHttpUrl(input) {
     const url = new URL(input)
 
     return isHttpProtocol(url.protocol)
-  } catch (e) {
+  } catch {
     return false
   }
 }
@@ -17,7 +17,9 @@ function parseHttpUrl(input) {
     throw new TypeError('input must be a string')
   }
 
-  const url = new URL(new RegExp('^\\w+\\:\\/\\/').test(input) ? input : `http://${input}`)
+  const url = new URL(
+    new RegExp('^\\w+\\:\\/\\/').test(input) ? input : `http://${input}`,
+  )
 
   if (!isHttpProtocol(url.protocol)) {
     throw new TypeError('Provided URL has an invalid protocol')
@@ -29,5 +31,5 @@ function parseHttpUrl(input) {
 module.exports = {
   isHttpProtocol,
   isValidHttpUrl,
-  parseHttpUrl
+  parseHttpUrl,
 }

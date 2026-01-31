@@ -28,11 +28,9 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
-      "prettier --write"
-    ],
-    "!(*.js)": "prettier --ignore-unknown --write"
-  },
+	"lint-staged": {
+		"*": "prettier --ignore-unknown --write"
+	},
   "repository": {
     "type": "git",
     "url": "https://github.com/all-contributors/all-contributors-cli.git"

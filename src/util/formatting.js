@@ -16,7 +16,7 @@ export async function formatConfig(configPath, content) {
     })
 
     return formattedOutput.trimEnd()
-  } catch (error) {
+  } catch {
     // If Prettier can't be required or throws in general,
     // assume it's not usable and we should fall back to JSON.stringify
     return stringified

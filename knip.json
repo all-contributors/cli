@@ -1,0 +1,12 @@
+{
+  "$schema": "https://unpkg.com/knip@5.71.0/schema.json",
+  "entry": [
+    "jest.config.js",
+    "prettier.config.js",
+    "src/**/__tests__/*",
+    "src/api.js",
+    "src/repo/*.js",
+    "src/util/*.js"
+  ],
+  "treatConfigHintsAsErrors": true
+}

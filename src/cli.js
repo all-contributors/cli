@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 const path = require('path')
-const yargs = require('yargs')
+const yargs = require('yargs/yargs')
+const {hideBin} = require('yargs/helpers')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
 
@@ -15,7 +16,7 @@ const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
 
 function getArgs() {
-  return yargs
+  return yargs(hideBin(process.argv))
     .scriptName('all-contributors')
     .option('config', {
       alias: 'c',

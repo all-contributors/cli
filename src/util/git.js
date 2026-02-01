@@ -1,7 +1,7 @@
 const path = require('path')
 const spawn = require('child_process').spawn
-const _ = require('lodash/fp')
 const pify = require('pify')
+const util = require('../util')
 const conventions = require('../init/commit-conventions')
 const {readConfig} = require('./config-file')
 
@@ -62,10 +62,12 @@ async function commit(options, data) {
   const commitConvention = conventions[config.commitConvention]
 
   return spawnGitCommand(['add'].concat(absolutePathFiles)).then(() => {
-    let commitMessage = _.template(options.commitTemplate || commitTemplate)({
-      ...data,
-      prefix: commitConvention.msg,
-    })
+    let commitMessage = util.template(options.commitTemplate || commitTemplate)(
+      {
+        ...data,
+        prefix: commitConvention.msg,
+      },
+    )
     if (commitConvention.lowercase) {
       commitMessage = commitConvention.transform(commitMessage)
     }

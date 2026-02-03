@@ -39,9 +39,7 @@ test(`Result of parsed url without protocol should be equal`, () => {
 
 test(`Throw an error when parsed input isn't a string`, () => {
   const input = 123
-  expect(url.parseHttpUrl.bind(null, input)).toThrow(
-    'input must be a string',
-  )
+  expect(url.parseHttpUrl.bind(null, input)).toThrow('input must be a string')
 })
 
 test(`Throw an error when parsed url has wrong protocol`, () => {

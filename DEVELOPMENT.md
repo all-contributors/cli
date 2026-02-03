@@ -38,13 +38,13 @@ CommonJS (if everyone supports that) in the future for consistency.
 To check for linting errors you can run:
 
 ```bash
-pnpm lint
+npm run lint
 ```
 
 ESlint can automatically fix some errors. to fix errors automatically run:
 
 ```bash
-pnpm lint --fix
+npm run lint -- --fix
 ```
 
 The `--fix` flag will automatically fix many common issues like:
@@ -68,28 +68,31 @@ staged files before each commit.
 3. `lint-staged` runs `eslint --fix` on all staged JavaScript/TypeScript files
 4. If linting passes, the commit proceeds; if it fails, the commit is blocked
 
-What this means... this workflow ensures that code is automatically linted and fixed before it's committed to version control.
+What this means... this workflow ensures that code is automatically linted and
+fixed before it's committed to version control.
 
-
-If you are encountering issues with the pre-commit hook, you can run the following command to manually lint and fix the files:
+If you are encountering issues with the pre-commit hook, you can run the
+following command to manually lint and fix the files:
 
 ```bash
-pnpm lint --fix
+npm run lint -- --fix
 ```
-Or if it's really problematic, you can skip verification and commit anyway with the `--no-verify` flag.
+
+Or if it's really problematic, you can skip verification and commit anyway with
+the `--no-verify` flag.
 
 ```bash
 git commit --no-verify
 ```
 
-If you do this please ping one of the maintainers in the PR that you open so they can help you fix the issues!
+If you do this please ping one of the maintainers in the PR that you open so
+they can help you fix the issues!
 
 **Configuration:**
 
 - Husky configuration is in `package.json` under the `husky.hooks.pre-commit`
   field
-- `lint-staged` configuration is in `package.json` under the `lint-staged`
-  field
+- `lint-staged` configuration is in `package.json` under the `lint-staged` field
 - The setup uses the native ESLint configuration (`eslint.config.mjs`)
 
 **Note:** Previously, the project used `kcd-scripts pre-commit` which handled
@@ -98,31 +101,15 @@ with our native ESLint config to avoid version conflicts.
 
 ### Dependencies
 
-The following packages are used for linting:
+The following packages are typical starters for linting a JavaScript project:
 
-- **eslint** — ESLint core (v9.39.2+)
+- **eslint** — ESLint core
 - **@eslint/js** — ESLint recommended rules configuration
 - **eslint-plugin-import** — Import/export rules for module resolution and best
   practices
 - **eslint-plugin-jest** — Jest-specific rules for test files
-- **eslint-config-prettier** — Disables ESLint rules that conflict with Prettier
-  formatting
-- **@rushstack/eslint-patch** — Module resolution patch for improved
-  import/export handling
 - **globals** — Provides properly formatted global variables for Node.js and
   Jest environments
-
-### Why these packages?
-
-The configuration is based on `eslint-config-kentcdodds`, which provides a
-comprehensive set of rules. We extracted the essential parts to create a
-maintainable native config that:
-
-- Catches common bugs and errors
-- Enforces consistent code style
-- Works with both CommonJS and ES modules
-- Integrates with Prettier for formatting
-- Provides Jest-specific linting for test files
 
 ### Configuration file
 

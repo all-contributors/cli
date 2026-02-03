@@ -5,7 +5,7 @@ import jestPlugin from 'eslint-plugin-jest'
 import globals from 'globals'
 
 export default defineConfig([
-  globalIgnores(['coverage/**', 'dist/**', '_law_tests/**']),
+  globalIgnores(['coverage/**', 'dist/**']),
   {linterOptions: {reportUnusedDisableDirectives: 'error'}},
   {
     extends: [js.configs.recommended, importPlugin.flatConfigs.recommended],

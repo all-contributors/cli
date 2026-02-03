@@ -66,8 +66,9 @@ async function commit(options, data) {
       ...data,
       prefix: commitConvention.msg,
     })
-    if (commitConvention.lowercase)
+    if (commitConvention.lowercase) {
       commitMessage = commitConvention.transform(commitMessage)
+    }
     return spawnGitCommand(['commit', '-m', commitMessage])
   })
 }

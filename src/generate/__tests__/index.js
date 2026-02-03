@@ -74,7 +74,7 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a custom wra
   const {options, jfmengels, content} = fixtures()
   const contributorList = [kentcdodds, bogas04, jfmengels]
   const result = generate(
-    Object.assign(options, { wrapperTemplate: '<p><%= bodyContent %></p>'}),
+    Object.assign(options, {wrapperTemplate: '<p><%= bodyContent %></p>'}),
     contributorList,
     content,
   )
@@ -255,11 +255,7 @@ test('replace all-contributors badge if present', () => {
 test('validate if cell width attribute is floored correctly', () => {
   const {kentcdodds} = contributors
   const {options, content} = fixtures()
-  const contributorList = [
-    kentcdodds,
-    kentcdodds,
-    kentcdodds,
-  ]
+  const contributorList = [kentcdodds, kentcdodds, kentcdodds]
 
   options.contributorsPerLine = 7
   const result = generate(options, contributorList, content)

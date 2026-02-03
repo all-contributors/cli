@@ -63,7 +63,6 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
-    "@rushstack/eslint-patch": "^1.15.0",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",

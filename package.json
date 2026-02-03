@@ -15,8 +15,8 @@
   "scripts": {
     "add-contributor": "kcd-scripts contributors add",
     "build": "kcd-scripts build",
-    "lint": "eslint .",
-    "format": "prettier -w src/**/*.js",
+    "lint": "eslint . && prettier --check --ignore-unknown .",
+    "lint-fix": "eslint --fix . && prettier --write --ignore-unknown .",
     "test": "NODE_OPTIONS='--experimental-vm-modules' kcd-scripts test --watchAll=false",
     "commit": "git-cz",
     "start": "./dist/cli.js",

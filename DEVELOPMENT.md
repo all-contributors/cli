@@ -1,5 +1,91 @@
 # Development Documentation
 
+## Testing and Code Coverage
+
+### Running Tests
+
+The project uses Jest for testing. To run the test suite you can use:
+
+```bash
+pnpm test
+```
+
+This runs all tests with code coverage analysis enabled.
+
+### Test Configuration
+
+Test configuration is in `jest.config.js`, which extends `kcd-scripts/jest` with
+project-specific settings:
+
+```javascript
+const jestConfig = require('kcd-scripts/jest')
+
+module.exports = Object.assign(jestConfig, {
+  coverageThreshold: {
+    global: {
+      branches: 50,
+      functions: 40,
+      lines: 50,
+      statements: 50,
+    },
+  },
+  forceExit: true,
+})
+```
+
+### Coverage Thresholds
+
+The project enforces minimum code coverage thresholds through the jest
+configuration above:
+
+- **Branches:** 50%
+- **Functions:** 40%
+- **Lines:** 50%
+- **Statements:** 50%
+
+Tests will fail if coverage drops below these thresholds.
+
+### Coverage Reports
+
+When you run tests, coverage reports are automatically generated in the
+`coverage/` directory:
+
+- **`coverage/lcov-report/index.html`** — Interactive HTML report (open in
+  browser)
+- **`coverage/lcov.info`** — LCOV format (used by Codecov)
+- **`coverage/clover.xml`** — Clover XML format
+- **`coverage/coverage-final.json`** — JSON format
+
+The HTML report provides a visual breakdown of which files are covered by tests.
+
+### Codecov Integration
+
+The project uses Codecov to track code coverage over time and on pull requests.
+
+**CI Integration:**
+
+- The GitHub Actions workflow (`.github/workflows/test-deploy.yml`)
+  automatically uploads coverage to Codecov after running tests
+- Coverage reports appear as comments on pull requests (if enabled)
+- The workflow uses `codecov/codecov-action@vxxx` (whatever version is most
+  recent) to upload the `lcov.info` file
+
+**Configuration:**
+
+Codecov behavior is configured in `.codecov.yml`:
+
+- Patch coverage is tracked (checks coverage of changed code in PRs)
+- Project-level status checks are disabled
+- PR comments are disabled
+- Codecov now requires a token for all uploads so we have one generated in the
+  repo as a secret `secrets.CODECOV_TOKEN`.
+
+**Local Usage:**
+
+You don't need a Codecov account to view coverage locally—just run `pnpm test`
+and open the HTML report. Codecov integration is primarily for tracking coverage
+trends and to simplify PR reviews in the CI/CD pipeline.
+
 ## Linting
 
 2026 update: The project is now using ESLint 9 and the flat config format. As we

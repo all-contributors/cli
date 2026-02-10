@@ -1,16 +1,16 @@
-const _ = require('lodash/fp')
+const util = require('../util')
 const formatContributionType = require('./format-contribution-type')
 
-const avatarTemplate = _.template(
+const avatarTemplate = util.template(
   '<img src="<%= contributor.avatar_url %>?s=<%= options.imageSize %>" width="<%= options.imageSize %>px;" alt="<%= name %>"/>',
 )
-const avatarBlockTemplate = _.template(
+const avatarBlockTemplate = util.template(
   '<a href="<%= contributor.profile %>"><%= avatar %><br /><sub><b><%= name %></b></sub></a>',
 )
-const avatarBlockTemplateNoProfile = _.template(
+const avatarBlockTemplateNoProfile = util.template(
   '<%= avatar %><br /><sub><b><%= name %></b></sub>',
 )
-const contributorTemplate = _.template(
+const contributorTemplate = util.template(
   '<%= avatarBlock %><br /><%= contributions %>',
 )
 
@@ -20,18 +20,15 @@ function defaultTemplate(templateData) {
   const rawName =
     templateData.contributor.name || templateData.contributor.login
   const name = escapeName(rawName)
-  const avatar = avatarTemplate(
-    _.assign(templateData, {
-      name,
-    }),
-  )
-  const avatarBlockTemplateData = _.assign(
-    {
-      name,
-      avatar,
-    },
-    templateData,
-  )
+  const avatar = avatarTemplate({
+    ...templateData,
+    name,
+  })
+  const avatarBlockTemplateData = {
+    name,
+    avatar,
+    ...templateData,
+  }
   let avatarBlock = null
 
   if (templateData.contributor.profile) {
@@ -40,7 +37,7 @@ function defaultTemplate(templateData) {
     avatarBlock = avatarBlockTemplateNoProfile(avatarBlockTemplateData)
   }
 
-  return contributorTemplate(_.assign({avatarBlock}, templateData))
+  return contributorTemplate({avatarBlock, ...templateData})
 }
 
 function escapeName(name) {
@@ -50,14 +47,15 @@ function escapeName(name) {
 }
 
 module.exports = function formatContributor(options, contributor) {
-  const formatter = _.partial(formatContributionType, [options, contributor])
+  const formatter = contribution =>
+    formatContributionType(options, contributor, contribution)
   const contributions = contributor.contributions.map(formatter).join(' ')
   const templateData = {
     contributions,
     contributor,
-    options: _.assign({imageSize: defaultImageSize}, options),
+    options: {imageSize: defaultImageSize, ...options},
   }
   const customTemplate =
-    options.contributorTemplate && _.template(options.contributorTemplate)
+    options.contributorTemplate && util.template(options.contributorTemplate)
   return (customTemplate || defaultTemplate)(templateData)
 }

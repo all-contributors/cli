@@ -1,6 +1,5 @@
 import {readFile, writeFile} from 'fs/promises'
 import jf from 'json-fixer'
-import _ from 'lodash/fp'
 import {formatConfig} from './formatting'
 
 export async function readConfig(configPath) {
@@ -64,7 +63,7 @@ export async function writeContributors(configPath, contributors) {
   } catch (error) {
     return Promise.reject(error)
   }
-  const content = _.assign(config, {contributors})
+  const content = {...config, contributors}
 
   return writeConfig(configPath, content)
 }

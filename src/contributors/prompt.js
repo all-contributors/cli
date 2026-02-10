@@ -1,21 +1,18 @@
-const _ = require('lodash/fp')
 const inquirer = require('inquirer')
 const util = require('../util')
 const repo = require('../repo')
 
-const contributionChoices = _.flow(
-  util.contributionTypes,
-  _.toPairs,
-  _.sortBy(pair => {
-    return pair[1].description
-  }),
-  _.map(pair => {
-    return {
-      name: `${pair[1].symbol}  ${pair[1].description}`,
-      value: pair[0],
-    }
-  }),
-)
+function contributionChoices(options) {
+  const types = util.contributionTypes(options)
+  const pairs = Object.entries(types)
+  const sorted = pairs.sort((a, b) =>
+    a[1].description.localeCompare(b[1].description),
+  )
+  return sorted.map(pair => ({
+    name: `${pair[1].symbol}  ${pair[1].description}`,
+    value: pair[0],
+  }))
+}
 
 function getQuestions(options, username, contributions) {
   return [
@@ -68,7 +65,10 @@ function getQuestions(options, username, contributions) {
 
         if (!input.length) {
           return 'Use space to select at least one contribution type.'
-        } else if (_.isEqual(input, previousContributions)) {
+        } else if (
+          JSON.stringify(input.sort()) ===
+          JSON.stringify(previousContributions.sort())
+        ) {
           return 'Nothing changed, use space to select contribution types.'
         }
         return true
@@ -81,15 +81,15 @@ function getValidUserContributions(options, contributions) {
   const validContributionTypes = util.contributionTypes(options)
   const userContributions = contributions && contributions.split(',')
 
-  const validUserContributions = _.filter(
+  const validUserContributions = userContributions.filter(
     userContribution => validContributionTypes[userContribution] !== undefined,
-  )(userContributions)
+  )
 
-  const invalidUserContributions = _.filter(
+  const invalidUserContributions = userContributions.filter(
     userContribution => validContributionTypes[userContribution] === undefined,
-  )(userContributions)
+  )
 
-  if (_.isEmpty(validUserContributions)) {
+  if (validUserContributions.length === 0) {
     throw new Error(
       `${invalidUserContributions.toString()} is/are invalid contribution type(s)`,
     )
@@ -106,5 +106,5 @@ module.exports = function prompt(options, username, contributions) {
         : getValidUserContributions(options, contributions),
   }
   const questions = getQuestions(options, username, contributions)
-  return inquirer.prompt(questions).then(_.assign(defaults))
+  return inquirer.prompt(questions).then(answers => ({...defaults, ...answers}))
 }

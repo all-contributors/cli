@@ -55,6 +55,7 @@
     "yargs": "^18.0.0"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.7.6",
     "@eslint/js": "^9.39.2",
     "eslint": "^9.39.2",
     "eslint-plugin-import": "^2.32.0",

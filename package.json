@@ -46,6 +46,7 @@
   },
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
+    "@babel/runtime": "^7.7.6",
     "chalk": "^5.6.2",
     "inquirer": "^7.3.3",
     "json-fixer": "^1.6.8",
@@ -55,7 +56,6 @@
     "yargs": "^18.0.0"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.7.6",
     "@eslint/js": "^9.39.2",
     "eslint": "^9.39.2",
     "eslint-plugin-import": "^2.32.0",

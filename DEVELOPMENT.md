@@ -7,7 +7,7 @@
 The project uses Jest for testing. To run the test suite you can use:
 
 ```bash
-pnpm test
+npm test
 ```
 
 This runs all tests with code coverage analysis enabled.

@@ -38,10 +38,12 @@ module.exports = Object.assign(jestConfig, {
 The project enforces minimum code coverage thresholds through the jest
 configuration above:
 
-- **Branches:** 50%
-- **Functions:** 40%
-- **Lines:** 50%
-- **Statements:** 50%
+| Coverage Type | Percentage |
+|---------------|-----------|
+| Branches      | 50%       |
+| Functions     | 40%       |
+| Lines         | 50%       |
+| Statements    | 50%       |
 
 Tests will fail if coverage drops below these thresholds.
 

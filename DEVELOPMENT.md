@@ -62,7 +62,7 @@ The HTML report provides a visual breakdown of which files are covered by tests.
 
 The project uses Codecov to track code coverage over time and on pull requests.
 
-**CI Integration:**
+#### CI Integration
 
 - The GitHub Actions workflow (`.github/workflows/test-deploy.yml`)
   automatically uploads coverage to Codecov after running tests
@@ -70,7 +70,7 @@ The project uses Codecov to track code coverage over time and on pull requests.
 - The workflow uses `codecov/codecov-action@vxxx` (whatever version is most
   recent) to upload the `lcov.info` file
 
-**Configuration:**
+#### Configuration
 
 Codecov behavior is configured in `.codecov.yml`:
 
@@ -80,7 +80,7 @@ Codecov behavior is configured in `.codecov.yml`:
 - Codecov now requires a token for all uploads so we have one generated in the
   repo as a secret `secrets.CODECOV_TOKEN`.
 
-**Local Usage:**
+#### Local Usage
 
 You don't need a Codecov account to view coverage locally—just run `pnpm test`
 and open the HTML report. Codecov integration is primarily for tracking coverage

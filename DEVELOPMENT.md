@@ -39,11 +39,11 @@ The project enforces minimum code coverage thresholds through the jest
 configuration above:
 
 | Coverage Type | Percentage |
-|---------------|-----------|
-| Branches      | 50%       |
-| Functions     | 40%       |
-| Lines         | 50%       |
-| Statements    | 50%       |
+| ------------- | ---------- |
+| Branches      | 50%        |
+| Functions     | 40%        |
+| Lines         | 50%        |
+| Statements    | 50%        |
 
 Tests will fail if coverage drops below these thresholds.
 

@@ -39,19 +39,17 @@ test(`Result of parsed url without protocol should be equal`, () => {
 
 test(`Throw an error when parsed input isn't a string`, () => {
   const input = 123
-  expect(url.parseHttpUrl.bind(null, input)).toThrowError(
-    'input must be a string',
-  )
+  expect(url.parseHttpUrl.bind(null, input)).toThrow('input must be a string')
 })
 
 test(`Throw an error when parsed url has wrong protocol`, () => {
   const input = 'ftp://domain.xyz'
-  expect(url.parseHttpUrl.bind(null, input)).toThrowError(
+  expect(url.parseHttpUrl.bind(null, input)).toThrow(
     'Provided URL has an invalid protocol',
   )
 })
 
 test(`Throw an error when parsed input isn't a URL`, () => {
   const input = 'some string'
-  expect(url.parseHttpUrl.bind(null, input)).toThrowError('Invalid URL')
+  expect(url.parseHttpUrl.bind(null, input)).toThrow('Invalid URL')
 })

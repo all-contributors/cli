@@ -1,10 +1,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-- [
-  all-contributors-cli
-](#all-contributors-cli)
+- [ all-contributors-cli ](#all-contributors-cli)
   - [The problem](#the-problem)
   - [This solution](#this-solution)
   - [Using the all-contributors-cli](#using-the-all-contributors-cli)

@@ -66,9 +66,15 @@ function formatFooter(options) {
 
 function generateContributorsList(options, contributors) {
   const tableFooter = formatFooter(options)
-  const defaultWrapperTemplate =  _.template('\n<table>\n  <tbody><%= bodyContent %>  </tbody>\n<%= tableFooterContent %></table>\n\n')
-  const wrapperTemplate = options.wrapperTemplate ? _.template(`\n${options.wrapperTemplate}\n\n`) : defaultWrapperTemplate
-  const seperator = options.wrapperTemplate ? '\n    </tr><br />\n    <tr>\n      ' : '\n    </tr>\n    <tr>\n      '
+  const defaultWrapperTemplate = _.template(
+    '\n<table>\n  <tbody><%= bodyContent %>  </tbody>\n<%= tableFooterContent %></table>\n\n',
+  )
+  const wrapperTemplate = options.wrapperTemplate
+    ? _.template(`\n${options.wrapperTemplate}\n\n`)
+    : defaultWrapperTemplate
+  const seperator = options.wrapperTemplate
+    ? '\n    </tr><br />\n    <tr>\n      '
+    : '\n    </tr>\n    <tr>\n      '
 
   let tableFooterContent = ''
 
@@ -82,9 +88,9 @@ function generateContributorsList(options, contributors) {
       return formatContributor(options, contributor)
     }),
     _.chunk(options.contributorsPerLine),
-    _.map((currentLineContributors) => formatLine(
-      options, currentLineContributors
-    )),
+    _.map(currentLineContributors =>
+      formatLine(options, currentLineContributors),
+    ),
     _.join(seperator),
     newContent => {
       if (options.linkToUsage) {
@@ -93,7 +99,7 @@ function generateContributorsList(options, contributors) {
 
       const bodyContent = `\n    <tr>\n      ${newContent}\n    </tr>\n`
 
-      return wrapperTemplate({ bodyContent, tableFooterContent})
+      return wrapperTemplate({bodyContent, tableFooterContent})
     },
   )(contributors)
 }

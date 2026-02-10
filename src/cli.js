@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 const path = require('path')
-const yargs = require('yargs')
+const yargs = require('yargs/yargs')
+const {hideBin} = require('yargs/helpers')
 const chalk = require('chalk')
 const inquirer = require('inquirer')
 
@@ -15,7 +16,7 @@ const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
 
 function getArgs() {
-  return yargs
+  return yargs(hideBin(process.argv))
     .scriptName('all-contributors')
     .option('config', {
       alias: 'c',
@@ -151,8 +152,7 @@ function promptForCommand(argv) {
           value: 'generate',
         },
         {
-          name:
-            'Compare contributors from the repository with the credited ones',
+          name: 'Compare contributors from the repository with the credited ones',
           value: 'check',
         },
       ],
@@ -184,7 +184,6 @@ async function run() {
         throw new Error(`Unknown command ${command}`)
     }
   } catch (e) {
-    /* eslint-disable-next-line no-console */
     console.error(e.stack || e.message || e)
     process.exit(1)
   }

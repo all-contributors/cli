@@ -9,7 +9,6 @@ const addPrivateToken = (url, privateToken = '') => {
 }
 
 const getUserInfo = function (username, hostname, privateToken) {
-  /* eslint-disable complexity */
   if (!hostname) {
     hostname = 'https://gitlab.com'
   }

@@ -1,5 +1,6 @@
+import {test, expect, beforeAll} from 'vitest'
 import nock from 'nock'
-import githubAPI from '../github'
+import githubAPI from '../github.js'
 
 import allContributorsCliResponse from './github/all-contributors.response.json'
 import allContributorsCliTransformed from './github/all-contributors.transformed.json'
@@ -54,7 +55,7 @@ async function rejects(promise) {
 }
 
 // When we move to vitest this might not be an issue anymore
-// eslint-disable-next-line jest/expect-expect
+// eslint-disable-next-line vitest/expect-expect
 test('handle errors', async () => {
   nock('https://api.github.com').get('/users/nodisplayname').replyWithError(404)
 
@@ -118,7 +119,7 @@ test('fill in the name when null is returned', async () => {
 })
 
 // When we move to vitest this might not be an issue anymore
-// eslint-disable-next-line jest/expect-expect
+// eslint-disable-next-line vitest/expect-expect
 test('attaches token when supplied', async () => {
   const mockAuthToken = 'myMock-token-adaskjda'
   nock('https://api.github.com')
@@ -132,7 +133,7 @@ test('attaches token when supplied', async () => {
 })
 
 // When we move to vitest this might not be an issue anymore
-// eslint-disable-next-line jest/expect-expect
+// eslint-disable-next-line vitest/expect-expect
 test('attaches no token when supplied empty', async () => {
   nock('https://api.github.com')
     .matchHeader('authorization', '')
@@ -145,7 +146,7 @@ test('attaches no token when supplied empty', async () => {
 })
 
 // When we move to vitest this might not be an issue anymore
-// eslint-disable-next-line jest/expect-expect
+// eslint-disable-next-line vitest/expect-expect
 test('attaches no token when not supplied', async () => {
   nock('https://api.github.com')
     .matchHeader('authorization', '')

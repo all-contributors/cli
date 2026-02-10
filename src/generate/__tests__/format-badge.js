@@ -1,5 +1,6 @@
+import {test, expect} from 'vitest'
 import _ from 'lodash/fp'
-import formatBadge from '../format-badge'
+import formatBadge from '../format-badge.js'
 
 test('return badge with the number of contributors', () => {
   const options = {}

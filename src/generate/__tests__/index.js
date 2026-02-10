@@ -1,4 +1,5 @@
-import generate from '../'
+import {test, expect} from 'vitest'
+import generate from '../index.js'
 import contributors from './fixtures/contributors.json'
 
 function fixtures() {

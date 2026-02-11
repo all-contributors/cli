@@ -222,7 +222,6 @@ better get to know the project.
 
 ### Build dependencies (from kcd-scripts → native Babel)
 
-Legend: **Required** = needed for the build to run. **Removed** = removed
 intentionally from the build process. **Unsure** = need to confirm (e.g. depends
 on config choice).
 

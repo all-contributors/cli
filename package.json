@@ -14,7 +14,7 @@
   },
   "scripts": {
     "add-contributor": "kcd-scripts contributors add",
-    "build": "babel src --out-dir dist --copy-files && find dist -type d -name '__tests__' -exec rm -rf {} + 2>/dev/null; find dist -type d -name '__snapshots__' -exec rm -rf {} + 2>/dev/null; true",
+    "build": "babel src --out-dir dist --copy-files && rm -rf dist/**/__tests__ dist/**/__snapshots__",
     "lint": "eslint . && prettier --check --ignore-unknown .",
     "lint-fix": "eslint --fix . && prettier --write --ignore-unknown .",
     "test": "NODE_OPTIONS='--experimental-vm-modules' kcd-scripts test --watchAll=false",

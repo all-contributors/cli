@@ -14,8 +14,8 @@
   },
   "scripts": {
     "add-contributor": "kcd-scripts contributors add",
-    "build": "kcd-scripts build",
     "knip": "knip",
+    "build": "babel src --out-dir dist --copy-files",
     "lint": "eslint . && prettier --check --ignore-unknown .",
     "lint-fix": "eslint --fix . && prettier --write --ignore-unknown .",
     "test": "vitest",
@@ -57,6 +57,9 @@
     "yargs": "^18.0.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.26.0",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
     "@eslint/js": "^9.39.2",
     "@vitest/coverage-v8": "^2.0.0",
     "eslint": "^9.39.2",

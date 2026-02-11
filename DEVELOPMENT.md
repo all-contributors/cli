@@ -12,6 +12,9 @@ npm test
 
 This runs all tests with code coverage analysis enabled.
 
+Note: if you want to run your tests locally in vscode using the interactive IDE,
+be sure to install the Jest (orta) extension so your tests are discovered.
+
 ### Test Configuration
 
 Test configuration is in `jest.config.js`, which extends `kcd-scripts/jest` with
@@ -221,7 +224,6 @@ system. We might be able to remove others as we refine the build process and
 better get to know the project.
 
 ### Build dependencies (from kcd-scripts → native Babel)
-
 
 - **@babel/core**
   - **Status:** Required

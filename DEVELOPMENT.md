@@ -222,8 +222,6 @@ better get to know the project.
 
 ### Build dependencies (from kcd-scripts → native Babel)
 
-intentionally from the build process. **Unsure** = need to confirm (e.g. depends
-on config choice).
 
 - **@babel/core**
   - **Status:** Required

@@ -15,6 +15,7 @@
   "scripts": {
     "add-contributor": "kcd-scripts contributors add",
     "build": "kcd-scripts build",
+    "knip": "knip",
     "lint": "eslint . && prettier --check --ignore-unknown .",
     "lint-fix": "eslint --fix . && prettier --write --ignore-unknown .",
     "test": "NODE_OPTIONS='--experimental-vm-modules' kcd-scripts test --watchAll=false",
@@ -46,9 +47,7 @@
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
     "@babel/runtime": "^7.7.6",
-    "async": "^3.1.0",
-    "chalk": "^4.0.0",
-    "didyoumean": "^1.2.1",
+    "chalk": "^5.6.2",
     "inquirer": "^7.3.3",
     "json-fixer": "^1.6.8",
     "lodash": "^4.11.2",
@@ -58,19 +57,17 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.2",
-    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9.39.2",
-    "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jest": "^29.12.1",
     "git-cz": "^4.7.6",
-    "kcd-scripts": "^16.0.0",
     "globals": "^17.1.0",
     "husky": "^9.1.0",
+    "kcd-scripts": "^16.0.0",
+    "knip": "^5.83.1",
     "lint-staged": "^16.2.7",
     "nock": "^14.0.10",
-    "prettier": "^3.8.1",
-    "semantic-release": "^25.0.2"
+    "prettier": "^3.8.1"
   },
   "optionalDependencies": {
     "prettier": "^3"

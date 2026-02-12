@@ -1,7 +1,7 @@
 import js from '@eslint/js'
 import {defineConfig, globalIgnores} from 'eslint/config'
 import importPlugin from 'eslint-plugin-import'
-import jestPlugin from 'eslint-plugin-jest'
+import vitestPlugin from 'eslint-plugin-vitest'
 import globals from 'globals'
 
 export default defineConfig([
@@ -22,14 +22,13 @@ export default defineConfig([
     },
   },
   {
-    extends: [jestPlugin.configs['flat/recommended']],
+    extends: [vitestPlugin.configs.recommended],
     files: ['**/__tests__/**/*.js'],
     languageOptions: {
-      globals: globals.jest,
+      globals: globals.node,
     },
     rules: {
-      'jest/no-disabled-tests': 'error',
-      'jest/prefer-to-have-length': 'error',
+      'vitest/prefer-to-have-length': 'error',
     },
   },
 ])

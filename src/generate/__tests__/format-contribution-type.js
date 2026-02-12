@@ -1,4 +1,5 @@
-import formatContributionType from '../format-contribution-type'
+import {test, expect} from 'vitest'
+import formatContributionType from '../format-contribution-type.js'
 import contributors from './fixtures/contributors.json'
 
 const fixtures = () => {

@@ -1,4 +1,5 @@
-import prompt from '../prompt'
+import {test, expect} from 'vitest'
+import prompt from '../prompt.js'
 
 function fixtures() {
   const options = {

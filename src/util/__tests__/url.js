@@ -1,4 +1,5 @@
-import url from '../url'
+import {test, expect} from 'vitest'
+import url from '../url.js'
 
 test(`Result of protocol validation should be true`, () => {
   expect(url.isHttpProtocol('http:')).toBe(true)

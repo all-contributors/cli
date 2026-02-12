@@ -1,5 +1,6 @@
+import {test, expect} from 'vitest'
 import path from 'path'
-import {formatConfig} from '../formatting'
+import {formatConfig} from '../formatting.js'
 
 const content = {contributors: [{id: 'abc123'}]}
 

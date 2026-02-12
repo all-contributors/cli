@@ -1,7 +1,7 @@
 import {readFile, writeFile} from 'fs/promises'
 import jf from 'json-fixer'
-import _ from 'lodash/fp'
-import {formatConfig} from './formatting'
+import _ from 'lodash/fp.js'
+import {formatConfig} from './formatting.js'
 
 export async function readConfig(configPath) {
   try {

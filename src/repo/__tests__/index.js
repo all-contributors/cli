@@ -1,10 +1,10 @@
-import repo from '..'
+import {test, expect, beforeEach} from 'vitest'
+import nock from 'nock'
+import repo from '../index.js'
 
-jest.mock('../github')
-jest.mock('../gitlab')
-
-const githubAPI = require('../github')
-const gitlabAPI = require('../gitlab')
+beforeEach(() => {
+  nock.cleanAll()
+})
 
 test('get choices for init command', () => {
   expect(repo.getChoices()).toEqual([
@@ -37,37 +37,38 @@ test('get repo name given a repo type', () => {
   expect(repo.getTypeName('other')).toBe(null)
 })
 
-test('get user info calls underlying APIs', () => {
-  githubAPI.getUserInfo.mockImplementationOnce(() => {
-    return {
-      login: 'nodisplayname',
-      name: 'nodisplayname',
-      avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
-      profile: 'https://github.com/nodisplayname',
-    }
-  })
-  gitlabAPI.getUserInfo.mockImplementationOnce(() => {
-    return {
-      login: 'nodisplayname',
-      name: 'nodisplayname',
-      avatar_url:
-        'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
-      profile: 'https://gitlab.com/nodisplayname',
-    }
+test('get user info calls underlying APIs', async () => {
+  nock('https://api.github.com').get('/users/nodisplayname').reply(200, {
+    login: 'nodisplayname',
+    name: 'nodisplayname',
+    avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
+    html_url: 'https://github.com/nodisplayname',
   })
 
-  expect(repo.getUserInfo('nodisplayname', 'github')).toEqual({
+  nock('https://gitlab.com')
+    .get('/api/v4/users?username=nodisplayname')
+    .reply(200, [
+      {
+        username: 'nodisplayname',
+        name: 'nodisplayname',
+        avatar_url:
+          'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
+        web_url: 'https://gitlab.com/nodisplayname',
+      },
+    ])
+
+  expect(await repo.getUserInfo('nodisplayname', 'github')).toEqual({
     login: 'nodisplayname',
     name: 'nodisplayname',
     avatar_url: 'https://avatars2.githubusercontent.com/u/3869412?v=3&s=400',
     profile: 'https://github.com/nodisplayname',
   })
-  expect(repo.getUserInfo('nodisplayname', 'gitlab')).toEqual({
+  expect(await repo.getUserInfo('nodisplayname', 'gitlab')).toEqual({
     login: 'nodisplayname',
     name: 'nodisplayname',
     avatar_url:
       'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
     profile: 'https://gitlab.com/nodisplayname',
   })
-  expect(repo.getUserInfo('nodisplayname', 'other')).toBe(null)
+  expect(await repo.getUserInfo('nodisplayname', 'other')).toBe(null)
 })

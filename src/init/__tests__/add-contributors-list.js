@@ -1,6 +1,7 @@
+import {test, expect, describe} from 'vitest'
 import {unlink} from 'fs/promises'
-import {addContributorsList} from '../init-content'
-import ensureFileExists from '../file-exist'
+import {addContributorsList} from '../init-content.js'
+import ensureFileExists from '../file-exist.js'
 
 describe('addContributorsList', () => {
   test('insert list under contributors section', () => {

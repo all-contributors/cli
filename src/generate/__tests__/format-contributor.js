@@ -1,5 +1,6 @@
+import {test, expect} from 'vitest'
 import _ from 'lodash/fp'
-import formatContributor from '../format-contributor'
+import formatContributor from '../format-contributor.js'
 import contributors from './fixtures/contributors.json'
 
 function fixtures() {

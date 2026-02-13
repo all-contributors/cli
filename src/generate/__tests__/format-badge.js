@@ -1,5 +1,5 @@
 import _ from 'lodash/fp'
-import formatBadge from '../format-badge'
+import {formatBadge} from '../format-badge'
 
 test('return badge with the number of contributors', () => {
   const options = {}

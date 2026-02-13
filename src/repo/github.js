@@ -1,6 +1,6 @@
-const url = require('url')
-const fetch = require('node-fetch')
-const {parseHttpUrl, isValidHttpUrl} = require('../util/url')
+import url from 'url'
+import fetch from 'node-fetch'
+import {parseHttpUrl, isValidHttpUrl} from '../util/url.js'
 
 /**
  * Get the host based on public or enterprise GitHub.
@@ -76,7 +76,7 @@ function getContributorsPage(githubUrl, optionalPrivateToken) {
   })
 }
 
-const getUserInfo = function (username, hostname, optionalPrivateToken) {
+export const getUserInfo = function (username, hostname, optionalPrivateToken) {
   if (!username) {
     throw new Error(
       `No login when adding a contributor. Please specify a username.`,
@@ -121,13 +121,13 @@ const getUserInfo = function (username, hostname, optionalPrivateToken) {
   )
 }
 
-const getContributors = function (owner, name, hostname, optionalPrivateToken) {
+export const getContributors = function (
+  owner,
+  name,
+  hostname,
+  optionalPrivateToken,
+) {
   const root = getApiHost(hostname)
   const contributorsUrl = `${root}/repos/${owner}/${name}/contributors?per_page=100`
   return getContributorsPage(contributorsUrl, optionalPrivateToken)
-}
-
-module.exports = {
-  getUserInfo,
-  getContributors,
 }

@@ -3,11 +3,11 @@
 // This is to support adding contributors using the AllContributors GitHub Bot (see github.com/all-contributors/all-contributors-bot
 // These Node API's are intended to be network and side effect free, everything should be in memory with no io to network/disk
 
-const chalk = require('chalk')
+import chalk from 'chalk'
 
-const addContributorWithDetails = require('./contributors/addWithDetails')
-const generate = require('./generate')
-const {addContributorsList, addBadge} = require('./init/init-content')
+import {addContributorWithDetails} from './contributors/addWithDetails.js'
+import {generate} from './generate/index.js'
+import {addContributorsList, addBadge} from './init/init-content.js'
 
 process.stdout.write(
   chalk.yellow(
@@ -17,9 +17,7 @@ process.stdout.write(
   ),
 )
 
-module.exports = {
-  addContributorWithDetails,
-  generate,
-  initContributorsList: addContributorsList,
-  initBadge: addBadge,
-}
+export const initContributorsList = addContributorsList
+export const initBadge = addBadge
+
+export {addContributorWithDetails, generate}

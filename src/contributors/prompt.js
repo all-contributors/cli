@@ -1,7 +1,7 @@
-const _ = require('lodash/fp')
-const inquirer = require('inquirer')
-const util = require('../util')
-const repo = require('../repo')
+import _ from 'lodash/fp.js'
+import inquirer from 'inquirer'
+import * as util from '../util/index.js'
+import * as repo from '../repo/index.js'
 
 const contributionChoices = _.flow(
   util.contributionTypes,
@@ -97,7 +97,7 @@ function getValidUserContributions(options, contributions) {
   return validUserContributions
 }
 
-module.exports = function prompt(options, username, contributions) {
+export function prompt(options, username, contributions) {
   const defaults = {
     username,
     contributions:

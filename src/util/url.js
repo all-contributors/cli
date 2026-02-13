@@ -1,8 +1,8 @@
-function isHttpProtocol(input) {
+export function isHttpProtocol(input) {
   return new RegExp('^https?\\:?$').test(input)
 }
 
-function isValidHttpUrl(input) {
+export function isValidHttpUrl(input) {
   try {
     const url = new URL(input)
 
@@ -12,7 +12,7 @@ function isValidHttpUrl(input) {
   }
 }
 
-function parseHttpUrl(input) {
+export function parseHttpUrl(input) {
   if (typeof input !== 'string') {
     throw new TypeError('input must be a string')
   }
@@ -26,10 +26,4 @@ function parseHttpUrl(input) {
   }
 
   return url.toString()
-}
-
-module.exports = {
-  isHttpProtocol,
-  isValidHttpUrl,
-  parseHttpUrl,
 }

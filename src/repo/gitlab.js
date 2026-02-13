@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 
 const addPrivateToken = (url, privateToken = '') => {
   if (privateToken === '') return url
@@ -97,7 +97,4 @@ const getContributors = function (owner, name, hostname, privateToken) {
   )
 }
 
-module.exports = {
-  getUserInfo,
-  getContributors,
-}
+export {getUserInfo, getContributors}

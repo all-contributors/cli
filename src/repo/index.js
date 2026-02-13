@@ -1,5 +1,5 @@
-const githubAPI = require('./github')
-const gitlabAPI = require('./gitlab')
+import * as githubAPI from './github.js'
+import * as gitlabAPI from './gitlab.js'
 
 const privateToken =
   (process.env &&
@@ -37,7 +37,7 @@ const SUPPORTED_REPO_TYPES = {
   },
 }
 
-const getChoices = function () {
+export const getChoices = function () {
   return Object.keys(SUPPORTED_REPO_TYPES)
     .map(key => SUPPORTED_REPO_TYPES[key])
     .map(item => {
@@ -48,7 +48,7 @@ const getChoices = function () {
     })
 }
 
-const getHostname = function (repoType, repoHost) {
+export const getHostname = function (repoType, repoHost) {
   if (repoHost) {
     return repoHost
   } else if (repoType in SUPPORTED_REPO_TYPES) {
@@ -57,42 +57,42 @@ const getHostname = function (repoType, repoHost) {
   return null
 }
 
-const getCheckKey = function (repoType) {
+export const getCheckKey = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].checkKey
   }
   return null
 }
 
-const getTypeName = function (repoType) {
+export const getTypeName = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].name
   }
   return null
 }
 
-const getLinkToCommits = function (repoType) {
+export const getLinkToCommits = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].linkToCommits
   }
   return null
 }
 
-const getLinkToIssues = function (repoType) {
+export const getLinkToIssues = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].linkToIssues
   }
   return null
 }
 
-const getLinkToReviews = function (repoType) {
+export const getLinkToReviews = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].linkToReviews
   }
   return null
 }
 
-const getUserInfo = function (username, repoType, repoHost) {
+export const getUserInfo = function (username, repoType, repoHost) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].getUserInfo(
       username,
@@ -103,7 +103,7 @@ const getUserInfo = function (username, repoType, repoHost) {
   return null
 }
 
-const getContributors = function (owner, name, repoType, repoHost) {
+export const getContributors = function (owner, name, repoType, repoHost) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].getContributors(
       owner,
@@ -113,16 +113,4 @@ const getContributors = function (owner, name, repoType, repoHost) {
     )
   }
   return null
-}
-
-module.exports = {
-  getChoices,
-  getHostname,
-  getCheckKey,
-  getTypeName,
-  getLinkToCommits,
-  getLinkToIssues,
-  getLinkToReviews,
-  getUserInfo,
-  getContributors,
 }

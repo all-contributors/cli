@@ -1,5 +1,5 @@
-import addContributorWithDetails from '../addWithDetails'
-import fixtures from './fixtures'
+import {addContributorWithDetails} from '../addWithDetails'
+import {fixtures} from './fixtures'
 
 test('add new contributor without going to the network', async () => {
   const {options} = fixtures()

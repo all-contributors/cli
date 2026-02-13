@@ -1,6 +1,6 @@
-const fs = require('fs')
+import fs from 'fs'
 
-module.exports = function ensureFileExists(file) {
+export function ensureFileExists(file) {
   return new Promise((resolve, reject) => {
     if (fs.existsSync(file)) return resolve(file)
     fs.writeFile(file, '', err => {

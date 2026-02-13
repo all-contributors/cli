@@ -1,16 +1,16 @@
 #!/usr/bin/env node
 
-const path = require('path')
-const yargs = require('yargs/yargs')
-const {hideBin} = require('yargs/helpers')
-const chalk = require('chalk')
-const inquirer = require('inquirer')
+import path from 'path'
+import yargs from 'yargs/yargs'
+import {hideBin} from 'yargs/helpers'
+import chalk from 'chalk'
+import inquirer from 'inquirer'
 
-const init = require('./init')
-const generate = require('./generate')
-const util = require('./util')
-const repo = require('./repo')
-const updateContributors = require('./contributors')
+import {init} from './init/index.js'
+import {generate} from './generate/index.js'
+import * as util from './util/index.js'
+import * as repo from './repo/index.js'
+import {addContributor} from './contributors/index.js'
 
 const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
@@ -77,7 +77,7 @@ async function addContribution(argv) {
   const contributions = argv._[2]
 
   // Add or update contributor in the config file
-  const data = updateContributors(argv, username, contributions)
+  const data = addContributor(argv, username, contributions)
 
   argv.contributors = data.contributors
 

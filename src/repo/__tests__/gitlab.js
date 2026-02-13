@@ -1,5 +1,5 @@
 import nock from 'nock'
-import gitlabAPI from '../gitlab'
+import * as gitlabAPI from '../gitlab'
 
 const getUserInfo = gitlabAPI.getUserInfo
 

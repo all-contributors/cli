@@ -1,4 +1,4 @@
-import generate from '../'
+import {generate} from '../'
 import contributors from './fixtures/contributors.json'
 
 function fixtures() {

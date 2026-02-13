@@ -1,7 +1,7 @@
-const addContributor = require('./add')
+import {add} from './add.js'
 
 // Adds a contributor without going to the network (you supply the additional fields)
-module.exports = function addContributorWithDetails({
+export function addContributorWithDetails({
   options,
   login,
   contributions,
@@ -17,5 +17,5 @@ module.exports = function addContributorWithDetails({
       profile,
     })
   }
-  return addContributor(options, login, contributions, infoFetcherNoNetwork)
+  return add(options, login, contributions, infoFetcherNoNetwork)
 }

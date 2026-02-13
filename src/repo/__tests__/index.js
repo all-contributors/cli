@@ -1,4 +1,4 @@
-import repo from '..'
+import * as repo from '..'
 
 jest.mock('../github')
 jest.mock('../gitlab')

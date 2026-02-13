@@ -1,7 +1,7 @@
-module.exports = {
-  configFile: require('./config-file'),
-  contributionTypes: require('./contribution-types'),
-  git: require('./git'),
-  markdown: require('./markdown'),
-  url: require('./url'),
-}
+import * as configFile from './config-file.js'
+import {contributionTypes} from './contribution-types.js'
+import * as git from './git.js'
+import * as markdown from './markdown.js'
+import * as url from './url.js'
+
+export {configFile, contributionTypes, git, markdown, url}

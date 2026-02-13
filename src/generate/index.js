@@ -1,7 +1,7 @@
-const _ = require('lodash/fp')
-const floor = require('lodash/floor')
-const formatBadge = require('./format-badge')
-const formatContributor = require('./format-contributor')
+import _ from 'lodash/fp.js'
+import floor from 'lodash/floor.js'
+import {formatBadge} from './format-badge.js'
+import {formatContributor} from './format-contributor.js'
 
 function injectListBetweenTags(newContent) {
   return function (previousContent) {
@@ -142,7 +142,7 @@ function replaceBadge(newContent) {
   }
 }
 
-module.exports = function generate(options, contributors, fileContent) {
+export function generate(options, contributors, fileContent) {
   const contributorsList =
     contributors.length === 0
       ? '\n'

@@ -1,5 +1,5 @@
-const _ = require('lodash/fp')
-const repo = require('../repo')
+import _ from 'lodash/fp.js'
+import * as repo from '../repo/index.js'
 
 const defaultTypes = function (repoType) {
   return {
@@ -143,6 +143,6 @@ const defaultTypes = function (repoType) {
   }
 }
 
-module.exports = function (options) {
+export function contributionTypes(options) {
   return _.assign(defaultTypes(options.repoType), options.types)
 }

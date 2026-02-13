@@ -1,7 +1,9 @@
-const _ = require('lodash/fp')
-const inquirer = require('inquirer')
-const git = require('../util').git
-const conventions = require('./commit-conventions')
+import _ from 'lodash/fp.js'
+import inquirer from 'inquirer'
+import * as util from '../util/index.js'
+import {conventions} from './commit-conventions.js'
+
+const {git} = util
 
 const questions = [
   {
@@ -96,7 +98,7 @@ const questions = [
 
 const uniqueFiles = _.flow(_.compact, _.uniq)
 
-module.exports = function prompt() {
+export function prompt() {
   return git
     .getRepoInfo()
     .then(repoInfo => {

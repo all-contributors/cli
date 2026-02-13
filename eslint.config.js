@@ -15,7 +15,10 @@ export default defineConfig([
       globals: globals.node,
     },
     rules: {
-      'import/no-unresolved': ['error', {ignore: ['^eslint/', '^prettier$']}],
+      'import/no-unresolved': [
+        'error',
+        {ignore: ['^eslint/', '^prettier$', '^yargs']},
+      ],
       'import/no-extraneous-dependencies': 'error',
       'import/default': 'off',
       'import/namespace': 'off',

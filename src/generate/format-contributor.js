@@ -1,5 +1,5 @@
-const _ = require('lodash/fp')
-const formatContributionType = require('./format-contribution-type')
+import _ from 'lodash/fp.js'
+import {formatContributionType} from './format-contribution-type.js'
 
 const avatarTemplate = _.template(
   '<img src="<%= contributor.avatar_url %>?s=<%= options.imageSize %>" width="<%= options.imageSize %>px;" alt="<%= name %>"/>',
@@ -49,7 +49,7 @@ function escapeName(name) {
     .replace(new RegExp('\\"', 'g'), '&quot;')
 }
 
-module.exports = function formatContributor(options, contributor) {
+export function formatContributor(options, contributor) {
   const formatter = _.partial(formatContributionType, [options, contributor])
   const contributions = contributor.contributions.map(formatter).join(' ')
   const templateData = {

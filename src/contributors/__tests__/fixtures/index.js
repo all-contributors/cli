@@ -1,6 +1,6 @@
 import contributors from './contributors.json'
 
-export default function fixtures() {
+export function fixtures() {
   const options = {
     contributors,
   }

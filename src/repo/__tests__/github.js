@@ -1,5 +1,5 @@
 import nock from 'nock'
-import githubAPI from '../github'
+import * as githubAPI from '../github'
 
 import allContributorsCliResponse from './github/all-contributors.response.json'
 import allContributorsCliTransformed from './github/all-contributors.transformed.json'

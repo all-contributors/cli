@@ -1,6 +1,6 @@
 import {unlink} from 'fs/promises'
 import {addContributorsList} from '../init-content'
-import ensureFileExists from '../file-exist'
+import {ensureFileExists} from '../file-exist'
 
 describe('addContributorsList', () => {
   test('insert list under contributors section', () => {

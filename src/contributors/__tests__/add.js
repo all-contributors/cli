@@ -1,5 +1,5 @@
-import addContributor from '../add'
-import fixtures from './fixtures'
+import {add} from '../add'
+import {fixtures} from './fixtures'
 
 function mockInfoFetcher(username) {
   return Promise.resolve({
@@ -33,7 +33,7 @@ test('callback with error if infoFetcher fails', async () => {
   function infoFetcher() {
     return Promise.reject(error)
   }
-  const resolvedError = await addContributor(
+  const resolvedError = await add(
     options,
     username,
     contributions,
@@ -48,7 +48,7 @@ test('add new contributor at the end of the list of contributors', () => {
   const username = 'login3'
   const contributions = ['doc']
 
-  return addContributor(options, username, contributions, mockInfoFetcher).then(
+  return add(options, username, contributions, mockInfoFetcher).then(
     contributors => {
       expect(contributors).toHaveLength(options.contributors.length + 1)
       expect(contributors[options.contributors.length]).toEqual({
@@ -68,7 +68,7 @@ test('add new contributor at the end of the list of contributors with a url link
   const contributions = ['doc']
   options.url = 'www.foo.bar'
 
-  return addContributor(options, username, contributions, mockInfoFetcher).then(
+  return add(options, username, contributions, mockInfoFetcher).then(
     contributors => {
       expect(contributors).toHaveLength(options.contributors.length + 1)
       expect(contributors[options.contributors.length]).toEqual({
@@ -87,7 +87,7 @@ test(`should not update an existing contributor's contributions where nothing ha
   const username = 'login2'
   const contributions = ['blog', 'code']
 
-  return addContributor(options, username, contributions, mockInfoFetcher).then(
+  return add(options, username, contributions, mockInfoFetcher).then(
     contributors => {
       expect(contributors).toEqual(options.contributors)
     },
@@ -99,7 +99,7 @@ test(`should not update an existing contributor's contributions where nothing ha
   const username = 'login1'
   const contributions = ['code']
 
-  return addContributor(options, username, contributions, mockInfoFetcher).then(
+  return add(options, username, contributions, mockInfoFetcher).then(
     contributors => {
       expect(contributors).toEqual(options.contributors)
     },
@@ -110,7 +110,7 @@ test(`should update an existing contributor's contributions if a new type is add
   const {options} = fixtures()
   const username = 'login1'
   const contributions = ['bug']
-  return addContributor(options, username, contributions, mockInfoFetcher).then(
+  return add(options, username, contributions, mockInfoFetcher).then(
     contributors => {
       expect(contributors).toHaveLength(options.contributors.length)
       expect(contributors[0]).toEqual({
@@ -128,7 +128,7 @@ test(`should update an existing contributor's contributions if a new type is add
   const {options} = caseFixtures()
   const username = 'login1'
   const contributions = ['bug']
-  return addContributor(options, username, contributions, mockInfoFetcher).then(
+  return add(options, username, contributions, mockInfoFetcher).then(
     contributors => {
       expect(contributors).toHaveLength(1)
       expect(contributors[0]).toEqual({
@@ -148,7 +148,7 @@ test(`should update an existing contributor's contributions if a new type is add
   const contributions = ['bug']
   options.url = 'www.foo.bar'
 
-  return addContributor(options, username, contributions, mockInfoFetcher).then(
+  return add(options, username, contributions, mockInfoFetcher).then(
     contributors => {
       expect(contributors).toHaveLength(options.contributors.length)
       expect(contributors[0]).toEqual({
@@ -167,7 +167,7 @@ test(`should update an existing contributor's contributions if an existing type 
   const username = 'login2'
   const contributions = ['code']
 
-  return addContributor(options, username, contributions, mockInfoFetcher).then(
+  return add(options, username, contributions, mockInfoFetcher).then(
     contributors => {
       expect(contributors).toHaveLength(options.contributors.length)
       expect(contributors[1]).toEqual({

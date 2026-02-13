@@ -1,7 +1,14 @@
-import {test, expect} from 'vitest'
+import {test, expect, vi} from 'vitest'
 import {add} from '../add.js'
 import fixtures from './fixtures/index.js'
 
+/**
+ * Mock function that simulates fetching contributor info from an API.
+ * Returns a promise resolving to contributor data without making real API calls.
+ *
+ * @param {string} username - GitHub username to fetch
+ * @returns {Promise<Object>} Contributor info (login, name, avatar_url, profile)
+ */
 function mockInfoFetcher(username) {
   return Promise.resolve({
     login: username,
@@ -11,6 +18,12 @@ function mockInfoFetcher(username) {
   })
 }
 
+/**
+ * Returns test options with one contributor that has a capitalized login ('Login1').
+ * Used for testing that case-insensitive username matching works correctly.
+ *
+ * @returns {Object} Options object with contributors array containing one entry
+ */
 function caseFixtures() {
   const options = {
     contributors: [
@@ -42,6 +55,28 @@ test('callback with error if infoFetcher fails', async () => {
   ).catch(e => e)
 
   expect(resolvedError).toBe(error)
+})
+
+test('calls infoFetcher with (username, options.repoType, options.repoHost) when adding new contributor', async () => {
+  const {options} = fixtures()
+  options.repoType = 'github'
+  options.repoHost = 'https://github.com'
+  const username = 'newuser'
+  const contributions = ['doc']
+  const infoFetcher = vi.fn().mockResolvedValue({
+    login: username,
+    name: 'New User',
+    avatar_url: '',
+    profile: '',
+  })
+
+  await add(options, username, contributions, infoFetcher)
+
+  expect(infoFetcher).toHaveBeenCalledWith(
+    username,
+    'github',
+    'https://github.com',
+  )
 })
 
 test('add new contributor at the end of the list of contributors', () => {

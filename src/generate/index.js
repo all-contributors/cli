@@ -155,6 +155,9 @@ function replaceBadge(newContent) {
 }
 
 export function generate(options, contributors, fileContent) {
+  if (contributors === undefined || !Array.isArray(contributors)) {
+    throw new Error('contributors must be an array')
+  }
   const contributorsList =
     contributors.length === 0
       ? '\n'

@@ -1,8 +1,9 @@
 import {test, expect} from 'vitest'
-import prompt from '../prompt.js'
+import prompt, {getQuestions} from '../prompt.js'
 
 function fixtures() {
   const options = {
+    repoType: 'github',
     contributors: [
       {
         login: 'jfmengels',
@@ -57,4 +58,25 @@ test(`should filter valid contribution types from user inserted types`, () => {
     expect(answers.contributions).toHaveLength(2)
     expect(answers.contributions).toEqual(['code', 'bug'])
   })
+})
+
+test(`should throw error when username is provided but contributions are undefined`, () => {
+  const options = fixtures()
+  const username = 'userName'
+  const contributions = undefined
+  expect(() => prompt(options, username, contributions)).toThrow(
+    ' is/are invalid contribution type(s)',
+  )
+})
+
+test(`should return prompt with username message when username and contributions are not provided`, () => {
+  const options = fixtures()
+  const username = undefined
+  const contributions = undefined
+  const questions = getQuestions(options, username, contributions)
+  const usernameQuestion = questions.find(q => q.name === 'username')
+  expect(usernameQuestion).toBeDefined()
+  expect(usernameQuestion.message).toBe(
+    "Oops. Missing something. What is the contributor's GitHub username?",
+  )
 })

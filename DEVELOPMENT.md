@@ -12,6 +12,9 @@ npm test
 
 This runs all tests with code coverage analysis enabled.
 
+Note: if you want to run your tests locally in VS Code using the interactive
+IDE, be sure to install the Jest (orta) extension so your tests are discovered.
+
 ### Test Configuration
 
 Test configuration is in `vitest.config.ts`.
@@ -129,7 +132,7 @@ without assertions).
 The project uses Husky to run pre-commit hooks that automatically lint and fix
 staged files before each commit.
 
-**How it works:**
+#### How it works:
 
 1. When you run `git commit`, Husky intercepts the commit
 2. The pre-commit hook runs `lint-staged`
@@ -189,3 +192,67 @@ ESLint 9's flat config format and includes:
 - Vitest plugin rules (for test files only)
 - Custom overrides for project-specific needs
 - Support for both CommonJS and ES module syntax
+
+## Build system and process migration
+
+Our build system has been migrated from `kcd-scripts build` to native Babel.
+Below are the dependencies we add for the new native build and a description of
+what each does.
+
+For now we are keeping _some_ of the dependencies from the kcd-scripts build
+system. We might be able to remove others as we refine the build process and
+better get to know the project.
+
+### Build dependencies (from kcd-scripts → native Babel)
+
+- **@babel/core**
+  - **Status:** Required
+  - **Purpose:** The Babel compiler. Performs the actual transpilation (parse →
+    transform → generate).
+
+- **@babel/cli**
+  - **Status:** Required
+  - **Purpose:** Command-line interface. Runs `babel src --out-dir dist` and
+    feeds files to @babel/core.
+
+- **@babel/preset-env**
+  - **Status:** Required
+  - **Purpose:** Preset that compiles modern JS to match a target environment
+    (e.g. Node 22). Handles syntax and, optionally, module format.
+
+- **@babel/plugin-transform-runtime**
+  - **Status:** REMOVED
+  - **Purpose:** Replaces inlined Babel helpers with
+    `require('@babel/runtime/...')` so helpers live in one place. Keeps dist
+    smaller and avoids duplicating helper code in every file.
+
+- **@babel/plugin-transform-modules-commonjs**
+  - **Status:** REMOVED
+  - **Purpose:** Converts ES module syntax to CommonJS. Only needed if
+    preset-env is set with `modules: false`; if preset-env uses
+    `modules: 'commonjs'`, this plugin is redundant.
+
+- **@babel/plugin-transform-class-properties**
+  - **Status:** REMOVED
+  - **Purpose:** Transpiles class properties (including static) in loose mode.
+
+- **babel-plugin-macros**
+  - **Status:** Removed
+  - **Purpose:** Enables macro-based transforms (e.g. preval, codegen).
+    kcd-scripts includes it by default. We don't use macros in this project.
+
+- **semver**
+  - **Status:** Removed
+  - **Purpose:** Used in a config helper to read `engines.node` from
+    package.json and derive the target Node version. We hardcode our target
+    (e.g. `node: '22.22.0'`) in babel.config.js instead.
+
+- **@babel/runtime**
+  - **Status:** Required
+  - **Purpose:** Already a production dependency. Provides the helper functions
+    that `@babel/plugin-transform-runtime` injects imports for. Required at
+    runtime when using that plugin.
+
+IMPORTANT: there are still 2 bugs in the cli that i don't want to fix in this PR
+but the cli is broken. We can fix these bugs in a future pr and also add tests
+that will catch these bugs in the future.

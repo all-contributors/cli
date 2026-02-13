@@ -12,8 +12,8 @@ npm test
 
 This runs all tests with code coverage analysis enabled.
 
-Note: if you want to run your tests locally in VS Code using the interactive IDE,
-be sure to install the Jest (orta) extension so your tests are discovered.
+Note: if you want to run your tests locally in VS Code using the interactive
+IDE, be sure to install the Jest (orta) extension so your tests are discovered.
 
 ### Test Configuration
 

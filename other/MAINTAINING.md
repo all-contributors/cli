@@ -59,22 +59,6 @@ feature. This keeps our git history clean, but more importantly, this allows us
 to make any necessary changes to the commit message so we release what we want
 to release. See the next section on Releases for more about that.
 
-## Release
-
-Our releases are automatic. They happen whenever code lands into `main`. A
-Circle CI build build gets kicked off and if it's successful, a tool called
-[`semantic-release`](https://github.com/semantic-release/semantic-release) is
-used to automatically publish a new release to npm as well as a changelog to
-GitHub. It is only able to determine the version and whether a release is
-necessary by the git commit messages. With this in mind, **please brush up on
-[the commit message convention][commit] which drives our releases.**
-
-> One important note about this: Please make sure that commit messages do NOT
-> contain the words "BREAKING CHANGE" in them unless we want to push a major
-> version. I've been burned by this more than once where someone will include
-> "BREAKING CHANGE: None" and it will end up releasing a new major version. Not
-> a huge deal honestly, but kind of annoying...
-
 ## Thanks!
 
 Thank you so much for helping to maintain this project!

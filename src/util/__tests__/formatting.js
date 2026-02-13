@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest'
 import path from 'path'
 import {formatConfig} from '../formatting.js'
 

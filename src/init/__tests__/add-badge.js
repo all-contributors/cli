@@ -1,4 +1,5 @@
-import {addBadge} from '../init-content'
+import {test, expect} from 'vitest'
+import {addBadge} from '../init-content.js'
 
 test('insert badge under title', () => {
   const content = ['# project', '', 'Description', '', 'Foo bar'].join('\n')

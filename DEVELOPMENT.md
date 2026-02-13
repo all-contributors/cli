@@ -4,7 +4,7 @@
 
 ### Running Tests
 
-The project uses Jest for testing. To run the test suite you can use:
+The project uses Vitest for testing. To run the test suite you can use:
 
 ```bash
 npm test
@@ -12,34 +12,17 @@ npm test
 
 This runs all tests with code coverage analysis enabled.
 
-Note: if you want to run your tests locally in vscode using the interactive IDE,
-be sure to install the Jest (orta) extension so your tests are discovered.
+Note: if you want to run your tests locally in VS Code using the interactive
+IDE, be sure to install the Jest (orta) extension so your tests are discovered.
 
 ### Test Configuration
 
-Test configuration is in `jest.config.js`, which extends `kcd-scripts/jest` with
-project-specific settings:
-
-```javascript
-const jestConfig = require('kcd-scripts/jest')
-
-module.exports = Object.assign(jestConfig, {
-  coverageThreshold: {
-    global: {
-      branches: 50,
-      functions: 40,
-      lines: 50,
-      statements: 50,
-    },
-  },
-  forceExit: true,
-})
-```
+Test configuration is in `vitest.config.ts`.
 
 ### Coverage Thresholds
 
-The project enforces minimum code coverage thresholds through the jest
-configuration above:
+The project enforces minimum code coverage thresholds through the Vitest
+configuration file:
 
 | Coverage Type | Percentage |
 | ------------- | ---------- |
@@ -52,14 +35,11 @@ Tests will fail if coverage drops below these thresholds.
 
 ### Coverage Reports
 
-When you run tests, coverage reports are automatically generated in the
-`coverage/` directory:
+Run `test-coverage` to generate coverage reports in the `coverage/` directory:
 
 - **`coverage/lcov-report/index.html`** — Interactive HTML report (open in
   browser)
 - **`coverage/lcov.info`** — LCOV format (used by Codecov)
-- **`coverage/clover.xml`** — Clover XML format
-- **`coverage/coverage-final.json`** — JSON format
 
 The HTML report provides a visual breakdown of which files are covered by tests.
 
@@ -140,7 +120,7 @@ npm run lint -- --fix
 
 The `--fix` flag will automatically fix many common issues like:
 
-- Jest method aliases (e.g., `toThrowError()` → `toThrow()`)
+- Vitest method aliases (e.g., `toThrowError()` → `toThrow()`)
 - Unused eslint-disable directives
 - Some formatting issues
 
@@ -198,9 +178,9 @@ The following packages are typical starters for linting a JavaScript project:
 - **@eslint/js** — ESLint recommended rules configuration
 - **eslint-plugin-import** — Import/export rules for module resolution and best
   practices
-- **eslint-plugin-jest** — Jest-specific rules for test files
+- **@vitest/eslint-plugin** — Vitest-specific rules for test files
 - **globals** — Provides properly formatted global variables for Node.js and
-  Jest environments
+  Vitest environments
 
 ### Configuration file
 
@@ -209,7 +189,7 @@ ESLint 9's flat config format and includes:
 
 - Base rules from `eslint:recommended`
 - Import plugin rules
-- Jest plugin rules (for test files only)
+- Vitest plugin rules (for test files only)
 - Custom overrides for project-specific needs
 - Support for both CommonJS and ES module syntax
 
@@ -241,22 +221,20 @@ better get to know the project.
     (e.g. Node 22). Handles syntax and, optionally, module format.
 
 - **@babel/plugin-transform-runtime**
-  - **Status:** Kept, Optional
+  - **Status:** REMOVED
   - **Purpose:** Replaces inlined Babel helpers with
     `require('@babel/runtime/...')` so helpers live in one place. Keeps dist
     smaller and avoids duplicating helper code in every file.
 
 - **@babel/plugin-transform-modules-commonjs**
-  - **Status:** Kept — we still have some CommonJS files in the project.
+  - **Status:** REMOVED
   - **Purpose:** Converts ES module syntax to CommonJS. Only needed if
     preset-env is set with `modules: false`; if preset-env uses
     `modules: 'commonjs'`, this plugin is redundant.
 
 - **@babel/plugin-transform-class-properties**
-  - **Status:** Remove — codebase is largely functions, no classes, so no class
-    properties.
+  - **Status:** REMOVED
   - **Purpose:** Transpiles class properties (including static) in loose mode.
-    Used by kcd-scripts for parity.
 
 - **babel-plugin-macros**
   - **Status:** Removed

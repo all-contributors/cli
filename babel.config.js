@@ -1,18 +1,16 @@
 export default {
+  ignore: [
+    '**/__snapshots__/**',
+    '**/__tests__/**',
+    '**/fixtures/**',
+    '__tests__/**',
+  ],
   presets: [
     [
       '@babel/preset-env',
       {
-        modules: false,
         targets: {node: '22.22.0'},
-      },
-    ],
-  ],
-  plugins: [
-    [
-      '@babel/plugin-transform-runtime',
-      {
-        useESModules: true,
+        modules: false,
       },
     ],
   ],

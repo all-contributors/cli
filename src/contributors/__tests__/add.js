@@ -1,5 +1,6 @@
-import {add} from '../add'
-import {fixtures} from './fixtures'
+import {test, expect} from 'vitest'
+import {add} from '../add.js'
+import {fixtures} from './fixtures/index.js'
 
 function mockInfoFetcher(username) {
   return Promise.resolve({

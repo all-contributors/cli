@@ -1,4 +1,5 @@
-import {writeConfig, readConfig, writeContributors} from '../config-file'
+import {test, expect} from 'vitest'
+import {writeConfig, readConfig, writeContributors} from '../config-file.js'
 
 const absentFile = './abc'
 const absentConfigFileExpected = `Configuration file not found: ${absentFile}`

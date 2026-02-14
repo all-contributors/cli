@@ -2,6 +2,13 @@ import {test, expect} from 'vitest'
 import generate from '../index.js'
 import contributors from './fixtures/contributors.json'
 
+/**
+ * Returns test fixtures including options, sample contributor, and markdown content.
+ * The content includes ALL-CONTRIBUTORS-LIST comment tags where the contributor
+ * table should be injected.
+ *
+ * @returns {Object} Test data with options, jfmengels contributor, and sample content
+ */
 function fixtures() {
   const options = {
     projectOwner: 'kentcdodds',
@@ -35,6 +42,22 @@ function fixtures() {
   return {options, jfmengels, content}
 }
 
+/**
+ * Tests that generate throws an error when contributors is undefined.
+ * This prevents callers from forgetting to await the contributors promise
+ * before passing it to generate.
+ */
+test('throws when contributors is undefined (caller must await and pass resolved array)', () => {
+  const {options, content} = fixtures()
+  expect(() => generate(options, undefined, content)).toThrow(
+    /Cannot read properties of undefined \(reading 'length'\)/,
+  )
+})
+
+/**
+ * Tests that generate replaces content between ALL-CONTRIBUTORS-LIST tags
+ * with a properly formatted table of contributors.
+ */
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors', () => {
   const {kentcdodds, bogas04} = contributors
   const {options, jfmengels, content} = fixtures()
@@ -44,6 +67,10 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of c
   expect(result).toMatchSnapshot()
 })
 
+/**
+ * Tests that generate includes a link to usage documentation when
+ * linkToUsage option is set to true.
+ */
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors with linkToUsage', () => {
   const {kentcdodds, bogas04} = contributors
   const {options, jfmengels, content} = fixtures()
@@ -57,6 +84,10 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of c
   expect(result).toMatchSnapshot()
 })
 
+/**
+ * Tests that generate does not include a usage link when linkToUsage
+ * option is explicitly set to false.
+ */
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors without linkToUsage', () => {
   const {kentcdodds, bogas04} = contributors
   const {options, jfmengels, content} = fixtures()
@@ -70,6 +101,11 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of c
   expect(result).toMatchSnapshot()
 })
 
+/**
+ * Tests that generate uses a custom wrapper template when provided.
+ * The wrapper template can contain <%= bodyContent %> to position the
+ * contributor list within custom HTML/markdown.
+ */
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a custom wrapper around the list of contributors contained in the "bodyContent" tag', () => {
   const {kentcdodds, bogas04} = contributors
   const {options, jfmengels, content} = fixtures()
@@ -83,6 +119,10 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a custom wra
   expect(result).toMatchSnapshot()
 })
 
+/**
+ * Tests that generate splits contributors into multiple table rows when
+ * the number of contributors exceeds the contributorsPerLine setting.
+ */
 test('split contributors into multiples lines when there are too many', () => {
   const {kentcdodds} = contributors
   const {options, content} = fixtures()
@@ -100,6 +140,10 @@ test('split contributors into multiples lines when there are too many', () => {
   expect(result).toMatchSnapshot()
 })
 
+/**
+ * Tests that generate splits contributors into multiple rows with linkToUsage
+ * enabled when there are more contributors than fit on one line.
+ */
 test('split contributors into multiples lines when there are too many with linkToUsage', () => {
   const {kentcdodds} = contributors
   const {options, content} = fixtures()
@@ -121,6 +165,11 @@ test('split contributors into multiples lines when there are too many with linkT
   expect(result).toMatchSnapshot()
 })
 
+/**
+ * Tests that generate sorts contributors alphabetically when
+ * contributorsSortAlphabetically option is true. The output should
+ * match regardless of the input order.
+ */
 test('sorts the list of contributors if contributorsSortAlphabetically=true', () => {
   const {kentcdodds, bogas04} = contributors
   const {options, jfmengels, content} = fixtures()
@@ -141,6 +190,10 @@ test('sorts the list of contributors if contributorsSortAlphabetically=true', ()
   expect(resultPreSorted).toEqual(resultAutoSorted)
 })
 
+/**
+ * Tests that generate returns the content unchanged when there are no
+ * ALL-CONTRIBUTORS-LIST tags present in the content.
+ */
 test('not inject anything if there is no tags to inject content in', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()
@@ -153,6 +206,10 @@ test('not inject anything if there is no tags to inject content in', () => {
   expect(result).toBe(content)
 })
 
+/**
+ * Tests that generate returns the content unchanged when the start tag
+ * is malformed (e.g., ALL-CONTRIBUTORS-LIST:SSSSSSSTART instead of :START).
+ */
 test('not inject anything if start tag is malformed', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()
@@ -171,6 +228,10 @@ test('not inject anything if start tag is malformed', () => {
   expect(result).toBe(content)
 })
 
+/**
+ * Tests that generate returns the content unchanged when the end tag
+ * is malformed (e.g., ALL-CONTRIBUTORS-LIST:EEEEEEEND instead of :END).
+ */
 test('not inject anything if end tag is malformed', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()
@@ -189,6 +250,10 @@ test('not inject anything if end tag is malformed', () => {
   expect(result).toBe(content)
 })
 
+/**
+ * Tests that generate injects only the comment structure (with prettier
+ * and markdownlint directives) when the contributors list is empty.
+ */
 test('inject nothing if there are no contributors', () => {
   const {options, content} = fixtures()
   const contributorList = []
@@ -215,6 +280,11 @@ test('inject nothing if there are no contributors', () => {
   expect(result).toBe(expected)
 })
 
+/**
+ * Tests that generate updates the all-contributors badge count when
+ * ALL-CONTRIBUTORS-BADGE tags are present in the content. The badge
+ * count should match the number of contributors.
+ */
 test('replace all-contributors badge if present', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()
@@ -253,6 +323,11 @@ test('replace all-contributors badge if present', () => {
   expect(result).toBe(expected)
 })
 
+/**
+ * Tests that generate correctly calculates cell width when contributorsPerLine
+ * results in a decimal value. The width should be floored to an integer to
+ * ensure valid HTML table attributes.
+ */
 test('validate if cell width attribute is floored correctly', () => {
   const {kentcdodds} = contributors
   const {options, content} = fixtures()

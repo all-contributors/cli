@@ -70,14 +70,14 @@ function startGeneration(argv) {
 }
 
 async function addContribution(argv) {
-  // ensure the config file exists
-  await util.configFile.readConfig(argv.config)
+  const configData = await util.configFile.readConfig(argv.config)
+  Object.assign(argv, configData)
 
   const username = argv._[1] === undefined ? undefined : String(argv._[1])
   const contributions = argv._[2]
 
   // Add or update contributor in the config file
-  const data = updateContributors(argv, username, contributions)
+  const data = await updateContributors(argv, username, contributions)
 
   argv.contributors = data.contributors
 
@@ -189,4 +189,8 @@ async function run() {
   }
 }
 
-run()
+if (require.main === module) {
+  run()
+} else {
+  module.exports = {addContribution}
+}

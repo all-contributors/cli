@@ -101,7 +101,7 @@ module.exports = function prompt(options, username, contributions) {
   const defaults = {
     username,
     contributions:
-      username === undefined && contributions === undefined
+      contributions === undefined
         ? []
         : getValidUserContributions(options, contributions),
   }

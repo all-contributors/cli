@@ -136,7 +136,7 @@ test('add new contributor at the end of the list of contributors with a url link
 })
 
 /**
- * Tests that addContributor is idempotent when a contributor already has
+ * Tests that addContributor responds accordingly when a contributor already has
  * the exact same contribution types. The contributors list should remain unchanged.
  */
 test(`should not update an existing contributor's contributions where nothing has changed`, () => {

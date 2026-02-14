@@ -3,7 +3,6 @@ const spawn = require('child_process').spawn
 const _ = require('lodash/fp')
 const pify = require('pify')
 const conventions = require('../init/commit-conventions')
-const {readConfig} = require('./config-file')
 
 const commitTemplate =
   '<%= prefix %> <%= (newContributor ? "Add" : "Update") %> @<%= username %> as a contributor'
@@ -58,8 +57,7 @@ async function commit(options, data) {
   const absolutePathFiles = files.map(file => {
     return path.resolve(process.cwd(), file)
   })
-  const config = await readConfig(options.config)
-  const commitConvention = conventions[config.commitConvention]
+  const commitConvention = conventions[options.commitConvention]
 
   return spawnGitCommand(['add'].concat(absolutePathFiles)).then(() => {
     let commitMessage = _.template(options.commitTemplate || commitTemplate)({

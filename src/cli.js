@@ -125,7 +125,9 @@ async function checkContributors(argv) {
       if (missingFromRepo.length) {
         process.stdout.write('\n')
         process.stdout.write(
-          YoctoColors.bold('Unknown contributors found in .all-contributorsrc:\n'),
+          YoctoColors.bold(
+            'Unknown contributors found in .all-contributorsrc:\n',
+          ),
         )
         process.stdout.write(`${missingFromRepo.join(', ')}\n`)
       }
@@ -165,7 +167,7 @@ function promptForCommand(argv) {
 async function run() {
   try {
     const argv = getArgs()
-    
+
     // Load and merge config file data into argv
     try {
       const configData = await util.configFile.readConfig(argv.config)
@@ -176,7 +178,7 @@ async function run() {
       }
       // If default config file doesn't exist, that's okay
     }
-    
+
     const command = await promptForCommand(argv)
 
     switch (command) {

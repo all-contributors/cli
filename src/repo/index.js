@@ -92,7 +92,6 @@ const getLinkToReviews = function (repoType) {
   return null
 }
 
-// Seems to be failing here but also i don't think i have a config here for it to use.
 const getUserInfo = function (username, repoType, repoHost) {
   if (repoType in SUPPORTED_REPO_TYPES) {
     return SUPPORTED_REPO_TYPES[repoType].getUserInfo(

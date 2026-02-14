@@ -109,5 +109,7 @@ module.exports = function prompt(options, username, contributions) {
   return inquirer.prompt(questions).then(_.assign(defaults))
 }
 
+/** @testonly */
 module.exports.getQuestions = getQuestions
+/** @testonly */
 module.exports.getValidUserContributions = getValidUserContributions

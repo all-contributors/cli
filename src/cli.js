@@ -2,8 +2,8 @@
 
 const path = require('path')
 const yargs = require('yargs/yargs')
+const YoctoColors = require('yoctocolors')
 const {hideBin} = require('yargs/helpers')
-const chalk = require('chalk')
 const inquirer = require('inquirer')
 
 const init = require('./init')
@@ -70,14 +70,11 @@ function startGeneration(argv) {
 }
 
 async function addContribution(argv) {
-  // ensure the config file exists
-  await util.configFile.readConfig(argv.config)
-
   const username = argv._[1] === undefined ? undefined : String(argv._[1])
   const contributions = argv._[2]
 
   // Add or update contributor in the config file
-  const data = updateContributors(argv, username, contributions)
+  const data = await updateContributors(argv, username, contributions)
 
   argv.contributors = data.contributors
 
@@ -90,22 +87,20 @@ async function addContribution(argv) {
 }
 
 async function checkContributors(argv) {
-  const configData = await util.configFile.readConfig(argv.config)
-
   return repo
     .getContributors(
-      configData.projectOwner,
-      configData.projectName,
-      configData.repoType,
-      configData.repoHost,
+      argv.projectOwner,
+      argv.projectName,
+      argv.repoType,
+      argv.repoHost,
     )
     .then(repoContributors => {
-      const checkKey = repo.getCheckKey(configData.repoType)
-      const knownContributions = configData.contributors.reduce((obj, item) => {
+      const checkKey = repo.getCheckKey(argv.repoType)
+      const knownContributions = argv.contributors.reduce((obj, item) => {
         obj[item[checkKey]] = item.contributions
         return obj
       }, {})
-      const knownContributors = configData.contributors.map(
+      const knownContributors = argv.contributors.map(
         contributor => contributor[checkKey],
       )
 
@@ -122,14 +117,17 @@ async function checkContributors(argv) {
 
       if (missingInConfig.length) {
         process.stdout.write(
-          chalk.bold('Missing contributors in .all-contributorsrc:\n'),
+          YoctoColors.bold('Missing contributors in .all-contributorsrc:\n'),
         )
-        process.stdout.write(`    ${missingInConfig.join(', ')}\n`)
+        process.stdout.write(`${missingInConfig.join(', ')}\n`)
       }
 
       if (missingFromRepo.length) {
+        process.stdout.write('\n')
         process.stdout.write(
-          chalk.bold('Unknown contributors found in .all-contributorsrc:\n'),
+          YoctoColors.bold(
+            'Unknown contributors found in .all-contributorsrc:\n',
+          ),
         )
         process.stdout.write(`${missingFromRepo.join(', ')}\n`)
       }
@@ -169,6 +167,18 @@ function promptForCommand(argv) {
 async function run() {
   try {
     const argv = getArgs()
+
+    // Load and merge config file data into argv
+    try {
+      const configData = await util.configFile.readConfig(argv.config)
+      Object.assign(argv, configData)
+    } catch (error) {
+      if (error instanceof SyntaxError || argv.config !== defaultRCFile) {
+        throw error
+      }
+      // If default config file doesn't exist, that's okay
+    }
+
     const command = await promptForCommand(argv)
 
     switch (command) {

@@ -3,15 +3,15 @@
 // This is to support adding contributors using the AllContributors GitHub Bot (see github.com/all-contributors/all-contributors-bot
 // These Node API's are intended to be network and side effect free, everything should be in memory with no io to network/disk
 
-const chalk = require('chalk')
+const YoctoColors = require('yoctocolors')
 
 const addContributorWithDetails = require('./contributors/addWithDetails')
 const generate = require('./generate')
 const {addContributorsList, addBadge} = require('./init/init-content')
 
 process.stdout.write(
-  chalk.yellow(
-    `${chalk.bold(
+  YoctoColors.yellow(
+    `${YoctoColors.bold(
       'WARNING',
     )} :: Using the all-contributors node-api comes with zero guarantees of stability and may contain breaking changes without warning\n`,
   ),

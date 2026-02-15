@@ -1,6 +1,6 @@
 {
   "name": "all-contributors-cli",
-  "version": "0.0.0-semantically-released",
+  "version": "6.26.1",
   "description": "Tool to easily add recognition for new contributors",
   "bin": {
     "all-contributors": "dist/cli.js"

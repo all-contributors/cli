@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest'
 import formatContributor from '../format-contributor.js'
 import contributors from './fixtures/contributors.json'
 

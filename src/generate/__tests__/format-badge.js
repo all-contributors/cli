@@ -1,3 +1,4 @@
+import {test, expect} from 'vitest'
 import formatBadge from '../format-badge.js'
 
 test('return badge with the number of contributors', () => {

@@ -1,5 +1,4 @@
 import {test, expect} from 'vitest'
-import _ from 'lodash/fp'
 import formatContributor from '../format-contributor.js'
 import contributors from './fixtures/contributors.json'
 
@@ -15,9 +14,10 @@ function fixtures() {
 }
 
 test('format a simple contributor', () => {
-  const contributor = _.assign(contributors.kentcdodds, {
+  const contributor = {
+    ...contributors.kentcdodds,
     contributions: ['review'],
-  })
+  }
   const {options} = fixtures()
 
   const expected =
@@ -47,9 +47,10 @@ test('format contributor using custom template', () => {
 })
 
 test('default image size to 100', () => {
-  const contributor = _.assign(contributors.kentcdodds, {
+  const contributor = {
+    ...contributors.kentcdodds,
     contributions: ['review'],
-  })
+  }
   const {options} = fixtures()
   delete options.imageSize
 

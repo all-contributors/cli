@@ -4,4 +4,5 @@ module.exports = {
   git: require('./git'),
   markdown: require('./markdown'),
   url: require('./url'),
+  template: require('./template'),
 }

@@ -1,11 +1,10 @@
-const _ = require('lodash/fp')
 const util = require('../util')
 const repo = require('../repo')
 const add = require('./add')
 const prompt = require('./prompt')
 
 function isNewContributor(contributorList, username) {
-  return !_.find({login: username}, contributorList)
+  return !contributorList.find(contributor => contributor.login === username)
 }
 
 module.exports = function addContributor(options, username, contributions) {

@@ -1,28 +1,64 @@
 # Development Documentation
 
+## Prerequisites
+
+- **Node.js** 22 or later (see `engines` in `package.json`)
+- **npm** (the project uses npm which produces a `package-lock.json`)
+
+## Development commands
+
+These are the npm scripts available when working on the CLI:
+
+| Command                   | Description                                            |
+| ------------------------- | ------------------------------------------------------ |
+| `npm install`             | Install dependencies                                   |
+| `npm run build`           | Build the CLI (output in `dist/`)                      |
+| `npm run dev`             | Run the CLI from source without building               |
+| `npm run start`           | Run the built CLI (`dist/cli.js`)                      |
+| `npm run lint`            | Check for lint and format issues                       |
+| `npm run lint-fix`        | Auto-fix lint and format issues                        |
+| `npm test`                | Run the test suite (no coverage)                       |
+| `npm run test-coverage`   | Run tests with coverage and generate reports           |
+| `npm run commit`          | Commit changes using a commitizen-compatible interface |
+| `npm run knip`            | Find unused files, dependencies, and exports           |
+| `npm run add-contributor` | Add a contributor (runs kcd-scripts contributors add)  |
+
+## All-contributors CLI commands
+
+When the CLI is installed (`all-contributors-cli`) or run via `npm run dev`,
+these are the subcommands:
+
+| Command                                           | Description                                          |
+| ------------------------------------------------- | ---------------------------------------------------- |
+| `all-contributors add <username> <contributions>` | Add a new contributor                                |
+| `all-contributors generate`                       | Generate the contributors list in the README         |
+| `all-contributors init`                           | Prepare the project to use this tool                 |
+| `all-contributors check`                          | Compare repo contributors with `.all-contributorsrc` |
+
 ## Testing and Code Coverage
 
-### Running Tests
+### Run tests
 
-The project uses Vitest for testing. To run the test suite you can use:
+The project uses Vitest for testing. To run the test suite use:
 
 ```bash
 npm test
 ```
 
-This runs all tests with code coverage analysis enabled.
+This runs all tests without coverage. For coverage (thresholds and reports), use
+`npm run test-coverage` (see below).
 
-Note: if you want to run your tests locally in VS Code using the interactive
-IDE, be sure to install the Jest (orta) extension so your tests are discovered.
+If you want to run tests inside your editor and you use VS Code you can install
+the VitTest extension so tests are discovered and runnable through the VSCode
+test runner.
 
-### Test Configuration
+### Test configuration
 
 Test configuration is in `vitest.config.ts`.
 
-### Coverage Thresholds
+### Coverage thresholds
 
-The project enforces minimum code coverage thresholds through the Vitest
-configuration file:
+The project enforces minimum code coverage thresholds in the Vitest config:
 
 | Coverage Type | Percentage |
 | ------------- | ---------- |
@@ -33,226 +69,138 @@ configuration file:
 
 Tests will fail if coverage drops below these thresholds.
 
-### Coverage Reports
+### Coverage reports
 
-Run `test-coverage` to generate coverage reports in the `coverage/` directory:
+Run `npm run test-coverage` to generate coverage reports in the `coverage/`
+directory:
 
-- **`coverage/lcov-report/index.html`** — Interactive HTML report (open in
+- **`coverage/lcov-report/index.html`** — Interactive HTML report (open in a
   browser)
 - **`coverage/lcov.info`** — LCOV format (used by Codecov)
 
-The HTML report provides a visual breakdown of which files are covered by tests.
+The HTML report shows which files are covered by tests.
 
-### Codecov Integration
+### Codecov integration
 
-The project uses Codecov to track code coverage over time and on pull requests.
+The project uses Codecov to track coverage over time and on pull requests.
 
-#### CI Integration
+#### CI integration
 
-- The GitHub Actions workflow (`.github/workflows/test-deploy.yml`)
-  automatically uploads coverage to Codecov after running tests
-- Coverage reports appear as comments on pull requests (if enabled)
-- The workflow uses `codecov/codecov-action@vxxx` (whatever version is most
-  recent) to upload the `lcov.info` file
+- The workflow `.github/workflows/test-deploy.yml` runs tests with coverage and
+  uploads `coverage/lcov.info` to Codecov via a `codecov/codecov-action`
+  version.
+- Coverage can appear in PR comments if enabled in the Codecov project.
 
 #### Configuration
 
-Codecov behavior is configured in `.codecov.yml`:
+Codecov is configured in `.codecov.yml`:
 
-- Patch coverage is tracked (checks coverage of changed code in PRs)
+- Patch coverage is tracked (coverage of changed code in PRs)
 - Project-level status checks are disabled
 - PR comments are disabled
-- Codecov now requires a token for all uploads so we have one generated in the
-  repo as a secret `secrets.CODECOV_TOKEN`.
 
-#### Local Usage
+Codecov now required a token to upload coverage. Uploads use the repository
+secret `secrets.CODECOV_TOKEN` which is scoped to the `all-contributors` org and
+CLI repository.
 
-You don't need a Codecov account to view coverage locally—just run `pnpm test`
-and open the HTML report. Codecov integration is primarily for tracking coverage
-trends and to simplify PR reviews in the CI/CD pipeline.
+#### Local usage
+
+You don't need a Codecov account to view coverage locally. Run
+`npm run test-coverage` and open the HTML report. Codecov is mainly for tracking
+trends and CI.
 
 ## Linting
 
-2026 update: The project is now using ESLint 9 and the flat config format. As we
-update things from the old config we will update this document to reflect the
-changes. Once the code base is stable and things work, we can delete some of the
-historical documentation. But for now this document can help us track design
-decisions and changes made.
+The project uses ESLint. Linting was migrated from `kcd-scripts` to a native
+ESLint setup that supports both CommonJS source files and ES module test files.
 
 ### Overview
 
-The project uses a native ESLint configuration that was migrated from
-kcd-scripts. The setup supports both CommonJS source files and ES module test
-files, using ESLint 9's flat config format.
-
-### What changed
-
-Previously, the project used `kcd-scripts` for linting configuration. Because
-that project is no longer actively maintained, we migrated to a native ESLint
-setup that replicates the same behavior.
-
-**Migration details:**
-
-- Replaced `kcd-scripts lint` with native ESLint
-- Created `eslint.config.mjs` using ESLint 9 flat config format
-- Extracted rules from `eslint-config-kentcdodds` to create a simplified,
-  maintainable config. This included removing a lot of the custom rules and
-  leaning more on the recommended rules.
-- Preserved some custom rule overrides from the original setup
-- Supports both CommonJS (source files) and ES modules (test files)
-
-Note: We should consider refacting the project to use ES modules instead of
-CommonJS (if everyone supports that) in the future for consistency.
+- Config: `eslint.config.mjs`
+- Includes `eslint:recommended`, import rules, Vitest rules for test files, and
+  project overrides
 
 ### How to run the linter
 
-To check for linting errors you can run:
+To check for issues you can run:
 
 ```bash
 npm run lint
 ```
 
-ESlint can automatically fix some errors. to fix errors automatically run:
+To auto-fix what ESLint and Prettier can fix you can run:
 
 ```bash
-npm run lint -- --fix
+npm run lint-fix
 ```
 
-The `--fix` flag will automatically fix many common issues like:
-
-- Vitest method aliases (e.g., `toThrowError()` → `toThrow()`)
-- Unused eslint-disable directives
-- Some formatting issues
-
-**Note:** Some errors require manual fixes (e.g., unused variables, tests
-without assertions).
+This will fix many issues (e.g. Vitest aliases, unused eslint-disable
+directives, formatting). Some problems still need manual fixes (e.g. unused
+variables, tests without assertions).
 
 ### Pre-commit hooks
 
-The project uses Husky to run pre-commit hooks that automatically lint and fix
-staged files before each commit.
+Husky runs a pre-commit hook that lints and fixes staged files before each
+commit.
 
-#### How it works:
+1. On `git commit`, Husky runs the pre-commit hook.
+2. The hook runs `lint-staged`, which runs ESLint and Prettier on staged
+   JavaScript files.
+3. If that passes, the commit continues; if it fails, the commit is blocked.
 
-1. When you run `git commit`, Husky intercepts the commit
-2. The pre-commit hook runs `lint-staged`
-3. `lint-staged` runs `eslint --fix` on all staged JavaScript/TypeScript files
-4. If linting passes, the commit proceeds; if it fails, the commit is blocked
-
-What this means... this workflow ensures that code is automatically linted and
-fixed before it's committed to version control.
-
-If you are encountering issues with the pre-commit hook, you can run the
-following command to manually lint and fix the files:
-
-```bash
-npm run lint -- --fix
-```
-
-Or if it's really problematic, you can skip verification and commit anyway with
-the `--no-verify` flag.
-
-```bash
-git commit --no-verify
-```
-
-If you do this please ping one of the maintainers in the PR that you open so
-they can help you fix the issues!
+If the hook gives you trouble, run `npm run lint-fix` manually, then try
+committing again. As a last resort you can skip the hook with
+`git commit --no-verify`; if you do, mention it in your PR so maintainers can
+help.
 
 **Configuration:**
 
-- Husky configuration is in `package.json` under the `husky.hooks.pre-commit`
-  field
-- `lint-staged` configuration is in `package.json` under the `lint-staged` field
-- The setup uses the native ESLint configuration (`eslint.config.mjs`)
+- The hook lives in `.husky/pre-commit` (it runs `npx lint-staged`).
+- `lint-staged` is configured in `package.json` under the `lint-staged` field.
+- Linting uses `eslint.config.mjs`.
 
-**Note:** Previously, the project used `kcd-scripts pre-commit` which handled
-both hook management and linting. We migrated to using `lint-staged` directly
-with our native ESLint config to avoid version conflicts.
+### Lint-related dependencies
 
-### Dependencies
+- **eslint** — Core
+- **@eslint/js** — Recommended rules
+- **eslint-plugin-import** — Import/export rules
+- **@vitest/eslint-plugin** — Vitest rules for test files
+- **globals** — Node and Vitest globals for the lint environment
 
-The following packages are typical starters for linting a JavaScript project:
+## Build system
 
-- **eslint** — ESLint core
-- **@eslint/js** — ESLint recommended rules configuration
-- **eslint-plugin-import** — Import/export rules for module resolution and best
-  practices
-- **@vitest/eslint-plugin** — Vitest-specific rules for test files
-- **globals** — Provides properly formatted global variables for Node.js and
-  Vitest environments
+The build uses native Babel (migrated from `kcd-scripts build`). Key
+dependencies:
 
-### Configuration file
+- **@babel/core** — Compiler (parse, transform, generate)
+- **@babel/cli** — Runs `babel src --out-dir dist`
+- **@babel/preset-env** — Compiles modern JS for the target (e.g. Node 22)
+- **@babel/runtime** — Runtime helpers used by the transpiled code
 
-The ESLint configuration is in `eslint.config.mjs` at the project root. It uses
-ESLint 9's flat config format and includes:
+### How to build
 
-- Base rules from `eslint:recommended`
-- Import plugin rules
-- Vitest plugin rules (for test files only)
-- Custom overrides for project-specific needs
-- Support for both CommonJS and ES module syntax
+```bash
+npm run build
+```
 
-## Build system and process migration
+Output goes to `dist/`. To run the built CLI locally without publishing, use
+`npm run start` (runs `dist/cli.js`) or `npm link` from the repo root and then
+run `all-contributors` in another directory.
 
-Our build system has been migrated from `kcd-scripts build` to native Babel.
-Below are the dependencies we add for the new native build and a description of
-what each does.
+## Release process
 
-For now we are keeping _some_ of the dependencies from the kcd-scripts build
-system. We might be able to remove others as we refine the build process and
-better get to know the project.
+We use conventional commits for merged PRs. The
+[Release Please](https://github.com/googleapis/release-please-action) GitHub
+Action automates the release flow: after merges to `main`, it opens a release PR
+with an updated changelog and version. A maintainer merges that PR when tests
+pass and the release is ready.
 
-### Build dependencies (from kcd-scripts → native Babel)
+Release Please needs a GitHub token to open PRs. The repo uses the secret
+`ALL_CONTRIBS_RELEASE_PLEASE_TOKEN` (scoped to the all-contributors org and CLI
+repo). The same pattern could be extended to the app repo later if needed.
 
-- **@babel/core**
-  - **Status:** Required
-  - **Purpose:** The Babel compiler. Performs the actual transpilation (parse →
-    transform → generate).
+### Release process
 
-- **@babel/cli**
-  - **Status:** Required
-  - **Purpose:** Command-line interface. Runs `babel src --out-dir dist` and
-    feeds files to @babel/core.
-
-- **@babel/preset-env**
-  - **Status:** Required
-  - **Purpose:** Preset that compiles modern JS to match a target environment
-    (e.g. Node 22). Handles syntax and, optionally, module format.
-
-- **@babel/plugin-transform-runtime**
-  - **Status:** REMOVED
-  - **Purpose:** Replaces inlined Babel helpers with
-    `require('@babel/runtime/...')` so helpers live in one place. Keeps dist
-    smaller and avoids duplicating helper code in every file.
-
-- **@babel/plugin-transform-modules-commonjs**
-  - **Status:** REMOVED
-  - **Purpose:** Converts ES module syntax to CommonJS. Only needed if
-    preset-env is set with `modules: false`; if preset-env uses
-    `modules: 'commonjs'`, this plugin is redundant.
-
-- **@babel/plugin-transform-class-properties**
-  - **Status:** REMOVED
-  - **Purpose:** Transpiles class properties (including static) in loose mode.
-
-- **babel-plugin-macros**
-  - **Status:** Removed
-  - **Purpose:** Enables macro-based transforms (e.g. preval, codegen).
-    kcd-scripts includes it by default. We don't use macros in this project.
-
-- **semver**
-  - **Status:** Removed
-  - **Purpose:** Used in a config helper to read `engines.node` from
-    package.json and derive the target Node version. We hardcode our target
-    (e.g. `node: '22.22.0'`) in babel.config.js instead.
-
-- **@babel/runtime**
-  - **Status:** Required
-  - **Purpose:** Already a production dependency. Provides the helper functions
-    that `@babel/plugin-transform-runtime` injects imports for. Required at
-    runtime when using that plugin.
-
-IMPORTANT: there are still 2 bugs in the cli that i don't want to fix in this PR
-but the cli is broken. We can fix these bugs in a future pr and also add tests
-that will catch these bugs in the future.
+TBD -- this is not yet implemented but was implemented via circleci previously.
+We plan to create a release based process that will support release please and
+manual releases.

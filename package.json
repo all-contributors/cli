@@ -13,7 +13,7 @@
     "node": ">=22.22.0"
   },
   "scripts": {
-    "add-contributor": "kcd-scripts contributors add",
+    "add-contributor": "node src/cli.js add",
     "knip": "knip",
     "build": "babel src --out-dir dist --copy-files",
     "lint": "eslint . && prettier --check --ignore-unknown .",
@@ -61,19 +61,18 @@
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@eslint/js": "^9.39.2",
-    "@vitest/coverage-v8": "^2.0.0",
+    "@vitest/coverage-v8": "^4.0.0",
     "eslint": "^9.39.2",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vitest": "^0.5.4",
     "git-cz": "^4.7.6",
     "globals": "^17.1.0",
     "husky": "^9.1.0",
-    "kcd-scripts": "^16.0.0",
     "knip": "^5.83.1",
     "lint-staged": "^16.2.7",
     "nock": "^14.0.10",
     "prettier": "^3.8.1",
-    "vitest": "^2.0.0"
+    "vitest": "^4.0.0"
   },
   "optionalDependencies": {
     "prettier": "^3"

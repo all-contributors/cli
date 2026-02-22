@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - main
+      - release-please-types
 
 permissions:
   contents: write
@@ -17,6 +18,5 @@ jobs:
       - uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
         with:
           token: ${{ secrets.CLI_RELEASE_PLEASE_TOKEN }}
-          # this is a built-in strategy in release-please, see "Action Inputs"
-          # for more options
-          release-type: simple
+          # Use config file for all changelog configuration
+          config-file: release-please-config.json

@@ -199,4 +199,8 @@ async function run() {
   }
 }
 
-run()
+if (require.main === module) {
+  run()
+} else {
+  module.exports = {addContribution}
+}

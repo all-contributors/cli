@@ -1,4 +1,6 @@
-const injectContentBetween = require('../util').markdown.injectContentBetween
+import * as util from '../util/index.js'
+
+const {injectContentBetween} = util.markdown
 
 const badgeContent = [
   '<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->',

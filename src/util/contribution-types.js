@@ -1,4 +1,4 @@
-const repo = require('../repo')
+import * as repo from '../repo/index.js'
 
 const defaultTypes = function (repoType) {
   return {
@@ -142,6 +142,6 @@ const defaultTypes = function (repoType) {
   }
 }
 
-module.exports = function (options) {
+export function contributionTypes(options) {
   return {...defaultTypes(options.repoType), ...options.types}
 }

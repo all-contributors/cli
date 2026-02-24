@@ -1,6 +1,6 @@
-const util = require('../util')
-const formatBadge = require('./format-badge')
-const formatContributor = require('./format-contributor')
+import * as util from '../util/index.js'
+import {formatBadge} from './format-badge.js'
+import {formatContributor} from './format-contributor.js'
 
 function chunk(array, size) {
   const chunks = []

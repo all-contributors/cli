@@ -1,10 +1,9 @@
-const {Eta} = require('eta')
+import {Eta} from 'eta'
 
 const eta = new Eta({
   useWith: true,
   autoEscape: false,
 })
-const template = templateString => data =>
-  eta.renderString(templateString, data)
 
-module.exports = template
+export const template = templateString => data =>
+  eta.renderString(templateString, data)

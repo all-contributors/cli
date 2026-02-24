@@ -1,5 +1,5 @@
-const util = require('../util')
-const formatContributionType = require('./format-contribution-type')
+import * as util from '../util/index.js'
+import {formatContributionType} from './format-contribution-type.js'
 
 const avatarTemplate = util.template(
   '<img src="<%= contributor.avatar_url %>?s=<%= options.imageSize %>" width="<%= options.imageSize %>px;" alt="<%= name %>"/>',
@@ -46,7 +46,7 @@ function escapeName(name) {
     .replace(new RegExp('\\"', 'g'), '&quot;')
 }
 
-module.exports = function formatContributor(options, contributor) {
+export function formatContributor(options, contributor) {
   const formatter = contribution =>
     formatContributionType(options, contributor, contribution)
   const contributions = contributor.contributions.map(formatter).join(' ')

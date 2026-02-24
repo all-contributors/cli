@@ -1,8 +1,8 @@
-const path = require('path')
-const spawn = require('child_process').spawn
-const pify = require('pify')
-const util = require('../util')
-const conventions = require('../init/commit-conventions')
+import path from 'path'
+import {spawn} from 'child_process'
+import pify from 'pify'
+import {conventions} from '../init/commit-conventions.js'
+import * as util from '../util/index.js'
 
 const commitTemplate =
   '<%= prefix %> <%= (newContributor ? "Add" : "Update") %> @<%= username %> as a contributor'

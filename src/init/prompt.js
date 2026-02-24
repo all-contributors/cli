@@ -1,6 +1,8 @@
-const inquirer = require('inquirer')
-const git = require('../util').git
-const conventions = require('./commit-conventions')
+import inquirer from 'inquirer'
+import * as util from '../util/index.js'
+import {conventions} from './commit-conventions.js'
+
+const {git} = util
 
 function uniqueFiles(files) {
   return [...new Set(files.filter(Boolean))]
@@ -97,7 +99,7 @@ const questions = [
   },
 ]
 
-module.exports = function prompt() {
+export function prompt() {
   return git
     .getRepoInfo()
     .then(repoInfo => {

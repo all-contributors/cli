@@ -3,7 +3,7 @@
 // This is to support adding contributors using the AllContributors GitHub Bot (see github.com/all-contributors/all-contributors-bot
 // These Node API's are intended to be network and side effect free, everything should be in memory with no io to network/disk
 
-const YoctoColors = require('yoctocolors')
+import * as YoctoColors from 'yoctocolors'
 
 import {addContributorWithDetails} from './contributors/addWithDetails.js'
 import {generate} from './generate/index.js'

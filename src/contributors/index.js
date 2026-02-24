@@ -1,7 +1,7 @@
-const util = require('../util')
-const repo = require('../repo')
-const add = require('./add')
-const prompt = require('./prompt')
+import * as util from '../util/index.js'
+import * as repo from '../repo/index.js'
+import {add} from './add.js'
+import {prompt} from './prompt.js'
 
 function isNewContributor(contributorList, username) {
   return !contributorList.find(contributor => contributor.login === username)

@@ -1,4 +1,4 @@
-const util = require('../util')
+import * as util from '../util/index.js'
 
 const linkTemplate = util.template(
   '<a href="<%= url %>" title="<%= description %>"><%= symbol %></a>',

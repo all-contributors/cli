@@ -1,6 +1,6 @@
-const inquirer = require('inquirer')
-const util = require('../util')
-const repo = require('../repo')
+import * as inquirer from 'inquirer'
+import * as util from '../util/index.js'
+import * as repo from '../repo/index.js'
 
 function contributionChoices(options) {
   const types = util.contributionTypes(options)

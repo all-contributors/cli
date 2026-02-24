@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-const path = require('path')
-const yargs = require('yargs/yargs')
-const YoctoColors = require('yoctocolors')
-const {hideBin} = require('yargs/helpers')
-const inquirer = require('inquirer')
+import path from 'path'
+import yargs from 'yargs'
+import {hideBin} from 'yargs/helpers'
+import * as YoctoColors from 'yoctocolors'
+import inquirer from 'inquirer'
 
 import {init} from './init/index.js'
 import {generate} from './generate/index.js'
@@ -74,7 +74,7 @@ async function addContribution(argv) {
   const contributions = argv._[2]
 
   // Add or update contributor in the config file
-  const data = await updateContributors(argv, username, contributions)
+  const data = await addContributor(argv, username, contributions)
 
   argv.contributors = data.contributors
 

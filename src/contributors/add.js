@@ -1,11 +1,13 @@
-import _ from 'lodash/fp.js'
-
 function uniqueTypes(contribution) {
   return contribution.type || contribution
 }
 
 function formatContributions(options, existing = [], types) {
-  const same = _.intersectionBy(uniqueTypes, existing, types)
+  const same = types.filter(type =>
+    existing.some(
+      existingType => uniqueTypes(existingType) === uniqueTypes(type),
+    ),
+  )
   const remove = types.length < existing.length && same.length
 
   if (options.url) {
@@ -20,17 +22,23 @@ function formatContributions(options, existing = [], types) {
     return same
   }
 
-  return _.uniqBy(uniqueTypes, existing.concat(types))
+  const combined = existing.concat(types)
+  return combined.filter(
+    (item, index, arr) =>
+      index ===
+      arr.findIndex(other => uniqueTypes(other) === uniqueTypes(item)),
+  )
 }
 
 function updateContributor(options, contributor, contributions) {
-  return _.assign(contributor, {
+  return {
+    ...contributor,
     contributions: formatContributions(
       options,
       contributor.contributions,
       contributions,
     ),
-  })
+  }
 }
 
 function updateExistingContributor(options, username, contributions) {
@@ -48,9 +56,10 @@ function updateExistingContributor(options, username, contributions) {
 function addNewContributor(options, username, contributions, infoFetcher) {
   return infoFetcher(username, options.repoType, options.repoHost).then(
     userData => {
-      const contributor = _.assign(userData, {
+      const contributor = {
+        ...userData,
         contributions: formatContributions(options, [], contributions),
-      })
+      }
       return options.contributors.concat(contributor)
     },
   )
@@ -58,12 +67,12 @@ function addNewContributor(options, username, contributions, infoFetcher) {
 
 export function add(options, username, contributions, infoFetcher) {
   // case insensitive find
-  const exists = _.find(contributor => {
+  const exists = options.contributors.find(contributor => {
     return (
       contributor.login &&
       contributor.login.toLowerCase() === username.toLowerCase()
     )
-  }, options.contributors)
+  })
 
   if (exists) {
     return Promise.resolve(

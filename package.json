@@ -1,6 +1,6 @@
 {
   "name": "all-contributors-cli",
-  "version": "0.0.0-semantically-released",
+  "version": "6.26.1",
   "description": "Tool to easily add recognition for new contributors",
   "bin": {
     "all-contributors": "dist/cli.js"
@@ -13,7 +13,7 @@
     "node": ">=22.22.0"
   },
   "scripts": {
-    "add-contributor": "kcd-scripts contributors add",
+    "add-contributor": "node src/cli.js add",
     "knip": "knip",
     "build": "babel src --out-dir dist --copy-files",
     "lint": "eslint . && prettier --check --ignore-unknown .",
@@ -49,32 +49,31 @@
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
     "@babel/runtime": "^7.7.6",
-    "chalk": "^5.6.2",
+    "eta": "^4.5.1",
     "inquirer": "^7.3.3",
     "json-fixer": "^1.6.8",
-    "lodash": "^4.11.2",
     "node-fetch": "^2.6.0",
     "pify": "^5.0.0",
-    "yargs": "^18.0.0"
+    "yargs": "^18.0.0",
+    "yoctocolors": "^2.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.26.0",
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@eslint/js": "^9.39.2",
-    "@vitest/coverage-v8": "^2.0.0",
+    "@vitest/coverage-v8": "^4.0.0",
     "eslint": "^9.39.2",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vitest": "^0.5.4",
     "git-cz": "^4.7.6",
     "globals": "^17.1.0",
     "husky": "^9.1.0",
-    "kcd-scripts": "^16.0.0",
     "knip": "^5.83.1",
     "lint-staged": "^16.2.7",
     "nock": "^14.0.10",
     "prettier": "^3.8.1",
-    "vitest": "^2.0.0"
+    "vitest": "^4.0.0"
   },
   "optionalDependencies": {
     "prettier": "^3"

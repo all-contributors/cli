@@ -1,8 +1,6 @@
-import _ from 'lodash/fp.js'
+const util = require('../util')
 
-import * as util from '../util/index.js'
-
-const linkTemplate = _.template(
+const linkTemplate = util.template(
   '<a href="<%= url %>" title="<%= description %>"><%= symbol %></a>',
 )
 
@@ -24,7 +22,7 @@ export function formatContributionType(options, contributor, contribution) {
 
   const templateData = {
     symbol: type.symbol,
-    description: type.description,
+    description: type.description || '',
     contributor,
     options,
   }
@@ -34,10 +32,10 @@ export function formatContributionType(options, contributor, contribution) {
   if (contribution.url) {
     url = contribution.url
   } else if (type.link) {
-    url = _.template(type.link)(templateData)
+    url = util.template(type.link)(templateData)
   }
 
-  return linkTemplate(_.assign({url}, templateData))
+  return linkTemplate({url, ...templateData})
 }
 
 function getUrl(contribution, contributor) {

@@ -5,6 +5,6 @@ coverage:
     patch:
       default:
         target: auto
-        base: pr
+        informational: true
 
-comment: off
+comment: on

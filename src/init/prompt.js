@@ -1,9 +1,10 @@
-import _ from 'lodash/fp.js'
-import inquirer from 'inquirer'
-import * as util from '../util/index.js'
-import {conventions} from './commit-conventions.js'
+const inquirer = require('inquirer')
+const git = require('../util').git
+const conventions = require('./commit-conventions')
 
-const {git} = util
+function uniqueFiles(files) {
+  return [...new Set(files.filter(Boolean))]
+}
 
 const questions = [
   {
@@ -96,9 +97,7 @@ const questions = [
   },
 ]
 
-const uniqueFiles = _.flow(_.compact, _.uniq)
-
-export function prompt() {
+module.exports = function prompt() {
   return git
     .getRepoInfo()
     .then(repoInfo => {

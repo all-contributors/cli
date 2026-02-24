@@ -1,11 +1,10 @@
-import _ from 'lodash/fp.js'
-import * as util from '../util/index.js'
-import * as repo from '../repo/index.js'
-import {add} from './add.js'
-import {prompt} from './prompt.js'
+const util = require('../util')
+const repo = require('../repo')
+const add = require('./add')
+const prompt = require('./prompt')
 
 function isNewContributor(contributorList, username) {
-  return !_.find({login: username}, contributorList)
+  return !contributorList.find(contributor => contributor.login === username)
 }
 
 export function addContributor(options, username, contributions) {

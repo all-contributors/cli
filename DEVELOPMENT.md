@@ -35,7 +35,7 @@ these are the subcommands:
 | `all-contributors init`                           | Prepare the project to use this tool                 |
 | `all-contributors check`                          | Compare repo contributors with `.all-contributorsrc` |
 
-## Testing and Code Coverage
+## Testing and code coverage
 
 ### Run tests
 

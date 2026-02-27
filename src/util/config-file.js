@@ -1,10 +1,10 @@
-import {readFile, writeFile} from 'fs/promises'
+import { promises as fs } from 'fs';
 import jf from 'json-fixer'
 import {formatConfig} from './formatting.js'
 
 export async function readConfig(configPath) {
   try {
-    const configFileContents = await readFile(configPath, 'utf-8')
+    const configFileContents = await fs.readFile(configPath, 'utf-8')
     const {data: config, changed} = jf(configFileContents)
 
     if (!('repoType' in config)) {
@@ -18,7 +18,7 @@ export async function readConfig(configPath) {
     if (changed) {
       const formatterConfig = await formatConfig(configPath, config)
       //Updates the file with fixes
-      await writeFile(configPath, formatterConfig)
+      await fs.writeFile(configPath, formatterConfig)
     }
 
     return config
@@ -52,7 +52,7 @@ export async function writeConfig(configPath, content) {
     )
   }
 
-  return writeFile(configPath, `${await formatConfig(configPath, content)}\n`)
+  return fs.writeFile(configPath, `${await formatConfig(configPath, content)}\n`)
 }
 
 export async function writeContributors(configPath, contributors) {

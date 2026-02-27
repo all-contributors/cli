@@ -1,26 +1,37 @@
+import { promises as fs } from 'fs';
 import * as util from '../util/index.js'
 import {prompt} from './prompt.js'
 import {addBadge, addContributorsList} from './init-content.js'
-import {ensureFileExists} from './file-exist.js'
 
-const {configFile, markdown} = util.markdown
+const {configFile} = util.markdown
 
-function injectInFile(file, fn) {
-  return markdown.read(file).then(content => markdown.write(file, fn(content)))
+async function ensureFileExists(file) {
+  try {
+    await fs.access(file);
+    return file;
+  } catch {
+    await fs.writeFile(file, '');
+    return file;
+  }
 }
 
-export function init() {
-  return prompt().then(result => {
-    return configFile
-      .writeConfig('.all-contributorsrc', result.config)
-      .then(() => {
-        ensureFileExists(result.contributorFile)
-      })
-      .then(() => injectInFile(result.contributorFile, addContributorsList))
-      .then(() => {
-        if (result.badgeFile) {
-          return injectInFile(result.badgeFile, addBadge)
-        }
-      })
-  })
+
+async function injectInFile(file, fn) {
+  const content = await fs.readFile(file, 'utf8')
+
+  await fs.writeFile(file, fn(content))
+}
+
+export async function init() {
+  const promptResult = await prompt()
+
+  await configFile.writeConfig('.all-contributorsrc', promptResult.config)
+
+  await ensureFileExists(promptResult.contributorFile)
+
+  await injectInFile(promptResult.contributorFile, addContributorsList)
+
+  if (promptResult.badgeFile) {
+    await injectInFile(promptResult.badgeFile, addBadge)
+  }
 }

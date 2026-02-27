@@ -1,27 +1,20 @@
 import path from 'path'
-import {spawn} from 'child_process'
-import pify from 'pify'
+import {exec} from 'child_process'
+import {promisify} from 'util'
 import {conventions} from '../init/commit-conventions.js'
 import * as util from '../util/index.js'
 
 const commitTemplate =
   '<%= prefix %> <%= (newContributor ? "Add" : "Update") %> @<%= username %> as a contributor'
 
-const getRemoteOriginData = pify(cb => {
-  let output = ''
-  const git = spawn('git', 'config --get remote.origin.url'.split(' '))
-  git.stdout.on('data', data => {
-    output += data
-  })
-
-  git.stderr.on('data', cb)
-  git.on('close', () => {
-    cb(null, output)
-  })
-})
+const getRemoteOriginData = async () => {
+  const execAsync = promisify(exec)
+  const {stdout} = await execAsync('git config --get remote.origin.url')
+  return stdout
+}
 
 function parse(originUrl) {
-  const result = /:(\w+)\/([A-Za-z0-9-_]+)/.exec(originUrl)
+  const result = /[:\/]([A-Za-z0-9-_]+)\/([A-Za-z0-9-_]+)(?:\.git)?/.exec(originUrl)
   if (!result) {
     return null
   }
@@ -36,21 +29,14 @@ export function getRepoInfo() {
   return getRemoteOriginData().then(parse)
 }
 
-const spawnGitCommand = pify((args, cb) => {
-  const git = spawn('git', args)
-  const bufs = []
-  git.stderr.on('data', buf => bufs.push(buf))
-  git.on('close', code => {
-    if (code) {
-      const msg =
-        Buffer.concat(bufs).toString() ||
-        `git ${args.join(' ')} - exit code: ${code}`
-      cb(new Error(msg))
-    } else {
-      cb(null)
-    }
-  })
-})
+const spawnGitCommand = async (args) => {
+  try {
+    await promisify(exec)(`git ${args.join(' ')}`)
+  } catch (error) {
+    const msg = error.stderr || `git ${args.join(' ')} - exit code: ${error.code}`
+    throw new Error(msg)
+  }
+}
 
 export async function commit(options, data) {
   const files = options.files.concat(options.config)

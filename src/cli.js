@@ -5,6 +5,7 @@ import yargs from 'yargs'
 import {hideBin} from 'yargs/helpers'
 import * as YoctoColors from 'yoctocolors'
 import inquirer from 'inquirer'
+import { promises as fs } from 'fs';
 
 import {init} from './init/index.js'
 import {generate} from './generate/index.js'
@@ -57,16 +58,16 @@ function getArgs() {
     .default('contributors', []).argv
 }
 
-function startGeneration(argv) {
-  return Promise.all(
-    argv.files.map(file => {
-      const filePath = path.join(cwd, file)
-      return util.markdown.read(filePath).then(fileContent => {
-        const newFileContent = generate(argv, argv.contributors, fileContent)
-        return util.markdown.write(filePath, newFileContent)
-      })
-    }),
-  )
+async function startGeneration(argv) {
+  await Promise.all(
+    argv.files.map(async (file) => {
+      const filePath = path.join(cwd, file);
+      const fileContent = await fs.readFile(filePath, 'utf8');
+      const newFileContent = generate(argv, argv.contributors, fileContent);
+
+      await fs.writeFile(filePath, newFileContent);
+    })
+  );
 }
 
 async function addContribution(argv) {

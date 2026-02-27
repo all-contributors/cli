@@ -1,5 +1,5 @@
 import {test, expect, describe} from 'vitest'
-import {unlink} from 'fs/promises'
+import { promises as fs } from 'fs';
 import {addContributorsList} from '../init-content.js'
 import {ensureFileExists} from '../file-exist.js'
 
@@ -47,6 +47,6 @@ describe('ensureFileExists', () => {
 
     expect(data).toStrictEqual(file)
 
-    await unlink(file)
+    await fs.unlink(file)
   })
 })

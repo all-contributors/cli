@@ -77,7 +77,7 @@ export function getQuestions(options, username, contributions) {
   ]
 }
 
-export function getValidUserContributions(options, contributions) {
+function getValidUserContributions(options, contributions) {
   const validContributionTypes = util.contributionTypes(options)
   const userContributions = contributions && contributions.split(',')
 

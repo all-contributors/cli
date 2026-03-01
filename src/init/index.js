@@ -1,18 +1,17 @@
-import { promises as fs } from 'fs';
-import { configFile } from '../util/index.js'
+import {promises as fs} from 'fs'
+import {configFile} from '../util/index.js'
 import {prompt} from './prompt.js'
 import {addBadge, addContributorsList} from './init-content.js'
 
 async function ensureFileExists(file) {
   try {
-    await fs.access(file);
-    return file;
+    await fs.access(file)
+    return file
   } catch {
-    await fs.writeFile(file, '');
-    return file;
+    await fs.writeFile(file, '')
+    return file
   }
 }
-
 
 async function injectInFile(file, fn) {
   const content = await fs.readFile(file, 'utf8')

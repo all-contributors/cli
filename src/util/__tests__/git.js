@@ -1,6 +1,6 @@
-import { test, expect, vi, describe, beforeEach } from 'vitest'
-import { promisify } from 'util'
-import { commit, getRepoInfo } from '../git'
+import {test, expect, vi, describe, beforeEach} from 'vitest'
+import {promisify} from 'util'
+import {commit, getRepoInfo} from '../git'
 
 vi.mock('child_process')
 vi.mock('util')
@@ -12,9 +12,7 @@ vi.mock('../config-file', () => ({
   ),
 }))
 
-
 describe('getRepoInfo', () => {
-
   beforeEach(() => {
     vi.clearAllMocks()
   })
@@ -22,7 +20,7 @@ describe('getRepoInfo', () => {
   test('should parse GitHub SSH URLs correctly', async () => {
     const mockExecAsync = vi.fn().mockResolvedValue({
       stdout: 'git@github.com:all-contributors/all-contributors-cli.git\n',
-      stderr: ''
+      stderr: '',
     })
 
     vi.mocked(promisify).mockReturnValue(mockExecAsync)
@@ -38,9 +36,9 @@ describe('getRepoInfo', () => {
   test('should parse GitHub HTTPS URLs correctly', async () => {
     const mockExecAsync = vi.fn().mockResolvedValue({
       stdout: 'https://github.com/all-contributors/all-contributors-cli.git\n',
-      stderr: ''
+      stderr: '',
     })
-    
+
     vi.mocked(promisify).mockReturnValue(mockExecAsync)
 
     const result = await getRepoInfo()
@@ -54,9 +52,9 @@ describe('getRepoInfo', () => {
   test('should return null for invalid URLs', async () => {
     const mockExecAsync = vi.fn().mockResolvedValue({
       stdout: 'invalid-url\n',
-      stderr: ''
+      stderr: '',
     })
-    
+
     vi.mocked(promisify).mockReturnValue(mockExecAsync)
 
     const result = await getRepoInfo()
@@ -68,7 +66,7 @@ describe('getRepoInfo', () => {
     const gitError = new Error('fatal: not a git repository')
     gitError.stderr = 'fatal: not a git repository'
     const mockExecAsync = vi.fn().mockRejectedValue(gitError)
-    
+
     vi.mocked(promisify).mockReturnValue(mockExecAsync)
 
     await expect(getRepoInfo()).rejects.toThrow('fatal: not a git repository')
@@ -80,7 +78,7 @@ describe('commit', () => {
     files: ['README.md', 'package.json'],
     config: '.all-contributorsrc',
     commitTemplate: undefined,
-    commitConvention: 'gitmoji'
+    commitConvention: 'gitmoji',
   }
   const mockData = {
     username: 'jdoe',
@@ -109,7 +107,8 @@ describe('commit', () => {
     vi.mocked(promisify).mockReturnValue(mockExecAsync)
     const customOptions = {
       ...mockOptions,
-      commitTemplate: 'docs: <%= newContributor ? "Add" : "Update" %> @<%= username %>',
+      commitTemplate:
+        'docs: <%= newContributor ? "Add" : "Update" %> @<%= username %>',
     }
 
     await commit(customOptions, mockData)
@@ -144,7 +143,8 @@ describe('commit', () => {
   })
 
   test('should handle git commit errors', async () => {
-    const mockExecAsync = vi.fn()
+    const mockExecAsync = vi
+      .fn()
       .mockResolvedValueOnce({stdout: '', stderr: ''}) // git add succeeds
       .mockRejectedValueOnce({
         stderr: 'nothing to commit, working tree clean',

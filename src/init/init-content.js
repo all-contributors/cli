@@ -34,7 +34,9 @@ function splitAndRejoin(fn) {
 }
 
 function findContributorsSection(lines) {
-  return lines.findIndex(str => str.toLowerCase().indexOf('# contributors') === 1)
+  return lines.findIndex(
+    str => str.toLowerCase().indexOf('# contributors') === 1,
+  )
 }
 
 function addContributorsListImpl(lines) {

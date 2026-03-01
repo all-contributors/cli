@@ -1,5 +1,5 @@
 import inquirer from 'inquirer'
-import { git } from '../util/index.js'
+import {git} from '../util/index.js'
 import {conventions} from './commit-conventions.js'
 
 function uniqueFiles(files) {

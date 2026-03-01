@@ -1,4 +1,4 @@
-import { promises as fs } from 'fs';
+import {promises as fs} from 'fs'
 import jf from 'json-fixer'
 import {formatConfig} from './formatting.js'
 
@@ -52,7 +52,10 @@ export async function writeConfig(configPath, content) {
     )
   }
 
-  return fs.writeFile(configPath, `${await formatConfig(configPath, content)}\n`)
+  return fs.writeFile(
+    configPath,
+    `${await formatConfig(configPath, content)}\n`,
+  )
 }
 
 export async function writeContributors(configPath, contributors) {

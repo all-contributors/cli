@@ -2,7 +2,7 @@ import * as util from '../util/index.js'
 import {formatContributionType} from './format-contribution-type.js'
 
 const avatarTemplate = util.template(
-  '<img src="<%= contributor.avatar_url %>" width="<%= options.imageSize %>px" height="<%= options.imageSize %>px" alt="<%= name %>"/>'
+  '<img src="<%= contributor.avatar_url %>" width="<%= options.imageSize %>px" height="<%= options.imageSize %>px" alt="<%= name %>"/>',
 )
 
 const avatarBlockTemplate = util.template(

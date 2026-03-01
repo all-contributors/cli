@@ -1,5 +1,6 @@
+import {test, expect, beforeAll} from 'vitest'
 import nock from 'nock'
-import githubAPI from '../github'
+import * as githubAPI from '../github.js'
 
 import allContributorsCliResponse from './github/all-contributors.response.json'
 import allContributorsCliTransformed from './github/all-contributors.transformed.json'
@@ -22,23 +23,19 @@ beforeAll(() => {
     .reply(200, allContributorsCliResponse)
     .get('/repos/facebook/react-native/contributors?per_page=100')
     .reply(200, reactNativeResponse1, {
-      Link:
-        '<https://api.github.com/repositories/29028775/contributors?per_page=100&page=2>; rel="next", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=4>; rel="last"',
+      Link: '<https://api.github.com/repositories/29028775/contributors?per_page=100&page=2>; rel="next", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=4>; rel="last"',
     })
     .get('/repositories/29028775/contributors?per_page=100&page=2')
     .reply(200, reactNativeResponse2, {
-      Link:
-        '<https://api.github.com/repositories/29028775/contributors?per_page=100&page=3>; rel="next", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=4>; rel="last", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=1>; rel="first", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=1>; rel="prev"',
+      Link: '<https://api.github.com/repositories/29028775/contributors?per_page=100&page=3>; rel="next", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=4>; rel="last", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=1>; rel="first", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=1>; rel="prev"',
     })
     .get('/repositories/29028775/contributors?per_page=100&page=3')
     .reply(200, reactNativeResponse3, {
-      Link:
-        '<https://api.github.com/repositories/29028775/contributors?per_page=100&page=4>; rel="next", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=4>; rel="last", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=1>; rel="first", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=2>; rel="prev"',
+      Link: '<https://api.github.com/repositories/29028775/contributors?per_page=100&page=4>; rel="next", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=4>; rel="last", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=1>; rel="first", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=2>; rel="prev"',
     })
     .get('/repositories/29028775/contributors?per_page=100&page=4')
     .reply(200, reactNativeResponse4, {
-      Link:
-        '<https://api.github.com/repositories/29028775/contributors?per_page=100&page=1>; rel="first", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=3>; rel="prev"',
+      Link: '<https://api.github.com/repositories/29028775/contributors?per_page=100&page=1>; rel="first", <https://api.github.com/repositories/29028775/contributors?per_page=100&page=3>; rel="prev"',
     })
 })
 
@@ -57,6 +54,8 @@ async function rejects(promise) {
   expect(error).toBeTruthy()
 }
 
+// When we move to vitest this might not be an issue anymore
+// eslint-disable-next-line vitest/expect-expect
 test('handle errors', async () => {
   nock('https://api.github.com').get('/users/nodisplayname').replyWithError(404)
 
@@ -119,6 +118,8 @@ test('fill in the name when null is returned', async () => {
   expect(info.name).toBe('nodisplayname')
 })
 
+// When we move to vitest this might not be an issue anymore
+// eslint-disable-next-line vitest/expect-expect
 test('attaches token when supplied', async () => {
   const mockAuthToken = 'myMock-token-adaskjda'
   nock('https://api.github.com')
@@ -131,6 +132,8 @@ test('attaches token when supplied', async () => {
   await getUserInfo('test-token', 'https://github.com', mockAuthToken)
 })
 
+// When we move to vitest this might not be an issue anymore
+// eslint-disable-next-line vitest/expect-expect
 test('attaches no token when supplied empty', async () => {
   nock('https://api.github.com')
     .matchHeader('authorization', '')
@@ -142,6 +145,8 @@ test('attaches no token when supplied empty', async () => {
   await getUserInfo('test-token', 'https://github.com', '')
 })
 
+// When we move to vitest this might not be an issue anymore
+// eslint-disable-next-line vitest/expect-expect
 test('attaches no token when not supplied', async () => {
   nock('https://api.github.com')
     .matchHeader('authorization', '')

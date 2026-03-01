@@ -1,10 +1,7 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-
-- [
-  all-contributors-cli
-](#all-contributors-cli)
+- [ all-contributors-cli ](#all-contributors-cli)
   - [The problem](#the-problem)
   - [This solution](#this-solution)
   - [Using the all-contributors-cli](#using-the-all-contributors-cli)
@@ -46,8 +43,8 @@
     </tbody>
 </table>
 
-[![Build Status](https://dl.circleci.com/status-badge/img/gh/all-contributors/cli/tree/master.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/all-contributors/cli/tree/master)
-[![Code Coverage](https://codecov.io/gh/all-contributors/cli/branch/master/graph/badge.svg?token=jHIrCqevli)](https://codecov.io/gh/all-contributors/cli)
+[![Build Status](https://dl.circleci.com/status-badge/img/gh/all-contributors/cli/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/all-contributors/cli/tree/main)
+[![Code Coverage](https://codecov.io/gh/all-contributors/cli/branch/main/graph/badge.svg?token=jHIrCqevli)](https://codecov.io/gh/all-contributors/cli)
 [![Version](https://img.shields.io/npm/v/all-contributors-cli.svg)](https://www.npmjs.com/package/all-contributors-cli)
 [![Downloads](https://img.shields.io/npm/dm/all-contributors-cli.svg)](http://www.npmtrends.com/all-contributors-cli)
 [![AUR Version](https://img.shields.io/aur/version/all-contributors-cli.svg)](https://aur.archlinux.org/packages/all-contributors-cli)
@@ -142,7 +139,7 @@ Thanks goes to these wonderful people
     <tr>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/smoia"><img src="https://avatars3.githubusercontent.com/u/35300580?v=4?s=100" width="100px;" alt="Stefano Moia"/><br /><sub><b>Stefano Moia</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=smoia" title="Code">💻</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/ilai-deutel"><img src="https://avatars0.githubusercontent.com/u/10098207?v=4?s=100" width="100px;" alt="Ilaï Deutel"/><br /><sub><b>Ilaï Deutel</b></sub></a><br /><a href="#platform-ilai-deutel" title="Packaging/porting to new platform">📦</a></td>
-      <td align="center" valign="top" width="16.66%"><a href="https://github.com/jdalrymple"><img src="https://avatars3.githubusercontent.com/u/3743662?v=4?s=100" width="100px;" alt="Justin Dalrymple"/><br /><sub><b>Justin Dalrymple</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=jdalrymple" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/commits?author=jdalrymple" title="Tests">⚠️</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/jdalrymple"><img src="https://avatars3.githubusercontent.com/u/3743662?v=4?s=100" width="100px;" alt="Justin Dalrymple"/><br /><sub><b>Justin Dalrymple</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=jdalrymple" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/commits?author=jdalrymple" title="Tests">⚠️</a> <a href="#security-jdalrymple" title="Security">🛡️</a> <a href="https://github.com/all-contributors/cli/issues?q=author%3Ajdalrymple" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/k3nsei"><img src="https://avatars2.githubusercontent.com/u/190422?v=4?s=100" width="100px;" alt="Piotr Stępniewski"/><br /><sub><b>Piotr Stępniewski</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Ak3nsei" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/commits?author=k3nsei" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/commits?author=k3nsei" title="Tests">⚠️</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://dev.to/gr2m"><img src="https://avatars3.githubusercontent.com/u/39992?v=4?s=100" width="100px;" alt="Gregor Martynus"/><br /><sub><b>Gregor Martynus</b></sub></a><br /><a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3Agr2m" title="Reviewed Pull Requests">👀</a> <a href="#question-gr2m" title="Answering Questions">💬</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://sinchang.me/"><img src="https://avatars0.githubusercontent.com/u/3297859?v=4?s=100" width="100px;" alt="Jeff Wen"/><br /><sub><b>Jeff Wen</b></sub></a><br /><a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3Asinchang" title="Reviewed Pull Requests">👀</a></td>
@@ -173,6 +170,10 @@ Thanks goes to these wonderful people
     </tr>
     <tr>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/schweden1997"><img src="https://avatars.githubusercontent.com/u/6765735?v=4?s=100" width="100px;" alt="Marco De Gaetano"/><br /><sub><b>Marco De Gaetano</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Aschweden1997" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/marcelpanse"><img src="https://avatars.githubusercontent.com/u/418984?v=4?s=100" width="100px;" alt="Marcel Panse"/><br /><sub><b>Marcel Panse</b></sub></a><br /><a href="#security-marcelpanse" title="Security">🛡️</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="http://www.leahwasser.com"><img src="https://avatars.githubusercontent.com/u/7649194?v=4?s=100" width="100px;" alt="Leah Wasser"/><br /><sub><b>Leah Wasser</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=lwasser" title="Documentation">📖</a> <a href="#security-lwasser" title="Security">🛡️</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="http://www.davepagurek.com"><img src="https://avatars.githubusercontent.com/u/5315059?v=4?s=100" width="100px;" alt="Dave Pagurek"/><br /><sub><b>Dave Pagurek</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Adavepagurek" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://blog.jmadge.com"><img src="https://avatars.githubusercontent.com/u/23616154?v=4?s=100" width="100px;" alt="Jim Madge"/><br /><sub><b>Jim Madge</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=JimMadge" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3AJimMadge" title="Reviewed Pull Requests">👀</a></td>
     </tr>
   </tbody>
   <tfoot>

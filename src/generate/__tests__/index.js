@@ -1,6 +1,14 @@
-import generate from '../'
+import {test, expect} from 'vitest'
+import {generate} from '../index.js'
 import contributors from './fixtures/contributors.json'
 
+/**
+ * Returns test fixtures including options, sample contributor, and markdown content.
+ * The content includes ALL-CONTRIBUTORS-LIST comment tags where the contributor
+ * table should be injected.
+ *
+ * @returns {Object} Test data with options, jfmengels contributor, and sample content
+ */
 function fixtures() {
   const options = {
     projectOwner: 'kentcdodds',
@@ -33,6 +41,13 @@ function fixtures() {
 
   return {options, jfmengels, content}
 }
+
+test('throws when contributors is undefined (caller must await and pass resolved array)', () => {
+  const {options, content} = fixtures()
+  expect(() => generate(options, undefined, content)).toThrow(
+    'contributors must be an array',
+  )
+})
 
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors', () => {
   const {kentcdodds, bogas04} = contributors
@@ -74,7 +89,7 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a custom wra
   const {options, jfmengels, content} = fixtures()
   const contributorList = [kentcdodds, bogas04, jfmengels]
   const result = generate(
-    Object.assign(options, { wrapperTemplate: '<p><%= bodyContent %></p>'}),
+    Object.assign(options, {wrapperTemplate: '<p><%= bodyContent %></p>'}),
     contributorList,
     content,
   )
@@ -255,11 +270,7 @@ test('replace all-contributors badge if present', () => {
 test('validate if cell width attribute is floored correctly', () => {
   const {kentcdodds} = contributors
   const {options, content} = fixtures()
-  const contributorList = [
-    kentcdodds,
-    kentcdodds,
-    kentcdodds,
-  ]
+  const contributorList = [kentcdodds, kentcdodds, kentcdodds]
 
   options.contributorsPerLine = 7
   const result = generate(options, contributorList, content)

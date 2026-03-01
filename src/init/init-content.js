@@ -1,5 +1,6 @@
-const _ = require('lodash/fp')
-const injectContentBetween = require('../util').markdown.injectContentBetween
+import * as util from '../util/index.js'
+
+const {injectContentBetween} = util.markdown
 
 const badgeContent = [
   '<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->',
@@ -20,25 +21,25 @@ const listContent = [
 const footerContent =
   'This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!'
 
-function addBadge(lines) {
+function addBadgeImpl(lines) {
   return injectContentBetween(lines, badgeContent, 1, 1)
 }
 
 function splitAndRejoin(fn) {
-  return _.flow(
-    _.split('\n'),
-    fn,
-    _.join('\n'),
-  )
+  return function (content) {
+    const lines = content.split('\n')
+    const result = fn(lines)
+    return result.join('\n')
+  }
 }
 
-const findContributorsSection = _.findIndex(function isContributorsSection(
-  str,
-) {
-  return str.toLowerCase().indexOf('# contributors') === 1
-})
+function findContributorsSection(lines) {
+  return lines.findIndex(function isContributorsSection(str) {
+    return str.toLowerCase().indexOf('# contributors') === 1
+  })
+}
 
-function addContributorsList(lines) {
+function addContributorsListImpl(lines) {
   const insertionLine = findContributorsSection(lines)
   if (insertionLine === -1) {
     return lines.concat([
@@ -59,7 +60,5 @@ function addContributorsList(lines) {
   )
 }
 
-module.exports = {
-  addBadge: splitAndRejoin(addBadge),
-  addContributorsList: splitAndRejoin(addContributorsList),
-}
+export const addBadge = splitAndRejoin(addBadgeImpl)
+export const addContributorsList = splitAndRejoin(addContributorsListImpl)

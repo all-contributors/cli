@@ -23,8 +23,6 @@ Relevant code or config
 
 What you did:
 
-
-
 What happened:
 
 <!-- Please provide the full error message/screenshots/anything -->
@@ -37,7 +35,5 @@ minimal amount of code possible.
 -->
 
 Problem description:
-
-
 
 Suggested solution:

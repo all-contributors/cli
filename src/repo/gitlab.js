@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+import fetch from 'node-fetch'
 
 const addPrivateToken = (url, privateToken = '') => {
   if (privateToken === '') return url
@@ -9,7 +9,6 @@ const addPrivateToken = (url, privateToken = '') => {
 }
 
 const getUserInfo = function (username, hostname, privateToken) {
-  /* eslint-disable complexity */
   if (!hostname) {
     hostname = 'https://gitlab.com'
   }
@@ -98,7 +97,4 @@ const getContributors = function (owner, name, hostname, privateToken) {
   )
 }
 
-module.exports = {
-  getUserInfo,
-  getContributors,
-}
+export {getUserInfo, getContributors}

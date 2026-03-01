@@ -1,28 +1,25 @@
-const _ = require('lodash/fp')
-const inquirer = require('inquirer')
-const util = require('../util')
-const repo = require('../repo')
+import inquirer from 'inquirer'
+import * as util from '../util/index.js'
+import * as repo from '../repo/index.js'
 
-const contributionChoices = _.flow(
-  util.contributionTypes,
-  _.toPairs,
-  _.sortBy(pair => {
-    return pair[1].description
-  }),
-  _.map(pair => {
-    return {
-      name: `${pair[1].symbol}  ${pair[1].description}`,
-      value: pair[0],
-    }
-  }),
-)
+function contributionChoices(options) {
+  const types = util.contributionTypes(options)
+  const pairs = Object.entries(types)
+  const sorted = pairs.sort((a, b) =>
+    a[1].description.localeCompare(b[1].description),
+  )
+  return sorted.map(pair => ({
+    name: `${pair[1].symbol}  ${pair[1].description}`,
+    value: pair[0],
+  }))
+}
 
-function getQuestions(options, username, contributions) {
+export function getQuestions(options, username, contributions) {
   return [
     {
       type: 'input',
       name: 'username',
-      message: `What is the contributor's ${repo.getTypeName(
+      message: `Oops. Missing something. What is the contributor's ${repo.getTypeName(
         options.repoType,
       )} username?`,
       when: !username,
@@ -38,7 +35,7 @@ function getQuestions(options, username, contributions) {
       name: 'contributions',
       message: 'What are the contribution types?',
       when: !contributions,
-      default: function(answers) {
+      default: function (answers) {
         // default values for contributions when updating existing users
         answers.username = answers.username || username
         return options.contributors
@@ -53,7 +50,7 @@ function getQuestions(options, username, contributions) {
           )
       },
       choices: contributionChoices(options),
-      validate: function(input, answers) {
+      validate: function (input, answers) {
         answers.username = answers.username || username
         const previousContributions = options.contributors
           .filter(
@@ -68,7 +65,10 @@ function getQuestions(options, username, contributions) {
 
         if (!input.length) {
           return 'Use space to select at least one contribution type.'
-        } else if (_.isEqual(input, previousContributions)) {
+        } else if (
+          JSON.stringify(input.sort()) ===
+          JSON.stringify(previousContributions.sort())
+        ) {
           return 'Nothing changed, use space to select contribution types.'
         }
         return true
@@ -81,15 +81,15 @@ function getValidUserContributions(options, contributions) {
   const validContributionTypes = util.contributionTypes(options)
   const userContributions = contributions && contributions.split(',')
 
-  const validUserContributions = _.filter(
+  const validUserContributions = userContributions.filter(
     userContribution => validContributionTypes[userContribution] !== undefined,
-  )(userContributions)
+  )
 
-  const invalidUserContributions = _.filter(
+  const invalidUserContributions = userContributions.filter(
     userContribution => validContributionTypes[userContribution] === undefined,
-  )(userContributions)
+  )
 
-  if (_.isEmpty(validUserContributions)) {
+  if (validUserContributions.length === 0) {
     throw new Error(
       `${invalidUserContributions.toString()} is/are invalid contribution type(s)`,
     )
@@ -97,14 +97,14 @@ function getValidUserContributions(options, contributions) {
   return validUserContributions
 }
 
-module.exports = function prompt(options, username, contributions) {
+export function prompt(options, username, contributions) {
   const defaults = {
     username,
     contributions:
-      username === undefined && contributions === undefined
+      contributions === undefined
         ? []
         : getValidUserContributions(options, contributions),
   }
   const questions = getQuestions(options, username, contributions)
-  return inquirer.prompt(questions).then(_.assign(defaults))
+  return inquirer.prompt(questions).then(answers => ({...defaults, ...answers}))
 }

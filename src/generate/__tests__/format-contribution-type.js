@@ -1,4 +1,5 @@
-import formatContributionType from '../format-contribution-type'
+import {test, expect} from 'vitest'
+import {formatContributionType} from '../format-contribution-type.js'
 import contributors from './fixtures/contributors.json'
 
 const fixtures = () => {
@@ -160,17 +161,15 @@ test('be able to override existing templates', () => {
 test('throw a helpful error on unknown type', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()
-  expect(() =>
-    formatContributionType(options, contributor, 'docs'),
-  ).toThrowError('Unknown contribution type docs for contributor kentcdodds')
+  expect(() => formatContributionType(options, contributor, 'docs')).toThrow(
+    'Unknown contribution type docs for contributor kentcdodds',
+  )
 })
 
 test('throw a helpful error on unknown type and no login', () => {
   const contributor = contributors.nologin_badrole
   const {options} = fixtures()
-  expect(() =>
-    formatContributionType(options, contributor, 'docs'),
-  ).toThrowError(
+  expect(() => formatContributionType(options, contributor, 'docs')).toThrow(
     'Unknown contribution type docs for contributor Wildly Misconfigured',
   )
 })

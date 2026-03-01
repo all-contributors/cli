@@ -1,6 +1,6 @@
 {
   "name": "all-contributors-cli",
-  "version": "0.0.0-semantically-released",
+  "version": "6.26.1",
   "description": "Tool to easily add recognition for new contributors",
   "bin": {
     "all-contributors": "dist/cli.js"
@@ -10,27 +10,33 @@
     "dist"
   ],
   "engines": {
-    "node": ">=4"
+    "node": ">=22.22.0"
   },
   "scripts": {
-    "add-contributor": "kcd-scripts contributors add",
-    "build": "kcd-scripts build",
-    "lint": "kcd-scripts lint",
-    "test": "kcd-scripts test",
-    "validate": "kcd-scripts validate",
+    "add-contributor": "node src/cli.js add",
+    "knip": "knip",
+    "build": "babel src --out-dir dist --copy-files",
+    "lint": "eslint . && prettier --check --ignore-unknown .",
+    "lint-fix": "eslint --fix . && prettier --write --ignore-unknown .",
+    "test": "vitest",
+    "test-coverage": "vitest --coverage",
     "commit": "git-cz",
     "start": "./dist/cli.js",
+    "prepare": "husky",
     "dev": "./src/cli.js"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "kcd-scripts pre-commit"
-    }
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "!(*.js)": "prettier --ignore-unknown --write"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/all-contributors/all-contributors-cli.git"
   },
+  "type": "module",
   "keywords": [
     "all-contributors",
     "contributors"
@@ -43,41 +49,34 @@
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
     "@babel/runtime": "^7.7.6",
-    "async": "^3.1.0",
-    "chalk": "^4.0.0",
-    "didyoumean": "^1.2.1",
-    "inquirer": "^7.3.3",
+    "eta": "^4.5.1",
+    "inquirer": "^13.3.0",
     "json-fixer": "^1.6.8",
-    "lodash": "^4.11.2",
     "node-fetch": "^2.6.0",
     "pify": "^5.0.0",
-    "yargs": "^15.0.1"
+    "yargs": "^18.0.0",
+    "yoctocolors": "^2.1.2"
   },
   "devDependencies": {
-    "codecov": "^3.8.1",
-    "cz-conventional-changelog": "^3.3.0",
+    "@babel/cli": "^7.26.0",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@eslint/js": "^9.39.2",
+    "@vitest/coverage-v8": "^4.0.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-vitest": "^0.5.4",
     "git-cz": "^4.7.6",
-    "kcd-scripts": "^6.2.0",
-    "nock": "^12.0.0",
-    "semantic-release": "^17.0.8"
+    "globals": "^17.1.0",
+    "husky": "^9.1.0",
+    "knip": "^5.83.1",
+    "lint-staged": "^16.2.7",
+    "nock": "^14.0.10",
+    "prettier": "^3.8.1",
+    "vitest": "^4.0.0"
   },
   "optionalDependencies": {
-    "prettier": "^2"
-  },
-  "eslintIgnore": [
-    "node_modules",
-    "coverage",
-    "dist"
-  ],
-  "eslintConfig": {
-    "extends": "./node_modules/kcd-scripts/eslint.js",
-    "rules": {
-      "camelcase": "off",
-      "no-process-exit": "off",
-      "import/extensions": "off",
-      "func-names": "off",
-      "consistent-return": "off"
-    }
+    "prettier": "^3"
   },
   "config": {
     "commitizen": {

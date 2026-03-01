@@ -40,4 +40,4 @@ Object.keys(conventions).forEach(style => {
   conventions[style].value = style
 })
 
-module.exports = conventions
+export {conventions}

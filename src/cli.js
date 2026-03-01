@@ -136,27 +136,28 @@ async function checkContributors(argv) {
 }
 
 function promptForCommand(argv) {
+  const choices = [
+    {
+      name: 'Add new contributor or edit contribution type',
+      value: 'add',
+    },
+    {
+      name: 'Re-generate the contributors list',
+      value: 'generate',
+    },
+    {
+      name: 'Compare contributors from the repository with the credited ones',
+      value: 'check',
+    },
+  ]
   const questions = [
     {
       type: 'list',
       name: 'command',
       message: 'What do you want to do?',
-      choices: [
-        {
-          name: 'Add new contributor or edit contribution type',
-          value: 'add',
-        },
-        {
-          name: 'Re-generate the contributors list',
-          value: 'generate',
-        },
-        {
-          name: 'Compare contributors from the repository with the credited ones',
-          value: 'check',
-        },
-      ],
+      choices: choices,
       when: !argv._[0],
-      default: 0,
+      default: choices[0].value,
     },
   ]
 

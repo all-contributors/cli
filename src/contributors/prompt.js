@@ -14,12 +14,12 @@ function contributionChoices(options) {
   }))
 }
 
-function getQuestions(options, username, contributions) {
+export function getQuestions(options, username, contributions) {
   return [
     {
       type: 'input',
       name: 'username',
-      message: `What is the contributor's ${repo.getTypeName(
+      message: `Oops. Missing something. What is the contributor's ${repo.getTypeName(
         options.repoType,
       )} username?`,
       when: !username,
@@ -101,7 +101,7 @@ export function prompt(options, username, contributions) {
   const defaults = {
     username,
     contributions:
-      username === undefined && contributions === undefined
+      contributions === undefined
         ? []
         : getValidUserContributions(options, contributions),
   }

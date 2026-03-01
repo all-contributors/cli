@@ -2,6 +2,13 @@ import {test, expect} from 'vitest'
 import {generate} from '../index.js'
 import contributors from './fixtures/contributors.json'
 
+/**
+ * Returns test fixtures including options, sample contributor, and markdown content.
+ * The content includes ALL-CONTRIBUTORS-LIST comment tags where the contributor
+ * table should be injected.
+ *
+ * @returns {Object} Test data with options, jfmengels contributor, and sample content
+ */
 function fixtures() {
   const options = {
     projectOwner: 'kentcdodds',
@@ -34,6 +41,13 @@ function fixtures() {
 
   return {options, jfmengels, content}
 }
+
+test('throws when contributors is undefined (caller must await and pass resolved array)', () => {
+  const {options, content} = fixtures()
+  expect(() => generate(options, undefined, content)).toThrow(
+    'contributors must be an array',
+  )
+})
 
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors', () => {
   const {kentcdodds, bogas04} = contributors

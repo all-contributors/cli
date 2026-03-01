@@ -1,8 +1,6 @@
 import inquirer from 'inquirer'
-import * as util from '../util/index.js'
+import { git } from '../util/index.js'
 import {conventions} from './commit-conventions.js'
-
-const {git} = util
 
 function uniqueFiles(files) {
   return [...new Set(files.filter(Boolean))]

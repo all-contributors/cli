@@ -1,9 +1,7 @@
 import { promises as fs } from 'fs';
-import * as util from '../util/index.js'
+import { configFile } from '../util/index.js'
 import {prompt} from './prompt.js'
 import {addBadge, addContributorsList} from './init-content.js'
-
-const {configFile} = util.markdown
 
 async function ensureFileExists(file) {
   try {

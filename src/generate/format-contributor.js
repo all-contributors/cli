@@ -2,8 +2,9 @@ import * as util from '../util/index.js'
 import {formatContributionType} from './format-contribution-type.js'
 
 const avatarTemplate = util.template(
-  '<img src="<%= contributor.avatar_url %>?s=<%= options.imageSize %>" width="<%= options.imageSize %>px;" alt="<%= name %>"/>',
+  '<img src="<%= contributor.avatar_url %>" width="<%= options.imageSize %>px" height="<%= options.imageSize %>px" alt="<%= name %>"/>',
 )
+
 const avatarBlockTemplate = util.template(
   '<a href="<%= contributor.profile %>"><%= avatar %><br /><sub><b><%= name %></b></sub></a>',
 )
@@ -50,12 +51,25 @@ export function formatContributor(options, contributor) {
   const formatter = contribution =>
     formatContributionType(options, contributor, contribution)
   const contributions = contributor.contributions.map(formatter).join(' ')
+
+  const contributorAvatarUrl = new URL(contributor.avatar_url)
+
+  contributorAvatarUrl.searchParams.append(
+    'size',
+    options.imageSize ?? defaultImageSize,
+  )
+
   const templateData = {
     contributions,
-    contributor,
+    contributor: {
+      ...contributor,
+      avatar_url: contributorAvatarUrl.toString(),
+    },
     options: {imageSize: defaultImageSize, ...options},
   }
+
   const customTemplate =
     options.contributorTemplate && util.template(options.contributorTemplate)
+
   return (customTemplate || defaultTemplate)(templateData)
 }

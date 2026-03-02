@@ -697,6 +697,16 @@
         "code",
         "review"
       ]
+    },
+    {
+      "login": "KibbeWater",
+      "name": "Snow",
+      "avatar_url": "https://avatars.githubusercontent.com/u/35224538?v=4",
+      "profile": "https://github.com/KibbeWater",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "skipCi": true,

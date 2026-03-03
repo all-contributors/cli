@@ -53,7 +53,6 @@
     "inquirer": "^13.3.0",
     "json-fixer": "^1.6.8",
     "node-fetch": "^2.6.0",
-    "pify": "^5.0.0",
     "yargs": "^18.0.0",
     "yoctocolors": "^2.1.2"
   },

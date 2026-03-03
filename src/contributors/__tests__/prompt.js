@@ -80,7 +80,7 @@ test(`should return prompt with username message when username and contributions
   const usernameQuestion = questions.find(q => q.name === 'username')
   expect(usernameQuestion).toBeDefined()
   expect(usernameQuestion.message).toBe(
-    "Oops. Missing something. What is the contributor's GitHub username?",
+    "What is the contributor's GitHub username?",
   )
 })
 

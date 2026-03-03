@@ -1,7 +1,3 @@
-import * as util from '../util/index.js'
-
-const {injectContentBetween} = util.markdown
-
 const badgeContent = [
   '<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->',
   '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)',
@@ -21,6 +17,10 @@ const listContent = [
 const footerContent =
   'This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!'
 
+function injectContentBetween(lines, content, startIndex, endIndex) {
+  return [].concat(lines.slice(0, startIndex), content, lines.slice(endIndex))
+}
+
 function addBadgeImpl(lines) {
   return injectContentBetween(lines, badgeContent, 1, 1)
 }
@@ -34,13 +34,14 @@ function splitAndRejoin(fn) {
 }
 
 function findContributorsSection(lines) {
-  return lines.findIndex(function isContributorsSection(str) {
-    return str.toLowerCase().indexOf('# contributors') === 1
-  })
+  return lines.findIndex(
+    str => str.toLowerCase().indexOf('# contributors') === 1,
+  )
 }
 
 function addContributorsListImpl(lines) {
   const insertionLine = findContributorsSection(lines)
+
   if (insertionLine === -1) {
     return lines.concat([
       '## Contributors ✨',
@@ -52,6 +53,7 @@ function addContributorsListImpl(lines) {
       footerContent,
     ])
   }
+
   return injectContentBetween(
     lines,
     listContent,

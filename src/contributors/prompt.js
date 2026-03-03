@@ -19,7 +19,7 @@ export function getQuestions(options, username, contributions) {
     {
       type: 'input',
       name: 'username',
-      message: `Oops. Missing something. What is the contributor's ${repo.getTypeName(
+      message: `What is the contributor's ${repo.getTypeName(
         options.repoType,
       )} username?`,
       when: !username,

@@ -5,6 +5,7 @@ import yargs from 'yargs'
 import {hideBin} from 'yargs/helpers'
 import * as YoctoColors from 'yoctocolors'
 import inquirer from 'inquirer'
+import {promises as fs} from 'fs'
 
 import {init} from './init/index.js'
 import {generate} from './generate/index.js'
@@ -57,14 +58,14 @@ function getArgs() {
     .default('contributors', []).argv
 }
 
-function startGeneration(argv) {
-  return Promise.all(
-    argv.files.map(file => {
+async function startGeneration(argv) {
+  await Promise.all(
+    argv.files.map(async file => {
       const filePath = path.join(cwd, file)
-      return util.markdown.read(filePath).then(fileContent => {
-        const newFileContent = generate(argv, argv.contributors, fileContent)
-        return util.markdown.write(filePath, newFileContent)
-      })
+      const fileContent = await fs.readFile(filePath, 'utf8')
+      const newFileContent = generate(argv, argv.contributors, fileContent)
+
+      await fs.writeFile(filePath, newFileContent)
     }),
   )
 }
@@ -135,27 +136,28 @@ async function checkContributors(argv) {
 }
 
 function promptForCommand(argv) {
+  const choices = [
+    {
+      name: 'Add new contributor or edit contribution type',
+      value: 'add',
+    },
+    {
+      name: 'Re-generate the contributors list',
+      value: 'generate',
+    },
+    {
+      name: 'Compare contributors from the repository with the credited ones',
+      value: 'check',
+    },
+  ]
   const questions = [
     {
       type: 'list',
       name: 'command',
       message: 'What do you want to do?',
-      choices: [
-        {
-          name: 'Add new contributor or edit contribution type',
-          value: 'add',
-        },
-        {
-          name: 'Re-generate the contributors list',
-          value: 'generate',
-        },
-        {
-          name: 'Compare contributors from the repository with the credited ones',
-          value: 'check',
-        },
-      ],
+      choices: choices,
       when: !argv._[0],
-      default: 0,
+      default: choices[0].value,
     },
   ]
 

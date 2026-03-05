@@ -1,5 +1,3 @@
-import fetch from 'node-fetch'
-
 const addPrivateToken = (url, privateToken = '') => {
   if (privateToken === '') return url
 

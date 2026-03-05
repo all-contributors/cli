@@ -1,5 +1,4 @@
 import url from 'url'
-import fetch from 'node-fetch'
 import {parseHttpUrl, isValidHttpUrl} from '../util/url.js'
 
 /**

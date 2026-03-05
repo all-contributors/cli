@@ -15,7 +15,7 @@
   "scripts": {
     "add-contributor": "node src/cli.js add",
     "knip": "knip",
-    "build": "babel src --out-dir dist --copy-files",
+    "build": "cp -r src dist",
     "lint": "eslint . && prettier --check --ignore-unknown .",
     "lint-fix": "eslint --fix . && prettier --write --ignore-unknown .",
     "test": "vitest",
@@ -48,7 +48,6 @@
   },
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
-    "@babel/runtime": "^7.7.6",
     "eta": "^4.5.1",
     "inquirer": "^13.3.0",
     "json-fixer": "^1.6.8",
@@ -56,9 +55,6 @@
     "yoctocolors": "^2.1.2"
   },
   "devDependencies": {
-    "@babel/cli": "^7.26.0",
-    "@babel/core": "^7.26.0",
-    "@babel/preset-env": "^7.26.0",
     "@eslint/js": "^9.39.2",
     "@vitest/coverage-v8": "^4.0.0",
     "eslint": "^9.39.2",

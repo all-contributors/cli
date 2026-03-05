@@ -62,7 +62,7 @@
     "@babel/preset-env": "^7.26.0",
     "@eslint/js": "^9.39.2",
     "@vitest/coverage-v8": "^4.0.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.2",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vitest": "^0.5.4",
     "git-cz": "^4.7.6",

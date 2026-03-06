@@ -6,6 +6,10 @@ on:
       - main
   pull_request:
   workflow_dispatch:
+  release:
+    types: [published]
+
+permissions: {}
 
 jobs:
   test:
@@ -37,3 +41,28 @@ jobs:
           files: ./coverage/lcov.info
           fail_ci_if_error: false
           verbose: true
+  publish:
+    name: >-
+      Publish cli 📦 to NPM
+    if:
+      github.repository_owner == 'all-contributors' && github.event_name ==
+      'release'
+    needs:
+      - test
+    runs-on: ubuntu-latest
+    environment:
+      name: npm-publish
+      url: https://www.npmjs.com/package/all-contributors-cli
+    permissions:
+      id-token: write # mandatory for OIDC / NPM publishing
+      contents: read
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/setup-node@6044e13b5dc448c55e2357c09f80417699197238 # v6.2.0
+        with:
+          node-version: '22'
+          registry-url: 'https://registry.npmjs.org'
+      - run: |
+          npm ci
+          npm run build
+      - run: npm publish --provenance

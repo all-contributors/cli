@@ -4,10 +4,10 @@
     ".": {
       "changelog-path": "CHANGELOG.md",
       "release-type": "node",
+      "include-component-in-tag": false,
       "changelog-sections": [
         {"type": "feat", "section": "🚀 New Features", "hidden": false},
-        {"type": "feature", "section": "🚀 New Features", "hidden": false},
-        {"type": "enhance", "section": "💅 Enhancements", "hidden": false},
+        {"type": "enh", "section": "💅 Enhancements", "hidden": false},
         {"type": "fix", "section": "🔥 Bug Fixes", "hidden": false},
         {
           "type": "perf",

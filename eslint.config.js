@@ -5,7 +5,12 @@ import vitestPlugin from 'eslint-plugin-vitest'
 import globals from 'globals'
 
 export default defineConfig([
-  globalIgnores(['coverage/**', 'dist/**']),
+  globalIgnores([
+    'coverage/**',
+    'dist/**',
+    '.all-contributorsrc',
+    'CHANGELOG*',
+  ]),
   {linterOptions: {reportUnusedDisableDirectives: 'error'}},
   {
     extends: [js.configs.recommended, importPlugin.flatConfigs.recommended],

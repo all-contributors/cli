@@ -7,7 +7,7 @@ on:
   pull_request:
   workflow_dispatch:
   release:
-    types: [published]
+    types: [published, prereleased]
 
 permissions: {}
 

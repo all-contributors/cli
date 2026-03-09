@@ -7,7 +7,7 @@ on:
   pull_request:
   workflow_dispatch:
   release:
-    types: [published, prereleased]
+    types: [released, prereleased]
 
 permissions: {}
 
@@ -63,9 +63,16 @@ jobs:
           node-version: '24'
           registry-url: 'https://registry.npmjs.org'
       # Ensure npm 11.5.1 or later for trusted publishing
-      - run: npm install -g npm@latest
-      - run: |
-          npm --version
+      - name: Install latest version of npm
+        run: npm install -g npm@latest
+      - name: Install deps and build package
+        run: |
           npm ci
           npm run build
-      - run: npm publish --provenance
+      - name: Publish to NPM via trusted publishing (tag next if prerelease)
+        run: |
+          if [[ "${{ github.event.release.prerelease }}" == "true" ]]; then
+            npm publish --provenance --tag next
+          else
+            npm publish --provenance
+          fi

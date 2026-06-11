@@ -178,6 +178,7 @@ Thanks goes to these wonderful people
     </tr>
     <tr>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/michaelfaith"><img src="https://avatars.githubusercontent.com/u/8071845?v=4?s=100" width="100px;" alt="michael faith"/><br /><sub><b>michael faith</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Amichaelfaith" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3Amichaelfaith" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/all-contributors/cli/commits?author=michaelfaith" title="Code">💻</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="http://brandonalenz.com"><img src="https://avatars.githubusercontent.com/u/15805554?v=4?s=100" width="100px;" alt="Brandon Lenz"/><br /><sub><b>Brandon Lenz</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Abrandonlenz" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/commits?author=brandonlenz" title="Code">💻</a></td>
     </tr>
   </tbody>
   <tfoot>

@@ -66,7 +66,7 @@ specification for your GitHub or GitLab repository.
 ## Using the all-contributors-cli
 
 If you're looking to use the cli, head over to
-[the cli docs on allcontributors.org](https://allcontributors.org/docs/en/cli/overview).
+[the cli docs on allcontributors.org](https://allcontributors.org/docs/en/cli/).
 The all-contributors website contains all the information required to install,
 configure and use the all-contributors-cli.
 

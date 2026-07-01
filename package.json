@@ -49,7 +49,7 @@
   "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
     "eta": "^4.5.1",
-    "inquirer": "^13.3.0",
+    "inquirer": "^14.0.2",
     "json-fixer": "^1.6.8",
     "yargs": "^18.0.0",
     "yoctocolors": "^2.1.2"

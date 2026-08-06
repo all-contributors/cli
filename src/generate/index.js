@@ -36,13 +36,17 @@ function injectListBetweenTags(newContent) {
       0,
       previousContent.lastIndexOf('\n', startOfOpeningTagIndex),
     )
-    const nbSpaces =
-      startOfOpeningTagIndex - Math.min(startOfOpeningTagIndex, startIndent)
+    const nbSpaces = Math.max(
+      0,
+      startOfOpeningTagIndex -
+        Math.min(startOfOpeningTagIndex, startIndent) -
+        1,
+    )
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n<!-- prettier-ignore-start -->',
       '\n<!-- markdownlint-disable -->',
-      newContent.replace('\n', `\n${' '.repeat(nbSpaces - 1)}`),
+      newContent.replace('\n', `\n${' '.repeat(nbSpaces)}`),
       '<!-- markdownlint-restore -->',
       '\n<!-- prettier-ignore-end -->',
       '\n\n',

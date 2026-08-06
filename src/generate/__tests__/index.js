@@ -277,3 +277,20 @@ test('validate if cell width attribute is floored correctly', () => {
 
   expect(result).toMatchSnapshot()
 })
+
+test('inject the table when the ALL-CONTRIBUTORS-LIST tag starts the file', () => {
+  const {kentcdodds, bogas04} = contributors
+  const {options} = fixtures()
+  const contributorList = [kentcdodds, bogas04]
+  const content = [
+    '<!-- ALL-CONTRIBUTORS-LIST:START -->FOO BAR BAZ<!-- ALL-CONTRIBUTORS-LIST:END -->',
+    '',
+    'Thanks a lot everyone!',
+  ].join('\n')
+
+  const result = generate(options, contributorList, content)
+
+  expect(result).toContain('<table>')
+  expect(result).toContain('<!-- ALL-CONTRIBUTORS-LIST:END -->')
+  expect(result).not.toContain('FOO BAR BAZ')
+})

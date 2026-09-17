@@ -67,7 +67,7 @@
     "lint-staged": "^17.0.8",
     "nock": "^14.0.10",
     "prettier": "^3.8.1",
-    "vitest": "^4.0.0"
+    "vitest": "^5.0.1"
   },
   "optionalDependencies": {
     "prettier": "^3"

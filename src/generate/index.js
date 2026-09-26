@@ -42,13 +42,23 @@ function injectListBetweenTags(newContent) {
         Math.min(startOfOpeningTagIndex, startIndent) -
         1,
     )
+    const previousList = previousContent.slice(
+      endOfOpeningTagIndex,
+      startOfClosingTagIndex,
+    )
+    // If a previously generated list had its markdownlint comments removed,
+    // don't add them back
+    const withMarkdownlint =
+      previousList.includes('<!-- markdownlint-disable -->') ||
+      !previousList.includes('<!-- prettier-ignore-start -->')
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n<!-- prettier-ignore-start -->',
-      '\n<!-- markdownlint-disable -->',
+      withMarkdownlint ? '\n<!-- markdownlint-disable -->' : '',
       newContent.replace('\n', `\n${' '.repeat(nbSpaces)}`),
-      '<!-- markdownlint-restore -->',
-      '\n<!-- prettier-ignore-end -->',
+      withMarkdownlint
+        ? '<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->'
+        : '<!-- prettier-ignore-end -->',
       '\n\n',
       previousContent.slice(startOfClosingTagIndex),
     ].join('')

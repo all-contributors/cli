@@ -294,3 +294,47 @@ test('inject the table when the ALL-CONTRIBUTORS-LIST tag starts the file', () =
   expect(result).toContain('<!-- ALL-CONTRIBUTORS-LIST:END -->')
   expect(result).not.toContain('FOO BAR BAZ')
 })
+
+test('does not re-add markdownlint comments to a generated list that had them removed', () => {
+  const {kentcdodds} = contributors
+  const {options} = fixtures()
+  const content = [
+    '<!-- ALL-CONTRIBUTORS-LIST:START -->',
+    '<!-- prettier-ignore-start -->',
+    '<table></table>',
+    '',
+    '<!-- prettier-ignore-end -->',
+    '',
+    '<!-- ALL-CONTRIBUTORS-LIST:END -->',
+  ].join('\n')
+
+  const result = generate(options, [kentcdodds], content)
+
+  expect(result).not.toContain('markdownlint')
+  expect(result).toContain('</table>\n\n<!-- prettier-ignore-end -->\n\n')
+})
+
+test('keeps markdownlint comments in a generated list that has them', () => {
+  const {kentcdodds} = contributors
+  const {options} = fixtures()
+  const content = [
+    '<!-- ALL-CONTRIBUTORS-LIST:START -->',
+    '<!-- prettier-ignore-start -->',
+    '<!-- markdownlint-disable -->',
+    '<table></table>',
+    '',
+    '<!-- markdownlint-restore -->',
+    '<!-- prettier-ignore-end -->',
+    '',
+    '<!-- ALL-CONTRIBUTORS-LIST:END -->',
+  ].join('\n')
+
+  const result = generate(options, [kentcdodds], content)
+
+  expect(result).toContain(
+    '<!-- prettier-ignore-start -->\n<!-- markdownlint-disable -->\n<table>',
+  )
+  expect(result).toContain(
+    '</table>\n\n<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->',
+  )
+})

@@ -155,6 +155,80 @@ test('sorts the list of contributors if contributorsSortAlphabetically=true', ()
   expect(resultPreSorted).toEqual(resultAutoSorted)
 })
 
+test('sorts the list of contributors case-insensitively', () => {
+  const {options, content} = fixtures()
+  options.contributorsSortAlphabetically = true
+
+  const alice = {
+    login: 'alice',
+    name: 'alice',
+    avatar_url: 'https://example.com/alice.png',
+    contributions: ['code'],
+  }
+  const bob = {
+    login: 'bob',
+    name: 'Bob',
+    avatar_url: 'https://example.com/bob.png',
+    contributions: ['doc'],
+  }
+  const charlie = {
+    login: 'charlie',
+    name: 'charlie',
+    avatar_url: 'https://example.com/charlie.png',
+    contributions: ['design'],
+  }
+  const david = {
+    login: 'david',
+    name: 'David',
+    avatar_url: 'https://example.com/david.png',
+    contributions: ['test'],
+  }
+
+  const resultMixedOrder = generate(
+    options,
+    [david, bob, alice, charlie],
+    content,
+  )
+
+  const resultSortedOrder = generate(
+    options,
+    [alice, bob, charlie, david],
+    content,
+  )
+
+  expect(resultMixedOrder).toEqual(resultSortedOrder)
+})
+
+test('falls back to login when name is missing during alphabetical sort', () => {
+  const {options, content} = fixtures()
+  options.contributorsSortAlphabetically = true
+  options.contributorTemplate =
+    '<%= contributor.name || contributor.login %> is awesome!'
+
+  const alice = {
+    login: 'alice',
+    avatar_url: 'https://example.com/alice.png',
+    contributions: ['code'],
+  }
+  const bob = {
+    login: 'bob',
+    name: 'Bob',
+    avatar_url: 'https://example.com/bob.png',
+    contributions: ['doc'],
+  }
+  const charlie = {
+    login: 'charlie',
+    avatar_url: 'https://example.com/charlie.png',
+    contributions: ['design'],
+  }
+
+  const resultMixedOrder = generate(options, [charlie, bob, alice], content)
+
+  const resultSortedOrder = generate(options, [alice, bob, charlie], content)
+
+  expect(resultMixedOrder).toEqual(resultSortedOrder)
+})
+
 test('not inject anything if there is no tags to inject content in', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()

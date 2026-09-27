@@ -91,9 +91,17 @@ function generateContributorsList(options, contributors) {
 
   const sortedContributors = [...contributors]
   if (options.contributorsSortAlphabetically) {
-    sortedContributors.sort((a, b) =>
-      (a.name || '').localeCompare(b.name || ''),
-    )
+    sortedContributors.sort((a, b) => {
+      const nameA = a.name || a.login || ''
+      const nameB = b.name || b.login || ''
+      const comparison = nameA.localeCompare(nameB, undefined, {
+        sensitivity: 'base',
+      })
+      if (comparison !== 0) {
+        return comparison
+      }
+      return nameA.localeCompare(nameB)
+    })
   }
 
   const formattedContributors = sortedContributors.map(contributor =>

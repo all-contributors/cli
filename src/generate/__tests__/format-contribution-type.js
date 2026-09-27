@@ -173,3 +173,35 @@ test('throw a helpful error on unknown type and no login', () => {
     'Unknown contribution type docs for contributor Wildly Misconfigured',
   )
 })
+
+test('be able to parse markdown link in custom type link (#520)', () => {
+  const contributor = contributors.kentcdodds
+  const {options} = fixtures()
+  options.types = {
+    core: {
+      symbol: '🏵️',
+      description: 'Core team',
+      link: '[<%= symbol %>](https://github.com/bl-portal-bot)',
+    },
+  }
+
+  expect(formatContributionType(options, contributor, 'core')).toBe(
+    '<a href="https://github.com/bl-portal-bot" title="Core team">🏵️</a>',
+  )
+})
+
+test('be able to parse markdown link with custom title in custom type link', () => {
+  const contributor = contributors.kentcdodds
+  const {options} = fixtures()
+  options.types = {
+    custom: {
+      symbol: '🔭',
+      description: 'Default description',
+      link: '[<%= symbol %>](https://example.com/custom "Overridden title")',
+    },
+  }
+
+  expect(formatContributionType(options, contributor, 'custom')).toBe(
+    '<a href="https://example.com/custom" title="Overridden title">🔭</a>',
+  )
+})

@@ -32,7 +32,19 @@ export function formatContributionType(options, contributor, contribution) {
   if (contribution.url) {
     url = contribution.url
   } else if (type.link) {
-    url = util.template(type.link)(templateData)
+    const rawLink = util.template(type.link)(templateData).trim()
+    const markdownMatch = /^\[(.*?)\]\((.*?)(?:\s+"(.*?)")?\)$/.exec(rawLink)
+    if (markdownMatch) {
+      if (markdownMatch[1]) {
+        templateData.symbol = markdownMatch[1]
+      }
+      url = markdownMatch[2]
+      if (markdownMatch[3]) {
+        templateData.description = markdownMatch[3]
+      }
+    } else {
+      url = rawLink
+    }
   }
 
   return linkTemplate({url, ...templateData})

@@ -31,6 +31,11 @@ function getArgs() {
       description:
         'Sort the list of contributors alphabetically in the generated list',
     })
+    .option('replace', {
+      type: 'boolean',
+      default: false,
+      description: 'Replace existing contributions instead of merging them',
+    })
     .help('help')
     .alias('h', 'help')
     .alias('v', 'version')

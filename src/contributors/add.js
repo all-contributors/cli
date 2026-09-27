@@ -3,23 +3,26 @@ function uniqueTypes(contribution) {
 }
 
 function formatContributions(options, existing = [], types) {
-  const same = types.filter(type =>
-    existing.some(
-      existingType => uniqueTypes(existingType) === uniqueTypes(type),
-    ),
-  )
-  const remove = types.length < existing.length && same.length
-
   if (options.url) {
-    return existing.concat(
-      types.map(type => {
-        return {type, url: options.url}
-      }),
+    const newTypesWithUrl = types.map(type => ({type, url: options.url}))
+    if (options.replace) {
+      return newTypesWithUrl
+    }
+    const combined = existing.concat(newTypesWithUrl)
+    return combined.filter(
+      (item, index, arr) =>
+        index ===
+        arr.findIndex(other => uniqueTypes(other) === uniqueTypes(item)),
     )
   }
 
-  if (remove) {
-    return same
+  if (options.replace) {
+    return types.map(type => {
+      const existingMatch = existing.find(
+        item => uniqueTypes(item) === uniqueTypes(type),
+      )
+      return existingMatch || type
+    })
   }
 
   const combined = existing.concat(types)

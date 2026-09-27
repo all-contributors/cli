@@ -105,6 +105,9 @@ export function prompt(options, username, contributions) {
         ? []
         : getValidUserContributions(options, contributions),
   }
+  if (contributions === undefined) {
+    defaults.replace = true
+  }
   const questions = getQuestions(options, username, contributions)
   return inquirer.prompt(questions).then(answers => ({...defaults, ...answers}))
 }

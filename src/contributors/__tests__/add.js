@@ -198,10 +198,36 @@ test(`should update an existing contributor's contributions if a new type is add
   )
 })
 
-test(`should update an existing contributor's contributions if an existing type is removed`, () => {
+test(`should preserve an existing contributor's contributions if an existing type is re-added (#371)`, () => {
   const {options} = fixtures()
   const username = 'login2'
   const contributions = ['code']
+
+  return add(options, username, contributions, mockInfoFetcher).then(
+    contributors => {
+      expect(contributors).toHaveLength(options.contributors.length)
+      expect(contributors[1]).toEqual({
+        login: 'login2',
+        name: 'Some name',
+        avatar_url: 'www.avatar.url',
+        profile: 'www.profile.url',
+        contributions: [
+          {
+            type: 'blog',
+            url: 'www.blog.url/path',
+          },
+          'code',
+        ],
+      })
+    },
+  )
+})
+
+test(`should update an existing contributor's contributions if replace is true`, () => {
+  const {options} = fixtures()
+  const username = 'login2'
+  const contributions = ['code']
+  options.replace = true
 
   return add(options, username, contributions, mockInfoFetcher).then(
     contributors => {

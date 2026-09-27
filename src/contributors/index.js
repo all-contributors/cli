@@ -10,7 +10,12 @@ function isNewContributor(contributorList, username) {
 export function addContributor(options, username, contributions) {
   const answersP = prompt(options, username, contributions)
   const contributorsP = answersP.then(answers =>
-    add(options, answers.username, answers.contributions, repo.getUserInfo),
+    add(
+      {...options, replace: answers.replace ?? options.replace},
+      answers.username,
+      answers.contributions,
+      repo.getUserInfo,
+    ),
   )
 
   const writeContributorsP = contributorsP.then(contributors =>

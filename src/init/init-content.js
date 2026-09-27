@@ -4,8 +4,10 @@ const badgeContent = [
   '<!-- ALL-CONTRIBUTORS-BADGE:END -->',
 ].join('\n')
 
-const headerContent =
-  'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):'
+function getHeaderContent(docsLocale = 'en') {
+  return `Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/${docsLocale}/emoji-key)):`
+}
+
 const listContent = [
   '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->',
   '<!-- prettier-ignore-start -->',
@@ -26,9 +28,9 @@ function addBadgeImpl(lines) {
 }
 
 function splitAndRejoin(fn) {
-  return function (content) {
+  return function (content, options) {
     const lines = content.split('\n')
-    const result = fn(lines)
+    const result = fn(lines, options)
     return result.join('\n')
   }
 }
@@ -39,14 +41,16 @@ function findContributorsSection(lines) {
   )
 }
 
-function addContributorsListImpl(lines) {
+function addContributorsListImpl(lines, options) {
   const insertionLine = findContributorsSection(lines)
+  const docsLocale = options?.docsLocale || options?.locale || 'en'
+  const header = getHeaderContent(docsLocale)
 
   if (insertionLine === -1) {
     return lines.concat([
       '## Contributors ✨',
       '',
-      headerContent,
+      header,
       '',
       listContent,
       '',

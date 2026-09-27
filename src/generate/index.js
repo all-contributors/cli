@@ -68,9 +68,10 @@ function formatFooter(options) {
   if (!options.linkToUsage) {
     return ''
   }
+  const docsLocale = options?.docsLocale || options?.locale || 'en'
   const smallLogoURL =
     'https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg'
-  const linkToBotAdd = 'https://all-contributors.js.org/docs/en/bot/usage'
+  const linkToBotAdd = `https://all-contributors.js.org/docs/${docsLocale}/bot/usage`
 
   return `<tr>\n      <td align="center" size="13px" colspan="${options.contributorsPerLine}">\n        <img src="${smallLogoURL}">\n          <a href="${linkToBotAdd}">Add your contributions</a>\n        </img>\n      </td>\n    </tr>`
 }
@@ -158,6 +159,13 @@ function replaceBadge(newContent) {
   }
 }
 
+function replaceEmojiKeyLink(content, docsLocale) {
+  return content.replace(
+    /(https:\/\/(?:allcontributors\.org|all-contributors\.js\.org)\/docs\/)[a-zA-Z-]+(\/emoji-key)/g,
+    `$1${docsLocale}$2`,
+  )
+}
+
 export function generate(options, contributors, fileContent) {
   if (contributors === undefined || !Array.isArray(contributors)) {
     throw new Error('contributors must be an array')
@@ -171,5 +179,11 @@ export function generate(options, contributors, fileContent) {
   let result = fileContent
   result = injectListBetweenTags(contributorsList)(result)
   result = replaceBadge(badge)(result)
+
+  const docsLocale = options?.docsLocale || options?.locale
+  if (docsLocale) {
+    result = replaceEmojiKeyLink(result, docsLocale)
+  }
+
   return result
 }

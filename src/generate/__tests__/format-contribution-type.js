@@ -173,3 +173,86 @@ test('throw a helpful error on unknown type and no login', () => {
     'Unknown contribution type docs for contributor Wildly Misconfigured',
   )
 })
+
+test('link to docs when linkToDocs is true with default en locale', () => {
+  const contributor = contributors.kentcdodds
+  const {options} = fixtures()
+  options.linkToDocs = true
+
+  expect(formatContributionType(options, contributor, 'tool')).toBe(
+    '<a href="https://allcontributors.org/docs/en/emoji-key#tool" title="Tools">🔧</a>',
+  )
+})
+
+test('link to docs when linkToDocs is true with custom docsLocale', () => {
+  const contributor = contributors.kentcdodds
+  const {options} = fixtures()
+  options.linkToDocs = true
+  options.docsLocale = 'pt-BR'
+
+  expect(formatContributionType(options, contributor, 'tool')).toBe(
+    '<a href="https://allcontributors.org/docs/pt-BR/emoji-key#tool" title="Tools">🔧</a>',
+  )
+})
+
+test('link to docs when linkToDocs is true with locale alias', () => {
+  const contributor = contributors.kentcdodds
+  const {options} = fixtures()
+  options.linkToDocs = true
+  options.locale = 'es-ES'
+
+  expect(formatContributionType(options, contributor, 'tool')).toBe(
+    '<a href="https://allcontributors.org/docs/es-ES/emoji-key#tool" title="Tools">🔧</a>',
+  )
+})
+
+test('link to docs for contributor without login when linkToDocs is true', () => {
+  const contributor = contributors.nologin
+  const {options} = fixtures()
+  options.linkToDocs = true
+  options.docsLocale = 'pt-BR'
+
+  expect(formatContributionType(options, contributor, 'translation')).toBe(
+    '<a href="https://allcontributors.org/docs/pt-BR/emoji-key#translation" title="Translation">🌍</a>',
+  )
+})
+
+test('support custom docsLinkTemplate', () => {
+  const contributor = contributors.kentcdodds
+  const {options} = fixtures()
+  options.linkToDocs = true
+  options.docsLocale = 'fr'
+  options.docsLinkTemplate =
+    'https://example.com/<%= docsLocale %>/<%= contribution %>'
+
+  expect(formatContributionType(options, contributor, 'tool')).toBe(
+    '<a href="https://example.com/fr/tool" title="Tools">🔧</a>',
+  )
+})
+
+test('linkToDocs "all" overrides default repo link types', () => {
+  const contributor = contributors.kentcdodds
+  const {options} = fixtures()
+  options.linkToDocs = 'all'
+  options.docsLocale = 'pt-BR'
+
+  expect(formatContributionType(options, contributor, 'code')).toBe(
+    '<a href="https://allcontributors.org/docs/pt-BR/emoji-key#code" title="Code">💻</a>',
+  )
+})
+
+test('custom type templates can access docsLocale', () => {
+  const contributor = contributors.kentcdodds
+  const {options} = fixtures()
+  options.docsLocale = 'pt-BR'
+  options.types = {
+    localized: {
+      symbol: '🇧🇷',
+      link: 'https://docs.myproject.com/<%= docsLocale %>/<%= contributor.login %>',
+    },
+  }
+
+  expect(formatContributionType(options, contributor, 'localized')).toBe(
+    '<a href="https://docs.myproject.com/pt-BR/kentcdodds" title="">🇧🇷</a>',
+  )
+})

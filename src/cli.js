@@ -31,6 +31,21 @@ function getArgs() {
       description:
         'Sort the list of contributors alphabetically in the generated list',
     })
+    .option('docsLocale', {
+      type: 'string',
+      default: 'en',
+      description: 'Locale for documentation links (e.g. en, pt-BR, es-ES)',
+    })
+    .option('locale', {
+      type: 'string',
+      description: 'Alias for docsLocale',
+    })
+    .option('linkToDocs', {
+      type: 'boolean',
+      default: false,
+      description:
+        'Link contribution emoji icons to documentation instead of local anchors',
+    })
     .help('help')
     .alias('h', 'help')
     .alias('v', 'version')
@@ -173,12 +188,19 @@ async function run() {
     // Load and merge config file data into argv
     try {
       const configData = await util.configFile.readConfig(argv.config)
+      if (configData.locale && !configData.docsLocale) {
+        configData.docsLocale = configData.locale
+      }
       Object.assign(argv, configData)
     } catch (error) {
       if (error instanceof SyntaxError || argv.config !== defaultRCFile) {
         throw error
       }
       // If default config file doesn't exist, that's okay
+    }
+
+    if (argv.locale && (!argv.docsLocale || argv.docsLocale === 'en')) {
+      argv.docsLocale = argv.locale
     }
 
     const command = await promptForCommand(argv)

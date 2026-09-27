@@ -15,6 +15,10 @@ export async function readConfig(configPath) {
       config.commitConvention = 'angular'
     }
 
+    if (!('docsLocale' in config) && 'locale' in config) {
+      config.docsLocale = config.locale
+    }
+
     if (changed) {
       const formatterConfig = await formatConfig(configPath, config)
       //Updates the file with fixes

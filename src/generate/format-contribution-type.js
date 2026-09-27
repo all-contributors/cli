@@ -9,6 +9,37 @@ function getType(options, contribution) {
   return types[contribution.type || contribution]
 }
 
+function getDocsUrl(options, contributionKey, contributor, templateData) {
+  const docsLocale = options?.docsLocale || options?.locale || 'en'
+  if (options?.docsLinkTemplate) {
+    return util.template(options.docsLinkTemplate)({
+      ...templateData,
+      docsLocale,
+      contribution: contributionKey,
+      contributor,
+      options,
+    })
+  }
+  return `https://allcontributors.org/docs/${docsLocale}/emoji-key#${contributionKey}`
+}
+
+function getUrl(options, contribution, contributor) {
+  const contributionKey = contribution.type || contribution
+
+  if (options?.linkToDocs) {
+    return getDocsUrl(options, contributionKey, contributor, {
+      contributor,
+      options,
+    })
+  }
+
+  if (contributor.login) {
+    return `#${contributionKey}-${contributor.login}`
+  } else {
+    return `#${contributionKey}`
+  }
+}
+
 export function formatContributionType(options, contributor, contribution) {
   const type = getType(options, contribution)
 
@@ -20,28 +51,30 @@ export function formatContributionType(options, contributor, contribution) {
     )
   }
 
+  const docsLocale = options?.docsLocale || options?.locale || 'en'
+  const contributionKey = contribution.type || contribution
+
   const templateData = {
     symbol: type.symbol,
     description: type.description || '',
     contributor,
-    options,
+    options: {
+      ...options,
+      docsLocale,
+    },
+    docsLocale,
+    contribution: contributionKey,
   }
 
-  let url = getUrl(contribution, contributor)
+  let url = getUrl(options, contribution, contributor)
 
   if (contribution.url) {
     url = contribution.url
+  } else if (options?.linkToDocs === 'all') {
+    url = getDocsUrl(options, contributionKey, contributor, templateData)
   } else if (type.link) {
     url = util.template(type.link)(templateData)
   }
 
   return linkTemplate({url, ...templateData})
-}
-
-function getUrl(contribution, contributor) {
-  if (contributor.login) {
-    return `#${contribution}-${contributor.login}`
-  } else {
-    return `#${contribution}`
-  }
 }

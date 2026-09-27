@@ -294,3 +294,55 @@ test('inject the table when the ALL-CONTRIBUTORS-LIST tag starts the file', () =
   expect(result).toContain('<!-- ALL-CONTRIBUTORS-LIST:END -->')
   expect(result).not.toContain('FOO BAR BAZ')
 })
+
+test('formats table footer with localized bot usage link when docsLocale is set', () => {
+  const {kentcdodds} = contributors
+  const {options, content} = fixtures()
+  const contributorList = [kentcdodds]
+  const result = generate(
+    Object.assign(options, {linkToUsage: true, docsLocale: 'pt-BR'}),
+    contributorList,
+    content,
+  )
+
+  expect(result).toContain(
+    '<a href="https://all-contributors.js.org/docs/pt-BR/bot/usage">Add your contributions</a>',
+  )
+})
+
+test('formats table footer with localized bot usage link when locale alias is set', () => {
+  const {kentcdodds} = contributors
+  const {options, content} = fixtures()
+  const contributorList = [kentcdodds]
+  const result = generate(
+    Object.assign(options, {linkToUsage: true, locale: 'es-ES'}),
+    contributorList,
+    content,
+  )
+
+  expect(result).toContain(
+    '<a href="https://all-contributors.js.org/docs/es-ES/bot/usage">Add your contributions</a>',
+  )
+})
+
+test('updates emoji-key link in document when docsLocale is set', () => {
+  const {kentcdodds} = contributors
+  const {options} = fixtures()
+  const contentWithHeader = [
+    '# project',
+    '',
+    'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):',
+    '',
+    '<!-- ALL-CONTRIBUTORS-LIST:START -->FOO BAR BAZ<!-- ALL-CONTRIBUTORS-LIST:END -->',
+  ].join('\n')
+
+  const result = generate(
+    Object.assign(options, {docsLocale: 'pt-BR'}),
+    [kentcdodds],
+    contentWithHeader,
+  )
+
+  expect(result).toContain(
+    'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/pt-BR/emoji-key)):',
+  )
+})

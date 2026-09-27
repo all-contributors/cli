@@ -95,6 +95,13 @@ const questions = [
     message: 'Do you want to add a footer with link to usage?',
     default: true,
   },
+  {
+    type: 'input',
+    name: 'docsLocale',
+    message:
+      'What documentation locale would you like to use? (e.g. en, pt-BR, es-ES)',
+    default: 'en',
+  },
 ]
 
 export function prompt() {
@@ -121,6 +128,7 @@ export function prompt() {
           contributors: [],
           contributorsPerLine: 7,
           linkToUsage: answers.linkToUsage,
+          docsLocale: answers.docsLocale || 'en',
         },
         contributorFile: answers.contributorFile,
         badgeFile: answers.badgeFile,

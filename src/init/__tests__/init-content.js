@@ -63,4 +63,22 @@ describe('addContributorsList', () => {
 
     expect(result).toMatchSnapshot()
   })
+
+  test('create contributors section with localized header when docsLocale is set', () => {
+    const content = ['# project', '', 'Description'].join('\n')
+    const result = addContributorsList(content, {docsLocale: 'pt-BR'})
+
+    expect(result).toContain(
+      'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/pt-BR/emoji-key)):',
+    )
+  })
+
+  test('create contributors section with localized header when locale alias is set', () => {
+    const content = ['# project', '', 'Description'].join('\n')
+    const result = addContributorsList(content, {locale: 'es-ES'})
+
+    expect(result).toContain(
+      'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/es-ES/emoji-key)):',
+    )
+  })
 })

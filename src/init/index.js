@@ -26,7 +26,9 @@ export async function init() {
 
   await ensureFileExists(promptResult.contributorFile)
 
-  await injectInFile(promptResult.contributorFile, addContributorsList)
+  await injectInFile(promptResult.contributorFile, content =>
+    addContributorsList(content, promptResult.config),
+  )
 
   if (promptResult.badgeFile) {
     await injectInFile(promptResult.badgeFile, addBadge)

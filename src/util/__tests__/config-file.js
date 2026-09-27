@@ -61,3 +61,22 @@ test(`throws if 'files' was overridden in .all-contributorsrc and is empty`, asy
     `Error! Project files was overridden and is empty in ${incompleteConfigFilePath}`,
   )
 })
+
+test('readConfig maps locale to docsLocale if docsLocale is omitted', async () => {
+  const {promises: fs} = await import('fs')
+  const {join} = await import('path')
+  const {tmpdir} = await import('os')
+  const testPath = join(tmpdir(), `test-config-${Date.now()}.json`)
+  await fs.writeFile(
+    testPath,
+    JSON.stringify({
+      projectName: 'test',
+      projectOwner: 'test',
+      locale: 'pt-BR',
+    }),
+  )
+
+  const config = await readConfig(testPath)
+  expect(config.docsLocale).toBe('pt-BR')
+  await fs.unlink(testPath)
+})

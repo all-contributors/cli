@@ -294,3 +294,85 @@ test('inject the table when the ALL-CONTRIBUTORS-LIST tag starts the file', () =
   expect(result).toContain('<!-- ALL-CONTRIBUTORS-LIST:END -->')
   expect(result).not.toContain('FOO BAR BAZ')
 })
+
+test('omits markdownlint comments when options.markdownlint is false', () => {
+  const {kentcdodds} = contributors
+  const {options, content} = fixtures()
+  options.markdownlint = false
+  const contributorList = [kentcdodds]
+
+  const result = generate(options, contributorList, content)
+
+  expect(result).toContain('<!-- prettier-ignore-start -->')
+  expect(result).toContain('<!-- prettier-ignore-end -->')
+  expect(result).not.toContain('<!-- markdownlint-disable -->')
+  expect(result).not.toContain('<!-- markdownlint-restore -->')
+})
+
+test('includes markdownlint comments when options.markdownlint is true', () => {
+  const {kentcdodds} = contributors
+  const {options, content} = fixtures()
+  options.markdownlint = true
+  const contributorList = [kentcdodds]
+
+  const result = generate(options, contributorList, content)
+
+  expect(result).toContain('<!-- prettier-ignore-start -->')
+  expect(result).toContain('<!-- markdownlint-disable -->')
+  expect(result).toContain('<!-- markdownlint-restore -->')
+  expect(result).toContain('<!-- prettier-ignore-end -->')
+})
+
+test('preserves omission of markdownlint comments when existing list lacks them', () => {
+  const {kentcdodds} = contributors
+  const {options} = fixtures()
+  const contributorList = [kentcdodds]
+
+  const contentWithoutMarkdownlint = [
+    '# project',
+    '',
+    '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->',
+    '<!-- prettier-ignore-start -->',
+    '<table>',
+    '  <tbody>',
+    '  </tbody>',
+    '</table>',
+    '',
+    '<!-- prettier-ignore-end -->',
+    '<!-- ALL-CONTRIBUTORS-LIST:END -->',
+  ].join('\n')
+
+  const result = generate(options, contributorList, contentWithoutMarkdownlint)
+
+  expect(result).toContain('<!-- prettier-ignore-start -->')
+  expect(result).toContain('<!-- prettier-ignore-end -->')
+  expect(result).not.toContain('<!-- markdownlint-disable -->')
+  expect(result).not.toContain('<!-- markdownlint-restore -->')
+})
+
+test('preserves markdownlint comments when existing list includes them', () => {
+  const {kentcdodds} = contributors
+  const {options} = fixtures()
+  const contributorList = [kentcdodds]
+
+  const contentWithMarkdownlint = [
+    '# project',
+    '',
+    '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->',
+    '<!-- prettier-ignore-start -->',
+    '<!-- markdownlint-disable -->',
+    '<table>',
+    '  <tbody>',
+    '  </tbody>',
+    '</table>',
+    '',
+    '<!-- markdownlint-restore -->',
+    '<!-- prettier-ignore-end -->',
+    '<!-- ALL-CONTRIBUTORS-LIST:END -->',
+  ].join('\n')
+
+  const result = generate(options, contributorList, contentWithMarkdownlint)
+
+  expect(result).toContain('<!-- markdownlint-disable -->')
+  expect(result).toContain('<!-- markdownlint-restore -->')
+})

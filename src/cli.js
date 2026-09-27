@@ -31,6 +31,11 @@ function getArgs() {
       description:
         'Sort the list of contributors alphabetically in the generated list',
     })
+    .option('markdownlint', {
+      type: 'boolean',
+      description:
+        'Include markdownlint-disable/restore comments in contributors list',
+    })
     .help('help')
     .alias('h', 'help')
     .alias('v', 'version')

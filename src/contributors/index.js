@@ -4,7 +4,11 @@ import {add} from './add.js'
 import {prompt} from './prompt.js'
 
 function isNewContributor(contributorList, username) {
-  return !contributorList.find(contributor => contributor.login === username)
+  return !contributorList.find(
+    contributor =>
+      contributor.login &&
+      contributor.login.toLowerCase() === username.toLowerCase(),
+  )
 }
 
 export function addContributor(options, username, contributions) {

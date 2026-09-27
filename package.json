@@ -6,6 +6,7 @@
     "all-contributors": "dist/cli.js"
   },
   "main": "dist/api.js",
+  "types": "dist/index.d.ts",
   "files": [
     "dist"
   ],

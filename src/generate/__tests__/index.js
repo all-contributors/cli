@@ -155,6 +155,103 @@ test('sorts the list of contributors if contributorsSortAlphabetically=true', ()
   expect(resultPreSorted).toEqual(resultAutoSorted)
 })
 
+test('sorts contributors alphabetically case-insensitively (#370)', () => {
+  const {options, content} = fixtures()
+  options.contributorsSortAlphabetically = true
+
+  const alice = {
+    login: 'alice',
+    name: 'Alice',
+    avatar_url: 'https://example.com/alice.png',
+    profile: 'https://example.com/alice',
+    contributions: ['code'],
+  }
+  const bob = {
+    login: 'bob',
+    name: 'bob',
+    avatar_url: 'https://example.com/bob.png',
+    profile: 'https://example.com/bob',
+    contributions: ['code'],
+  }
+  const charlie = {
+    login: 'charlie',
+    name: 'Charlie',
+    avatar_url: 'https://example.com/charlie.png',
+    profile: 'https://example.com/charlie',
+    contributions: ['code'],
+  }
+  const david = {
+    login: 'david',
+    name: 'david',
+    avatar_url: 'https://example.com/david.png',
+    profile: 'https://example.com/david',
+    contributions: ['code'],
+  }
+
+  const result = generate(options, [david, alice, bob, charlie], content)
+  const expected = generate(options, [alice, bob, charlie, david], content)
+
+  expect(result).toEqual(expected)
+})
+
+test('falls back to login when contributor name is missing or empty', () => {
+  const {options, content} = fixtures()
+  options.contributorsSortAlphabetically = true
+
+  const userA = {
+    login: 'adam',
+    name: '',
+    avatar_url: 'https://example.com/adam.png',
+    profile: 'https://example.com/adam',
+    contributions: ['code'],
+  }
+  const userB = {
+    login: 'bob',
+    name: 'Bob',
+    avatar_url: 'https://example.com/bob.png',
+    profile: 'https://example.com/bob',
+    contributions: ['code'],
+  }
+
+  const result = generate(options, [userB, userA], content)
+  const expected = generate(options, [userA, userB], content)
+
+  expect(result).toEqual(expected)
+})
+
+test('sorts contributors using specified sortLocale or locale (#349)', () => {
+  const {options, content} = fixtures()
+  options.contributorsSortAlphabetically = true
+  options.sortLocale = 'cs'
+
+  const userC = {
+    login: 'cecilia',
+    name: 'Cecilia',
+    avatar_url: 'https://example.com/c.png',
+    profile: 'https://example.com/c',
+    contributions: ['code'],
+  }
+  const userCaron = {
+    login: 'cenek',
+    name: 'Čeněk',
+    avatar_url: 'https://example.com/cenek.png',
+    profile: 'https://example.com/cenek',
+    contributions: ['code'],
+  }
+  const userD = {
+    login: 'david',
+    name: 'David',
+    avatar_url: 'https://example.com/d.png',
+    profile: 'https://example.com/d',
+    contributions: ['code'],
+  }
+
+  const result = generate(options, [userD, userCaron, userC], content)
+  const expected = generate(options, [userC, userCaron, userD], content)
+
+  expect(result).toEqual(expected)
+})
+
 test('not inject anything if there is no tags to inject content in', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()

@@ -31,6 +31,11 @@ function getArgs() {
       description:
         'Sort the list of contributors alphabetically in the generated list',
     })
+    .option('sortLocale', {
+      type: 'string',
+      description:
+        'Locale code to use when sorting contributors alphabetically (e.g. en, cs, es)',
+    })
     .help('help')
     .alias('h', 'help')
     .alias('v', 'version')

@@ -1,5 +1,13 @@
+import os from 'os'
+import path from 'path'
+import {promises as fs} from 'fs'
 import {test, expect} from 'vitest'
-import {writeConfig, readConfig, writeContributors} from '../config-file.js'
+import {
+  writeConfig,
+  readConfig,
+  readRawConfig,
+  writeContributors,
+} from '../config-file.js'
 
 const absentFile = './abc'
 const absentConfigFileExpected = `Configuration file not found: ${absentFile}`
@@ -60,4 +68,60 @@ test(`throws if 'files' was overridden in .all-contributorsrc and is empty`, asy
   ).rejects.toThrow(
     `Error! Project files was overridden and is empty in ${incompleteConfigFilePath}`,
   )
+})
+
+test('writeContributors does not inject repoType or commitConvention if absent', async () => {
+  const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'all-contrib-'))
+  const configPath = path.join(tmpDir, '.all-contributorsrc')
+  const initialConfig = {
+    projectName: 'test-project',
+    projectOwner: 'test-owner',
+    contributors: [],
+  }
+  await fs.writeFile(configPath, JSON.stringify(initialConfig, null, 2))
+
+  const newContributors = [
+    {
+      login: 'alice',
+      name: 'Alice',
+      avatar_url: 'https://example.com/alice.png',
+      profile: 'https://example.com/alice',
+      contributions: ['doc'],
+    },
+  ]
+
+  await writeContributors(configPath, newContributors)
+
+  const rawConfig = await readRawConfig(configPath)
+  expect(rawConfig.contributors).toHaveLength(1)
+  expect(rawConfig.contributors[0].login).toBe('alice')
+  expect(rawConfig.repoType).toBeUndefined()
+  expect(rawConfig.commitConvention).toBeUndefined()
+
+  const configWithDefaults = await readConfig(configPath)
+  expect(configWithDefaults.repoType).toBe('github')
+  expect(configWithDefaults.commitConvention).toBe('angular')
+
+  await fs.rm(tmpDir, {recursive: true, force: true})
+})
+
+test('writeContributors preserves existing repoType and commitConvention', async () => {
+  const tmpDir = await fs.mkdtemp(path.join(os.tmpdir(), 'all-contrib-'))
+  const configPath = path.join(tmpDir, '.all-contributorsrc')
+  const initialConfig = {
+    projectName: 'test-project',
+    projectOwner: 'test-owner',
+    repoType: 'gitlab',
+    commitConvention: 'gitmoji',
+    contributors: [],
+  }
+  await fs.writeFile(configPath, JSON.stringify(initialConfig, null, 2))
+
+  await writeContributors(configPath, [])
+
+  const rawConfig = await readRawConfig(configPath)
+  expect(rawConfig.repoType).toBe('gitlab')
+  expect(rawConfig.commitConvention).toBe('gitmoji')
+
+  await fs.rm(tmpDir, {recursive: true, force: true})
 })

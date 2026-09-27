@@ -45,8 +45,18 @@ const spawnGitCommand = async args => {
 }
 
 export async function commit(options, data) {
-  const files = options.files.concat(options.config)
-  const absolutePathFiles = files.map(file => path.resolve(process.cwd(), file))
+  const baseDir = options.config
+    ? path.dirname(path.resolve(process.cwd(), options.config))
+    : process.cwd()
+  const rawFiles = Array.isArray(options.files)
+    ? options.files
+    : typeof options.files === 'string'
+      ? [options.files]
+      : ['README.md']
+  const absoluteFiles = rawFiles.map(file => path.resolve(baseDir, file))
+  const absolutePathFiles = options.config
+    ? absoluteFiles.concat(path.resolve(process.cwd(), options.config))
+    : absoluteFiles
   const commitConvention = conventions[options.commitConvention]
 
   return spawnGitCommand(['add'].concat(absolutePathFiles)).then(() => {

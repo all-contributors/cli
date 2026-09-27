@@ -31,6 +31,10 @@ function getArgs() {
       description:
         'Sort the list of contributors alphabetically in the generated list',
     })
+    .option('files', {
+      type: 'array',
+      description: 'Files to update',
+    })
     .help('help')
     .alias('h', 'help')
     .alias('v', 'version')
@@ -59,9 +63,18 @@ function getArgs() {
 }
 
 async function startGeneration(argv) {
+  const baseDir = argv.config ? path.dirname(path.resolve(argv.config)) : cwd
+  const files = Array.isArray(argv.files)
+    ? argv.files
+    : typeof argv.files === 'string'
+      ? [argv.files]
+      : ['README.md']
+
   await Promise.all(
-    argv.files.map(async file => {
-      const filePath = path.join(cwd, file)
+    files.map(async file => {
+      const filePath = path.isAbsolute(file)
+        ? file
+        : path.resolve(baseDir, file)
       const fileContent = await fs.readFile(filePath, 'utf8')
       const newFileContent = generate(argv, argv.contributors, fileContent)
 

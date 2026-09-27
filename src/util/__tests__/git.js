@@ -1,3 +1,4 @@
+import path from 'path'
 import {test, expect, vi, describe, beforeEach} from 'vitest'
 import {promisify} from 'util'
 import {commit, getRepoInfo} from '../git'
@@ -154,6 +155,42 @@ describe('commit', () => {
 
     await expect(commit(mockOptions, mockData)).rejects.toThrow(
       'nothing to commit, working tree clean',
+    )
+  })
+
+  test('should resolve files relative to config base directory', async () => {
+    const mockExecAsync = vi.fn().mockResolvedValue({stdout: '', stderr: ''})
+    vi.mocked(promisify).mockReturnValue(mockExecAsync)
+
+    const subdirOptions = {
+      ...mockOptions,
+      files: ['README.md'],
+      config: 'subfolder/.all-contributorsrc',
+    }
+
+    await commit(subdirOptions, mockData)
+
+    expect(mockExecAsync).toHaveBeenNthCalledWith(
+      1,
+      `git add ${path.resolve(process.cwd(), 'subfolder/README.md')} ${path.resolve(process.cwd(), 'subfolder/.all-contributorsrc')}`,
+    )
+  })
+
+  test('should handle string files parameter', async () => {
+    const mockExecAsync = vi.fn().mockResolvedValue({stdout: '', stderr: ''})
+    vi.mocked(promisify).mockReturnValue(mockExecAsync)
+
+    const stringFilesOptions = {
+      ...mockOptions,
+      files: 'docs/README.md',
+      config: '.all-contributorsrc',
+    }
+
+    await commit(stringFilesOptions, mockData)
+
+    expect(mockExecAsync).toHaveBeenNthCalledWith(
+      1,
+      `git add ${path.resolve(process.cwd(), 'docs/README.md')} ${path.resolve(process.cwd(), '.all-contributorsrc')}`,
     )
   })
 })

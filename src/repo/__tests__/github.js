@@ -198,3 +198,70 @@ test('retrieve user from a different GitHub registry', async () => {
   )
   expect(info.name).toBe('No Display Name')
 })
+
+test('getApiHost normalizes GitHub host variations', () => {
+  expect(githubAPI.getApiHost()).toBe('https://api.github.com')
+  expect(githubAPI.getApiHost('https://github.com')).toBe(
+    'https://api.github.com',
+  )
+  expect(githubAPI.getApiHost('https://github.com/')).toBe(
+    'https://api.github.com',
+  )
+  expect(githubAPI.getApiHost('http://github.com')).toBe(
+    'https://api.github.com',
+  )
+  expect(githubAPI.getApiHost('http://github.com/')).toBe(
+    'https://api.github.com',
+  )
+  expect(githubAPI.getApiHost('https://api.github.com')).toBe(
+    'https://api.github.com',
+  )
+  expect(githubAPI.getApiHost('https://api.github.com/')).toBe(
+    'https://api.github.com',
+  )
+  expect(githubAPI.getApiHost('http://github.myhost.com:3000')).toBe(
+    'http://github.myhost.com:3000/api/v3',
+  )
+  expect(githubAPI.getApiHost('http://github.myhost.com:3000/')).toBe(
+    'http://github.myhost.com:3000/api/v3',
+  )
+  expect(githubAPI.getApiHost('http://github.myhost.com:3000/api/v3')).toBe(
+    'http://github.myhost.com:3000/api/v3',
+  )
+})
+
+test('getUserInfo works with trailing slash in repoHost', async () => {
+  nock('https://api.github.com').get('/users/user-trailing-slash').reply(200, {
+    login: 'user-trailing-slash',
+    name: 'User Trailing Slash',
+    avatar_url: 'https://avatars.githubusercontent.com/u/1234?v=4',
+    html_url: 'https://github.com/user-trailing-slash',
+  })
+
+  const info = await getUserInfo('user-trailing-slash', 'https://github.com/')
+  expect(info.name).toBe('User Trailing Slash')
+})
+
+test('handles non-JSON 404 response gracefully', async () => {
+  nock('https://api.github.com')
+    .get('/users/nonjsonuser')
+    .reply(404, '<html><body>Not Found</body></html>', {
+      'content-type': 'text/html',
+    })
+
+  await expect(getUserInfo('nonjsonuser')).rejects.toThrow(
+    "The username nonjsonuser doesn't exist on GitHub.",
+  )
+})
+
+test('handles non-JSON 500 response gracefully', async () => {
+  nock('https://api.github.com')
+    .get('/users/servererroruser')
+    .reply(500, 'Internal Server Error', {
+      'content-type': 'text/plain',
+    })
+
+  await expect(getUserInfo('servererroruser')).rejects.toThrow(
+    'Failed to fetch user info for servererroruser from https://api.github.com/users/servererroruser (Status: 500)',
+  )
+})

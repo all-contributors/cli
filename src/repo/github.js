@@ -8,17 +8,28 @@ import {parseHttpUrl, isValidHttpUrl} from '../util/url.js'
  * @param {String} hostname - Hostname from config.
  * @returns {String} - Host for GitHub API.
  */
-function getApiHost(hostname) {
+export function getApiHost(hostname) {
   if (!hostname) {
     hostname = 'https://github.com'
   }
 
-  if (hostname !== 'https://github.com') {
-    // Assume Github Enterprise
-    return url.resolve(hostname, '/api/v3')
+  const cleanHostname = hostname.trim().replace(/\/+$/, '')
+
+  if (
+    cleanHostname === 'https://github.com' ||
+    cleanHostname === 'http://github.com' ||
+    cleanHostname === 'https://api.github.com' ||
+    cleanHostname === 'http://api.github.com'
+  ) {
+    return 'https://api.github.com'
   }
 
-  return hostname.replace(/:\/\//, '://api.')
+  if (cleanHostname.endsWith('/api/v3')) {
+    return cleanHostname
+  }
+
+  // Assume Github Enterprise
+  return url.resolve(cleanHostname, '/api/v3')
 }
 
 function getFetchHeaders(optionalPrivateToken = '') {
@@ -50,28 +61,33 @@ function getNextLink(link) {
 function getContributorsPage(githubUrl, optionalPrivateToken) {
   return fetch(githubUrl, {
     headers: getFetchHeaders(optionalPrivateToken),
-  }).then(res => {
+  }).then(async res => {
     if (res.status === 404 || res.status >= 500) {
       throw new Error('No contributors found on the GitHub repository')
     }
 
-    return res.json().then(body => {
-      if (res.status >= 400 || !res.ok) {
-        throw new Error(body.message)
-      }
-      const contributorsIds = body.map(contributor => contributor.login)
+    let body
+    try {
+      body = await res.json()
+    } catch {
+      throw new Error('No contributors found on the GitHub repository')
+    }
 
-      const nextLink = getNextLink(res.headers.get('link'))
-      if (nextLink) {
-        return getContributorsPage(nextLink, optionalPrivateToken).then(
-          nextContributors => {
-            return contributorsIds.concat(nextContributors)
-          },
-        )
-      }
+    if (res.status >= 400 || !res.ok) {
+      throw new Error(body.message || 'Error fetching contributors from GitHub')
+    }
+    const contributorsIds = body.map(contributor => contributor.login)
 
-      return contributorsIds
-    })
+    const nextLink = getNextLink(res.headers.get('link'))
+    if (nextLink) {
+      return getContributorsPage(nextLink, optionalPrivateToken).then(
+        nextContributors => {
+          return contributorsIds.concat(nextContributors)
+        },
+      )
+    }
+
+    return contributorsIds
   })
 }
 
@@ -85,39 +101,60 @@ export const getUserInfo = function (username, hostname, optionalPrivateToken) {
   const root = getApiHost(hostname)
   return fetch(`${root}/users/${username}`, {
     headers: getFetchHeaders(optionalPrivateToken),
-  }).then(res =>
-    res.json().then(body => {
-      let profile = isValidHttpUrl(body.blog) ? body.blog : body.html_url
-
-      // Check for authentication required
-      if (
-        (!profile && body.message.includes('Must authenticate')) ||
-        res.status === 401
-      ) {
+  }).then(async res => {
+    let body
+    try {
+      body = await res.json()
+    } catch {
+      if (res.status === 404) {
+        throw new Error(`The username ${username} doesn't exist on GitHub.`)
+      }
+      if (res.status === 401) {
         throw new Error(
           `Missing authentication for GitHub API. Did you set PRIVATE_TOKEN?`,
         )
       }
+      throw new Error(
+        `Failed to fetch user info for ${username} from ${root}/users/${username} (Status: ${res.status})`,
+      )
+    }
 
-      // Github throwing specific errors as 200...
-      if (!profile && body.message) {
-        if (body.message.toLowerCase().includes('api rate limit exceeded')) {
-          throw new Error(body.message)
-        } else {
-          throw new Error(`The username ${username} doesn't exist on GitHub.`)
-        }
+    let profile = isValidHttpUrl(body.blog) ? body.blog : body.html_url
+
+    // Check for authentication required
+    if (
+      (!profile &&
+        body.message &&
+        body.message.includes('Must authenticate')) ||
+      res.status === 401
+    ) {
+      throw new Error(
+        `Missing authentication for GitHub API. Did you set PRIVATE_TOKEN?`,
+      )
+    }
+
+    if (res.status === 404) {
+      throw new Error(`The username ${username} doesn't exist on GitHub.`)
+    }
+
+    // Github throwing specific errors as 200...
+    if (!profile && body.message) {
+      if (body.message.toLowerCase().includes('api rate limit exceeded')) {
+        throw new Error(body.message)
+      } else {
+        throw new Error(`The username ${username} doesn't exist on GitHub.`)
       }
+    }
 
-      profile = parseHttpUrl(profile)
+    profile = parseHttpUrl(profile)
 
-      return {
-        login: body.login,
-        name: body.name || username,
-        avatar_url: body.avatar_url,
-        profile,
-      }
-    }),
-  )
+    return {
+      login: body.login,
+      name: body.name || username,
+      avatar_url: body.avatar_url,
+      profile,
+    }
+  })
 }
 
 export const getContributors = function (

@@ -1,4 +1,5 @@
 import inquirer from 'inquirer'
+import * as repo from '../repo/index.js'
 import {git} from '../util/index.js'
 import {conventions} from './commit-conventions.js'
 
@@ -21,29 +22,16 @@ const questions = [
     type: 'list',
     name: 'repoType',
     message: 'What is the repository type?',
-    choices: [
-      {
-        value: 'github',
-        name: 'GitHub',
-      },
-      {
-        value: 'gitlab',
-        name: 'GitLab',
-      },
-    ],
+    choices: repo.getChoices(),
     default: 'github',
   },
   {
     type: 'input',
     name: 'repoHost',
     message:
-      "Where is the repository hosted? Hit Enter if it's on GitHub or GitLab",
+      'Where is the repository hosted? Hit Enter if using the default host',
     default: function (answers) {
-      if (answers.repoType === 'github') {
-        return 'https://github.com'
-      } else if (answers.repoType === 'gitlab') {
-        return 'https://gitlab.com'
-      }
+      return repo.getHostname(answers.repoType)
     },
   },
   {

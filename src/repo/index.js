@@ -1,5 +1,6 @@
 import * as githubAPI from './github.js'
 import * as gitlabAPI from './gitlab.js'
+import * as giteaAPI from './gitea.js'
 
 const privateToken =
   (process.env &&
@@ -34,6 +35,48 @@ const SUPPORTED_REPO_TYPES = {
       '<%= options.repoHost || "https://gitlab.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/merge_requests?scope=all&state=all&approver_usernames[]=<%= contributor.login %>',
     getUserInfo: gitlabAPI.getUserInfo,
     getContributors: gitlabAPI.getContributors,
+  },
+  codeberg: {
+    value: 'codeberg',
+    name: 'Codeberg',
+    checkKey: 'login',
+    defaultHost: 'https://codeberg.org',
+    linkToCommits:
+      '<%= options.repoHost || "https://codeberg.org" %>/<%= options.projectOwner %>/<%= options.projectName %>/commits/branch/main?author=<%= contributor.login %>',
+    linkToIssues:
+      '<%= options.repoHost || "https://codeberg.org" %>/<%= options.projectOwner %>/<%= options.projectName %>/issues?poster=<%= contributor.login %>',
+    linkToReviews:
+      '<%= options.repoHost || "https://codeberg.org" %>/<%= options.projectOwner %>/<%= options.projectName %>/pulls?poster=<%= contributor.login %>',
+    getUserInfo: giteaAPI.getUserInfo,
+    getContributors: giteaAPI.getContributors,
+  },
+  gitea: {
+    value: 'gitea',
+    name: 'Gitea',
+    checkKey: 'login',
+    defaultHost: 'https://gitea.com',
+    linkToCommits:
+      '<%= options.repoHost || "https://gitea.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/commits/branch/main?author=<%= contributor.login %>',
+    linkToIssues:
+      '<%= options.repoHost || "https://gitea.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/issues?poster=<%= contributor.login %>',
+    linkToReviews:
+      '<%= options.repoHost || "https://gitea.com" %>/<%= options.projectOwner %>/<%= options.projectName %>/pulls?poster=<%= contributor.login %>',
+    getUserInfo: giteaAPI.getUserInfo,
+    getContributors: giteaAPI.getContributors,
+  },
+  forgejo: {
+    value: 'forgejo',
+    name: 'Forgejo',
+    checkKey: 'login',
+    defaultHost: 'https://codeberg.org',
+    linkToCommits:
+      '<%= options.repoHost || "https://codeberg.org" %>/<%= options.projectOwner %>/<%= options.projectName %>/commits/branch/main?author=<%= contributor.login %>',
+    linkToIssues:
+      '<%= options.repoHost || "https://codeberg.org" %>/<%= options.projectOwner %>/<%= options.projectName %>/issues?poster=<%= contributor.login %>',
+    linkToReviews:
+      '<%= options.repoHost || "https://codeberg.org" %>/<%= options.projectOwner %>/<%= options.projectName %>/pulls?poster=<%= contributor.login %>',
+    getUserInfo: giteaAPI.getUserInfo,
+    getContributors: giteaAPI.getContributors,
   },
 }
 

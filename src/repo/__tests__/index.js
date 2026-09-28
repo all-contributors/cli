@@ -16,6 +16,18 @@ test('get choices for init command', () => {
       value: 'gitlab',
       name: 'GitLab',
     },
+    {
+      value: 'codeberg',
+      name: 'Codeberg',
+    },
+    {
+      value: 'gitea',
+      name: 'Gitea',
+    },
+    {
+      value: 'forgejo',
+      name: 'Forgejo',
+    },
   ])
 })
 
@@ -28,12 +40,18 @@ test('get hostname for a given repo type', () => {
   expect(repo.getHostname('gitlab', 'http://my-gitlab.com:3000')).toEqual(
     'http://my-gitlab.com:3000',
   )
+  expect(repo.getHostname('codeberg')).toEqual('https://codeberg.org')
+  expect(repo.getHostname('gitea')).toEqual('https://gitea.com')
+  expect(repo.getHostname('forgejo')).toEqual('https://codeberg.org')
   expect(repo.getHostname('other')).toBe(null)
 })
 
 test('get repo name given a repo type', () => {
   expect(repo.getTypeName('github')).toEqual('GitHub')
   expect(repo.getTypeName('gitlab')).toEqual('GitLab')
+  expect(repo.getTypeName('codeberg')).toEqual('Codeberg')
+  expect(repo.getTypeName('gitea')).toEqual('Gitea')
+  expect(repo.getTypeName('forgejo')).toEqual('Forgejo')
   expect(repo.getTypeName('other')).toBe(null)
 })
 
@@ -57,6 +75,13 @@ test('get user info calls underlying APIs', async () => {
       },
     ])
 
+  nock('https://codeberg.org').get('/api/v1/users/nodisplayname').reply(200, {
+    login: 'nodisplayname',
+    full_name: 'nodisplayname',
+    avatar_url: 'https://codeberg.org/avatars/3869412',
+    html_url: 'https://codeberg.org/nodisplayname',
+  })
+
   expect(await repo.getUserInfo('nodisplayname', 'github')).toEqual({
     login: 'nodisplayname',
     name: 'nodisplayname',
@@ -69,6 +94,12 @@ test('get user info calls underlying APIs', async () => {
     avatar_url:
       'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
     profile: 'https://gitlab.com/nodisplayname',
+  })
+  expect(await repo.getUserInfo('nodisplayname', 'codeberg')).toEqual({
+    login: 'nodisplayname',
+    name: 'nodisplayname',
+    avatar_url: 'https://codeberg.org/avatars/3869412',
+    profile: 'https://codeberg.org/nodisplayname',
   })
   expect(await repo.getUserInfo('nodisplayname', 'other')).toBe(null)
 })

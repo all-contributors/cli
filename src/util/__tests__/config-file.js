@@ -1,5 +1,13 @@
-import {test, expect} from 'vitest'
-import {writeConfig, readConfig, writeContributors} from '../config-file.js'
+import {test, expect, vi} from 'vitest'
+import path from 'path'
+import {promises as fs} from 'fs'
+import {
+  writeConfig,
+  readConfig,
+  writeContributors,
+  findConfigFile,
+  CONFIG_FILES,
+} from '../config-file.js'
 
 const absentFile = './abc'
 const absentConfigFileExpected = `Configuration file not found: ${absentFile}`
@@ -60,4 +68,58 @@ test(`throws if 'files' was overridden in .all-contributorsrc and is empty`, asy
   ).rejects.toThrow(
     `Error! Project files was overridden and is empty in ${incompleteConfigFilePath}`,
   )
+})
+
+test('CONFIG_FILES contains standard root and .config file paths', () => {
+  expect(CONFIG_FILES).toContain('.all-contributorsrc')
+  expect(CONFIG_FILES).toContain('.all-contributors.json')
+  expect(CONFIG_FILES).toContain('.config/all-contributors.json')
+})
+
+test('findConfigFile detects .all-contributorsrc in current working directory', async () => {
+  const result = await findConfigFile(process.cwd())
+  // The CLI repo root contains .all-contributorsrc
+  expect(result).toBe(path.resolve(process.cwd(), '.all-contributorsrc'))
+})
+
+test('findConfigFile detects .all-contributors.json when .all-contributorsrc is absent', async () => {
+  const mockDir = '/virtual/project'
+  const accessSpy = vi.spyOn(fs, 'access').mockImplementation(async target => {
+    if (target === path.resolve(mockDir, '.all-contributors.json')) {
+      return undefined
+    }
+    throw new Error('ENOENT')
+  })
+
+  const result = await findConfigFile(mockDir)
+  expect(result).toBe(path.resolve(mockDir, '.all-contributors.json'))
+
+  accessSpy.mockRestore()
+})
+
+test('findConfigFile detects .config/all-contributors.json in .config subdirectory', async () => {
+  const mockDir = '/virtual/project'
+  const accessSpy = vi.spyOn(fs, 'access').mockImplementation(async target => {
+    if (target === path.resolve(mockDir, '.config/all-contributors.json')) {
+      return undefined
+    }
+    throw new Error('ENOENT')
+  })
+
+  const result = await findConfigFile(mockDir)
+  expect(result).toBe(path.resolve(mockDir, '.config/all-contributors.json'))
+
+  accessSpy.mockRestore()
+})
+
+test('findConfigFile returns null when no config files exist', async () => {
+  const mockDir = '/virtual/empty-project'
+  const accessSpy = vi
+    .spyOn(fs, 'access')
+    .mockRejectedValue(new Error('ENOENT'))
+
+  const result = await findConfigFile(mockDir)
+  expect(result).toBeNull()
+
+  accessSpy.mockRestore()
 })

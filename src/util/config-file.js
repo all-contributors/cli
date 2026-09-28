@@ -1,6 +1,29 @@
+import path from 'path'
 import {promises as fs} from 'fs'
 import jf from 'json-fixer'
 import {formatConfig} from './formatting.js'
+
+export const CONFIG_FILES = [
+  '.all-contributorsrc',
+  '.all-contributorsrc.json',
+  '.all-contributors.json',
+  '.config/.all-contributorsrc',
+  '.config/.all-contributorsrc.json',
+  '.config/all-contributors.json',
+]
+
+export async function findConfigFile(cwd = process.cwd()) {
+  for (const filename of CONFIG_FILES) {
+    const fullPath = path.resolve(cwd, filename)
+    try {
+      await fs.access(fullPath)
+      return fullPath
+    } catch {
+      // continue searching
+    }
+  }
+  return null
+}
 
 export async function readConfig(configPath) {
   try {

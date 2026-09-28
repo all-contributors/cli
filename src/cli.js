@@ -22,7 +22,6 @@ function getArgs() {
     .option('config', {
       alias: 'c',
       type: 'string',
-      default: defaultRCFile,
       description: 'Path to config file',
     })
     .option('contributorsSortAlphabetically', {
@@ -169,13 +168,18 @@ function promptForCommand(argv) {
 async function run() {
   try {
     const argv = getArgs()
+    const isExplicitConfig = Boolean(argv.config)
+    const detectedConfig = isExplicitConfig
+      ? argv.config
+      : (await util.configFile.findConfigFile(cwd)) || defaultRCFile
+    argv.config = detectedConfig
 
     // Load and merge config file data into argv
     try {
       const configData = await util.configFile.readConfig(argv.config)
       Object.assign(argv, configData)
     } catch (error) {
-      if (error instanceof SyntaxError || argv.config !== defaultRCFile) {
+      if (error instanceof SyntaxError || isExplicitConfig) {
         throw error
       }
       // If default config file doesn't exist, that's okay

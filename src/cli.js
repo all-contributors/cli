@@ -3,15 +3,14 @@
 import path from 'path'
 import yargs from 'yargs'
 import {hideBin} from 'yargs/helpers'
-import * as YoctoColors from 'yoctocolors'
 import inquirer from 'inquirer'
 import {promises as fs} from 'fs'
 
 import {init} from './init/index.js'
 import {generate} from './generate/index.js'
 import * as util from './util/index.js'
-import * as repo from './repo/index.js'
 import {addContributor} from './contributors/index.js'
+import {checkContributors} from './check/index.js'
 
 const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')
@@ -30,6 +29,11 @@ function getArgs() {
       default: false,
       description:
         'Sort the list of contributors alphabetically in the generated list',
+    })
+    .option('ignoredContributors', {
+      type: 'array',
+      default: [],
+      description: 'List of contributors to ignore when checking repository',
     })
     .help('help')
     .alias('h', 'help')
@@ -85,54 +89,6 @@ async function addContribution(argv) {
   if (argv.commit) {
     return util.git.commit(argv, data)
   }
-}
-
-async function checkContributors(argv) {
-  return repo
-    .getContributors(
-      argv.projectOwner,
-      argv.projectName,
-      argv.repoType,
-      argv.repoHost,
-    )
-    .then(repoContributors => {
-      const checkKey = repo.getCheckKey(argv.repoType)
-      const knownContributions = argv.contributors.reduce((obj, item) => {
-        obj[item[checkKey]] = item.contributions
-        return obj
-      }, {})
-      const knownContributors = argv.contributors.map(
-        contributor => contributor[checkKey],
-      )
-
-      const missingInConfig = repoContributors.filter(
-        key => !knownContributors.includes(key),
-      )
-      const missingFromRepo = knownContributors.filter(key => {
-        return (
-          !repoContributors.includes(key) &&
-          (knownContributions[key].includes('code') ||
-            knownContributions[key].includes('test'))
-        )
-      })
-
-      if (missingInConfig.length) {
-        process.stdout.write(
-          YoctoColors.bold('Missing contributors in .all-contributorsrc:\n'),
-        )
-        process.stdout.write(`${missingInConfig.join(', ')}\n`)
-      }
-
-      if (missingFromRepo.length) {
-        process.stdout.write('\n')
-        process.stdout.write(
-          YoctoColors.bold(
-            'Unknown contributors found in .all-contributorsrc:\n',
-          ),
-        )
-        process.stdout.write(`${missingFromRepo.join(', ')}\n`)
-      }
-    })
 }
 
 function promptForCommand(argv) {

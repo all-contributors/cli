@@ -199,6 +199,35 @@ Release Please needs a GitHub token to open PRs. The repo uses the secret
 `ALL_CONTRIBS_RELEASE_PLEASE_TOKEN` (scoped to the all-contributors org and CLI
 repo). The same pattern could be extended to the app repo later if needed.
 
+### Pull Request titles & conventional commits
+
+Because Release Please generates changelogs and release versions automatically
+based on pull request titles when squash-merged into `main`, pull request titles
+must follow the [Conventional Commits](https://www.conventionalcommits.org/)
+format:
+
+```text
+<type>(<optional scope>): <description>
+```
+
+Allowed types (configured in `release-please-config.json`):
+
+- `feat`: A new feature (triggers a minor release)
+- `enh`: Minor enhancement
+- `fix`: A bug fix (triggers a patch release)
+- `docs`: Documentation only changes
+- `style`: Code style / formatting changes
+- `refactor`: Code refactoring without behavior changes
+- `perf`: Performance improvements
+- `test`: Adding or updating tests
+- `build`: Changes affecting build systems or external dependencies
+- `ci`: Continuous integration improvements and workflow updates
+- `chore`: Maintenance chores and dependencies
+- `revert`: Reverts a previous commit
+
+The automated workflow `.github/workflows/lint-pr-title.yml` runs on all pull
+requests to validate the title format before merging.
+
 ### Release process
 
 TBD -- this is not yet implemented but was implemented via circleci previously.

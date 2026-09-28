@@ -8,9 +8,32 @@ function isNewContributor(contributorList, username) {
 }
 
 export function addContributor(options, username, contributions) {
+  const shouldUseSuppliedDetails =
+    options.noFetch ||
+    options['no-fetch'] ||
+    options.name !== undefined ||
+    options.avatarUrl !== undefined ||
+    options.avatar_url !== undefined ||
+    options.avatar !== undefined ||
+    options.profile !== undefined
+
+  const infoFetcher = shouldUseSuppliedDetails
+    ? login =>
+        Promise.resolve({
+          login,
+          name: options.name || login,
+          avatar_url:
+            options.avatarUrl ||
+            options.avatar_url ||
+            options.avatar ||
+            'https://avatars.githubusercontent.com/u/0?v=4',
+          profile: options.profile || '',
+        })
+    : repo.getUserInfo
+
   const answersP = prompt(options, username, contributions)
   const contributorsP = answersP.then(answers =>
-    add(options, answers.username, answers.contributions, repo.getUserInfo),
+    add(options, answers.username, answers.contributions, infoFetcher),
   )
 
   const writeContributorsP = contributorsP.then(contributors =>

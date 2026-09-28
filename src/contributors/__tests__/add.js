@@ -1,5 +1,7 @@
 import {test, expect, vi} from 'vitest'
 import {add} from '../add.js'
+import {addContributor} from '../index.js'
+import * as util from '../../util/index.js'
 import fixtures from './fixtures/index.js'
 
 /**
@@ -215,4 +217,49 @@ test(`should update an existing contributor's contributions if an existing type 
       })
     },
   )
+})
+
+test('addContributor with supplied details does not call repo.getUserInfo and uses custom name, avatar, and profile', async () => {
+  vi.spyOn(util.configFile, 'writeContributors').mockResolvedValue(true)
+  const {options} = fixtures()
+  const customOptions = {
+    ...options,
+    name: 'Awesome Sponsor',
+    avatarUrl: 'https://example.com/logo.png',
+    profile: 'https://example.com',
+  }
+  const result = await addContributor(customOptions, 'acme-corp', 'financial')
+  expect(result.username).toBe('acme-corp')
+  expect(result.contributions).toEqual(['financial'])
+  const added = result.contributors.find(c => c.login === 'acme-corp')
+  expect(added).toEqual({
+    login: 'acme-corp',
+    name: 'Awesome Sponsor',
+    avatar_url: 'https://example.com/logo.png',
+    profile: 'https://example.com',
+    contributions: ['financial'],
+  })
+})
+
+test('addContributor with noFetch uses username and default avatar without repo lookup', async () => {
+  vi.spyOn(util.configFile, 'writeContributors').mockResolvedValue(true)
+  const {options} = fixtures()
+  const customOptions = {
+    ...options,
+    noFetch: true,
+  }
+  const result = await addContributor(
+    customOptions,
+    'local-contributor',
+    'code',
+  )
+  expect(result.username).toBe('local-contributor')
+  const added = result.contributors.find(c => c.login === 'local-contributor')
+  expect(added).toEqual({
+    login: 'local-contributor',
+    name: 'local-contributor',
+    avatar_url: 'https://avatars.githubusercontent.com/u/0?v=4',
+    profile: '',
+    contributions: ['code'],
+  })
 })

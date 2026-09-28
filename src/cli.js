@@ -31,6 +31,24 @@ function getArgs() {
       description:
         'Sort the list of contributors alphabetically in the generated list',
     })
+    .option('name', {
+      type: 'string',
+      description: 'Manually specify the contributor display name',
+    })
+    .option('avatar-url', {
+      alias: 'avatar',
+      type: 'string',
+      description: 'Manually specify the contributor avatar image URL',
+    })
+    .option('profile', {
+      type: 'string',
+      description: 'Manually specify the contributor profile or website URL',
+    })
+    .option('no-fetch', {
+      type: 'boolean',
+      default: false,
+      description: 'Do not fetch contributor details from repo host',
+    })
     .help('help')
     .alias('h', 'help')
     .alias('v', 'version')

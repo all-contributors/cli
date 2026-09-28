@@ -175,7 +175,7 @@ async function run() {
       const configData = await util.configFile.readConfig(argv.config)
       Object.assign(argv, configData)
     } catch (error) {
-      if (error instanceof SyntaxError || argv.config !== defaultRCFile) {
+      if (error.code !== 'ENOENT' || argv.config !== defaultRCFile) {
         throw error
       }
       // If default config file doesn't exist, that's okay

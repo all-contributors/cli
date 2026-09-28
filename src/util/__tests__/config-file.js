@@ -61,3 +61,37 @@ test(`throws if 'files' was overridden in .all-contributorsrc and is empty`, asy
     `Error! Project files was overridden and is empty in ${incompleteConfigFilePath}`,
   )
 })
+
+test('Reading an absent configuration file throws error with ENOENT code', async () => {
+  let error
+  try {
+    await readConfig(absentFile)
+  } catch (err) {
+    error = err
+  }
+  expect(error).toBeDefined()
+  expect(error.code).toBe('ENOENT')
+  expect(error.message).toBe(absentConfigFileExpected)
+})
+
+test('Reading a malformed configuration file throws SyntaxError with file path and details', async () => {
+  const fs = await import('fs/promises')
+  const path = await import('path')
+  const os = await import('os')
+
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), 'all-contrib-'))
+  const malformedConfigPath = path.join(tempDir, '.all-contributorsrc')
+  await fs.writeFile(
+    malformedConfigPath,
+    '{ "projectOwner": "all-contributors", invalid json }',
+  )
+
+  try {
+    await expect(readConfig(malformedConfigPath)).rejects.toThrow(SyntaxError)
+    await expect(readConfig(malformedConfigPath)).rejects.toThrow(
+      `Configuration file has malformed JSON: ${malformedConfigPath}`,
+    )
+  } finally {
+    await fs.rm(tempDir, {recursive: true, force: true})
+  }
+})

@@ -31,6 +31,16 @@ function getArgs() {
       description:
         'Sort the list of contributors alphabetically in the generated list',
     })
+    .option('sortBy', {
+      alias: 's',
+      type: 'string',
+      description: 'Sort contributors by name, username, or contributions',
+    })
+    .option('sortOrder', {
+      type: 'string',
+      choices: ['asc', 'desc'],
+      description: 'Sort order (asc or desc)',
+    })
     .help('help')
     .alias('h', 'help')
     .alias('v', 'version')
@@ -169,6 +179,8 @@ function promptForCommand(argv) {
 async function run() {
   try {
     const argv = getArgs()
+    const cliSortBy = argv.sortBy
+    const cliSortOrder = argv.sortOrder
 
     // Load and merge config file data into argv
     try {
@@ -179,6 +191,13 @@ async function run() {
         throw error
       }
       // If default config file doesn't exist, that's okay
+    }
+
+    if (cliSortBy) {
+      argv.contributorsSortBy = cliSortBy
+    }
+    if (cliSortOrder) {
+      argv.contributorsSortOrder = cliSortOrder
     }
 
     const command = await promptForCommand(argv)

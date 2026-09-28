@@ -89,12 +89,7 @@ function generateContributorsList(options, contributors) {
 
   let tableFooterContent = ''
 
-  const sortedContributors = [...contributors]
-  if (options.contributorsSortAlphabetically) {
-    sortedContributors.sort((a, b) =>
-      (a.name || '').localeCompare(b.name || ''),
-    )
-  }
+  const sortedContributors = util.sortContributors(contributors, options)
 
   const formattedContributors = sortedContributors.map(contributor =>
     formatContributor(options, contributor),

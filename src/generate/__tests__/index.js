@@ -338,3 +338,44 @@ test('keeps markdownlint comments in a generated list that has them', () => {
     '</table>\n\n<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->',
   )
 })
+
+test('adds markdownlint comments to a new list by default', () => {
+  const {kentcdodds} = contributors
+  const {options, content} = fixtures()
+
+  const result = generate(options, [kentcdodds], content)
+
+  expect(result).toContain(
+    '<!-- prettier-ignore-start -->\n<!-- markdownlint-disable -->\n<table>',
+  )
+  expect(result).toContain(
+    '</table>\n\n<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->',
+  )
+})
+
+test('adds markdownlint comments to a generated list that had them removed when withMarkdownlint=true', () => {
+  const {kentcdodds} = contributors
+  const {options} = fixtures()
+  const content = [
+    '<!-- ALL-CONTRIBUTORS-LIST:START -->',
+    '<!-- prettier-ignore-start -->',
+    '<table></table>',
+    '',
+    '<!-- prettier-ignore-end -->',
+    '',
+    '<!-- ALL-CONTRIBUTORS-LIST:END -->',
+  ].join('\n')
+
+  const result = generate(
+    Object.assign(options, {withMarkdownlint: true}),
+    [kentcdodds],
+    content,
+  )
+
+  expect(result).toContain(
+    '<!-- prettier-ignore-start -->\n<!-- markdownlint-disable -->\n<table>',
+  )
+  expect(result).toContain(
+    '</table>\n\n<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->',
+  )
+})

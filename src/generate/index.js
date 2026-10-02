@@ -10,7 +10,7 @@ function chunk(array, size) {
   return chunks
 }
 
-function injectListBetweenTags(newContent) {
+function injectListBetweenTags(newContent, options) {
   return function (previousContent) {
     const tagToLookFor = `<!-- ALL-CONTRIBUTORS-LIST:`
     const closingTag = '-->'
@@ -46,17 +46,19 @@ function injectListBetweenTags(newContent) {
       endOfOpeningTagIndex,
       startOfClosingTagIndex,
     )
-    // If a previously generated list had its markdownlint comments removed,
-    // don't add them back
-    const withMarkdownlint = previousList.includes('<!-- markdownlint-disable -->')
+    const withMarkdownlint =
+      options.withMarkdownlint === true ||
+      previousList.includes('<!-- markdownlint-disable -->') ||
+      // Lists without prettier-ignore-start were never generated
+      // (e.g. hand-written tags), so they default to including markdownlint
+      !previousList.includes('<!-- prettier-ignore-start -->')
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n<!-- prettier-ignore-start -->',
       withMarkdownlint ? '\n<!-- markdownlint-disable -->' : '',
       newContent.replace('\n', `\n${' '.repeat(nbSpaces)}`),
-      withMarkdownlint
-        ? '<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->'
-        : '<!-- prettier-ignore-end -->',
+      withMarkdownlint ? '<!-- markdownlint-restore -->\n' : '',
+      '<!-- prettier-ignore-end -->',
       '\n\n',
       previousContent.slice(startOfClosingTagIndex),
     ].join('')
@@ -177,7 +179,7 @@ export function generate(options, contributors, fileContent) {
   const badge = formatBadge(options, contributors)
 
   let result = fileContent
-  result = injectListBetweenTags(contributorsList)(result)
+  result = injectListBetweenTags(contributorsList, options)(result)
   result = replaceBadge(badge)(result)
   return result
 }

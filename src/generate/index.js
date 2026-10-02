@@ -48,9 +48,7 @@ function injectListBetweenTags(newContent) {
     )
     // If a previously generated list had its markdownlint comments removed,
     // don't add them back
-    const withMarkdownlint =
-      previousList.includes('<!-- markdownlint-disable -->') ||
-      !previousList.includes('<!-- prettier-ignore-start -->')
+    const withMarkdownlint = previousList.includes('<!-- markdownlint-disable -->')
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n<!-- prettier-ignore-start -->',

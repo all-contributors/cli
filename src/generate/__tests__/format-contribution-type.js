@@ -119,6 +119,22 @@ test('be able to add types with template to the symbol list', () => {
   )
 })
 
+test('parse markdown-style custom type links into href and label', () => {
+  const contributor = contributors.kentcdodds
+  const {options} = fixtures()
+  options.types = {
+    core: {
+      symbol: '🏵️',
+      description: 'Core team',
+      link: '[<%= symbol %>](https://github.com/bl-portal-bot)',
+    },
+  }
+
+  expect(formatContributionType(options, contributor, 'core')).toBe(
+    '<a href="https://github.com/bl-portal-bot" title="Core team">🏵️</a>',
+  )
+})
+
 test('be able to override existing types', () => {
   const contributor = contributors.kentcdodds
   const {options} = fixtures()

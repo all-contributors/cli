@@ -3,17 +3,15 @@ import jf from 'json-fixer'
 import {formatConfig} from './formatting.js'
 
 export async function readConfig(configPath) {
+  const config = await readConfigFile(configPath)
+
+  return {repoType: 'github', commitConvention: 'angular', ...config}
+}
+
+async function readConfigFile(configPath) {
   try {
     const configFileContents = await fs.readFile(configPath, 'utf-8')
     const {data: config, changed} = jf(configFileContents)
-
-    if (!('repoType' in config)) {
-      config.repoType = 'github'
-    }
-
-    if (!('commitConvention' in config)) {
-      config.commitConvention = 'angular'
-    }
 
     if (changed) {
       const formatterConfig = await formatConfig(configPath, config)
@@ -62,7 +60,7 @@ export async function writeContributors(configPath, contributors) {
   let config
 
   try {
-    config = await readConfig(configPath)
+    config = await readConfigFile(configPath)
   } catch (error) {
     return Promise.reject(error)
   }

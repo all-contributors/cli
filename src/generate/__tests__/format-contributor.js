@@ -98,3 +98,16 @@ test('format contributor with quotes in name', () => {
     '<a href="http://github.com/namelastname"><img src="https://avatars1.githubusercontent.com/u/1500684?size=150" width="150px" height="150px" alt="Name &quot;Nickname&quot; Lastname"/><br /><sub><b>Name &quot;Nickname&quot; Lastname</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=namelastname" title="Documentation">📖</a>'
   expect(formatContributor(options, contributor)).toBe(expected)
 })
+
+test('format contributor with a relative avatar url', () => {
+  const contributor = {
+    ...contributors.nologin,
+    avatar_url: './assets/avatar.png',
+  }
+  const {options} = fixtures()
+
+  const expected =
+    '<img src="./assets/avatar.png" width="150px" height="150px" alt="No Github Account"/><br /><sub><b>No Github Account</b></sub><br /><a href="#translation" title="Translation">🌍</a>'
+
+  expect(formatContributor(options, contributor)).toBe(expected)
+})

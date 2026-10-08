@@ -1,3 +1,4 @@
+import path from 'path'
 import {test, expect, vi, describe, beforeEach} from 'vitest'
 import {promisify} from 'util'
 import {commit, getRepoInfo} from '../git'
@@ -63,17 +64,21 @@ describe('getRepoInfo', () => {
   })
 
   test('should handle git command errors', async () => {
-    const gitError = new Error('fatal: not a git repository')
-    gitError.stderr = 'fatal: not a git repository'
-    const mockExecAsync = vi.fn().mockRejectedValue(gitError)
+    const mockExecAsync = vi
+      .fn()
+      .mockRejectedValue(new Error('Git command failed'))
 
     vi.mocked(promisify).mockReturnValue(mockExecAsync)
 
-    await expect(getRepoInfo()).rejects.toThrow('fatal: not a git repository')
+    await expect(getRepoInfo()).rejects.toThrow('Git command failed')
   })
 })
 
 describe('commit', () => {
+  beforeEach(() => {
+    vi.clearAllMocks()
+  })
+
   const mockOptions = {
     files: ['README.md', 'package.json'],
     config: '.all-contributorsrc',
@@ -85,6 +90,12 @@ describe('commit', () => {
     newContributor: true,
   }
 
+  const expectedAddedFiles = [
+    path.resolve(process.cwd(), 'README.md'),
+    path.resolve(process.cwd(), 'package.json'),
+    path.resolve(process.cwd(), '.all-contributorsrc'),
+  ].join(' ')
+
   test('should add files and commit with correct message', async () => {
     const mockExecAsync = vi.fn().mockResolvedValue({stdout: '', stderr: ''})
     vi.mocked(promisify).mockReturnValue(mockExecAsync)
@@ -94,7 +105,7 @@ describe('commit', () => {
     expect(mockExecAsync).toHaveBeenCalledTimes(2)
     expect(mockExecAsync).toHaveBeenNthCalledWith(
       1,
-      `git add ${process.cwd()}/README.md ${process.cwd()}/package.json ${process.cwd()}/.all-contributorsrc`,
+      `git add ${expectedAddedFiles}`,
     )
     expect(mockExecAsync).toHaveBeenNthCalledWith(
       2,
@@ -138,7 +149,7 @@ describe('commit', () => {
     vi.mocked(promisify).mockReturnValue(mockExecAsync)
 
     await expect(commit(mockOptions, mockData)).rejects.toThrow(
-      `git add ${process.cwd()}/README.md ${process.cwd()}/package.json ${process.cwd()}/.all-contributorsrc - exit code: 1`,
+      `git add ${expectedAddedFiles} - exit code: 1`,
     )
   })
 

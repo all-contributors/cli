@@ -5,7 +5,7 @@ const badgeContent = [
 ].join('\n')
 
 const headerContent =
-  'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):'
+  'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/en/reference/emoji-key/)):'
 const listContent = [
   '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->',
   '<!-- prettier-ignore-start -->',

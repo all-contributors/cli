@@ -1,3 +1,6 @@
+import {promises as fs} from 'fs'
+import os from 'os'
+import path from 'path'
 import {test, expect} from 'vitest'
 import {writeConfig, readConfig, writeContributors} from '../config-file.js'
 
@@ -60,4 +63,41 @@ test(`throws if 'files' was overridden in .all-contributorsrc and is empty`, asy
   ).rejects.toThrow(
     `Error! Project files was overridden and is empty in ${incompleteConfigFilePath}`,
   )
+})
+
+async function createConfigFile(content) {
+  const directory = await fs.mkdtemp(
+    path.join(os.tmpdir(), 'all-contributors-'),
+  )
+  const configPath = path.join(directory, '.all-contributorsrc')
+  await fs.writeFile(configPath, JSON.stringify(content, null, 2))
+  return configPath
+}
+
+const MinimalConfigFile = {
+  projectOwner: 'all-contributors',
+  projectName: 'all-contributors-cli',
+  contributors: [],
+}
+
+test('reading a config file without repoType or commitConvention applies their defaults', async () => {
+  const configPath = await createConfigFile(MinimalConfigFile)
+
+  expect(await readConfig(configPath)).toEqual({
+    ...MinimalConfigFile,
+    commitConvention: 'angular',
+    repoType: 'github',
+  })
+})
+
+test('writing contributors does not add default repoType or commitConvention to the config file', async () => {
+  const configPath = await createConfigFile(MinimalConfigFile)
+  const contributors = [{login: 'jfmengels', contributions: ['code']}]
+
+  await writeContributors(configPath, contributors)
+
+  expect(JSON.parse(await fs.readFile(configPath, 'utf-8'))).toEqual({
+    ...MinimalConfigFile,
+    contributors,
+  })
 })

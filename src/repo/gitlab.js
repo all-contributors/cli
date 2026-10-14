@@ -1,3 +1,5 @@
+import {isValidHttpUrl} from '../util/url.js'
+
 const addPrivateToken = (url, privateToken = '') => {
   if (privateToken === '') return url
 
@@ -9,6 +11,8 @@ const addPrivateToken = (url, privateToken = '') => {
 const getUserInfo = function (username, hostname, privateToken) {
   if (!hostname) {
     hostname = 'https://gitlab.com'
+  } else if (!isValidHttpUrl(hostname)) {
+    throw new Error(`Invalid GitLab hostname: ${hostname}`)
   }
 
   return fetch(

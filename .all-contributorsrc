@@ -738,6 +738,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "VincentBorgers",
+      "name": "Vincent Borgers",
+      "avatar_url": "https://avatars.githubusercontent.com/u/88669109?v=4",
+      "profile": "http://vincentborgers.nl",
+      "contributions": [
+        "code",
+        "bug"
+      ]
     }
   ],
   "skipCi": true,

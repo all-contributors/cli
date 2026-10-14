@@ -155,6 +155,80 @@ test('sorts the list of contributors if contributorsSortAlphabetically=true', ()
   expect(resultPreSorted).toEqual(resultAutoSorted)
 })
 
+test('sorts the list of contributors case-insensitively when contributorsSortAlphabetically=true', () => {
+  const {options, content} = fixtures()
+  options.contributorsSortAlphabetically = true
+
+  const contributorA = {
+    login: 'adam',
+    name: 'adam',
+    avatar_url: 'https://avatars.githubusercontent.com/u/1',
+    profile: 'https://github.com/adam',
+    contributions: ['doc'],
+  }
+  const contributorB = {
+    login: 'Bob',
+    name: 'Bob',
+    avatar_url: 'https://avatars.githubusercontent.com/u/2',
+    profile: 'https://github.com/Bob',
+    contributions: ['code'],
+  }
+  const contributorC = {
+    login: 'charlie',
+    name: 'charlie',
+    avatar_url: 'https://avatars.githubusercontent.com/u/3',
+    profile: 'https://github.com/charlie',
+    contributions: ['bug'],
+  }
+
+  const resultAutoSorted = generate(
+    options,
+    [contributorB, contributorC, contributorA],
+    content,
+  )
+
+  const resultExpected = generate(
+    {...options, contributorsSortAlphabetically: false},
+    [contributorA, contributorB, contributorC],
+    content,
+  )
+
+  expect(resultAutoSorted).toEqual(resultExpected)
+})
+
+test('sorts contributors falling back to login when name is not provided', () => {
+  const {options, content} = fixtures()
+  options.contributorsSortAlphabetically = true
+
+  const contributorNoNameA = {
+    login: 'alice',
+    avatar_url: 'https://avatars.githubusercontent.com/u/1',
+    profile: 'https://github.com/alice',
+    contributions: ['doc'],
+  }
+  const contributorWithNameB = {
+    login: 'bob_user',
+    name: 'Bob',
+    avatar_url: 'https://avatars.githubusercontent.com/u/2',
+    profile: 'https://github.com/bob_user',
+    contributions: ['code'],
+  }
+
+  const resultAutoSorted = generate(
+    options,
+    [contributorWithNameB, contributorNoNameA],
+    content,
+  )
+
+  const resultExpected = generate(
+    {...options, contributorsSortAlphabetically: false},
+    [contributorNoNameA, contributorWithNameB],
+    content,
+  )
+
+  expect(resultAutoSorted).toEqual(resultExpected)
+})
+
 test('not inject anything if there is no tags to inject content in', () => {
   const {kentcdodds} = contributors
   const {options} = fixtures()

@@ -47,23 +47,31 @@ function escapeName(name) {
     .replace(new RegExp('\\"', 'g'), '&quot;')
 }
 
+function formatAvatarUrl(avatarUrl, imageSize) {
+  if (!URL.canParse(avatarUrl)) {
+    return avatarUrl
+  }
+
+  const url = new URL(avatarUrl)
+
+  url.searchParams.append('size', imageSize)
+
+  return url.toString()
+}
+
 export function formatContributor(options, contributor) {
   const formatter = contribution =>
     formatContributionType(options, contributor, contribution)
   const contributions = contributor.contributions.map(formatter).join(' ')
 
-  const contributorAvatarUrl = new URL(contributor.avatar_url)
-
-  contributorAvatarUrl.searchParams.append(
-    'size',
-    options.imageSize ?? defaultImageSize,
-  )
-
   const templateData = {
     contributions,
     contributor: {
       ...contributor,
-      avatar_url: contributorAvatarUrl.toString(),
+      avatar_url: formatAvatarUrl(
+        contributor.avatar_url,
+        options.imageSize ?? defaultImageSize,
+      ),
     },
     options: {imageSize: defaultImageSize, ...options},
   }

@@ -94,10 +94,7 @@ function generateContributorsList(options, contributors) {
     sortedContributors.sort((a, b) => {
       const nameA = a.name || a.login || ''
       const nameB = b.name || b.login || ''
-      return (
-        nameA.localeCompare(nameB, undefined, {sensitivity: 'base'}) ||
-        nameA.localeCompare(nameB)
-      )
+      return nameA.localeCompare(nameB, undefined, {sensitivity: 'base'})
     })
   }
 

@@ -22,7 +22,14 @@ export default defineConfig([
     rules: {
       'import/no-unresolved': [
         'error',
-        {ignore: ['^eslint/', '^prettier$', '^yargs']},
+        {
+          ignore: [
+            '^all-contributors-types$',
+            '^eslint/',
+            '^prettier$',
+            '^yargs',
+          ],
+        },
       ],
       'import/no-extraneous-dependencies': 'error',
       'import/default': 'off',

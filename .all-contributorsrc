@@ -446,7 +446,8 @@
         "code",
         "test",
         "security",
-        "bug"
+        "bug",
+        "review"
       ]
     },
     {

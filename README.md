@@ -73,7 +73,7 @@ configure and use the all-contributors-cli.
 ## Contributors ✨
 
 Thanks goes to these wonderful people
-([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+([emoji key](https://allcontributors.org/en/reference/emoji-key/)):
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
@@ -181,6 +181,7 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="16.66%"><a href="http://brandonalenz.com"><img src="https://avatars.githubusercontent.com/u/15805554?v=4?s=100" width="100px;" alt="Brandon Lenz"/><br /><sub><b>Brandon Lenz</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Abrandonlenz" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/commits?author=brandonlenz" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/commits?author=brandonlenz" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/davidpavlovschi"><img src="https://avatars.githubusercontent.com/u/154081173?v=4?s=100" width="100px;" alt="David Pavlovschii"/><br /><sub><b>David Pavlovschii</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=davidpavlovschi" title="Code">💻</a></td>
       <td align="center" valign="top" width="16.66%"><a href="http://vincentborgers.nl"><img src="https://avatars.githubusercontent.com/u/88669109?v=4?s=100" width="100px;" alt="Vincent Borgers"/><br /><sub><b>Vincent Borgers</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=VincentBorgers" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/issues?q=author%3AVincentBorgers" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/MBK-fr"><img src="https://avatars.githubusercontent.com/u/41642346?v=4?s=100" width="100px;" alt="mehdi B"/><br /><sub><b>mehdi B</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=MBK-fr" title="Documentation">📖</a> <a href="https://github.com/all-contributors/cli/issues?q=author%3AMBK-fr" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/commits?author=MBK-fr" title="Code">💻</a></td>
     </tr>
   </tbody>
   <tfoot>

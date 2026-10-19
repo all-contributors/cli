@@ -749,6 +749,17 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "MBK-fr",
+      "name": "mehdi B",
+      "avatar_url": "https://avatars.githubusercontent.com/u/41642346?v=4",
+      "profile": "https://github.com/MBK-fr",
+      "contributions": [
+        "doc",
+        "bug",
+        "code"
+      ]
     }
   ],
   "skipCi": true,

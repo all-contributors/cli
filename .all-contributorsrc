@@ -760,6 +760,15 @@
         "bug",
         "code"
       ]
+    },
+    {
+      "login": "vjymisal0",
+      "name": "Vijay Misal",
+      "avatar_url": "https://avatars.githubusercontent.com/u/97379957?v=4",
+      "profile": "https://vijaymisal.tech/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "skipCi": true,

@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.1](https://github.com/all-contributors/cli/compare/v7.0.0...v7.0.1) (2026-10-27)
+
+
+### 📦 CI Improvements
+
+* add workflow displatch to  release-please workflow ([#580](https://github.com/all-contributors/cli/issues/580)) ([08ef81c](https://github.com/all-contributors/cli/commit/08ef81c11d81560a640210b17efffd20d4e7aa83))
+
 ## [7.0.0](https://github.com/all-contributors/cli/compare/v6.26.1...v7.0.0) (2026-10-23)
 
 

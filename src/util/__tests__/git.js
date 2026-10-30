@@ -94,7 +94,7 @@ describe('commit', () => {
     path.resolve(process.cwd(), 'README.md'),
     path.resolve(process.cwd(), 'package.json'),
     path.resolve(process.cwd(), '.all-contributorsrc'),
-  ].join(' ')
+  ]
 
   test('should add files and commit with correct message', async () => {
     const mockExecAsync = vi.fn().mockResolvedValue({stdout: '', stderr: ''})
@@ -103,14 +103,15 @@ describe('commit', () => {
     await commit(mockOptions, mockData)
 
     expect(mockExecAsync).toHaveBeenCalledTimes(2)
-    expect(mockExecAsync).toHaveBeenNthCalledWith(
-      1,
-      `git add ${expectedAddedFiles}`,
-    )
-    expect(mockExecAsync).toHaveBeenNthCalledWith(
-      2,
-      'git commit -m :busts_in_silhouette: Add @jdoe as a contributor',
-    )
+    expect(mockExecAsync).toHaveBeenNthCalledWith(1, 'git', [
+      'add',
+      ...expectedAddedFiles,
+    ])
+    expect(mockExecAsync).toHaveBeenNthCalledWith(2, 'git', [
+      'commit',
+      '-m',
+      ':busts_in_silhouette: Add @jdoe as a contributor',
+    ])
   })
 
   test('should handle custom commit templates', async () => {
@@ -124,10 +125,11 @@ describe('commit', () => {
 
     await commit(customOptions, mockData)
 
-    expect(mockExecAsync).toHaveBeenNthCalledWith(
-      2,
-      'git commit -m docs: Add @jdoe',
-    )
+    expect(mockExecAsync).toHaveBeenNthCalledWith(2, 'git', [
+      'commit',
+      '-m',
+      'docs: Add @jdoe',
+    ])
   })
 
   test('should handle git add errors with proper error message', async () => {
@@ -149,7 +151,7 @@ describe('commit', () => {
     vi.mocked(promisify).mockReturnValue(mockExecAsync)
 
     await expect(commit(mockOptions, mockData)).rejects.toThrow(
-      `git add ${expectedAddedFiles} - exit code: 1`,
+      `git add ${expectedAddedFiles.join(' ')} - exit code: 1`,
     )
   })
 

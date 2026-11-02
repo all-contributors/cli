@@ -184,6 +184,9 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/MBK-fr"><img src="https://avatars.githubusercontent.com/u/41642346?v=4?s=100" width="100px;" alt="mehdi B"/><br /><sub><b>mehdi B</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=MBK-fr" title="Documentation">📖</a> <a href="https://github.com/all-contributors/cli/issues?q=author%3AMBK-fr" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/commits?author=MBK-fr" title="Code">💻</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://vijaymisal.tech/"><img src="https://avatars.githubusercontent.com/u/97379957?v=4?s=100" width="100px;" alt="Vijay Misal"/><br /><sub><b>Vijay Misal</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=vjymisal0" title="Code">💻</a></td>
     </tr>
+    <tr>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/stchigel"><img src="https://avatars.githubusercontent.com/u/166736520?v=4?s=100" width="100px;" alt="Nico"/><br /><sub><b>Nico</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Astchigel" title="Bug reports">🐛</a></td>
+    </tr>
   </tbody>
   <tfoot>
     <tr>

@@ -1,0 +1,30 @@
+name: Setup
+
+description: Sets up the repo for a typical CI job
+
+inputs:
+  install-flags:
+    description: Flags to pass to `npm install`
+    required: false
+    type: string
+  node-version:
+    description: Node.js version to use
+    default: '22'
+    required: false
+  skip-checkout:
+    description: Skip the checkout step if the repo is already checked out
+    default: false
+    required: false
+
+runs:
+  steps:
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      if: ${{ inputs.skip-checkout == 'false' }}
+    - name: Setup Node.js
+      uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version: ${{ inputs.node-version }}
+    - name: Install dependencies
+      run: npm install ${{ inputs.install-flags }}
+      shell: bash
+  using: composite

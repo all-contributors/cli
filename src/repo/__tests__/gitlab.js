@@ -139,3 +139,35 @@ test('handle error when no token is offered', async () => {
     getUserInfo('nodisplayname', 'http://gitlab.needtoken.com:3000', ''),
   )
 })
+
+test.each([
+  'file:///etc/passwd',
+  'ftp://example.com',
+  'javascript:alert(1)',
+  'gitlab.example.com',
+  'not a url',
+])('rejects non-http(s) hostname %s without making a request', hostname => {
+  const scope = nock('https://gitlab.com').get(/.*/).reply(200, [])
+
+  expect(() => getUserInfo('someuser', hostname)).toThrow(
+    `Invalid GitLab hostname: ${hostname}`,
+  )
+  expect(scope.isDone()).toBe(false)
+  nock.cleanAll()
+})
+
+test('accepts a valid custom http(s) hostname', async () => {
+  nock('https://gitlab.example.com')
+    .get('/api/v4/users?username=customhost')
+    .reply(200, [
+      {
+        username: 'customhost',
+        name: 'Custom Host',
+        avatar_url: 'https://gitlab.example.com/avatar.png',
+        web_url: 'https://gitlab.example.com/customhost',
+      },
+    ])
+
+  const info = await getUserInfo('customhost', 'https://gitlab.example.com')
+  expect(info.login).toBe('customhost')
+})

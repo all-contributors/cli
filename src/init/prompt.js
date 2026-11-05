@@ -6,7 +6,7 @@ function uniqueFiles(files) {
   return [...new Set(files.filter(Boolean))]
 }
 
-const questions = [
+export const questions = [
   {
     type: 'input',
     name: 'projectName',
@@ -18,7 +18,7 @@ const questions = [
     message: 'Who is the owner of the repository?',
   },
   {
-    type: 'list',
+    type: 'select',
     name: 'repoType',
     message: 'What is the repository type?',
     choices: [
@@ -83,7 +83,7 @@ const questions = [
     default: true,
   },
   {
-    type: 'list',
+    type: 'select',
     name: 'commitConvention',
     message: 'What commit convention would you want it to use?',
     choices: Object.values(conventions),

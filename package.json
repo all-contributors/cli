@@ -55,9 +55,9 @@
     "yoctocolors": "^2.1.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.2",
-    "@vitest/coverage-v8": "^5.0.0",
-    "eslint": "^9.39.2",
+    "@eslint/js": "^9.39.5",
+    "@vitest/coverage-v8": "^5.1.0",
+    "eslint": "^9.39.5",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-vitest": "^0.5.4",
     "git-cz": "^4.7.6",
@@ -67,7 +67,7 @@
     "lint-staged": "^17.0.8",
     "nock": "^15.0.5",
     "prettier": "^3.8.1",
-    "vitest": "^5.0.0"
+    "vitest": "^5.1.0"
   },
   "optionalDependencies": {
     "prettier": "^3"

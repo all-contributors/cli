@@ -15,24 +15,13 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - name: Setup Node.js
-        uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: '22'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
+      - uses: $/.github/actions/setup
 
       - name: Build
         run: npm run build
 
       - name: Run tests
         run: npm run test-coverage
-        env:
-          NODE_OPTIONS: --experimental-vm-modules
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
@@ -57,17 +46,11 @@ jobs:
       id-token: write # mandatory for OIDC / NPM publishing
       contents: read
     steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      - uses: $/.github/actions/setup
         with:
           node-version: '24'
-          registry-url: 'https://registry.npmjs.org'
-      # Ensure npm 11.5.1 or later for trusted publishing
-      - name: Install latest version of npm
-        run: npm install -g npm@latest
-      - name: Install deps and build package
+      - name: Build package
         run: |
-          npm ci
           npm run build
       - name: Publish to NPM via trusted publishing (tag next if prerelease)
         run: |

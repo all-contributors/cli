@@ -47,8 +47,6 @@ jobs:
       contents: read
     steps:
       - uses: $/.github/actions/setup
-        with:
-          node-version: '24'
       - name: Build package
         run: |
           pnpm build

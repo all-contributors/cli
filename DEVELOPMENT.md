@@ -2,31 +2,31 @@
 
 ## Prerequisites
 
-- **Node.js** 22 or later (see `engines` in `package.json`)
-- **npm** (the project uses npm which produces a `package-lock.json`)
+- **Node.js** (see the `.nvmrc` for the exact version to use)
+- **pnpm** (the project uses pnpm which produces a `pnpm-lock.yaml`)
 
 ## Development commands
 
-These are the npm scripts available when working on the CLI:
+These are the package scripts available when working on the CLI:
 
-| Command                   | Description                                            |
-| ------------------------- | ------------------------------------------------------ |
-| `npm install`             | Install dependencies                                   |
-| `npm run build`           | Build the CLI (output in `dist/`)                      |
-| `npm run dev`             | Run the CLI from source without building               |
-| `npm run start`           | Run the built CLI (`dist/cli.js`)                      |
-| `npm run lint`            | Check for lint and format issues                       |
-| `npm run lint-fix`        | Auto-fix lint and format issues                        |
-| `npm test`                | Run the test suite (no coverage)                       |
-| `npm run test-coverage`   | Run tests with coverage and generate reports           |
-| `npm run commit`          | Commit changes using a commitizen-compatible interface |
-| `npm run knip`            | Find unused files, dependencies, and exports           |
-| `npm run add-contributor` | Add a contributor (runs kcd-scripts contributors add)  |
+| Command                | Description                                            |
+| ---------------------- | ------------------------------------------------------ |
+| `pnpm install`         | Install dependencies                                   |
+| `pnpm build`           | Build the CLI (output in `dist/`)                      |
+| `pnpm dev`             | Run the CLI from source without building               |
+| `pnpm start`           | Run the built CLI (`dist/cli.js`)                      |
+| `pnpm lint`            | Check for lint and format issues                       |
+| `pnpm lint-fix`        | Auto-fix lint and format issues                        |
+| `pnpm test`            | Run the test suite (no coverage)                       |
+| `pnpm test-coverage`   | Run tests with coverage and generate reports           |
+| `pnpm commit`          | Commit changes using a commitizen-compatible interface |
+| `pnpm knip`            | Find unused files, dependencies, and exports           |
+| `pnpm add-contributor` | Add a contributor (runs kcd-scripts contributors add)  |
 
 ## All-contributors CLI commands
 
-When the CLI is installed (`all-contributors-cli`) or run via `npm run dev`,
-these are the subcommands:
+When the CLI is installed (`all-contributors-cli`) or run via `pnpm dev`, these
+are the subcommands:
 
 | Command                                           | Description                                          |
 | ------------------------------------------------- | ---------------------------------------------------- |
@@ -42,11 +42,11 @@ these are the subcommands:
 The project uses Vitest for testing. To run the test suite use:
 
 ```bash
-npm test
+pnpm test
 ```
 
 This runs all tests without coverage. For coverage (thresholds and reports), use
-`npm run test-coverage` (see below).
+`pnpm test-coverage` (see below).
 
 If you want to run tests inside your editor and you use VS Code you can install
 the VitTest extension so tests are discovered and runnable through the VSCode
@@ -71,7 +71,7 @@ Tests will fail if coverage drops below these thresholds.
 
 ### Coverage reports
 
-Run `npm run test-coverage` to generate coverage reports in the `coverage/`
+Run `pnpm test-coverage` to generate coverage reports in the `coverage/`
 directory:
 
 - **`coverage/lcov-report/index.html`** — Interactive HTML report (open in a
@@ -106,8 +106,8 @@ CLI repository.
 #### Local usage
 
 You don't need a Codecov account to view coverage locally. Run
-`npm run test-coverage` and open the HTML report. Codecov is mainly for tracking
-trends and CI.
+`pnpm run test-coverage` and open the HTML report. Codecov is mainly for
+tracking trends and CI.
 
 ## Linting
 
@@ -125,13 +125,13 @@ ESLint setup that supports both CommonJS source files and ES module test files.
 To check for issues you can run:
 
 ```bash
-npm run lint
+pnpm lint
 ```
 
 To auto-fix what ESLint and Prettier can fix you can run:
 
 ```bash
-npm run lint-fix
+pnpm lint-fix
 ```
 
 This will fix many issues (e.g. Vitest aliases, unused eslint-disable
@@ -148,14 +148,13 @@ commit.
    JavaScript files.
 3. If that passes, the commit continues; if it fails, the commit is blocked.
 
-If the hook gives you trouble, run `npm run lint-fix` manually, then try
-committing again. As a last resort you can skip the hook with
-`git commit --no-verify`; if you do, mention it in your PR so maintainers can
-help.
+If the hook gives you trouble, run `pnpm lint-fix` manually, then try committing
+again. As a last resort you can skip the hook with `git commit --no-verify`; if
+you do, mention it in your PR so maintainers can help.
 
 **Configuration:**
 
-- The hook lives in `.husky/pre-commit` (it runs `npx lint-staged`).
+- The hook lives in `.husky/pre-commit` (it runs `pnpm lint-staged`).
 - `lint-staged` is configured in `package.json` under the `lint-staged` field.
 - Linting uses `eslint.config.mjs`.
 
@@ -180,12 +179,12 @@ dependencies:
 ### How to build
 
 ```bash
-npm run build
+pnpm build
 ```
 
 Output goes to `dist/`. To run the built CLI locally without publishing, use
-`npm run start` (runs `dist/cli.js`) or `npm link` from the repo root and then
-run `all-contributors` in another directory.
+`pnpm start` (runs `dist/cli.js`) or `pnpm link` from the repo root and then run
+`all-contributors` in another directory.
 
 ## Release process
 

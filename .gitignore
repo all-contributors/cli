@@ -9,7 +9,6 @@ dist
 # these cause more harm than good
 # when working with contributors
 yarn.lock
-pnpm-lock.yaml
 .vscode
 cache
 .idea

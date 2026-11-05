@@ -14,4 +14,4 @@ jobs:
       - uses: $/.github/actions/setup
 
       - name: Run ESLint
-        run: npm run lint
+        run: pnpm lint

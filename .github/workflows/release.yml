@@ -41,8 +41,6 @@ jobs:
       id-token: write # mandatory for OIDC / NPM publishing
     steps:
       - uses: $/.github/actions/setup
-        with:
-          node-version: '24'
       - name: Build
         run: pnpm build
       - name: Publish

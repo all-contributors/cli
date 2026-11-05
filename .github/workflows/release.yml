@@ -44,6 +44,6 @@ jobs:
         with:
           node-version: '24'
       - name: Build
-        run: npm run build
+        run: pnpm build
       - name: Publish
-        run: npm publish
+        run: pnpm publish

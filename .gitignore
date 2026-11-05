@@ -11,5 +11,4 @@ dist
 .husky
 .idea
 cache
-pnpm-lock.yaml
 yarn.lock

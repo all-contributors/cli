@@ -18,10 +18,10 @@ jobs:
       - uses: $/.github/actions/setup
 
       - name: Build
-        run: npm run build
+        run: pnpm build
 
       - name: Run tests
-        run: npm run test-coverage
+        run: pnpm test-coverage
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
@@ -43,19 +43,17 @@ jobs:
       name: npm-publish
       url: https://www.npmjs.com/package/all-contributors-cli
     permissions:
-      id-token: write # mandatory for OIDC / NPM publishing
+      id-token: write # mandatory for OIDC / Trusted publishing
       contents: read
     steps:
       - uses: $/.github/actions/setup
-        with:
-          node-version: '24'
       - name: Build package
         run: |
-          npm run build
+          pnpm build
       - name: Publish to NPM via trusted publishing (tag next if prerelease)
         run: |
           if [[ "${{ github.event.release.prerelease }}" == "true" ]]; then
-            npm publish --provenance --tag next
+            pnpm publish --tag next
           else
-            npm publish --provenance
+            pnpm publish
           fi

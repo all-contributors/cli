@@ -111,14 +111,15 @@ trends and CI.
 
 ## Linting
 
-The project uses ESLint. Linting was migrated from `kcd-scripts` to a native
-ESLint setup that supports both CommonJS source files and ES module test files.
+The project uses [Oxlint](https://oxc.rs/docs/guide/usage/linter). Linting was
+migrated from ESLint to Oxlint, which has no dependency on `minimatch` and runs
+as a native binary.
 
 ### Overview
 
-- Config: `eslint.config.mjs`
-- Includes `eslint:recommended`, import rules, Vitest rules for test files, and
-  project overrides
+- Config: `.oxlintrc.json`
+- Enables the `correctness` category plus `no-undef`, import rules, and Vitest
+  rules
 
 ### How to run the linter
 
@@ -128,15 +129,15 @@ To check for issues you can run:
 npm run lint
 ```
 
-To auto-fix what ESLint and Prettier can fix you can run:
+To auto-fix what Oxlint and Prettier can fix you can run:
 
 ```bash
 npm run lint-fix
 ```
 
-This will fix many issues (e.g. Vitest aliases, unused eslint-disable
-directives, formatting). Some problems still need manual fixes (e.g. unused
-variables, tests without assertions).
+This will fix many issues (e.g. Vitest aliases, unused disable directives,
+formatting). Some problems still need manual fixes (e.g. unused variables, tests
+without assertions).
 
 ### Pre-commit hooks
 
@@ -144,7 +145,7 @@ Husky runs a pre-commit hook that lints and fixes staged files before each
 commit.
 
 1. On `git commit`, Husky runs the pre-commit hook.
-2. The hook runs `lint-staged`, which runs ESLint and Prettier on staged
+2. The hook runs `lint-staged`, which runs Oxlint and Prettier on staged
    JavaScript files.
 3. If that passes, the commit continues; if it fails, the commit is blocked.
 
@@ -157,15 +158,17 @@ help.
 
 - The hook lives in `.husky/pre-commit` (it runs `npx lint-staged`).
 - `lint-staged` is configured in `package.json` under the `lint-staged` field.
-- Linting uses `eslint.config.mjs`.
+- Linting uses `.oxlintrc.json`.
 
 ### Lint-related dependencies
 
-- **eslint** — Core
-- **@eslint/js** — Recommended rules
-- **eslint-plugin-import** — Import/export rules
-- **@vitest/eslint-plugin** — Vitest rules for test files
-- **globals** — Node and Vitest globals for the lint environment
+- **oxlint** — Linter, including its built-in import and Vitest plugins
+
+Oxlint has no equivalent of `import/no-unresolved` or
+`import/no-extraneous-dependencies`, so [knip](https://knip.dev) covers missing
+files and unlisted dependencies. `npm run lint` runs it, and CI runs it in the
+Knip workflow. Knip only analyzes files reachable from the entry globs in
+`knip.json`, so new source files outside those globs need an entry added.
 
 ## Build system
 

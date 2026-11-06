@@ -13,5 +13,5 @@ jobs:
     steps:
       - uses: $/.github/actions/setup
 
-      - name: Run ESLint
+      - name: Run lint
         run: npm run lint

@@ -16,8 +16,8 @@
     "add-contributor": "node src/cli.js add",
     "knip": "knip",
     "build": "cp -r src dist",
-    "lint": "oxlint -c oxlint.config.mjs . --report-unused-disable-directives-severity=error && knip && prettier --check --ignore-unknown .",
-    "lint-fix": "oxlint -c oxlint.config.mjs --fix . && prettier --write --ignore-unknown .",
+    "lint": "oxlint . --report-unused-disable-directives-severity=error && knip && prettier --check --ignore-unknown .",
+    "lint-fix": "oxlint --fix . && prettier --write --ignore-unknown .",
     "test": "vitest",
     "test-coverage": "vitest --coverage",
     "commit": "git-cz",
@@ -27,7 +27,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "oxlint -c oxlint.config.mjs --fix",
+      "oxlint --fix",
       "prettier --write"
     ],
     "!(*.js)": "prettier --ignore-unknown --write"

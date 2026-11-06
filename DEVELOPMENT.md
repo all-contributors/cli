@@ -117,9 +117,9 @@ as a native binary.
 
 ### Overview
 
-- Config: `oxlint.config.mjs`. Oxlint doesn't auto-discover `.mjs` configs yet,
-  so pass `-c oxlint.config.mjs` when running it directly (the npm scripts and
-  `lint-staged` already do)
+- Config: `oxlint.config.mts`. Oxlint loads it through Node's built-in type
+  stripping, so use the Node version from `.nvmrc` (older versions fail with
+  "Failed to load config")
 - Enables the `correctness` category plus `no-undef`, import rules, and Vitest
   rules
 
@@ -160,7 +160,7 @@ help.
 
 - The hook lives in `.husky/pre-commit` (it runs `npx lint-staged`).
 - `lint-staged` is configured in `package.json` under the `lint-staged` field.
-- Linting uses `oxlint.config.mjs`.
+- Linting uses `oxlint.config.mts`.
 
 ### Lint-related dependencies
 

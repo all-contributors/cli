@@ -16,8 +16,8 @@
     "add-contributor": "node src/cli.js add",
     "knip": "knip",
     "build": "cp -r src dist",
-    "lint": "eslint . && prettier --check --ignore-unknown .",
-    "lint-fix": "eslint --fix . && prettier --write --ignore-unknown .",
+    "lint": "oxlint . --report-unused-disable-directives-severity=error && knip && prettier --check --ignore-unknown .",
+    "lint-fix": "oxlint --fix . && prettier --write --ignore-unknown .",
     "test": "vitest",
     "test-coverage": "vitest --coverage",
     "commit": "git-cz",
@@ -27,7 +27,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
+      "oxlint --fix",
       "prettier --write"
     ],
     "!(*.js)": "prettier --ignore-unknown --write"
@@ -55,17 +55,13 @@
     "yoctocolors": "^2.1.2"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.5",
     "@vitest/coverage-v8": "^5.1.0",
-    "eslint": "^9.39.5",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-vitest": "^0.5.4",
     "git-cz": "^4.7.6",
-    "globals": "^17.1.0",
     "husky": "^9.1.0",
     "knip": "^6.10.0",
     "lint-staged": "^17.0.8",
     "nock": "^15.0.5",
+    "oxlint": "^1.91.0",
     "prettier": "^3.8.1",
     "vitest": "^5.1.0"
   },

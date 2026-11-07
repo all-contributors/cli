@@ -10,6 +10,7 @@ export default defineConfig({
     coverage: {
       provider: 'v8',
       reporter: ['lcov', 'html', 'text'],
+      include: ['src/**/*.js'],
       thresholds: {
         branches: 50,
         functions: 40,

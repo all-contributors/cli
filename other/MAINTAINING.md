@@ -5,11 +5,11 @@
 
 **Table of Contents**
 
-- [Code of Conduct](#code-of-conduct)
-- [Issues](#issues)
-- [Pull Requests](#pull-requests)
-- [Release](#release)
-- [Thanks!](#thanks)
+- [Maintaining](#maintaining)
+  - [Code of Conduct](#code-of-conduct)
+  - [Issues](#issues)
+  - [Pull Requests](#pull-requests)
+  - [Thanks!](#thanks)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -62,6 +62,3 @@ to release. See the next section on Releases for more about that.
 ## Thanks!
 
 Thank you so much for helping to maintain this project!
-
-[commit]:
-  https://github.com/conventional-changelog-archived-repos/conventional-changelog-angular/blob/ed32559941719a130bb0327f886d6a32a8cbc2ba/convention.md

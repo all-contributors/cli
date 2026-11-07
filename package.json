@@ -2,28 +2,42 @@
   "name": "all-contributors-cli",
   "version": "7.0.0",
   "description": "Tool to easily add recognition for new contributors",
+  "keywords": [
+    "all-contributors",
+    "contributors"
+  ],
+  "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
+  "bugs": {
+    "url": "https://github.com/all-contributors/all-contributors-cli/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/all-contributors/cli.git"
+  },
+  "license": "MIT",
+  "author": "Jeroen Engels <jfm.engels@gmail.com>",
+  "sideEffects": false,
+  "type": "module",
+  "main": "dist/api.js",
   "bin": {
     "all-contributors": "dist/cli.js"
   },
-  "main": "dist/api.js",
   "files": [
     "dist"
   ],
-  "engines": {
-    "node": ">=22.22.0"
-  },
   "scripts": {
     "add-contributor": "node src/cli.js add",
-    "knip": "knip",
     "build": "cp -r src dist",
-    "lint": "eslint . && prettier --check --ignore-unknown .",
-    "lint-fix": "eslint --fix . && prettier --write --ignore-unknown .",
-    "test": "vitest",
-    "test-coverage": "vitest --coverage",
     "commit": "git-cz",
-    "start": "./dist/cli.js",
+    "dev": "./src/cli.js",
+    "format": "prettier . --write",
+    "format:check": "prettier . --check",
+    "knip": "knip",
+    "lint": "eslint .",
     "prepare": "husky",
-    "dev": "./src/cli.js"
+    "start": "./dist/cli.js",
+    "test": "vitest",
+    "test:coverage": "vitest --coverage"
   },
   "lint-staged": {
     "*.js": [
@@ -32,21 +46,11 @@
     ],
     "!(*.js)": "prettier --ignore-unknown --write"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/all-contributors/cli.git"
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
-  "type": "module",
-  "keywords": [
-    "all-contributors",
-    "contributors"
-  ],
-  "author": "Jeroen Engels <jfm.engels@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/all-contributors/all-contributors-cli/issues"
-  },
-  "homepage": "https://github.com/all-contributors/all-contributors-cli#readme",
   "dependencies": {
     "eta": "^4.5.1",
     "inquirer": "^14.0.2",
@@ -56,10 +60,14 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
+    "@eslint/markdown": "^8.0.3",
     "@vitest/coverage-v8": "^5.1.0",
     "eslint": "^9.39.5",
     "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsonc": "^3.4.2",
+    "eslint-plugin-package-json": "^1.14.0",
     "eslint-plugin-vitest": "^0.5.4",
+    "eslint-plugin-yml": "^3.10.0",
     "git-cz": "^4.7.6",
     "globals": "^17.1.0",
     "husky": "^9.1.0",
@@ -72,9 +80,7 @@
   "optionalDependencies": {
     "prettier": "^3"
   },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
+  "engines": {
+    "node": ">=22.22.0"
   }
 }

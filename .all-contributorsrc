@@ -778,6 +778,15 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "terrymun",
+      "name": "Terry Mun-Andersen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5593067?v=4",
+      "profile": "https://terrymun.com",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "skipCi": true,

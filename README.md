@@ -1,12 +1,11 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [ all-contributors-cli ](#all-contributors-cli)
-  - [The problem](#the-problem)
-  - [This solution](#this-solution)
-  - [Using the all-contributors-cli](#using-the-all-contributors-cli)
-  - [Contributors ✨](#contributors-)
-  - [LICENSE](#license)
+- [The problem](#the-problem)
+- [This solution](#this-solution)
+- [Using the all-contributors-cli](#using-the-all-contributors-cli)
+- [Contributors ✨](#contributors-)
+- [LICENSE](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -191,7 +190,7 @@ Thanks goes to these wonderful people
   <tfoot>
     <tr>
       <td align="center" size="13px" colspan="6">
-        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
+        <img alt="Logo" src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
           <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
         </img>
       </td>

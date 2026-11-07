@@ -15,10 +15,12 @@ These are the npm scripts available when working on the CLI:
 | `npm run build`           | Build the CLI (output in `dist/`)                      |
 | `npm run dev`             | Run the CLI from source without building               |
 | `npm run start`           | Run the built CLI (`dist/cli.js`)                      |
-| `npm run lint`            | Check for lint and format issues                       |
-| `npm run lint-fix`        | Auto-fix lint and format issues                        |
+| `npm run lint`            | Fix format issues                                      |
+| `npm run format:check`    | Check for format issues                                |
+| `npm run lint`            | Check for lint issues                                  |
+| `npm run lint -- --fix`   | Fix lint issues                                        |
 | `npm test`                | Run the test suite (no coverage)                       |
-| `npm run test-coverage`   | Run tests with coverage and generate reports           |
+| `npm run test:coverage`   | Run tests with coverage and generate reports           |
 | `npm run commit`          | Commit changes using a commitizen-compatible interface |
 | `npm run knip`            | Find unused files, dependencies, and exports           |
 | `npm run add-contributor` | Add a contributor (runs kcd-scripts contributors add)  |
@@ -46,7 +48,7 @@ npm test
 ```
 
 This runs all tests without coverage. For coverage (thresholds and reports), use
-`npm run test-coverage` (see below).
+`npm run test:coverage` (see below).
 
 If you want to run tests inside your editor and you use VS Code you can install
 the VitTest extension so tests are discovered and runnable through the VSCode
@@ -71,7 +73,7 @@ Tests will fail if coverage drops below these thresholds.
 
 ### Coverage reports
 
-Run `npm run test-coverage` to generate coverage reports in the `coverage/`
+Run `npm run test:coverage` to generate coverage reports in the `coverage/`
 directory:
 
 - **`coverage/lcov-report/index.html`** — Interactive HTML report (open in a
@@ -106,7 +108,7 @@ CLI repository.
 #### Local usage
 
 You don't need a Codecov account to view coverage locally. Run
-`npm run test-coverage` and open the HTML report. Codecov is mainly for tracking
+`npm run test:coverage` and open the HTML report. Codecov is mainly for tracking
 trends and CI.
 
 ## Linting

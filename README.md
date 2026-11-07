@@ -185,12 +185,13 @@ Thanks goes to these wonderful people
     </tr>
     <tr>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/stchigel"><img src="https://avatars.githubusercontent.com/u/166736520?v=4?s=100" width="100px;" alt="Nico"/><br /><sub><b>Nico</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Astchigel" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://terrymun.com"><img src="https://avatars.githubusercontent.com/u/5593067?v=4?s=100" width="100px;" alt="Terry Mun-Andersen"/><br /><sub><b>Terry Mun-Andersen</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Aterrymun" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
   <tfoot>
     <tr>
       <td align="center" size="13px" colspan="6">
-        <img alt="Logo" src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
+        <img src="https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg">
           <a href="https://all-contributors.js.org/docs/en/bot/usage">Add your contributions</a>
         </img>
       </td>

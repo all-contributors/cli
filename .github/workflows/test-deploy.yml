@@ -23,9 +23,6 @@ jobs:
       - name: Run tests
         run: npm run test:coverage
 
-      - name: Run end-to-end tests
-        run: npm run test:e2e
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
@@ -33,6 +30,14 @@ jobs:
           files: ./coverage/lcov.info
           fail_ci_if_error: false
           verbose: true
+  end-to-end:
+    name: >-
+      Run end-to-end tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: $/.github/actions/setup
+      - name: Run end-to-end tests
+        run: npm run test:e2e
   publish:
     name: >-
       Publish cli 📦 to NPM
@@ -41,6 +46,7 @@ jobs:
       'release'
     needs:
       - test
+      - end-to-end
     runs-on: ubuntu-latest
     environment:
       name: npm-publish

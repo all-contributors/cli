@@ -30,6 +30,7 @@ jobs:
           files: ./coverage/lcov.info
           fail_ci_if_error: false
           verbose: true
+
   end-to-end:
     name: >-
       Run end-to-end tests
@@ -38,6 +39,7 @@ jobs:
       - uses: $/.github/actions/setup
       - name: Run end-to-end tests
         run: npm run test:e2e
+
   publish:
     name: >-
       Publish cli 📦 to NPM

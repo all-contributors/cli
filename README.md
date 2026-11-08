@@ -1,12 +1,11 @@
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [ all-contributors-cli ](#all-contributors-cli)
-  - [The problem](#the-problem)
-  - [This solution](#this-solution)
-  - [Using the all-contributors-cli](#using-the-all-contributors-cli)
-  - [Contributors ✨](#contributors-)
-  - [LICENSE](#license)
+- [The problem](#the-problem)
+- [This solution](#this-solution)
+- [Using the all-contributors-cli](#using-the-all-contributors-cli)
+- [Contributors ✨](#contributors-)
+- [LICENSE](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -186,6 +185,7 @@ Thanks goes to these wonderful people
     </tr>
     <tr>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/stchigel"><img src="https://avatars.githubusercontent.com/u/166736520?v=4?s=100" width="100px;" alt="Nico"/><br /><sub><b>Nico</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Astchigel" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/nhktmdzhg"><img src="https://avatars.githubusercontent.com/u/57983253?v=4?s=100" width="100px;" alt="Nguyen Hoang Ky"/><br /><sub><b>Nguyen Hoang Ky</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Anhktmdzhg" title="Bug reports">🐛</a></td>
     </tr>
   </tbody>
   <tfoot>

@@ -1,6 +1,7 @@
 import path from 'path'
-import {test, expect, vi, describe, beforeEach} from 'vitest'
 import {promisify} from 'util'
+import {beforeEach, describe, expect, test, vi} from 'vitest'
+
 import {commit, getRepoInfo} from '../git'
 
 vi.mock('child_process')

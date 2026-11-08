@@ -1,7 +1,7 @@
 import * as configFile from './config-file.js'
 import {contributionTypes} from './contribution-types.js'
 import * as git from './git.js'
-import * as url from './url.js'
 import {template} from './template.js'
+import * as url from './url.js'
 
-export {configFile, contributionTypes, git, url, template}
+export {configFile, contributionTypes, git, template, url}

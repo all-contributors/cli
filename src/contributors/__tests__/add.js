@@ -1,4 +1,5 @@
-import {test, expect, vi} from 'vitest'
+import {expect, test, vi} from 'vitest'
+
 import {add} from '../add.js'
 import fixtures from './fixtures/index.js'
 

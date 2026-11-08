@@ -1,5 +1,6 @@
-import {test, expect, beforeEach} from 'vitest'
 import nock from 'nock'
+import {beforeEach, expect, test} from 'vitest'
+
 import * as repo from '../index.js'
 
 beforeEach(() => {

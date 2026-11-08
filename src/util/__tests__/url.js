@@ -1,4 +1,5 @@
-import {test, expect} from 'vitest'
+import {expect, test} from 'vitest'
+
 import {isHttpProtocol, isValidHttpUrl, parseHttpUrl} from '../url.js'
 
 test(`Result of protocol validation should be true`, () => {

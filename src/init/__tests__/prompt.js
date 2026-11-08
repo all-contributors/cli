@@ -1,5 +1,6 @@
-import {test, expect} from 'vitest'
 import inquirer from 'inquirer'
+import {expect, test} from 'vitest'
+
 import {questions} from '../prompt.js'
 
 test('uses only prompt types registered by inquirer', () => {

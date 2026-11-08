@@ -7,7 +7,7 @@ import * as YoctoColors from 'yoctocolors'
 
 import {addContributorWithDetails} from './contributors/addWithDetails.js'
 import {generate} from './generate/index.js'
-import {addContributorsList, addBadge} from './init/init-content.js'
+import {addBadge, addContributorsList} from './init/init-content.js'
 
 process.stdout.write(
   YoctoColors.yellow(

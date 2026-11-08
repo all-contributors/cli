@@ -1,5 +1,6 @@
-import {test, expect} from 'vitest'
 import nock from 'nock'
+import {expect, test} from 'vitest'
+
 import * as gitlabAPI from '../gitlab.js'
 
 const getUserInfo = gitlabAPI.getUserInfo

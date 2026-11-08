@@ -1,4 +1,5 @@
-import {test, expect} from 'vitest'
+import {expect, test} from 'vitest'
+
 import {addContributorWithDetails} from '../addWithDetails.js'
 import fixtures from './fixtures/index.js'
 

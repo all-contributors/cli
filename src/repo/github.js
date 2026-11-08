@@ -1,5 +1,6 @@
 import url from 'url'
-import {parseHttpUrl, isValidHttpUrl} from '../util/url.js'
+
+import {isValidHttpUrl, parseHttpUrl} from '../util/url.js'
 
 /**
  * Get the host based on public or enterprise GitHub.

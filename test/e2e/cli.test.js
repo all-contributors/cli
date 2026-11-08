@@ -38,6 +38,9 @@ it('generate adds contributors to the README', async ({ project }) => {
 it('generate exits 1 when the README is missing', async ({ projectWithoutReadme }) => {
   const result = await runCli(['generate'], { cwd: projectWithoutReadme });
 
-  expect(result.code).toBe(1);
-  expect(result.stderr).toContain('README.md');
-});
+  expect(result.code).toBe(1)
+  expect(result.stderr).toContain('README.md')
+  expect(result.stderr).toContain("Couldn't find README.md")
+  expect(result.stderr).not.toContain('ENOENT')
+  expect(result.stderr).not.toContain('at readFileToUpdate')
+})

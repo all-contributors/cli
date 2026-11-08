@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { promises as fs } from 'fs';
 import path from 'path';
 
 import inquirer from 'inquirer';
@@ -9,7 +8,7 @@ import { hideBin } from 'yargs/helpers';
 import * as YoctoColors from 'yoctocolors';
 
 import { addContributor } from './contributors/index.js';
-import { generate } from './generate/index.js';
+import { startGeneration } from './generate/start-generation.js';
 import { init } from './init/index.js';
 import * as repo from './repo/index.js';
 import * as util from './util/index.js';
@@ -53,18 +52,6 @@ function getArgs() {
     .default('files', ['README.md'])
     .default('contributorsPerLine', 7)
     .default('contributors', []).argv;
-}
-
-async function startGeneration(argv) {
-  await Promise.all(
-    argv.files.map(async (file) => {
-      const filePath = path.join(cwd, file);
-      const fileContent = await fs.readFile(filePath, 'utf8');
-      const newFileContent = generate(argv, argv.contributors, fileContent);
-
-      await fs.writeFile(filePath, newFileContent);
-    }),
-  );
 }
 
 async function addContribution(argv) {
@@ -168,19 +155,23 @@ async function run() {
 
     switch (command) {
       case 'init':
-        return init();
+        return await init()
       case 'generate':
-        return startGeneration(argv);
+        return await startGeneration(argv)
       case 'add':
-        return addContribution(argv);
+        return await addContribution(argv)
       case 'check':
-        return checkContributors(argv);
+        return await checkContributors(argv)
       default:
         throw new Error(`Unknown command ${command}`);
     }
   } catch (e) {
-    console.error(e.stack || e.message || e);
-    process.exit(1);
+    if (e instanceof util.UserError) {
+      console.error(e.message)
+    } else {
+      console.error(e.stack || e.message || e)
+    }
+    process.exit(1)
   }
 }
 

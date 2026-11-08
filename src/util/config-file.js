@@ -1,5 +1,6 @@
 import {promises as fs} from 'fs'
 import jf from 'json-fixer'
+
 import {formatConfig} from './formatting.js'
 
 export async function readConfig(configPath) {
@@ -24,11 +25,14 @@ async function readConfigFile(configPath) {
     if (error instanceof SyntaxError) {
       throw new SyntaxError(
         `Configuration file has malformed JSON: ${configPath}. Error:: ${error.message}`,
+        {cause: error},
       )
     }
 
     if (error.code === 'ENOENT') {
-      throw new Error(`Configuration file not found: ${configPath}`)
+      throw new Error(`Configuration file not found: ${configPath}`, {
+        cause: error,
+      })
     }
 
     throw error

@@ -1,6 +1,7 @@
 import inquirer from 'inquirer'
-import * as util from '../util/index.js'
+
 import * as repo from '../repo/index.js'
+import * as util from '../util/index.js'
 
 function contributionChoices(options) {
   const types = util.contributionTypes(options)

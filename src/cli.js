@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 
+import {promises as fs} from 'fs'
+import inquirer from 'inquirer'
 import path from 'path'
 import yargs from 'yargs'
 import {hideBin} from 'yargs/helpers'
 import * as YoctoColors from 'yoctocolors'
-import inquirer from 'inquirer'
-import {promises as fs} from 'fs'
 
-import {init} from './init/index.js'
-import {generate} from './generate/index.js'
-import * as util from './util/index.js'
-import * as repo from './repo/index.js'
 import {addContributor} from './contributors/index.js'
+import {generate} from './generate/index.js'
+import {init} from './init/index.js'
+import * as repo from './repo/index.js'
+import * as util from './util/index.js'
 
 const cwd = process.cwd()
 const defaultRCFile = path.join(cwd, '.all-contributorsrc')

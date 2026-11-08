@@ -1,10 +1,9 @@
-import {test, expect, beforeAll} from 'vitest'
 import nock from 'nock'
-import * as githubAPI from '../github.js'
+import {beforeAll, expect, test} from 'vitest'
 
+import * as githubAPI from '../github.js'
 import allContributorsCliResponse from './github/all-contributors.response.json'
 import allContributorsCliTransformed from './github/all-contributors.transformed.json'
-
 import reactNativeResponse1 from './github/react-native.response.1.json'
 import reactNativeResponse2 from './github/react-native.response.2.json'
 import reactNativeResponse3 from './github/react-native.response.3.json'

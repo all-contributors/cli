@@ -30,7 +30,7 @@ function defaultTemplate(templateData) {
     avatar,
     ...templateData,
   }
-  let avatarBlock = null
+  let avatarBlock
 
   if (templateData.contributor.profile) {
     avatarBlock = avatarBlockTemplate(avatarBlockTemplateData)

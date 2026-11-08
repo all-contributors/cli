@@ -1,4 +1,5 @@
-import {test, expect} from 'vitest'
+import {expect, test} from 'vitest'
+
 import {generate} from '../index.js'
 import contributors from './fixtures/contributors.json'
 

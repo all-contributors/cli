@@ -1,11 +1,12 @@
 import js from '@eslint/js'
 import markdown from '@eslint/markdown'
+import vitestPlugin from '@vitest/eslint-plugin'
+import {importX} from 'eslint-plugin-import-x'
 import jsonc from 'eslint-plugin-jsonc'
-import {defineConfig, globalIgnores} from 'eslint/config'
-import importPlugin from 'eslint-plugin-import'
 import packageJson from 'eslint-plugin-package-json'
-import vitestPlugin from 'eslint-plugin-vitest'
+import perfectionist from 'eslint-plugin-perfectionist'
 import yml from 'eslint-plugin-yml'
+import {defineConfig, globalIgnores} from 'eslint/config'
 import globals from 'globals'
 
 export default defineConfig([
@@ -17,22 +18,28 @@ export default defineConfig([
   ]),
   {linterOptions: {reportUnusedDisableDirectives: 'error'}},
   {
-    extends: [js.configs.recommended, importPlugin.flatConfigs.recommended],
+    extends: [js.configs.recommended, importX.flatConfigs.recommended],
     files: ['**/*.{mjs,js}'],
     languageOptions: {
       ecmaVersion: 'latest',
       globals: globals.node,
     },
+    plugins: {perfectionist},
     rules: {
-      'import/no-unresolved': [
+      'import-x/no-unresolved': [
         'error',
         {ignore: ['^eslint/', '^prettier$', '^yargs']},
       ],
-      'import/no-extraneous-dependencies': 'error',
-      'import/default': 'off',
-      'import/namespace': 'off',
-      'import/no-named-as-default-member': 'off',
+      'import-x/no-extraneous-dependencies': 'error',
+      'import-x/default': 'off',
+      'import-x/namespace': 'off',
+      'import-x/no-named-as-default-member': 'off',
+      'perfectionist/sort-exports': 'error',
+      'perfectionist/sort-imports': 'error',
+      'perfectionist/sort-named-exports': 'error',
+      'perfectionist/sort-named-imports': 'error',
     },
+    settings: {perfectionist: {partitionByComment: true, type: 'natural'}},
   },
   {
     extends: [vitestPlugin.configs.recommended],

@@ -1,6 +1,7 @@
-import path from 'path'
 import {exec} from 'child_process'
+import path from 'path'
 import {promisify} from 'util'
+
 import {conventions} from '../init/commit-conventions.js'
 import * as util from '../util/index.js'
 
@@ -40,7 +41,7 @@ const spawnGitCommand = async args => {
     const msg =
       error.stderr || `git ${args.join(' ')} - exit code: ${error.code}`
 
-    throw new Error(msg)
+    throw new Error(msg, {cause: error})
   }
 }
 

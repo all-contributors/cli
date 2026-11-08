@@ -1,7 +1,8 @@
 import {promises as fs} from 'fs'
+
 import {configFile} from '../util/index.js'
-import {prompt} from './prompt.js'
 import {addBadge, addContributorsList} from './init-content.js'
+import {prompt} from './prompt.js'
 
 async function ensureFileExists(file) {
   try {

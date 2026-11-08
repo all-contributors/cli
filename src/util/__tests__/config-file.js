@@ -1,8 +1,9 @@
 import {promises as fs} from 'fs'
 import os from 'os'
 import path from 'path'
-import {test, expect} from 'vitest'
-import {writeConfig, readConfig, writeContributors} from '../config-file.js'
+import {expect, test} from 'vitest'
+
+import {readConfig, writeConfig, writeContributors} from '../config-file.js'
 
 const absentFile = './abc'
 const absentConfigFileExpected = `Configuration file not found: ${absentFile}`

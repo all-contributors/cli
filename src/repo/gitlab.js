@@ -99,4 +99,4 @@ const getContributors = function (owner, name, hostname, privateToken) {
   )
 }
 
-export {getUserInfo, getContributors}
+export {getContributors, getUserInfo}

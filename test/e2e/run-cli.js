@@ -1,5 +1,6 @@
 // Helper that runs the CLI and returns the code, stdout, and stderr.
 import {execFile} from 'node:child_process'
+import process from 'node:process'
 import {fileURLToPath} from 'node:url'
 
 const cliPath = fileURLToPath(new URL('../../src/cli.js', import.meta.url))

@@ -1,28 +1,43 @@
-import {mkdtemp, readdir, rm} from 'node:fs/promises'
-import {tmpdir} from 'node:os'
+import {readdir, readFile, rm} from 'node:fs/promises'
 import path from 'node:path'
-import {afterEach, beforeEach, expect, test} from 'vitest'
+import {expect} from 'vitest'
+import {it as baseIt} from './fixtures.js'
 import {runCli} from './run-cli.js'
 
-let dir
-
-beforeEach(async () => {
-  dir = await mkdtemp(path.join(tmpdir(), 'ac-e2e-'))
+const it = baseIt.extend({
+  projectWithoutReadme: async ({project}, use) => {
+    await rm(path.join(project, 'README.md'))
+    await use(project)
+  },
 })
 
-afterEach(async () => {
-  await rm(dir, {recursive: true, force: true})
-})
-
-test('--help exits 0 and lists the commands', async () => {
-  const result = await runCli(['--help'], {cwd: dir})
+it('--help exits 0 and lists the commands', async ({tmpDir}) => {
+  const result = await runCli(['--help'], {cwd: tmpDir})
 
   expect(result.code).toBe(0)
   expect(result.stdout).toContain('generate')
 })
 
-test('--help does not create any files', async () => {
-  await runCli(['--help'], {cwd: dir})
+it('--help does not create any files', async ({tmpDir}) => {
+  await runCli(['--help'], {cwd: tmpDir})
 
-  expect(await readdir(dir)).toEqual([])
+  expect(await readdir(tmpDir)).toEqual([])
+})
+
+it('generate adds contributors to the README', async ({project}) => {
+  const result = await runCli(['generate'], {cwd: project})
+  const newReadme = await readFile(path.join(project, 'README.md'), 'utf8')
+
+  expect(result.code).toBe(0)
+  expect(newReadme).toContain('The Octocat')
+  expect(newReadme).toContain('https://github.com/octocat')
+})
+
+it('generate exits 1 when the README is missing', async ({
+  projectWithoutReadme,
+}) => {
+  const result = await runCli(['generate'], {cwd: projectWithoutReadme})
+
+  expect(result.code).toBe(1)
+  expect(result.stderr).toContain('README.md')
 })

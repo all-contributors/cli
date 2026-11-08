@@ -152,7 +152,7 @@ function promptForCommand(argv) {
   ]
   const questions = [
     {
-      type: 'list',
+      type: 'select',
       name: 'command',
       message: 'What do you want to do?',
       choices: choices,

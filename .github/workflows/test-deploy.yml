@@ -47,8 +47,8 @@ jobs:
       github.repository_owner == 'all-contributors' && github.event_name ==
       'release'
     needs:
-      - test
       - end-to-end
+      - test
     runs-on: ubuntu-latest
     environment:
       name: npm-publish

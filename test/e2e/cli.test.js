@@ -44,3 +44,14 @@ it('generate exits 1 when the README is missing', async ({ projectWithoutReadme 
   expect(result.stderr).not.toContain('ENOENT');
   expect(result.stderr).not.toContain('at readFileToUpdate');
 });
+
+it('exits 1 when the -c config file does not exist', async ({ tmpDir }) => {
+  const result = await runCli(['generate', '-c', 'missing.json'], {
+    cwd: tmpDir,
+  });
+
+  expect(result.code).toBe(1);
+  expect(result.stderr).toContain('Configuration file not found');
+  expect(result.stderr).not.toContain('at readConfigFile');
+  expect(result.stderr).toContain('all-contributors init');
+});

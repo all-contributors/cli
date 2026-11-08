@@ -3,6 +3,7 @@ import { promises as fs } from 'fs';
 import jf from 'json-fixer';
 
 import { formatConfig } from './formatting.js';
+import { UserError } from './user-error.js';
 
 export async function readConfig(configPath) {
   const config = await readConfigFile(configPath);
@@ -31,9 +32,11 @@ async function readConfigFile(configPath) {
     }
 
     if (error.code === 'ENOENT') {
-      throw new Error(`Configuration file not found: ${configPath}`, {
-        cause: error,
-      });
+      throw new UserError(
+        `Configuration file not found: ${configPath}\n` +
+          'Check that the path is correct, or run `all-contributors init` ' +
+          'to create a new configuration file.',
+      );
     }
 
     throw error;

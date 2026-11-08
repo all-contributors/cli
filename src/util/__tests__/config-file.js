@@ -5,6 +5,7 @@ import path from 'path';
 import { expect, test } from 'vitest';
 
 import { readConfig, writeConfig, writeContributors } from '../config-file.js';
+import { UserError } from '../user-error.js';
 
 const absentFile = './abc';
 const absentConfigFileExpected = `Configuration file not found: ${absentFile}`;
@@ -35,8 +36,11 @@ const NoFilesConfigFile = {
   files: [],
 };
 
-test('Reading an absent configuration file throws a helpful error', async () => {
-  await expect(readConfig(absentFile)).rejects.toThrow(absentConfigFileExpected);
+test('Reading an absent configuration file throws a helpful UserError', async () => {
+  const result = readConfig(absentFile);
+
+  await expect(result).rejects.toBeInstanceOf(UserError);
+  await expect(result).rejects.toThrow(absentConfigFileExpected);
 });
 
 test('Writing contributors in an absent configuration file throws a helpful error', async () => {

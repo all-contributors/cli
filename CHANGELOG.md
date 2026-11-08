@@ -1,5 +1,43 @@
 # Changelog
 
+## [7.0.1](https://github.com/all-contributors/cli/compare/v7.0.0...v7.0.1) (2026-11-08)
+
+
+### 🔥 Bug Fixes
+
+* add URL validation in gitlab.js (CWE-918) ([#570](https://github.com/all-contributors/cli/issues/570)) ([313c186](https://github.com/all-contributors/cli/commit/313c186c8e697376c50c93bf14a8359a11dad203))
+* don't persist default repoType and commitConvention to config file ([#542](https://github.com/all-contributors/cli/issues/542)) ([0b7660f](https://github.com/all-contributors/cli/commit/0b7660fff4e8a10cf1dda4a3d429b445bb63d500)), closes [#369](https://github.com/all-contributors/cli/issues/369)
+* replace removed inquirer list prompt with select ([#599](https://github.com/all-contributors/cli/issues/599)) ([11c66e6](https://github.com/all-contributors/cli/commit/11c66e698fcae1050e2218e659a974e5540aca6a))
+
+
+### 📚 Documentation
+
+* add nhktmdzhg as a contributor for bug ([#610](https://github.com/all-contributors/cli/issues/610)) ([e53bf5c](https://github.com/all-contributors/cli/commit/e53bf5c427dad9f7a5186e07c85e2f7a69274e55))
+* add stchigel as a contributor for bug ([#592](https://github.com/all-contributors/cli/issues/592)) ([28fa8ec](https://github.com/all-contributors/cli/commit/28fa8eca7809a1705bf9340418fa2b2a4dcdce54))
+
+
+### ⚙️ Chores
+
+* add more eslint plugins for better linting ([#607](https://github.com/all-contributors/cli/issues/607)) ([f0e13b3](https://github.com/all-contributors/cli/commit/f0e13b336afdbc334c8f5f85ea284b6d9dff6af2))
+* **deps-dev:** bump the development-dependencies group across 1 directory with 5 updates ([#590](https://github.com/all-contributors/cli/issues/590)) ([b315c75](https://github.com/all-contributors/cli/commit/b315c7552c9e07e52d46494ebcfcbec7ec85e22c))
+* **deps:** bump actions/setup-node ([f4341c8](https://github.com/all-contributors/cli/commit/f4341c87edc4467226e334aa6d9e3eca0296c0c2))
+* **deps:** bump actions/setup-node from 7.0.0 to 7.1.0 in the github-actions group ([#591](https://github.com/all-contributors/cli/issues/591)) ([f4341c8](https://github.com/all-contributors/cli/commit/f4341c87edc4467226e334aa6d9e3eca0296c0c2))
+* **deps:** Bump minor dependencies  ([#593](https://github.com/all-contributors/cli/issues/593)) ([ea23f04](https://github.com/all-contributors/cli/commit/ea23f04fd76498dd7c21717d715119d337e54012))
+* **deps:** bump the production-dependencies group with 2 updates ([#589](https://github.com/all-contributors/cli/issues/589)) ([e11a627](https://github.com/all-contributors/cli/commit/e11a6277615a1bbf38104b8aab1899edd1fb71f3))
+* remove legacy issue template ([#597](https://github.com/all-contributors/cli/issues/597)) ([45839a2](https://github.com/all-contributors/cli/commit/45839a2291434a08c7bd043bad6896dc5a3005ec))
+* update issue templates ([#596](https://github.com/all-contributors/cli/issues/596)) ([6029da7](https://github.com/all-contributors/cli/commit/6029da79f0bc2445b8c9b56c931fd6dbea6706ce))
+
+
+### 🧪 Testing
+
+* make sure cli and app are included in test cov ([#611](https://github.com/all-contributors/cli/issues/611)) ([68a6581](https://github.com/all-contributors/cli/commit/68a658135d7cdec69043608bc736c2b210dc04cf))
+
+
+### 📦 CI Improvements
+
+* add workflow displatch to  release-please workflow ([#580](https://github.com/all-contributors/cli/issues/580)) ([08ef81c](https://github.com/all-contributors/cli/commit/08ef81c11d81560a640210b17efffd20d4e7aa83))
+* extract checkout, node setup, and install into `setup` action ([#595](https://github.com/all-contributors/cli/issues/595)) ([46b17ff](https://github.com/all-contributors/cli/commit/46b17ffdf0d5bce05e419bab5b46ee2b6a497e23))
+
 ## [7.0.0](https://github.com/all-contributors/cli/compare/v6.26.1...v7.0.0) (2026-10-23)
 
 

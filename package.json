@@ -34,14 +34,19 @@
     "format:check": "prettier . --check",
     "knip": "knip",
     "lint": "eslint .",
-    "prepare": "husky",
+    "prepare": "simple-git-hooks",
     "start": "./dist/cli.js",
     "test": "vitest",
     "test:coverage": "vitest --coverage"
   },
+  "allowScripts": {
+    "simple-git-hooks": false
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
   "lint-staged": {
     "*.js": [
-      "eslint --fix",
       "prettier --write"
     ],
     "!(*.js)": "prettier --ignore-unknown --write"
@@ -71,11 +76,11 @@
     "eslint-plugin-yml": "^3.10.0",
     "git-cz": "^4.7.6",
     "globals": "^17.14.0",
-    "husky": "^9.1.0",
     "knip": "^6.10.0",
     "lint-staged": "^17.6.0",
     "nock": "^15.0.5",
     "prettier": "^3.8.1",
+    "simple-git-hooks": "^2.14.0",
     "vitest": "^5.1.0"
   },
   "optionalDependencies": {

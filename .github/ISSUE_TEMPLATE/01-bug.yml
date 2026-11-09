@@ -11,13 +11,11 @@ labels:
 body:
   - type: checkboxes
     attributes:
-      description:
-        If any of these required steps are not taken, we may not be able to
+      description: If any of these required steps are not taken, we may not be able to
         review your issue. Help us to help you!
       label: Bug Report Checklist
       options:
-        - label:
-            I have [searched for related
+        - label: I have [searched for related
             issues](https://github.com/all-contributors/cli/issues?q=is%3Aissue)
             and found none that matched my issue.
           required: true
@@ -29,8 +27,7 @@ body:
       required: true
   - type: textarea
     attributes:
-      description:
-        Steps to Reproduce the bug. Please provide a minimal reproducible
+      description: Steps to Reproduce the bug. Please provide a minimal reproducible
         example if possible.
       label: Steps to Reproduce
     validations:
@@ -51,8 +48,7 @@ body:
       required: false
   - type: input
     attributes:
-      description:
-        If possible, please create a repository that reproduces the issue with
+      description: If possible, please create a repository that reproduces the issue with
         the minimal amount of code possible.
       label: Minimal Reproduction
       placeholder: https://github.com/user/repo

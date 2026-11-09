@@ -2,10 +2,10 @@ const badgeContent = [
   '<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->',
   '[![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors-)',
   '<!-- ALL-CONTRIBUTORS-BADGE:END -->',
-].join('\n')
+].join('\n');
 
 const headerContent =
-  'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/en/reference/emoji-key/)):'
+  'Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/en/reference/emoji-key/)):';
 const listContent = [
   '<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->',
   '<!-- prettier-ignore-start -->',
@@ -13,34 +13,32 @@ const listContent = [
   '<!-- markdownlint-restore -->',
   '<!-- prettier-ignore-end -->',
   '<!-- ALL-CONTRIBUTORS-LIST:END -->',
-].join('\n')
+].join('\n');
 const footerContent =
-  'This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!'
+  'This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!';
 
 function injectContentBetween(lines, content, startIndex, endIndex) {
-  return [].concat(lines.slice(0, startIndex), content, lines.slice(endIndex))
+  return [].concat(lines.slice(0, startIndex), content, lines.slice(endIndex));
 }
 
 function addBadgeImpl(lines) {
-  return injectContentBetween(lines, badgeContent, 1, 1)
+  return injectContentBetween(lines, badgeContent, 1, 1);
 }
 
 function splitAndRejoin(fn) {
   return function (content) {
-    const lines = content.split('\n')
-    const result = fn(lines)
-    return result.join('\n')
-  }
+    const lines = content.split('\n');
+    const result = fn(lines);
+    return result.join('\n');
+  };
 }
 
 function findContributorsSection(lines) {
-  return lines.findIndex(
-    str => str.toLowerCase().indexOf('# contributors') === 1,
-  )
+  return lines.findIndex((str) => str.toLowerCase().indexOf('# contributors') === 1);
 }
 
 function addContributorsListImpl(lines) {
-  const insertionLine = findContributorsSection(lines)
+  const insertionLine = findContributorsSection(lines);
 
   if (insertionLine === -1) {
     return lines.concat([
@@ -51,16 +49,11 @@ function addContributorsListImpl(lines) {
       listContent,
       '',
       footerContent,
-    ])
+    ]);
   }
 
-  return injectContentBetween(
-    lines,
-    listContent,
-    insertionLine + 3,
-    insertionLine + 3,
-  )
+  return injectContentBetween(lines, listContent, insertionLine + 3, insertionLine + 3);
 }
 
-export const addBadge = splitAndRejoin(addBadgeImpl)
-export const addContributorsList = splitAndRejoin(addContributorsListImpl)
+export const addBadge = splitAndRejoin(addBadgeImpl);
+export const addContributorsList = splitAndRejoin(addContributorsListImpl);

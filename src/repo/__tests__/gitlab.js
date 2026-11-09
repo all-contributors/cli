@@ -1,24 +1,22 @@
-import nock from 'nock'
-import {expect, test} from 'vitest'
+import nock from 'nock';
+import { expect, test } from 'vitest';
 
-import * as gitlabAPI from '../gitlab.js'
+import * as gitlabAPI from '../gitlab.js';
 
-const getUserInfo = gitlabAPI.getUserInfo
+const getUserInfo = gitlabAPI.getUserInfo;
 
 async function rejects(promise) {
-  const error = await promise.catch(e => e)
-  expect(error).toBeTruthy()
+  const error = await promise.catch((e) => e);
+  expect(error).toBeTruthy();
 }
 
 // TODO: Review whether to add explicit expect() or keep implicit assertion via helper
 // eslint-disable-next-line vitest/expect-expect
 test('handle errors', async () => {
-  nock('https://gitlab.com')
-    .get('/api/v4/users?username=nodisplayname')
-    .reply(200, [])
+  nock('https://gitlab.com').get('/api/v4/users?username=nodisplayname').reply(200, []);
 
-  await rejects(getUserInfo('nodisplayname'))
-})
+  await rejects(getUserInfo('nodisplayname'));
+});
 
 test('fill in the name when it is returned', async () => {
   nock('https://gitlab.com')
@@ -31,11 +29,11 @@ test('fill in the name when it is returned', async () => {
           'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
         web_url: 'https://gitlab.com/nodisplayname',
       },
-    ])
+    ]);
 
-  const info = await getUserInfo('nodisplayname')
-  expect(info.name).toBe('No Display Name')
-})
+  const info = await getUserInfo('nodisplayname');
+  expect(info.name).toBe('No Display Name');
+});
 
 test('fill in the name when null is returned', async () => {
   nock('https://gitlab.com')
@@ -48,11 +46,11 @@ test('fill in the name when null is returned', async () => {
           'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
         web_url: 'https://gitlab.com/nodisplayname',
       },
-    ])
+    ]);
 
-  const info = await getUserInfo('nodisplayname')
-  expect(info.name).toBe('nodisplayname')
-})
+  const info = await getUserInfo('nodisplayname');
+  expect(info.name).toBe('nodisplayname');
+});
 
 test('fill in the name when an empty string is returned', async () => {
   nock('https://gitlab.com')
@@ -65,11 +63,11 @@ test('fill in the name when an empty string is returned', async () => {
           'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
         web_url: 'https://gitlab.com/nodisplayname',
       },
-    ])
+    ]);
 
-  const info = await getUserInfo('nodisplayname')
-  expect(info.name).toBe('nodisplayname')
-})
+  const info = await getUserInfo('nodisplayname');
+  expect(info.name).toBe('nodisplayname');
+});
 
 test('append http when no absolute link is provided', async () => {
   nock('https://gitlab.com')
@@ -82,11 +80,11 @@ test('append http when no absolute link is provided', async () => {
           'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
         web_url: 'www.gitlab.com/nodisplayname',
       },
-    ])
+    ]);
 
-  const info = await getUserInfo('nodisplayname')
-  expect(info.profile).toBe('http://www.gitlab.com/nodisplayname')
-})
+  const info = await getUserInfo('nodisplayname');
+  expect(info.profile).toBe('http://www.gitlab.com/nodisplayname');
+});
 
 test('retrieve user from a different gitlab registry', async () => {
   nock('http://gitlab.myhost.com:3000')
@@ -99,14 +97,11 @@ test('retrieve user from a different gitlab registry', async () => {
           'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
         web_url: 'https://gitlab.com/nodisplayname',
       },
-    ])
+    ]);
 
-  const info = await getUserInfo(
-    'nodisplayname',
-    'http://gitlab.myhost.com:3000',
-  )
-  expect(info.name).toBe('No Display Name')
-})
+  const info = await getUserInfo('nodisplayname', 'http://gitlab.myhost.com:3000');
+  expect(info.name).toBe('No Display Name');
+});
 
 test('retrieve user from a gitlab registry that needs a token', async () => {
   nock('http://gitlab.needtoken.com:3000')
@@ -119,27 +114,21 @@ test('retrieve user from a gitlab registry that needs a token', async () => {
           'http://www.gravatar.com/avatar/3186450a99d1641bf75a44baa23f0826?s=80\u0026d=identicon',
         web_url: 'https://gitlab.com/nodisplayname',
       },
-    ])
+    ]);
 
-  const info = await getUserInfo(
-    'nodisplayname',
-    'http://gitlab.needtoken.com:3000',
-    'faketoken',
-  )
-  expect(info.name).toBe('No Display Name')
-})
+  const info = await getUserInfo('nodisplayname', 'http://gitlab.needtoken.com:3000', 'faketoken');
+  expect(info.name).toBe('No Display Name');
+});
 
 // TODO: Review whether to add explicit expect() or keep implicit assertion via helper
 // eslint-disable-next-line vitest/expect-expect
 test('handle error when no token is offered', async () => {
   nock('http://gitlab.needtoken.com:3000')
     .get('/api/v4/users?username=nodisplayname')
-    .reply(200, [])
+    .reply(200, []);
 
-  await rejects(
-    getUserInfo('nodisplayname', 'http://gitlab.needtoken.com:3000', ''),
-  )
-})
+  await rejects(getUserInfo('nodisplayname', 'http://gitlab.needtoken.com:3000', ''));
+});
 
 test.each([
   'file:///etc/passwd',
@@ -147,15 +136,13 @@ test.each([
   'javascript:alert(1)',
   'gitlab.example.com',
   'not a url',
-])('rejects non-http(s) hostname %s without making a request', hostname => {
-  const scope = nock('https://gitlab.com').get(/.*/).reply(200, [])
+])('rejects non-http(s) hostname %s without making a request', (hostname) => {
+  const scope = nock('https://gitlab.com').get(/.*/).reply(200, []);
 
-  expect(() => getUserInfo('someuser', hostname)).toThrow(
-    `Invalid GitLab hostname: ${hostname}`,
-  )
-  expect(scope.isDone()).toBe(false)
-  nock.cleanAll()
-})
+  expect(() => getUserInfo('someuser', hostname)).toThrow(`Invalid GitLab hostname: ${hostname}`);
+  expect(scope.isDone()).toBe(false);
+  nock.cleanAll();
+});
 
 test('accepts a valid custom http(s) hostname', async () => {
   nock('https://gitlab.example.com')
@@ -167,8 +154,8 @@ test('accepts a valid custom http(s) hostname', async () => {
         avatar_url: 'https://gitlab.example.com/avatar.png',
         web_url: 'https://gitlab.example.com/customhost',
       },
-    ])
+    ]);
 
-  const info = await getUserInfo('customhost', 'https://gitlab.example.com')
-  expect(info.login).toBe('customhost')
-})
+  const info = await getUserInfo('customhost', 'https://gitlab.example.com');
+  expect(info.login).toBe('customhost');
+});

@@ -1,7 +1,7 @@
-import {expect, test} from 'vitest'
+import { expect, test } from 'vitest';
 
-import {generate} from '../index.js'
-import contributors from './fixtures/contributors.json'
+import { generate } from '../index.js';
+import contributors from './fixtures/contributors.json';
 
 /**
  * Returns test fixtures including options, sample contributor, and markdown content.
@@ -18,7 +18,7 @@ function fixtures() {
     contributorsPerLine: 5,
     contributors,
     contributorTemplate: '<%= contributor.name %> is awesome!',
-  }
+  };
 
   const jfmengels = {
     login: 'jfmengels',
@@ -26,7 +26,7 @@ function fixtures() {
     html_url: 'https://github.com/jfmengels',
     avatar_url: 'https://avatars.githubusercontent.com/u/3869412?v=3',
     contributions: ['doc'],
-  }
+  };
 
   const content = [
     '# project',
@@ -38,69 +38,59 @@ function fixtures() {
     '<!-- ALL-CONTRIBUTORS-LIST:START -->FOO BAR BAZ<!-- ALL-CONTRIBUTORS-LIST:END -->',
     '',
     'Thanks a lot everyone!',
-  ].join('\n')
+  ].join('\n');
 
-  return {options, jfmengels, content}
+  return { options, jfmengels, content };
 }
 
 test('throws when contributors is undefined (caller must await and pass resolved array)', () => {
-  const {options, content} = fixtures()
-  expect(() => generate(options, undefined, content)).toThrow(
-    'contributors must be an array',
-  )
-})
+  const { options, content } = fixtures();
+  expect(() => generate(options, undefined, content)).toThrow('contributors must be an array');
+});
 
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors', () => {
-  const {kentcdodds, bogas04} = contributors
-  const {options, jfmengels, content} = fixtures()
-  const contributorList = [kentcdodds, bogas04, jfmengels]
-  const result = generate(options, contributorList, content)
+  const { kentcdodds, bogas04 } = contributors;
+  const { options, jfmengels, content } = fixtures();
+  const contributorList = [kentcdodds, bogas04, jfmengels];
+  const result = generate(options, contributorList, content);
 
-  expect(result).toMatchSnapshot()
-})
+  expect(result).toMatchSnapshot();
+});
 
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors with linkToUsage', () => {
-  const {kentcdodds, bogas04} = contributors
-  const {options, jfmengels, content} = fixtures()
-  const contributorList = [kentcdodds, bogas04, jfmengels]
-  const result = generate(
-    Object.assign(options, {linkToUsage: true}),
-    contributorList,
-    content,
-  )
+  const { kentcdodds, bogas04 } = contributors;
+  const { options, jfmengels, content } = fixtures();
+  const contributorList = [kentcdodds, bogas04, jfmengels];
+  const result = generate(Object.assign(options, { linkToUsage: true }), contributorList, content);
 
-  expect(result).toMatchSnapshot()
-})
+  expect(result).toMatchSnapshot();
+});
 
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors without linkToUsage', () => {
-  const {kentcdodds, bogas04} = contributors
-  const {options, jfmengels, content} = fixtures()
-  const contributorList = [kentcdodds, bogas04, jfmengels]
-  const result = generate(
-    Object.assign(options, {linkToUsage: false}),
-    contributorList,
-    content,
-  )
+  const { kentcdodds, bogas04 } = contributors;
+  const { options, jfmengels, content } = fixtures();
+  const contributorList = [kentcdodds, bogas04, jfmengels];
+  const result = generate(Object.assign(options, { linkToUsage: false }), contributorList, content);
 
-  expect(result).toMatchSnapshot()
-})
+  expect(result).toMatchSnapshot();
+});
 
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a custom wrapper around the list of contributors contained in the "bodyContent" tag', () => {
-  const {kentcdodds, bogas04} = contributors
-  const {options, jfmengels, content} = fixtures()
-  const contributorList = [kentcdodds, bogas04, jfmengels]
+  const { kentcdodds, bogas04 } = contributors;
+  const { options, jfmengels, content } = fixtures();
+  const contributorList = [kentcdodds, bogas04, jfmengels];
   const result = generate(
-    Object.assign(options, {wrapperTemplate: '<p><%= bodyContent %></p>'}),
+    Object.assign(options, { wrapperTemplate: '<p><%= bodyContent %></p>' }),
     contributorList,
     content,
-  )
+  );
 
-  expect(result).toMatchSnapshot()
-})
+  expect(result).toMatchSnapshot();
+});
 
 test('split contributors into multiples lines when there are too many', () => {
-  const {kentcdodds} = contributors
-  const {options, content} = fixtures()
+  const { kentcdodds } = contributors;
+  const { options, content } = fixtures();
   const contributorList = [
     kentcdodds,
     kentcdodds,
@@ -109,15 +99,15 @@ test('split contributors into multiples lines when there are too many', () => {
     kentcdodds,
     kentcdodds,
     kentcdodds,
-  ]
-  const result = generate(options, contributorList, content)
+  ];
+  const result = generate(options, contributorList, content);
 
-  expect(result).toMatchSnapshot()
-})
+  expect(result).toMatchSnapshot();
+});
 
 test('split contributors into multiples lines when there are too many with linkToUsage', () => {
-  const {kentcdodds} = contributors
-  const {options, content} = fixtures()
+  const { kentcdodds } = contributors;
+  const { options, content } = fixtures();
   const contributorList = [
     kentcdodds,
     kentcdodds,
@@ -126,39 +116,27 @@ test('split contributors into multiples lines when there are too many with linkT
     kentcdodds,
     kentcdodds,
     kentcdodds,
-  ]
-  const result = generate(
-    Object.assign(options, {linkToUsage: true}),
-    contributorList,
-    content,
-  )
+  ];
+  const result = generate(Object.assign(options, { linkToUsage: true }), contributorList, content);
 
-  expect(result).toMatchSnapshot()
-})
+  expect(result).toMatchSnapshot();
+});
 
 test('sorts the list of contributors if contributorsSortAlphabetically=true', () => {
-  const {kentcdodds, bogas04} = contributors
-  const {options, jfmengels, content} = fixtures()
+  const { kentcdodds, bogas04 } = contributors;
+  const { options, jfmengels, content } = fixtures();
 
-  const resultPreSorted = generate(
-    options,
-    [bogas04, jfmengels, kentcdodds],
-    content,
-  )
+  const resultPreSorted = generate(options, [bogas04, jfmengels, kentcdodds], content);
 
-  options.contributorsSortAlphabetically = true
-  const resultAutoSorted = generate(
-    options,
-    [jfmengels, kentcdodds, bogas04],
-    content,
-  )
+  options.contributorsSortAlphabetically = true;
+  const resultAutoSorted = generate(options, [jfmengels, kentcdodds, bogas04], content);
 
-  expect(resultPreSorted).toEqual(resultAutoSorted)
-})
+  expect(resultPreSorted).toEqual(resultAutoSorted);
+});
 
 test('sorts the list of contributors case-insensitively when contributorsSortAlphabetically=true', () => {
-  const {options, content} = fixtures()
-  options.contributorsSortAlphabetically = true
+  const { options, content } = fixtures();
+  options.contributorsSortAlphabetically = true;
 
   const contributorA = {
     login: 'adam',
@@ -166,86 +144,76 @@ test('sorts the list of contributors case-insensitively when contributorsSortAlp
     avatar_url: 'https://avatars.githubusercontent.com/u/1',
     profile: 'https://github.com/adam',
     contributions: ['doc'],
-  }
+  };
   const contributorB = {
     login: 'Bob',
     name: 'Bob',
     avatar_url: 'https://avatars.githubusercontent.com/u/2',
     profile: 'https://github.com/Bob',
     contributions: ['code'],
-  }
+  };
   const contributorC = {
     login: 'charlie',
     name: 'charlie',
     avatar_url: 'https://avatars.githubusercontent.com/u/3',
     profile: 'https://github.com/charlie',
     contributions: ['bug'],
-  }
+  };
 
-  const resultAutoSorted = generate(
-    options,
-    [contributorB, contributorC, contributorA],
-    content,
-  )
+  const resultAutoSorted = generate(options, [contributorB, contributorC, contributorA], content);
 
   const resultExpected = generate(
-    {...options, contributorsSortAlphabetically: false},
+    { ...options, contributorsSortAlphabetically: false },
     [contributorA, contributorB, contributorC],
     content,
-  )
+  );
 
-  expect(resultAutoSorted).toEqual(resultExpected)
-})
+  expect(resultAutoSorted).toEqual(resultExpected);
+});
 
 test('sorts contributors falling back to login when name is not provided', () => {
-  const {options, content} = fixtures()
-  options.contributorsSortAlphabetically = true
+  const { options, content } = fixtures();
+  options.contributorsSortAlphabetically = true;
 
   const contributorNoNameA = {
     login: 'alice',
     avatar_url: 'https://avatars.githubusercontent.com/u/1',
     profile: 'https://github.com/alice',
     contributions: ['doc'],
-  }
+  };
   const contributorWithNameB = {
     login: 'bob_user',
     name: 'Bob',
     avatar_url: 'https://avatars.githubusercontent.com/u/2',
     profile: 'https://github.com/bob_user',
     contributions: ['code'],
-  }
+  };
 
-  const resultAutoSorted = generate(
-    options,
-    [contributorWithNameB, contributorNoNameA],
-    content,
-  )
+  const resultAutoSorted = generate(options, [contributorWithNameB, contributorNoNameA], content);
 
   const resultExpected = generate(
-    {...options, contributorsSortAlphabetically: false},
+    { ...options, contributorsSortAlphabetically: false },
     [contributorNoNameA, contributorWithNameB],
     content,
-  )
+  );
 
-  expect(resultAutoSorted).toEqual(resultExpected)
-})
+  expect(resultAutoSorted).toEqual(resultExpected);
+});
 
 test('not inject anything if there is no tags to inject content in', () => {
-  const {kentcdodds} = contributors
-  const {options} = fixtures()
-  const contributorList = [kentcdodds]
-  const content = ['# project', '', 'Description', '', 'License: MIT'].join(
-    '\n',
-  )
+  const { kentcdodds } = contributors;
+  const { options } = fixtures();
+  const contributorList = [kentcdodds];
+  const content = ['# project', '', 'Description', '', 'License: MIT'].join('\n');
 
-  const result = generate(options, contributorList, content)
-  expect(result).toBe(content)
-})
+  const result = generate(options, contributorList, content);
+  expect(result).toBe(content);
+});
 
 test('not inject anything if start tag is malformed', () => {
-  const {kentcdodds} = contributors
-  const {options} = fixtures()
-  const contributorList = [kentcdodds]
+  const { kentcdodds } = contributors;
+  const { options } = fixtures();
+  const contributorList = [kentcdodds];
   const content = [
     '# project',
     '',
@@ -254,16 +222,16 @@ test('not inject anything if start tag is malformed', () => {
     '<!-- ALL-CONTRIBUTORS-LIST:END -->',
     '',
     'License: MIT',
-  ].join('\n')
+  ].join('\n');
 
-  const result = generate(options, contributorList, content)
-  expect(result).toBe(content)
-})
+  const result = generate(options, contributorList, content);
+  expect(result).toBe(content);
+});
 
 test('not inject anything if end tag is malformed', () => {
-  const {kentcdodds} = contributors
-  const {options} = fixtures()
-  const contributorList = [kentcdodds]
+  const { kentcdodds } = contributors;
+  const { options } = fixtures();
+  const contributorList = [kentcdodds];
   const content = [
     '# project',
     '',
@@ -272,15 +240,15 @@ test('not inject anything if end tag is malformed', () => {
     '<!-- ALL-CONTRIBUTORS-LIST:EEEEEEEND -->',
     '',
     'License: MIT',
-  ].join('\n')
+  ].join('\n');
 
-  const result = generate(options, contributorList, content)
-  expect(result).toBe(content)
-})
+  const result = generate(options, contributorList, content);
+  expect(result).toBe(content);
+});
 
 test('inject nothing if there are no contributors', () => {
-  const {options, content} = fixtures()
-  const contributorList = []
+  const { options, content } = fixtures();
+  const contributorList = [];
   const expected = [
     '# project',
     '',
@@ -297,17 +265,17 @@ test('inject nothing if there are no contributors', () => {
     '<!-- ALL-CONTRIBUTORS-LIST:END -->',
     '',
     'Thanks a lot everyone!',
-  ].join('\n')
+  ].join('\n');
 
-  const result = generate(options, contributorList, content)
+  const result = generate(options, contributorList, content);
 
-  expect(result).toBe(expected)
-})
+  expect(result).toBe(expected);
+});
 
 test('replace all-contributors badge if present', () => {
-  const {kentcdodds} = contributors
-  const {options} = fixtures()
-  const contributorList = [kentcdodds]
+  const { kentcdodds } = contributors;
+  const { options } = fixtures();
+  const contributorList = [kentcdodds];
   const content = [
     '# project',
     '',
@@ -321,7 +289,7 @@ test('replace all-contributors badge if present', () => {
     ].join(''),
     '',
     'License: MIT',
-  ].join('\n')
+  ].join('\n');
   const expected = [
     '# project',
     '',
@@ -335,44 +303,44 @@ test('replace all-contributors badge if present', () => {
     ].join(''),
     '',
     'License: MIT',
-  ].join('\n')
+  ].join('\n');
 
-  const result = generate(options, contributorList, content)
+  const result = generate(options, contributorList, content);
 
-  expect(result).toBe(expected)
-})
+  expect(result).toBe(expected);
+});
 
 test('validate if cell width attribute is floored correctly', () => {
-  const {kentcdodds} = contributors
-  const {options, content} = fixtures()
-  const contributorList = [kentcdodds, kentcdodds, kentcdodds]
+  const { kentcdodds } = contributors;
+  const { options, content } = fixtures();
+  const contributorList = [kentcdodds, kentcdodds, kentcdodds];
 
-  options.contributorsPerLine = 7
-  const result = generate(options, contributorList, content)
+  options.contributorsPerLine = 7;
+  const result = generate(options, contributorList, content);
 
-  expect(result).toMatchSnapshot()
-})
+  expect(result).toMatchSnapshot();
+});
 
 test('inject the table when the ALL-CONTRIBUTORS-LIST tag starts the file', () => {
-  const {kentcdodds, bogas04} = contributors
-  const {options} = fixtures()
-  const contributorList = [kentcdodds, bogas04]
+  const { kentcdodds, bogas04 } = contributors;
+  const { options } = fixtures();
+  const contributorList = [kentcdodds, bogas04];
   const content = [
     '<!-- ALL-CONTRIBUTORS-LIST:START -->FOO BAR BAZ<!-- ALL-CONTRIBUTORS-LIST:END -->',
     '',
     'Thanks a lot everyone!',
-  ].join('\n')
+  ].join('\n');
 
-  const result = generate(options, contributorList, content)
+  const result = generate(options, contributorList, content);
 
-  expect(result).toContain('<table>')
-  expect(result).toContain('<!-- ALL-CONTRIBUTORS-LIST:END -->')
-  expect(result).not.toContain('FOO BAR BAZ')
-})
+  expect(result).toContain('<table>');
+  expect(result).toContain('<!-- ALL-CONTRIBUTORS-LIST:END -->');
+  expect(result).not.toContain('FOO BAR BAZ');
+});
 
 test('does not re-add markdownlint comments to a generated list that had them removed', () => {
-  const {kentcdodds} = contributors
-  const {options} = fixtures()
+  const { kentcdodds } = contributors;
+  const { options } = fixtures();
   const content = [
     '<!-- ALL-CONTRIBUTORS-LIST:START -->',
     '<!-- prettier-ignore-start -->',
@@ -381,17 +349,17 @@ test('does not re-add markdownlint comments to a generated list that had them re
     '<!-- prettier-ignore-end -->',
     '',
     '<!-- ALL-CONTRIBUTORS-LIST:END -->',
-  ].join('\n')
+  ].join('\n');
 
-  const result = generate(options, [kentcdodds], content)
+  const result = generate(options, [kentcdodds], content);
 
-  expect(result).not.toContain('markdownlint')
-  expect(result).toContain('</table>\n\n<!-- prettier-ignore-end -->\n\n')
-})
+  expect(result).not.toContain('markdownlint');
+  expect(result).toContain('</table>\n\n<!-- prettier-ignore-end -->\n\n');
+});
 
 test('keeps markdownlint comments in a generated list that has them', () => {
-  const {kentcdodds} = contributors
-  const {options} = fixtures()
+  const { kentcdodds } = contributors;
+  const { options } = fixtures();
   const content = [
     '<!-- ALL-CONTRIBUTORS-LIST:START -->',
     '<!-- prettier-ignore-start -->',
@@ -402,35 +370,35 @@ test('keeps markdownlint comments in a generated list that has them', () => {
     '<!-- prettier-ignore-end -->',
     '',
     '<!-- ALL-CONTRIBUTORS-LIST:END -->',
-  ].join('\n')
+  ].join('\n');
 
-  const result = generate(options, [kentcdodds], content)
+  const result = generate(options, [kentcdodds], content);
 
   expect(result).toContain(
     '<!-- prettier-ignore-start -->\n<!-- markdownlint-disable -->\n<table>',
-  )
+  );
   expect(result).toContain(
     '</table>\n\n<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->',
-  )
-})
+  );
+});
 
 test('adds markdownlint comments to a new list by default', () => {
-  const {kentcdodds} = contributors
-  const {options, content} = fixtures()
+  const { kentcdodds } = contributors;
+  const { options, content } = fixtures();
 
-  const result = generate(options, [kentcdodds], content)
+  const result = generate(options, [kentcdodds], content);
 
   expect(result).toContain(
     '<!-- prettier-ignore-start -->\n<!-- markdownlint-disable -->\n<table>',
-  )
+  );
   expect(result).toContain(
     '</table>\n\n<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->',
-  )
-})
+  );
+});
 
 test('adds markdownlint comments to a generated list that had them removed when withMarkdownlint=true', () => {
-  const {kentcdodds} = contributors
-  const {options} = fixtures()
+  const { kentcdodds } = contributors;
+  const { options } = fixtures();
   const content = [
     '<!-- ALL-CONTRIBUTORS-LIST:START -->',
     '<!-- prettier-ignore-start -->',
@@ -439,18 +407,18 @@ test('adds markdownlint comments to a generated list that had them removed when 
     '<!-- prettier-ignore-end -->',
     '',
     '<!-- ALL-CONTRIBUTORS-LIST:END -->',
-  ].join('\n')
+  ].join('\n');
 
   const result = generate(
-    Object.assign(options, {withMarkdownlint: true}),
+    Object.assign(options, { withMarkdownlint: true }),
     [kentcdodds],
     content,
-  )
+  );
 
   expect(result).toContain(
     '<!-- prettier-ignore-start -->\n<!-- markdownlint-disable -->\n<table>',
-  )
+  );
   expect(result).toContain(
     '</table>\n\n<!-- markdownlint-restore -->\n<!-- prettier-ignore-end -->',
-  )
-})
+  );
+});

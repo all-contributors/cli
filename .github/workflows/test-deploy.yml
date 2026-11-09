@@ -43,8 +43,7 @@ jobs:
   publish:
     name: >-
       Publish cli 📦 to NPM
-    if:
-      github.repository_owner == 'all-contributors' && github.event_name ==
+    if: github.repository_owner == 'all-contributors' && github.event_name ==
       'release'
     needs:
       - end-to-end

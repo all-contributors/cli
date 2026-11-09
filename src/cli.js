@@ -1,20 +1,21 @@
 #!/usr/bin/env node
 
-import {promises as fs} from 'fs'
-import inquirer from 'inquirer'
-import path from 'path'
-import yargs from 'yargs'
-import {hideBin} from 'yargs/helpers'
-import * as YoctoColors from 'yoctocolors'
+import { promises as fs } from 'fs';
+import path from 'path';
 
-import {addContributor} from './contributors/index.js'
-import {generate} from './generate/index.js'
-import {init} from './init/index.js'
-import * as repo from './repo/index.js'
-import * as util from './util/index.js'
+import inquirer from 'inquirer';
+import yargs from 'yargs';
+import { hideBin } from 'yargs/helpers';
+import * as YoctoColors from 'yoctocolors';
 
-const cwd = process.cwd()
-const defaultRCFile = path.join(cwd, '.all-contributorsrc')
+import { addContributor } from './contributors/index.js';
+import { generate } from './generate/index.js';
+import { init } from './init/index.js';
+import * as repo from './repo/index.js';
+import * as util from './util/index.js';
+
+const cwd = process.cwd();
+const defaultRCFile = path.join(cwd, '.all-contributorsrc');
 
 function getArgs() {
   return yargs(hideBin(process.argv))
@@ -28,18 +29,14 @@ function getArgs() {
     .option('contributorsSortAlphabetically', {
       type: 'boolean',
       default: false,
-      description:
-        'Sort the list of contributors alphabetically in the generated list',
+      description: 'Sort the list of contributors alphabetically in the generated list',
     })
     .help('help')
     .alias('h', 'help')
     .alias('v', 'version')
     .version()
     .recommendCommands()
-    .command(
-      'generate',
-      `Generate the list of contributors\n\nUSAGE: all-contributors generate`,
-    )
+    .command('generate', `Generate the list of contributors\n\nUSAGE: all-contributors generate`)
     .command(
       'add',
       `Add a new contributor\n\nUSAGE: all-contributors add <username> <comma-separated contributions>`,
@@ -55,84 +52,70 @@ function getArgs() {
     .boolean('commit')
     .default('files', ['README.md'])
     .default('contributorsPerLine', 7)
-    .default('contributors', []).argv
+    .default('contributors', []).argv;
 }
 
 async function startGeneration(argv) {
   await Promise.all(
-    argv.files.map(async file => {
-      const filePath = path.join(cwd, file)
-      const fileContent = await fs.readFile(filePath, 'utf8')
-      const newFileContent = generate(argv, argv.contributors, fileContent)
+    argv.files.map(async (file) => {
+      const filePath = path.join(cwd, file);
+      const fileContent = await fs.readFile(filePath, 'utf8');
+      const newFileContent = generate(argv, argv.contributors, fileContent);
 
-      await fs.writeFile(filePath, newFileContent)
+      await fs.writeFile(filePath, newFileContent);
     }),
-  )
+  );
 }
 
 async function addContribution(argv) {
-  const username = argv._[1] === undefined ? undefined : String(argv._[1])
-  const contributions = argv._[2]
+  const username = argv._[1] === undefined ? undefined : String(argv._[1]);
+  const contributions = argv._[2];
 
   // Add or update contributor in the config file
-  const data = await addContributor(argv, username, contributions)
+  const data = await addContributor(argv, username, contributions);
 
-  argv.contributors = data.contributors
+  argv.contributors = data.contributors;
 
-  await startGeneration(argv)
+  await startGeneration(argv);
 
   // Commit if configured
   if (argv.commit) {
-    return util.git.commit(argv, data)
+    return util.git.commit(argv, data);
   }
 }
 
 async function checkContributors(argv) {
   return repo
-    .getContributors(
-      argv.projectOwner,
-      argv.projectName,
-      argv.repoType,
-      argv.repoHost,
-    )
-    .then(repoContributors => {
-      const checkKey = repo.getCheckKey(argv.repoType)
+    .getContributors(argv.projectOwner, argv.projectName, argv.repoType, argv.repoHost)
+    .then((repoContributors) => {
+      const checkKey = repo.getCheckKey(argv.repoType);
       const knownContributions = argv.contributors.reduce((obj, item) => {
-        obj[item[checkKey]] = item.contributions
-        return obj
-      }, {})
-      const knownContributors = argv.contributors.map(
-        contributor => contributor[checkKey],
-      )
+        obj[item[checkKey]] = item.contributions;
+        return obj;
+      }, {});
+      const knownContributors = argv.contributors.map((contributor) => contributor[checkKey]);
 
-      const missingInConfig = repoContributors.filter(
-        key => !knownContributors.includes(key),
-      )
-      const missingFromRepo = knownContributors.filter(key => {
+      const missingInConfig = repoContributors.filter((key) => !knownContributors.includes(key));
+      const missingFromRepo = knownContributors.filter((key) => {
         return (
           !repoContributors.includes(key) &&
-          (knownContributions[key].includes('code') ||
-            knownContributions[key].includes('test'))
-        )
-      })
+          (knownContributions[key].includes('code') || knownContributions[key].includes('test'))
+        );
+      });
 
       if (missingInConfig.length) {
-        process.stdout.write(
-          YoctoColors.bold('Missing contributors in .all-contributorsrc:\n'),
-        )
-        process.stdout.write(`${missingInConfig.join(', ')}\n`)
+        process.stdout.write(YoctoColors.bold('Missing contributors in .all-contributorsrc:\n'));
+        process.stdout.write(`${missingInConfig.join(', ')}\n`);
       }
 
       if (missingFromRepo.length) {
-        process.stdout.write('\n')
+        process.stdout.write('\n');
         process.stdout.write(
-          YoctoColors.bold(
-            'Unknown contributors found in .all-contributorsrc:\n',
-          ),
-        )
-        process.stdout.write(`${missingFromRepo.join(', ')}\n`)
+          YoctoColors.bold('Unknown contributors found in .all-contributorsrc:\n'),
+        );
+        process.stdout.write(`${missingFromRepo.join(', ')}\n`);
       }
-    })
+    });
 }
 
 function promptForCommand(argv) {
@@ -149,7 +132,7 @@ function promptForCommand(argv) {
       name: 'Compare contributors from the repository with the credited ones',
       value: 'check',
     },
-  ]
+  ];
   const questions = [
     {
       type: 'select',
@@ -159,46 +142,46 @@ function promptForCommand(argv) {
       when: !argv._[0],
       default: choices[0].value,
     },
-  ]
+  ];
 
-  return inquirer.prompt(questions).then(answers => {
-    return answers.command || argv._[0]
-  })
+  return inquirer.prompt(questions).then((answers) => {
+    return answers.command || argv._[0];
+  });
 }
 
 async function run() {
   try {
-    const argv = getArgs()
+    const argv = getArgs();
 
     // Load and merge config file data into argv
     try {
-      const configData = await util.configFile.readConfig(argv.config)
-      Object.assign(argv, configData)
+      const configData = await util.configFile.readConfig(argv.config);
+      Object.assign(argv, configData);
     } catch (error) {
       if (error instanceof SyntaxError || argv.config !== defaultRCFile) {
-        throw error
+        throw error;
       }
       // If default config file doesn't exist, that's okay
     }
 
-    const command = await promptForCommand(argv)
+    const command = await promptForCommand(argv);
 
     switch (command) {
       case 'init':
-        return init()
+        return init();
       case 'generate':
-        return startGeneration(argv)
+        return startGeneration(argv);
       case 'add':
-        return addContribution(argv)
+        return addContribution(argv);
       case 'check':
-        return checkContributors(argv)
+        return checkContributors(argv);
       default:
-        throw new Error(`Unknown command ${command}`)
+        throw new Error(`Unknown command ${command}`);
     }
   } catch (e) {
-    console.error(e.stack || e.message || e)
-    process.exit(1)
+    console.error(e.stack || e.message || e);
+    process.exit(1);
   }
 }
 
-run()
+run();

@@ -1,10 +1,5 @@
 {
   "$schema": "https://unpkg.com/knip@5.71.0/schema.json",
-  "entry": [
-    "src/**/__tests__/*",
-    "src/api.js",
-    "src/repo/*.js",
-    "src/util/*.js"
-  ],
+  "entry": ["src/**/__tests__/*", "src/api.js", "src/repo/*.js", "src/util/*.js"],
   "treatConfigHintsAsErrors": true
 }

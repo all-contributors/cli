@@ -1,74 +1,70 @@
-import {promises as fs} from 'fs'
-import jf from 'json-fixer'
+import { promises as fs } from 'fs';
 
-import {formatConfig} from './formatting.js'
+import jf from 'json-fixer';
+
+import { formatConfig } from './formatting.js';
 
 export async function readConfig(configPath) {
-  const config = await readConfigFile(configPath)
+  const config = await readConfigFile(configPath);
 
-  return {repoType: 'github', commitConvention: 'angular', ...config}
+  return { repoType: 'github', commitConvention: 'angular', ...config };
 }
 
 async function readConfigFile(configPath) {
   try {
-    const configFileContents = await fs.readFile(configPath, 'utf-8')
-    const {data: config, changed} = jf(configFileContents)
+    const configFileContents = await fs.readFile(configPath, 'utf-8');
+    const { data: config, changed } = jf(configFileContents);
 
     if (changed) {
-      const formatterConfig = await formatConfig(configPath, config)
+      const formatterConfig = await formatConfig(configPath, config);
       //Updates the file with fixes
-      await fs.writeFile(configPath, formatterConfig)
+      await fs.writeFile(configPath, formatterConfig);
     }
 
-    return config
+    return config;
   } catch (error) {
     if (error instanceof SyntaxError) {
       throw new SyntaxError(
         `Configuration file has malformed JSON: ${configPath}. Error:: ${error.message}`,
-        {cause: error},
-      )
+        { cause: error },
+      );
     }
 
     if (error.code === 'ENOENT') {
       throw new Error(`Configuration file not found: ${configPath}`, {
         cause: error,
-      })
+      });
     }
 
-    throw error
+    throw error;
   }
 }
 
 export async function writeConfig(configPath, content) {
   if (!content.projectOwner) {
-    throw new Error(`Error! Project owner is not set in ${configPath}`)
+    throw new Error(`Error! Project owner is not set in ${configPath}`);
   }
 
   if (!content.projectName) {
-    throw new Error(`Error! Project name is not set in ${configPath}`)
+    throw new Error(`Error! Project name is not set in ${configPath}`);
   }
 
   if (content.files && !content.files.length) {
-    throw new Error(
-      `Error! Project files was overridden and is empty in ${configPath}`,
-    )
+    throw new Error(`Error! Project files was overridden and is empty in ${configPath}`);
   }
 
-  return fs.writeFile(
-    configPath,
-    `${await formatConfig(configPath, content)}\n`,
-  )
+  return fs.writeFile(configPath, `${await formatConfig(configPath, content)}\n`);
 }
 
 export async function writeContributors(configPath, contributors) {
-  let config
+  let config;
 
   try {
-    config = await readConfigFile(configPath)
+    config = await readConfigFile(configPath);
   } catch (error) {
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
-  const content = {...config, contributors}
+  const content = { ...config, contributors };
 
-  return writeConfig(configPath, content)
+  return writeConfig(configPath, content);
 }

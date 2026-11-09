@@ -7,7 +7,7 @@ const conventions = {
       return msg.replace(
         /(^.*?) ([A-Z][a-z]+) \w*/,
         (_, ...words) => `${words[0]} ${words[1].toLowerCase()} `,
-      )
+      );
     },
   },
   atom: {
@@ -34,10 +34,10 @@ const conventions = {
     name: 'None',
     msg: '',
   },
-}
+};
 
-Object.keys(conventions).forEach(style => {
-  conventions[style].value = style
-})
+Object.keys(conventions).forEach((style) => {
+  conventions[style].value = style;
+});
 
-export {conventions}
+export { conventions };

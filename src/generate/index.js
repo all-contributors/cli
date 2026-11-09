@@ -1,57 +1,44 @@
-import * as util from '../util/index.js'
-import {formatBadge} from './format-badge.js'
-import {formatContributor} from './format-contributor.js'
+import * as util from '../util/index.js';
+import { formatBadge } from './format-badge.js';
+import { formatContributor } from './format-contributor.js';
 
 function chunk(array, size) {
-  const chunks = []
+  const chunks = [];
   for (let i = 0; i < array.length; i += size) {
-    chunks.push(array.slice(i, i + size))
+    chunks.push(array.slice(i, i + size));
   }
-  return chunks
+  return chunks;
 }
 
 function injectListBetweenTags(newContent, options) {
   return function (previousContent) {
-    const tagToLookFor = `<!-- ALL-CONTRIBUTORS-LIST:`
-    const closingTag = '-->'
-    const startOfOpeningTagIndex = previousContent.indexOf(
-      `${tagToLookFor}START`,
-    )
-    const endOfOpeningTagIndex = previousContent.indexOf(
-      closingTag,
-      startOfOpeningTagIndex,
-    )
+    const tagToLookFor = `<!-- ALL-CONTRIBUTORS-LIST:`;
+    const closingTag = '-->';
+    const startOfOpeningTagIndex = previousContent.indexOf(`${tagToLookFor}START`);
+    const endOfOpeningTagIndex = previousContent.indexOf(closingTag, startOfOpeningTagIndex);
     const startOfClosingTagIndex = previousContent.indexOf(
       `${tagToLookFor}END`,
       endOfOpeningTagIndex,
-    )
+    );
     if (
       startOfOpeningTagIndex === -1 ||
       endOfOpeningTagIndex === -1 ||
       startOfClosingTagIndex === -1
     ) {
-      return previousContent
+      return previousContent;
     }
-    const startIndent = Math.max(
-      0,
-      previousContent.lastIndexOf('\n', startOfOpeningTagIndex),
-    )
+    const startIndent = Math.max(0, previousContent.lastIndexOf('\n', startOfOpeningTagIndex));
     const nbSpaces = Math.max(
       0,
-      startOfOpeningTagIndex -
-        Math.min(startOfOpeningTagIndex, startIndent) -
-        1,
-    )
-    const previousList = previousContent.slice(
-      endOfOpeningTagIndex,
-      startOfClosingTagIndex,
-    )
+      startOfOpeningTagIndex - Math.min(startOfOpeningTagIndex, startIndent) - 1,
+    );
+    const previousList = previousContent.slice(endOfOpeningTagIndex, startOfClosingTagIndex);
     const withMarkdownlint =
       options.withMarkdownlint === true ||
       previousList.includes('<!-- markdownlint-disable -->') ||
       // Lists without prettier-ignore-start were never generated
       // (e.g. hand-written tags), so they default to including markdownlint
-      !previousList.includes('<!-- prettier-ignore-start -->')
+      !previousList.includes('<!-- prettier-ignore-start -->');
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n<!-- prettier-ignore-start -->',
@@ -61,127 +48,111 @@ function injectListBetweenTags(newContent, options) {
       '<!-- prettier-ignore-end -->',
       '\n\n',
       previousContent.slice(startOfClosingTagIndex),
-    ].join('')
-  }
+    ].join('');
+  };
 }
 
 function formatLine(options, contributors) {
-  const width = Math.floor((100 / options.contributorsPerLine) * 100) / 100
-  const attributes = `align="center" valign="top" width="${width}%"`
+  const width = Math.floor((100 / options.contributorsPerLine) * 100) / 100;
+  const attributes = `align="center" valign="top" width="${width}%"`;
 
-  return `<td ${attributes}>${contributors.join(
-    `</td>\n      <td ${attributes}>`,
-  )}</td>`
+  return `<td ${attributes}>${contributors.join(`</td>\n      <td ${attributes}>`)}</td>`;
 }
 
 function formatFooter(options) {
   if (!options.linkToUsage) {
-    return ''
+    return '';
   }
   const smallLogoURL =
-    'https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg'
-  const linkToBotAdd = 'https://all-contributors.js.org/docs/en/bot/usage'
+    'https://raw.githubusercontent.com/all-contributors/all-contributors-cli/1b8533af435da9854653492b1327a23a4dbd0a10/assets/logo-small.svg';
+  const linkToBotAdd = 'https://all-contributors.js.org/docs/en/bot/usage';
 
-  return `<tr>\n      <td align="center" size="13px" colspan="${options.contributorsPerLine}">\n        <img src="${smallLogoURL}">\n          <a href="${linkToBotAdd}">Add your contributions</a>\n        </img>\n      </td>\n    </tr>`
+  return `<tr>\n      <td align="center" size="13px" colspan="${options.contributorsPerLine}">\n        <img src="${smallLogoURL}">\n          <a href="${linkToBotAdd}">Add your contributions</a>\n        </img>\n      </td>\n    </tr>`;
 }
 
 function generateContributorsList(options, contributors) {
-  const tableFooter = formatFooter(options)
+  const tableFooter = formatFooter(options);
   const defaultWrapperTemplate = util.template(
     '\n<table>\n  <tbody><%= bodyContent %>  </tbody>\n<%= tableFooterContent %></table>\n\n',
-  )
+  );
   const wrapperTemplate = options.wrapperTemplate
     ? util.template(`\n${options.wrapperTemplate}\n\n`)
-    : defaultWrapperTemplate
+    : defaultWrapperTemplate;
   const seperator = options.wrapperTemplate
     ? '\n    </tr><br />\n    <tr>\n      '
-    : '\n    </tr>\n    <tr>\n      '
+    : '\n    </tr>\n    <tr>\n      ';
 
-  let tableFooterContent = ''
+  let tableFooterContent = '';
 
-  const sortedContributors = [...contributors]
+  const sortedContributors = [...contributors];
   if (options.contributorsSortAlphabetically) {
     sortedContributors.sort((a, b) => {
-      const nameA = a.name || a.login || ''
-      const nameB = b.name || b.login || ''
-      return nameA.localeCompare(nameB, undefined, {sensitivity: 'base'})
-    })
+      const nameA = a.name || a.login || '';
+      const nameB = b.name || b.login || '';
+      return nameA.localeCompare(nameB, undefined, { sensitivity: 'base' });
+    });
   }
 
-  const formattedContributors = sortedContributors.map(contributor =>
+  const formattedContributors = sortedContributors.map((contributor) =>
     formatContributor(options, contributor),
-  )
+  );
 
-  const chunkedContributors = chunk(
-    formattedContributors,
-    options.contributorsPerLine,
-  )
+  const chunkedContributors = chunk(formattedContributors, options.contributorsPerLine);
 
-  const formattedLines = chunkedContributors.map(currentLineContributors =>
+  const formattedLines = chunkedContributors.map((currentLineContributors) =>
     formatLine(options, currentLineContributors),
-  )
+  );
 
-  const newContent = formattedLines.join(seperator)
+  const newContent = formattedLines.join(seperator);
 
   if (options.linkToUsage) {
-    tableFooterContent = `  <tfoot>\n    ${tableFooter}\n  </tfoot>\n`
+    tableFooterContent = `  <tfoot>\n    ${tableFooter}\n  </tfoot>\n`;
   }
 
-  const bodyContent = `\n    <tr>\n      ${newContent}\n    </tr>\n`
+  const bodyContent = `\n    <tr>\n      ${newContent}\n    </tr>\n`;
 
-  return wrapperTemplate({bodyContent, tableFooterContent})
+  return wrapperTemplate({ bodyContent, tableFooterContent });
 }
 
 function replaceBadge(newContent) {
   return function (previousContent) {
-    const tagToLookFor = `<!-- ALL-CONTRIBUTORS-BADGE:`
-    const closingTag = '-->'
-    const startOfOpeningTagIndex = previousContent.indexOf(
-      `${tagToLookFor}START`,
-    )
-    const endOfOpeningTagIndex = previousContent.indexOf(
-      closingTag,
-      startOfOpeningTagIndex,
-    )
+    const tagToLookFor = `<!-- ALL-CONTRIBUTORS-BADGE:`;
+    const closingTag = '-->';
+    const startOfOpeningTagIndex = previousContent.indexOf(`${tagToLookFor}START`);
+    const endOfOpeningTagIndex = previousContent.indexOf(closingTag, startOfOpeningTagIndex);
     const startOfClosingTagIndex = previousContent.indexOf(
       `${tagToLookFor}END`,
       endOfOpeningTagIndex,
-    )
+    );
     if (
       startOfOpeningTagIndex === -1 ||
       endOfOpeningTagIndex === -1 ||
       startOfClosingTagIndex === -1
     ) {
-      return previousContent
+      return previousContent;
     }
-    const startIndent = Math.max(
-      0,
-      previousContent.lastIndexOf('\n', startOfOpeningTagIndex),
-    )
-    const nbSpaces =
-      startOfOpeningTagIndex - Math.min(startOfOpeningTagIndex, startIndent)
+    const startIndent = Math.max(0, previousContent.lastIndexOf('\n', startOfOpeningTagIndex));
+    const nbSpaces = startOfOpeningTagIndex - Math.min(startOfOpeningTagIndex, startIndent);
     return [
       previousContent.slice(0, endOfOpeningTagIndex + closingTag.length),
       '\n',
       newContent.replace('\n', `\n${' '.repeat(nbSpaces)}`),
       '\n',
       previousContent.slice(startOfClosingTagIndex),
-    ].join('')
-  }
+    ].join('');
+  };
 }
 
 export function generate(options, contributors, fileContent) {
   if (contributors === undefined || !Array.isArray(contributors)) {
-    throw new Error('contributors must be an array')
+    throw new Error('contributors must be an array');
   }
   const contributorsList =
-    contributors.length === 0
-      ? '\n'
-      : generateContributorsList(options, contributors)
-  const badge = formatBadge(options, contributors)
+    contributors.length === 0 ? '\n' : generateContributorsList(options, contributors);
+  const badge = formatBadge(options, contributors);
 
-  let result = fileContent
-  result = injectListBetweenTags(contributorsList, options)(result)
-  result = replaceBadge(badge)(result)
-  return result
+  let result = fileContent;
+  result = injectListBetweenTags(contributorsList, options)(result);
+  result = replaceBadge(badge)(result);
+  return result;
 }

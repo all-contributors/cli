@@ -1,4 +1,4 @@
-import {add} from './add.js'
+import { add } from './add.js';
 
 // Adds a contributor without going to the network (you supply the additional fields)
 export function addContributorWithDetails({
@@ -15,7 +15,7 @@ export function addContributorWithDetails({
       name,
       avatar_url,
       profile,
-    })
-  }
-  return add(options, login, contributions, infoFetcherNoNetwork)
+    });
+  };
+  return add(options, login, contributions, infoFetcherNoNetwork);
 }

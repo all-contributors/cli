@@ -1,4 +1,4 @@
-import * as repo from '../repo/index.js'
+import * as repo from '../repo/index.js';
 
 const defaultTypes = function (repoType) {
   return {
@@ -139,9 +139,9 @@ const defaultTypes = function (repoType) {
       symbol: '📣',
       description: 'Promotion',
     },
-  }
-}
+  };
+};
 
 export function contributionTypes(options) {
-  return {...defaultTypes(options.repoType), ...options.types}
+  return { ...defaultTypes(options.repoType), ...options.types };
 }

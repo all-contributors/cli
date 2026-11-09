@@ -15,8 +15,7 @@ These are the npm scripts available when working on the CLI:
 | `npm run build`           | Build the CLI (output in `dist/`)                      |
 | `npm run dev`             | Run the CLI from source without building               |
 | `npm run start`           | Run the built CLI (`dist/cli.js`)                      |
-| `npm run lint`            | Fix format issues                                      |
-| `npm run format:check`    | Check for format issues                                |
+| `npm run format`          | Fix format issues                                      |
 | `npm run lint`            | Check for lint issues                                  |
 | `npm run lint -- --fix`   | Fix lint issues                                        |
 | `npm test`                | Run the test suite (no coverage)                       |
@@ -111,73 +110,53 @@ You don't need a Codecov account to view coverage locally. Run
 `npm run test:coverage` and open the HTML report. Codecov is mainly for tracking
 trends and CI.
 
-## Linting
+## Static Checks
 
-The project uses ESLint. Linting was migrated from `kcd-scripts` to a native
-ESLint setup that supports both CommonJS source files and ES module test files.
+The project has several forms of static analysis.
 
-### Overview
+### Format
 
-- Config: `eslint.config.mjs`
-- Includes `eslint:recommended`, import rules, Vitest rules for test files, and
-  project overrides
+We use Oxfmt for formatting.
+Use `format` to reformat.
 
-### How to run the linter
+```sh
+npm run format
+```
 
-To check for issues you can run:
+> [!NOTE]
+> Be sure to install the `Oxc` extension to get the most out of Oxfmt.
 
-```bash
+### Lint
+
+We use ESLint as our primary linter.
+You can check for violations with:
+
+```sh
 npm run lint
 ```
 
-To auto-fix what ESLint and Prettier can fix you can run:
+To automatically address what ESLint can fix for you, run:
 
-```bash
-npm run lint-fix
+```sh
+npm run lint -- --fix
 ```
 
 This will fix many issues (e.g. Vitest aliases, unused eslint-disable
-directives, formatting). Some problems still need manual fixes (e.g. unused
-variables, tests without assertions).
+directives, formatting).
+Some problems still need manual fixes (e.g. unused variables, tests without assertions).
 
 ### Pre-commit hooks
 
-Husky runs a pre-commit hook that lints and fixes staged files before each
-commit.
+`simple-git-hooks` runs a pre-commit hook that reformats staged files before each commit.
 
-1. On `git commit`, Husky runs the pre-commit hook.
-2. The hook runs `lint-staged`, which runs ESLint and Prettier on staged
-   JavaScript files.
-3. If that passes, the commit continues; if it fails, the commit is blocked.
-
-If the hook gives you trouble, run `npm run lint-fix` manually, then try
-committing again. As a last resort you can skip the hook with
-`git commit --no-verify`; if you do, mention it in your PR so maintainers can
-help.
+On `git commit`, `simple-git-hooks` runs the pre-commit hook.
+The hook runs `lint-staged`, which runs Oxfmt on all staged files.
 
 **Configuration:**
 
-- The hook lives in `.husky/pre-commit` (it runs `npx lint-staged`).
+- The hook is configured on `simple-git-hooks` in the `package.json`.
 - `lint-staged` is configured in `package.json` under the `lint-staged` field.
-- Linting uses `eslint.config.mjs`.
-
-### Lint-related dependencies
-
-- **eslint** — Core
-- **@eslint/js** — Recommended rules
-- **eslint-plugin-import** — Import/export rules
-- **@vitest/eslint-plugin** — Vitest rules for test files
-- **globals** — Node and Vitest globals for the lint environment
-
-## Build system
-
-The build uses native Babel (migrated from `kcd-scripts build`). Key
-dependencies:
-
-- **@babel/core** — Compiler (parse, transform, generate)
-- **@babel/cli** — Runs `babel src --out-dir dist`
-- **@babel/preset-env** — Compiles modern JS for the target (e.g. Node 22)
-- **@babel/runtime** — Runtime helpers used by the transpiled code
+- Linting uses `eslint.config.js`.
 
 ### How to build
 

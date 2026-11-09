@@ -1,10 +1,10 @@
-import inquirer from 'inquirer'
+import inquirer from 'inquirer';
 
-import {git} from '../util/index.js'
-import {conventions} from './commit-conventions.js'
+import { git } from '../util/index.js';
+import { conventions } from './commit-conventions.js';
 
 function uniqueFiles(files) {
-  return [...new Set(files.filter(Boolean))]
+  return [...new Set(files.filter(Boolean))];
 }
 
 export const questions = [
@@ -37,13 +37,12 @@ export const questions = [
   {
     type: 'input',
     name: 'repoHost',
-    message:
-      "Where is the repository hosted? Hit Enter if it's on GitHub or GitLab",
+    message: "Where is the repository hosted? Hit Enter if it's on GitHub or GitLab",
     default: function (answers) {
       if (answers.repoType === 'github') {
-        return 'https://github.com'
+        return 'https://github.com';
       } else if (answers.repoType === 'gitlab') {
-        return 'https://gitlab.com'
+        return 'https://gitlab.com';
       }
     },
   },
@@ -63,10 +62,10 @@ export const questions = [
     name: 'badgeFile',
     message: 'In which file should the badge be shown?',
     when: function (answers) {
-      return answers.needBadge
+      return answers.needBadge;
     },
     default: function (answers) {
-      return answers.contributorFile
+      return answers.contributorFile;
     },
   },
   {
@@ -79,8 +78,7 @@ export const questions = [
   {
     type: 'confirm',
     name: 'commit',
-    message:
-      'Do you want this badge to auto-commit when contributors are added?',
+    message: 'Do you want this badge to auto-commit when contributors are added?',
     default: true,
   },
   {
@@ -96,19 +94,19 @@ export const questions = [
     message: 'Do you want to add a footer with link to usage?',
     default: true,
   },
-]
+];
 
 export function prompt() {
   return git
     .getRepoInfo()
-    .then(repoInfo => {
+    .then((repoInfo) => {
       if (repoInfo) {
-        questions[0].default = repoInfo.projectName
-        questions[1].default = repoInfo.projectOwner
+        questions[0].default = repoInfo.projectName;
+        questions[1].default = repoInfo.projectOwner;
       }
-      return inquirer.prompt(questions)
+      return inquirer.prompt(questions);
     })
-    .then(answers => {
+    .then((answers) => {
       return {
         config: {
           projectName: answers.projectName,
@@ -125,6 +123,6 @@ export function prompt() {
         },
         contributorFile: answers.contributorFile,
         badgeFile: answers.badgeFile,
-      }
-    })
+      };
+    });
 }

@@ -10,7 +10,6 @@ dist
 # when working with contributors
 .husky
 .idea
-.vscode
 cache
 pnpm-lock.yaml
 yarn.lock

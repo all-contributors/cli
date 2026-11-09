@@ -30,8 +30,7 @@
     "build": "cp -r src dist",
     "commit": "git-cz",
     "dev": "./src/cli.js",
-    "format": "prettier . --write",
-    "format:check": "prettier . --check",
+    "format": "oxfmt",
     "knip": "knip",
     "lint": "eslint .",
     "prepare": "simple-git-hooks",
@@ -47,10 +46,7 @@
     "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
-    "*.js": [
-      "prettier --write"
-    ],
-    "!(*.js)": "prettier --ignore-unknown --write"
+    "*": "oxfmt --no-error-on-unmatched-pattern"
   },
   "config": {
     "commitizen": {
@@ -80,6 +76,7 @@
     "knip": "^6.10.0",
     "lint-staged": "^17.6.0",
     "nock": "^15.0.5",
+    "oxfmt": "^0.77.0",
     "prettier": "^3.8.1",
     "simple-git-hooks": "^2.14.0",
     "vitest": "^5.1.0"

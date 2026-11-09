@@ -1,11 +1,8 @@
-import * as githubAPI from './github.js'
-import * as gitlabAPI from './gitlab.js'
+import * as githubAPI from './github.js';
+import * as gitlabAPI from './gitlab.js';
 
 const privateToken =
-  (process.env &&
-    (process.env.ALL_CONTRIBUTORS_PRIVATE_TOKEN ||
-      process.env.PRIVATE_TOKEN)) ||
-  ''
+  (process.env && (process.env.ALL_CONTRIBUTORS_PRIVATE_TOKEN || process.env.PRIVATE_TOKEN)) || '';
 const SUPPORTED_REPO_TYPES = {
   github: {
     value: 'github',
@@ -35,62 +32,62 @@ const SUPPORTED_REPO_TYPES = {
     getUserInfo: gitlabAPI.getUserInfo,
     getContributors: gitlabAPI.getContributors,
   },
-}
+};
 
 export const getChoices = function () {
   return Object.keys(SUPPORTED_REPO_TYPES)
-    .map(key => SUPPORTED_REPO_TYPES[key])
-    .map(item => {
+    .map((key) => SUPPORTED_REPO_TYPES[key])
+    .map((item) => {
       return {
         value: item.value,
         name: item.name,
-      }
-    })
-}
+      };
+    });
+};
 
 export const getHostname = function (repoType, repoHost) {
   if (repoHost) {
-    return repoHost
+    return repoHost;
   } else if (repoType in SUPPORTED_REPO_TYPES) {
-    return SUPPORTED_REPO_TYPES[repoType].defaultHost
+    return SUPPORTED_REPO_TYPES[repoType].defaultHost;
   }
-  return null
-}
+  return null;
+};
 
 export const getCheckKey = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
-    return SUPPORTED_REPO_TYPES[repoType].checkKey
+    return SUPPORTED_REPO_TYPES[repoType].checkKey;
   }
-  return null
-}
+  return null;
+};
 
 export const getTypeName = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
-    return SUPPORTED_REPO_TYPES[repoType].name
+    return SUPPORTED_REPO_TYPES[repoType].name;
   }
-  return null
-}
+  return null;
+};
 
 export const getLinkToCommits = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
-    return SUPPORTED_REPO_TYPES[repoType].linkToCommits
+    return SUPPORTED_REPO_TYPES[repoType].linkToCommits;
   }
-  return null
-}
+  return null;
+};
 
 export const getLinkToIssues = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
-    return SUPPORTED_REPO_TYPES[repoType].linkToIssues
+    return SUPPORTED_REPO_TYPES[repoType].linkToIssues;
   }
-  return null
-}
+  return null;
+};
 
 export const getLinkToReviews = function (repoType) {
   if (repoType in SUPPORTED_REPO_TYPES) {
-    return SUPPORTED_REPO_TYPES[repoType].linkToReviews
+    return SUPPORTED_REPO_TYPES[repoType].linkToReviews;
   }
-  return null
-}
+  return null;
+};
 
 export const getUserInfo = function (username, repoType, repoHost) {
   if (repoType in SUPPORTED_REPO_TYPES) {
@@ -98,10 +95,10 @@ export const getUserInfo = function (username, repoType, repoHost) {
       username,
       getHostname(repoType, repoHost),
       privateToken,
-    )
+    );
   }
-  return null
-}
+  return null;
+};
 
 export const getContributors = function (owner, name, repoType, repoHost) {
   if (repoType in SUPPORTED_REPO_TYPES) {
@@ -110,7 +107,7 @@ export const getContributors = function (owner, name, repoType, repoHost) {
       name,
       getHostname(repoType, repoHost),
       privateToken,
-    )
+    );
   }
-  return null
-}
+  return null;
+};

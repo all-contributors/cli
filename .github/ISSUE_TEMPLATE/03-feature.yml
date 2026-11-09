@@ -11,13 +11,11 @@ labels:
 body:
   - type: checkboxes
     attributes:
-      description:
-        If any of these required steps are not taken, we may not be able to
+      description: If any of these required steps are not taken, we may not be able to
         review your issue. Help us to help you!
       label: Feature Request Checklist
       options:
-        - label:
-            I have [searched for related
+        - label: I have [searched for related
             issues](https://github.com/all-contributors/cli/issues?q=is%3Aissue)
             and found none that matched my issue.
           required: true

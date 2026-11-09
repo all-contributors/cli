@@ -1,17 +1,17 @@
-import {expect, test} from 'vitest'
+import { expect, test } from 'vitest';
 
-import {addContributorWithDetails} from '../addWithDetails.js'
-import fixtures from './fixtures/index.js'
+import { addContributorWithDetails } from '../addWithDetails.js';
+import fixtures from './fixtures/index.js';
 
 test('add new contributor without going to the network', async () => {
-  const {options} = fixtures()
+  const { options } = fixtures();
   const userDetails = {
     login: 'jakebolam',
     contributions: ['code', 'security'],
     name: 'Jake Bolam',
     avatar_url: 'my-avatar.example.com',
     profile: 'jakebolam.com',
-  }
+  };
 
   const contributors = await addContributorWithDetails({
     options,
@@ -20,8 +20,8 @@ test('add new contributor without going to the network', async () => {
     name: userDetails.name,
     avatar_url: userDetails.avatar_url,
     profile: userDetails.profile,
-  })
+  });
 
-  expect(contributors).toHaveLength(options.contributors.length + 1)
-  expect(contributors[options.contributors.length]).toEqual(userDetails)
-})
+  expect(contributors).toHaveLength(options.contributors.length + 1);
+  expect(contributors[options.contributors.length]).toEqual(userDetails);
+});

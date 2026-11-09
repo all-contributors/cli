@@ -1,7 +1,7 @@
-import {expect, test, vi} from 'vitest'
+import { expect, test, vi } from 'vitest';
 
-import {add} from '../add.js'
-import fixtures from './fixtures/index.js'
+import { add } from '../add.js';
+import fixtures from './fixtures/index.js';
 
 /**
  * Mock function that simulates fetching contributor info from an API.
@@ -16,7 +16,7 @@ function mockInfoFetcher(username) {
     name: 'Some name',
     avatar_url: 'www.avatar.url',
     profile: 'www.profile.url',
-  })
+  });
 }
 
 /**
@@ -36,184 +36,159 @@ function caseFixtures() {
         contributions: ['code'],
       },
     ],
-  }
-  return {options}
+  };
+  return { options };
 }
 
 test('callback with error if infoFetcher fails', async () => {
-  const {options} = fixtures()
-  const username = 'login3'
-  const contributions = ['doc']
-  const error = new Error('infoFetcher error')
+  const { options } = fixtures();
+  const username = 'login3';
+  const contributions = ['doc'];
+  const error = new Error('infoFetcher error');
   function infoFetcher() {
-    return Promise.reject(error)
+    return Promise.reject(error);
   }
-  const resolvedError = await add(
-    options,
-    username,
-    contributions,
-    infoFetcher,
-  ).catch(e => e)
+  const resolvedError = await add(options, username, contributions, infoFetcher).catch((e) => e);
 
-  expect(resolvedError).toBe(error)
-})
+  expect(resolvedError).toBe(error);
+});
 
 test('calls infoFetcher with (username, options.repoType, options.repoHost) when adding new contributor', async () => {
-  const {options} = fixtures()
-  options.repoType = 'github'
-  options.repoHost = 'https://github.com'
-  const username = 'newuser'
-  const contributions = ['doc']
+  const { options } = fixtures();
+  options.repoType = 'github';
+  options.repoHost = 'https://github.com';
+  const username = 'newuser';
+  const contributions = ['doc'];
   const infoFetcher = vi.fn().mockResolvedValue({
     login: username,
     name: 'New User',
     avatar_url: '',
     profile: '',
-  })
+  });
 
-  await add(options, username, contributions, infoFetcher)
+  await add(options, username, contributions, infoFetcher);
 
-  expect(infoFetcher).toHaveBeenCalledWith(
-    username,
-    'github',
-    'https://github.com',
-  )
-})
+  expect(infoFetcher).toHaveBeenCalledWith(username, 'github', 'https://github.com');
+});
 
 test('add new contributor at the end of the list of contributors', () => {
-  const {options} = fixtures()
-  const username = 'login3'
-  const contributions = ['doc']
+  const { options } = fixtures();
+  const username = 'login3';
+  const contributions = ['doc'];
 
-  return add(options, username, contributions, mockInfoFetcher).then(
-    contributors => {
-      expect(contributors).toHaveLength(options.contributors.length + 1)
-      expect(contributors[options.contributors.length]).toEqual({
-        login: 'login3',
-        name: 'Some name',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: ['doc'],
-      })
-    },
-  )
-})
+  return add(options, username, contributions, mockInfoFetcher).then((contributors) => {
+    expect(contributors).toHaveLength(options.contributors.length + 1);
+    expect(contributors[options.contributors.length]).toEqual({
+      login: 'login3',
+      name: 'Some name',
+      avatar_url: 'www.avatar.url',
+      profile: 'www.profile.url',
+      contributions: ['doc'],
+    });
+  });
+});
 
 test('add new contributor at the end of the list of contributors with a url link', () => {
-  const {options} = fixtures()
-  const username = 'login3'
-  const contributions = ['doc']
-  options.url = 'www.foo.bar'
+  const { options } = fixtures();
+  const username = 'login3';
+  const contributions = ['doc'];
+  options.url = 'www.foo.bar';
 
-  return add(options, username, contributions, mockInfoFetcher).then(
-    contributors => {
-      expect(contributors).toHaveLength(options.contributors.length + 1)
-      expect(contributors[options.contributors.length]).toEqual({
-        login: 'login3',
-        name: 'Some name',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: [{type: 'doc', url: 'www.foo.bar'}],
-      })
-    },
-  )
-})
+  return add(options, username, contributions, mockInfoFetcher).then((contributors) => {
+    expect(contributors).toHaveLength(options.contributors.length + 1);
+    expect(contributors[options.contributors.length]).toEqual({
+      login: 'login3',
+      name: 'Some name',
+      avatar_url: 'www.avatar.url',
+      profile: 'www.profile.url',
+      contributions: [{ type: 'doc', url: 'www.foo.bar' }],
+    });
+  });
+});
 
 test(`should not update an existing contributor's contributions where nothing has changed`, () => {
-  const {options} = fixtures()
-  const username = 'login2'
-  const contributions = ['blog', 'code']
+  const { options } = fixtures();
+  const username = 'login2';
+  const contributions = ['blog', 'code'];
 
-  return add(options, username, contributions, mockInfoFetcher).then(
-    contributors => {
-      expect(contributors).toEqual(options.contributors)
-    },
-  )
-})
+  return add(options, username, contributions, mockInfoFetcher).then((contributors) => {
+    expect(contributors).toEqual(options.contributors);
+  });
+});
 
 test(`should not update an existing contributor's contributions where nothing has changed but the casing`, () => {
-  const {options} = caseFixtures()
-  const username = 'login1'
-  const contributions = ['code']
+  const { options } = caseFixtures();
+  const username = 'login1';
+  const contributions = ['code'];
 
-  return add(options, username, contributions, mockInfoFetcher).then(
-    contributors => {
-      expect(contributors).toEqual(options.contributors)
-    },
-  )
-})
+  return add(options, username, contributions, mockInfoFetcher).then((contributors) => {
+    expect(contributors).toEqual(options.contributors);
+  });
+});
 
 test(`should update an existing contributor's contributions if a new type is added`, () => {
-  const {options} = fixtures()
-  const username = 'login1'
-  const contributions = ['bug']
-  return add(options, username, contributions, mockInfoFetcher).then(
-    contributors => {
-      expect(contributors).toHaveLength(options.contributors.length)
-      expect(contributors[0]).toEqual({
-        login: 'login1',
-        name: 'Some name',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: ['code', 'bug'],
-      })
-    },
-  )
-})
+  const { options } = fixtures();
+  const username = 'login1';
+  const contributions = ['bug'];
+  return add(options, username, contributions, mockInfoFetcher).then((contributors) => {
+    expect(contributors).toHaveLength(options.contributors.length);
+    expect(contributors[0]).toEqual({
+      login: 'login1',
+      name: 'Some name',
+      avatar_url: 'www.avatar.url',
+      profile: 'www.profile.url',
+      contributions: ['code', 'bug'],
+    });
+  });
+});
 
 test(`should update an existing contributor's contributions if a new type is added with different username case`, () => {
-  const {options} = caseFixtures()
-  const username = 'login1'
-  const contributions = ['bug']
-  return add(options, username, contributions, mockInfoFetcher).then(
-    contributors => {
-      expect(contributors).toHaveLength(1)
-      expect(contributors[0]).toEqual({
-        login: 'Login1',
-        name: 'Some name',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: ['code', 'bug'],
-      })
-    },
-  )
-})
+  const { options } = caseFixtures();
+  const username = 'login1';
+  const contributions = ['bug'];
+  return add(options, username, contributions, mockInfoFetcher).then((contributors) => {
+    expect(contributors).toHaveLength(1);
+    expect(contributors[0]).toEqual({
+      login: 'Login1',
+      name: 'Some name',
+      avatar_url: 'www.avatar.url',
+      profile: 'www.profile.url',
+      contributions: ['code', 'bug'],
+    });
+  });
+});
 
 test(`should update an existing contributor's contributions if a new type is added with a link`, () => {
-  const {options} = fixtures()
-  const username = 'login1'
-  const contributions = ['bug']
-  options.url = 'www.foo.bar'
+  const { options } = fixtures();
+  const username = 'login1';
+  const contributions = ['bug'];
+  options.url = 'www.foo.bar';
 
-  return add(options, username, contributions, mockInfoFetcher).then(
-    contributors => {
-      expect(contributors).toHaveLength(options.contributors.length)
-      expect(contributors[0]).toEqual({
-        login: 'login1',
-        name: 'Some name',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: ['code', {type: 'bug', url: 'www.foo.bar'}],
-      })
-    },
-  )
-})
+  return add(options, username, contributions, mockInfoFetcher).then((contributors) => {
+    expect(contributors).toHaveLength(options.contributors.length);
+    expect(contributors[0]).toEqual({
+      login: 'login1',
+      name: 'Some name',
+      avatar_url: 'www.avatar.url',
+      profile: 'www.profile.url',
+      contributions: ['code', { type: 'bug', url: 'www.foo.bar' }],
+    });
+  });
+});
 
 test(`should update an existing contributor's contributions if an existing type is removed`, () => {
-  const {options} = fixtures()
-  const username = 'login2'
-  const contributions = ['code']
+  const { options } = fixtures();
+  const username = 'login2';
+  const contributions = ['code'];
 
-  return add(options, username, contributions, mockInfoFetcher).then(
-    contributors => {
-      expect(contributors).toHaveLength(options.contributors.length)
-      expect(contributors[1]).toEqual({
-        login: 'login2',
-        name: 'Some name',
-        avatar_url: 'www.avatar.url',
-        profile: 'www.profile.url',
-        contributions: ['code'],
-      })
-    },
-  )
-})
+  return add(options, username, contributions, mockInfoFetcher).then((contributors) => {
+    expect(contributors).toHaveLength(options.contributors.length);
+    expect(contributors[1]).toEqual({
+      login: 'login2',
+      name: 'Some name',
+      avatar_url: 'www.avatar.url',
+      profile: 'www.profile.url',
+      contributions: ['code'],
+    });
+  });
+});

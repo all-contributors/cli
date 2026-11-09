@@ -30,6 +30,16 @@ jobs:
           files: ./coverage/lcov.info
           fail_ci_if_error: false
           verbose: true
+
+  end-to-end:
+    name: >-
+      Run end-to-end tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: $/.github/actions/setup
+      - name: Run end-to-end tests
+        run: npm run test:e2e
+
   publish:
     name: >-
       Publish cli 📦 to NPM
@@ -37,6 +47,7 @@ jobs:
       github.repository_owner == 'all-contributors' && github.event_name ==
       'release'
     needs:
+      - end-to-end
       - test
     runs-on: ubuntu-latest
     environment:

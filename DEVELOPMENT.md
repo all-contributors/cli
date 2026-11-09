@@ -135,7 +135,7 @@ You can check for violations with:
 npm run lint
 ```
 
-To auto what ESLint can fix you can run:
+To automatically address what ESLint can fix for you, run:
 
 ```sh
 npm run lint -- --fix

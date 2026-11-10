@@ -1,4 +1,4 @@
-name: Lint
+name: CI
 
 on:
   push:
@@ -14,6 +14,13 @@ jobs:
     steps:
       - uses: $/.github/actions/setup
       - run: npm run format -- --list-different
+
+  knip:
+    name: Knip
+    runs-on: ubuntu-latest
+    steps:
+      - uses: $/.github/actions/setup
+      - run: npx knip
 
   lint:
     name: Lint

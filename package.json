@@ -31,12 +31,10 @@
     "commit": "git-cz",
     "dev": "./src/cli.js",
     "format": "oxfmt",
-    "knip": "knip",
     "lint": "eslint .",
     "prepare": "simple-git-hooks",
     "start": "./dist/cli.js",
     "test": "vitest",
-    "test:coverage": "vitest --coverage",
     "test:e2e": "vitest run --config vitest.e2e.config.ts"
   },
   "allowScripts": {

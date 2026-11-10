@@ -1,0 +1,49 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch: ~
+
+jobs:
+  release_please:
+    name: Manage Release PR
+    if: github.event.repository.fork != true
+    runs-on: ubuntu-latest
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+    steps:
+      - name: Create Token
+        id: create_token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ vars.RELEASEBOT_APP_CLIENT_ID }}
+          private-key: ${{ secrets.RELEASEBOT_APP_PRIVATE_KEY }}
+      - name: Release Please
+        id: release
+        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
+        with:
+          config-file: .github/release-please/release-please-config.json
+          manifest-file: .github/release-please/release-please-manifest.json
+          token: ${{ steps.create_token.outputs.token }}
+
+  publish:
+    name: Publish Package
+    if: ${{ needs.release_please.outputs.releases_created == 'true' }}
+    needs: release_please
+    runs-on: ubuntu-latest
+    environment:
+      name: npm-publish
+      url: https://www.npmjs.com/package/all-contributors-cli
+    permissions:
+      id-token: write # mandatory for OIDC / NPM publishing
+      contents: read
+    steps:
+      - uses: $/.github/actions/setup
+        with:
+          node-version: '24'
+      - name: Build
+        run: npm run build
+      - name: Publish
+        run: npm publish

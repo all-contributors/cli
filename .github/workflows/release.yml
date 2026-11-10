@@ -37,8 +37,8 @@ jobs:
       name: npm-publish
       url: https://www.npmjs.com/package/all-contributors-cli
     permissions:
-      id-token: write # mandatory for OIDC / NPM publishing
       contents: read
+      id-token: write # mandatory for OIDC / NPM publishing
     steps:
       - uses: $/.github/actions/setup
         with:

@@ -36,7 +36,7 @@ jobs:
       - run: npm run lint
 
   test:
-    Name: Test
+    name: Test
     runs-on: ubuntu-latest
     permissions:
       id-token: write
@@ -47,5 +47,4 @@ jobs:
       - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           fail_ci_if_error: false
-          files: ./coverage/lcov.info
           use_oidc: true

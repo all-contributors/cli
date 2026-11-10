@@ -171,7 +171,7 @@ async function run() {
     } else {
       console.error(e.stack || e.message || e)
     }
-    process.exit(1)
+    process.exitCode = 1
   }
 }
 

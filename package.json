@@ -74,7 +74,7 @@
     "globals": "17.14.0",
     "knip": "6.44.2",
     "lint-staged": "17.6.0",
-    "nock": "15.0.5",
+    "nock": "15.0.6",
     "oxfmt": "0.77.0",
     "prettier": "3.9.10",
     "simple-git-hooks": "2.14.0",

@@ -15,9 +15,9 @@ These are the package scripts available when working on the CLI:
 | `pnpm build`           | Build the CLI (output in `dist/`)                      |
 | `pnpm dev`             | Run the CLI from source without building               |
 | `pnpm start`           | Run the built CLI (`dist/cli.js`)                      |
-| `pnpm run format       | Fix format issues                                      |
+| `pnpm run format`      | Fix format issues                                      |
 | `pnpm lint`            | Check for lint issues                                  |
-| `pnpm lint --fix   `   | Fix lint issues                                        |
+| `pnpm lint --fix`      | Fix lint issues                                        |
 | `pnpm test`            | Run the test suite (no coverage)                       |
 | `pnpm test:coverage`   | Run tests with coverage and generate reports           |
 | `pnpm commit`          | Commit changes using a commitizen-compatible interface |

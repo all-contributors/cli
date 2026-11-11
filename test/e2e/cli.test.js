@@ -96,6 +96,17 @@ it('generate exits 1 when the default config has malformed JSON', async ({
   expect(result.stderr).not.toContain('at readConfigFile');
 });
 
+it('bare command waits on the prompt', async ({ project }) => {
+  const result = await runCli([], {
+    cwd: project,
+    timeout: 5000,
+    waitFor: 'What do you want to do?',
+  });
+
+  expect(result.killed).toBe(true);
+  expect(result.stdout).toContain('What do you want to do?');
+});
+
 it('exits 1 for an unknown command', async ({ tmpDir }) => {
   const result = await runCli(['nope'], { cwd: tmpDir });
 

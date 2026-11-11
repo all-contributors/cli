@@ -14,11 +14,30 @@ export async function runGit(args, { cwd }) {
 }
 
 // Runs the CLI and returns the code, stdout, and stderr.
-export function runCli(args, { cwd = process.cwd() } = {}) {
+export function runCli(args, { cwd = process.cwd(), timeout = 0, waitFor } = {}) {
   return new Promise((resolve) => {
     // run the CLI
-    execFile(process.execPath, [cliPath, ...args], { cwd }, (error, stdout, stderr) => {
-      resolve({ code: error ? error.code : 0, stdout, stderr });
-    });
+    const child = execFile(
+      process.execPath,
+      [cliPath, ...args],
+      { cwd, timeout },
+      (error, stdout, stderr) => {
+        resolve({
+          code: error ? error.code : 0,
+          stdout,
+          stderr,
+          killed: Boolean(error?.killed),
+        });
+      },
+    );
+
+    // stop the CLI once stdout contains `waitFor`
+    if (waitFor) {
+      let output = '';
+      child.stdout.on('data', (chunk) => {
+        output += chunk;
+        if (output.includes(waitFor)) child.kill();
+      });
+    }
   });
 }

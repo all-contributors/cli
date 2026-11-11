@@ -12,35 +12,43 @@ export async function readConfig(configPath) {
 }
 
 async function readConfigFile(configPath) {
+  let configFileContents;
   try {
-    const configFileContents = await fs.readFile(configPath, 'utf-8');
-    const { data: config, changed } = jf(configFileContents);
-
-    if (changed) {
-      const formatterConfig = await formatConfig(configPath, config);
-      //Updates the file with fixes
-      await fs.writeFile(configPath, formatterConfig);
-    }
-
-    return config;
+    configFileContents = await fs.readFile(configPath, 'utf-8');
   } catch (error) {
-    if (error instanceof SyntaxError) {
-      throw new SyntaxError(
-        `Configuration file has malformed JSON: ${configPath}. Error:: ${error.message}`,
-        { cause: error },
-      );
-    }
-
     if (error.code === 'ENOENT') {
       throw new UserError(
         `Configuration file not found: ${configPath}\n` +
           'Check that the path is correct, or run `all-contributors init` ' +
           'to create a new configuration file.',
+        { cause: error },
       );
     }
-
     throw error;
   }
+
+  let config;
+  let changed;
+  try {
+    // json-fixer prints "There's still an error!" to stderr itself before
+    // throwing on malformed JSON message. json-fixer has no option to turn that off.
+    // we could do something hacky to silence this in the future
+    ({ data: config, changed } = jf(configFileContents));
+  } catch (error) {
+    throw new UserError(
+      `Configuration file has malformed JSON: ${configPath}\n${error.message}\n` +
+        'Fix the JSON in this file, or delete it and run `all-contributors init`.',
+      { cause: error },
+    );
+  }
+
+  if (changed) {
+    const formatterConfig = await formatConfig(configPath, config);
+    //Updates the file with fixes
+    await fs.writeFile(configPath, formatterConfig);
+  }
+
+  return config;
 }
 
 export async function writeConfig(configPath, content) {

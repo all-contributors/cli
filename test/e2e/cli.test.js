@@ -4,7 +4,7 @@ import path from 'node:path';
 import { expect } from 'vitest';
 
 import { it as baseIt } from './fixtures.js';
-import { runCli } from './run-cli.js';
+import { runCli, runGit } from './run-cli.js';
 
 const it = baseIt.extend({
   projectWithoutReadme: async ({ project }, use) => {
@@ -33,6 +33,31 @@ it('generate adds contributors to the README', async ({ project }) => {
   expect(result.code).toBe(0);
   expect(newReadme).toContain('The Octocat');
   expect(newReadme).toContain('https://github.com/octocat');
+});
+
+it('add --commit commits the changed files with the whole message', async ({ gitProject }) => {
+  const result = await runCli(['add', 'octocat', 'doc', '--commit'], { cwd: gitProject });
+  const subject = await runGit(['log', '-1', '--format=%s'], { cwd: gitProject });
+  const files = await runGit(['show', '--name-only', '--format='], { cwd: gitProject });
+
+  expect(result.code).toBe(0);
+  expect(subject).toBe('docs: update @octocat as a contributor');
+  expect(files.split('\n').sort()).toEqual(['.all-contributorsrc', 'README.md']);
+});
+
+it('add --commit does not run the commit message in a shell', async ({ gitProject }) => {
+  const commitTemplate = 'docs: update @octocat & echo pwned > pwned.txt &';
+  const result = await runCli(
+    ['add', 'octocat', 'doc', '--commit', '--commitTemplate', commitTemplate],
+    {
+      cwd: gitProject,
+    },
+  );
+  const subject = await runGit(['log', '-1', '--format=%s'], { cwd: gitProject });
+
+  expect(result.code).toBe(0);
+  expect(subject).toBe(commitTemplate);
+  expect(await readdir(gitProject)).not.toContain('pwned.txt');
 });
 
 it('generate exits 1 when the README is missing', async ({ projectWithoutReadme }) => {

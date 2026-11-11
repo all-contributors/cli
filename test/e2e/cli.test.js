@@ -11,6 +11,10 @@ const it = baseIt.extend({
     await rm(path.join(project, 'README.md'));
     await use(project);
   },
+  projectWithoutConfig: async ({ project }, use) => {
+    await rm(path.join(project, '.all-contributorsrc'));
+    await use(project);
+  },
 });
 
 it('--help exits 0 and lists the commands', async ({ tmpDir }) => {
@@ -43,6 +47,12 @@ it('generate exits 1 when the README is missing', async ({ projectWithoutReadme 
   expect(result.stderr).toContain("Couldn't find README.md");
   expect(result.stderr).not.toContain('ENOENT');
   expect(result.stderr).not.toContain('at readFileToUpdate');
+});
+
+it('generate exits 0 when the default config is missing', async ({ projectWithoutConfig }) => {
+  const result = await runCli(['generate'], { cwd: projectWithoutConfig });
+
+  expect(result.code).toBe(0);
 });
 
 it('exits 1 when the -c config file does not exist', async ({ tmpDir }) => {

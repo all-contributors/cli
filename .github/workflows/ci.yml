@@ -1,13 +1,19 @@
 name: CI
 
 on:
+  pull_request: ~
   push:
     branches:
       - main
-  pull_request: ~
-  workflow_dispatch: ~
 
 jobs:
+  e2e:
+    name: E2E Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: $/.github/actions/setup
+      - run: npm run test:e2e
+
   format_check:
     name: Format Check
     runs-on: ubuntu-latest
@@ -28,3 +34,17 @@ jobs:
     steps:
       - uses: $/.github/actions/setup
       - run: npm run lint
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+    steps:
+      - uses: $/.github/actions/setup
+      - run: npm run build
+      - run: npm run test -- --coverage
+      - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
+        with:
+          fail_ci_if_error: false
+          use_oidc: true

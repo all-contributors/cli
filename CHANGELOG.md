@@ -1,5 +1,30 @@
 # Changelog
 
+## [7.0.2](https://github.com/all-contributors/cli/compare/v7.0.1...v7.0.2) (2026-11-11)
+
+
+### 🔥 Bug Fixes
+
+* Readme error message should be user friendly not a quiet fail ([#617](https://github.com/all-contributors/cli/issues/617)) ([9c378f9](https://github.com/all-contributors/cli/commit/9c378f93c90a9eb5f2e531c2c7a5afa7fdb68e1b))
+
+
+### ⚙️ Chores
+
+* add renovate config ([#631](https://github.com/all-contributors/cli/issues/631)) ([1578599](https://github.com/all-contributors/cli/commit/1578599cb58d974d0b9e3d27d18355871dc24885))
+* migrate from prettier to oxfmt ([#625](https://github.com/all-contributors/cli/issues/625)) ([f4e7d2e](https://github.com/all-contributors/cli/commit/f4e7d2edeb3b9173ed3318a6a7960c9358771b24))
+* shift to simple-git-hooks for pre-commit hook ([#624](https://github.com/all-contributors/cli/issues/624)) ([53c3bcf](https://github.com/all-contributors/cli/commit/53c3bcfcc5a051c0ea94c0ec8ab8640e41152712))
+* update eslint to v10 and add import sorting ([#618](https://github.com/all-contributors/cli/issues/618)) ([284b533](https://github.com/all-contributors/cli/commit/284b533c547e8869d8f5535a3658c61d05292c52))
+
+
+### 🧪 Testing
+
+* add infra, setup, fixtures and e2e tests to actually run cli and catch bugs before users get them. ([#616](https://github.com/all-contributors/cli/issues/616)) ([f591a14](https://github.com/all-contributors/cli/commit/f591a142e847be8a03b0ce75af18feaef7b95999))
+
+
+### 📦 CI Improvements
+
+* consolidate lint and knip workflows ([#627](https://github.com/all-contributors/cli/issues/627)) ([69fc9d7](https://github.com/all-contributors/cli/commit/69fc9d7ef0bdb559217db77dbbf4ce720e1e8c85))
+
 ## [7.0.1](https://github.com/all-contributors/cli/compare/v7.0.0...v7.0.1) (2026-11-08)
 
 

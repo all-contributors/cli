@@ -1,5 +1,14 @@
 # Changelog
 
+## [7.0.2](https://github.com/all-contributors/cli/compare/v7.0.1...v7.0.2) (2026-11-12)
+
+
+### 🩹 Bug Fixes
+
+* cleaner user facing error handing and tests for config file points of failure ([#620](https://github.com/all-contributors/cli/issues/620)) ([0022c2e](https://github.com/all-contributors/cli/commit/0022c2e424ce55403ddeba7022349569cffd932d))
+* Readme error message should be user friendly not a quiet fail ([#617](https://github.com/all-contributors/cli/issues/617)) ([9c378f9](https://github.com/all-contributors/cli/commit/9c378f93c90a9eb5f2e531c2c7a5afa7fdb68e1b))
+* run git commands without a shell ([#588](https://github.com/all-contributors/cli/issues/588)) ([f9d3ee2](https://github.com/all-contributors/cli/commit/f9d3ee228332a7767fc7b351a2c6f8dd445ea553))
+
 ## [7.0.1](https://github.com/all-contributors/cli/compare/v7.0.0...v7.0.1) (2026-11-08)
 
 

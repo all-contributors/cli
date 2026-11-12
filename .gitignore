@@ -11,4 +11,5 @@ dist
 .husky
 .idea
 cache
+package-lock.json
 yarn.lock

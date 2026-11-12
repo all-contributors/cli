@@ -145,7 +145,7 @@ async function run() {
       const configData = await util.configFile.readConfig(argv.config);
       Object.assign(argv, configData);
     } catch (error) {
-      if (error instanceof SyntaxError || argv.config !== defaultRCFile) {
+      if (argv.config !== defaultRCFile || error.cause?.code !== 'ENOENT') {
         throw error;
       }
       // If default config file doesn't exist, that's okay
@@ -163,7 +163,11 @@ async function run() {
       case 'check':
         return await checkContributors(argv);
       default:
-        throw new Error(`Unknown command ${command}`);
+        throw new util.UserError(
+          `Unknown command: ${command}\n` +
+            'Valid commands are init, generate, add, and check.\n' +
+            'Run `all-contributors --help` for more details.',
+        );
     }
   } catch (e) {
     if (e instanceof util.UserError) {

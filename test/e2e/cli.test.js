@@ -1,4 +1,4 @@
-import { readdir, readFile, rm } from 'node:fs/promises';
+import { readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 import { expect } from 'vitest';
@@ -9,6 +9,14 @@ import { runCli, runGit } from './run-cli.js';
 const it = baseIt.extend({
   projectWithoutReadme: async ({ project }, use) => {
     await rm(path.join(project, 'README.md'));
+    await use(project);
+  },
+  projectWithoutConfig: async ({ project }, use) => {
+    await rm(path.join(project, '.all-contributorsrc'));
+    await use(project);
+  },
+  projectWithMalformedConfig: async ({ project }, use) => {
+    await writeFile(path.join(project, '.all-contributorsrc'), '{');
     await use(project);
   },
 });
@@ -68,4 +76,42 @@ it('generate exits 1 when the README is missing', async ({ projectWithoutReadme 
   expect(result.stderr).toContain("Couldn't find README.md");
   expect(result.stderr).not.toContain('ENOENT');
   expect(result.stderr).not.toContain('at readFileToUpdate');
+});
+
+it('generate exits 0 when the default config is missing', async ({ projectWithoutConfig }) => {
+  const result = await runCli(['generate'], { cwd: projectWithoutConfig });
+
+  expect(result.code).toBe(0);
+});
+
+it('generate exits 1 when the default config has malformed JSON', async ({
+  projectWithMalformedConfig,
+}) => {
+  const result = await runCli(['generate'], { cwd: projectWithMalformedConfig });
+
+  expect(result.code).toBe(1);
+  expect(result.stderr).toContain('Configuration file has malformed JSON');
+  expect(result.stderr).toContain('.all-contributorsrc');
+  expect(result.stderr).toContain('all-contributors init');
+  expect(result.stderr).not.toContain('at readConfigFile');
+});
+
+it('exits 1 for an unknown command', async ({ tmpDir }) => {
+  const result = await runCli(['nope'], { cwd: tmpDir });
+
+  expect(result.code).toBe(1);
+  expect(result.stderr).toContain('Unknown command: nope');
+  expect(result.stderr).toContain('all-contributors --help');
+  expect(result.stderr).not.toContain('at run');
+});
+
+it('exits 1 when the -c config file does not exist', async ({ tmpDir }) => {
+  const result = await runCli(['generate', '-c', 'missing.json'], {
+    cwd: tmpDir,
+  });
+
+  expect(result.code).toBe(1);
+  expect(result.stderr).toContain('Configuration file not found');
+  expect(result.stderr).not.toContain('at readConfigFile');
+  expect(result.stderr).toContain('all-contributors init');
 });

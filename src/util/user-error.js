@@ -3,8 +3,8 @@
  * The CLI prints only the message for these, without a stack trace.
  */
 export class UserError extends Error {
-  constructor(message) {
-    super(message);
+  constructor(message, options) {
+    super(message, options);
     this.name = 'UserError';
   }
 }

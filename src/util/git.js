@@ -1,4 +1,4 @@
-import { exec } from 'child_process';
+import { exec, execFile } from 'child_process';
 import path from 'path';
 import { promisify } from 'util';
 
@@ -34,7 +34,7 @@ export function getRepoInfo() {
 
 const spawnGitCommand = async (args) => {
   try {
-    await promisify(exec)(`git ${args.join(' ')}`);
+    await promisify(execFile)('git', args);
   } catch (error) {
     const msg = error.stderr || `git ${args.join(' ')} - exit code: ${error.code}`;
 

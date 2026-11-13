@@ -21,6 +21,28 @@ jobs:
       - uses: $/.github/actions/setup
       - run: pnpm test:e2e
 
+  engines_check:
+    name: Engines Check (Node.js ${{ matrix.node-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 22.22.0
+          - 22
+          - 23
+          - 24.0.0
+          - 24
+          - 25
+          - 26.0.0
+          - 26
+    steps:
+      - uses: $/.github/actions/setup
+        with:
+          cache: false
+          install-flags: --prod --engine-strict --ignore-scripts
+          node-version: ${{ matrix.node-version }}
+
   format_check:
     name: Format Check
     runs-on: ubuntu-latest

@@ -62,7 +62,7 @@
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@eslint/markdown": "8.0.3",
-    "@types/node": "^26.6.6",
+    "@types/node": "26.6.6",
     "@vitest/coverage-v8": "5.1.0",
     "@vitest/eslint-plugin": "1.6.28",
     "eslint": "10.14.0",

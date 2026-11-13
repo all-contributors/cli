@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "esModuleInterop": true,
+    "isolatedDeclarations": true,
+    "isolatedModules": true,
+    "lib": ["ES2025"],
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "rewriteRelativeImportExtensions": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "target": "ES2024",
+    "types": ["node"]
+  }
+}

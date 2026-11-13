@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "add-contributor": "node src/cli.js add",
-    "build": "cp -r src dist",
+    "build": "node scripts/build.ts",
     "commit": "git-cz",
     "dev": "./src/cli.js",
     "format": "oxfmt",
@@ -62,6 +62,7 @@
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@eslint/markdown": "8.0.3",
+    "@types/node": "^26.6.6",
     "@vitest/coverage-v8": "5.1.0",
     "@vitest/eslint-plugin": "1.6.28",
     "eslint": "10.14.0",

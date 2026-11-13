@@ -64,6 +64,7 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of c
   const result = generate(Object.assign(options, { linkToUsage: true }), contributorList, content);
 
   expect(result).toMatchSnapshot();
+  expect(result).toContain('alt="All Contributors"');
 });
 
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors without linkToUsage', () => {

@@ -83,6 +83,7 @@
   "optionalDependencies": {
     "prettier": "^3"
   },
+  "packageManager": "pnpm@12.16.1",
   "engines": {
     "node": ">=22.22.0"
   }

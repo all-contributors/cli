@@ -7,33 +7,40 @@ on:
       - main
 
 jobs:
+  dedupe_check:
+    name: Dedupe Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: $/.github/actions/setup
+      - run: pnpm dedupe --check
+
   e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
     steps:
       - uses: $/.github/actions/setup
-      - run: npm run test:e2e
+      - run: pnpm test:e2e
 
   format_check:
     name: Format Check
     runs-on: ubuntu-latest
     steps:
       - uses: $/.github/actions/setup
-      - run: npm run format -- --list-different
+      - run: pnpm format --list-different
 
   knip:
     name: Knip
     runs-on: ubuntu-latest
     steps:
       - uses: $/.github/actions/setup
-      - run: npm run knip
+      - run: pnpm knip
 
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: $/.github/actions/setup
-      - run: npm run lint
+      - run: pnpm lint
 
   test:
     name: Test
@@ -42,8 +49,8 @@ jobs:
       id-token: write
     steps:
       - uses: $/.github/actions/setup
-      - run: npm run build
-      - run: npm run test -- --coverage
+      - run: pnpm build
+      - run: pnpm test --coverage
       - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
         with:
           fail_ci_if_error: false

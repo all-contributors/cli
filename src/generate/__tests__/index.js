@@ -65,6 +65,7 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of c
 
   expect(result).toMatchSnapshot();
   expect(result).toContain('alt="All Contributors logo"');
+  expect(result).toContain('alt="All Contributors logo"');
 });
 
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors without linkToUsage', () => {

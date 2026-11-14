@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.0.3](https://github.com/all-contributors/cli/compare/v7.0.2...v7.0.3) (2026-11-14)
+
+
+### 🩹 Bug Fixes
+
+* don't include test files in the package ([#659](https://github.com/all-contributors/cli/issues/659)) ([6227a7a](https://github.com/all-contributors/cli/commit/6227a7ac65b8dc99dafb7ba034c96d16567482bd)), closes [#648](https://github.com/all-contributors/cli/issues/648)
+
+
+### 📖 Documentation
+
+* add stchigel as a contributor for code ([#647](https://github.com/all-contributors/cli/issues/647)) ([8155952](https://github.com/all-contributors/cli/commit/8155952e134efb6e1d12fa39a2933dc25014461b))
+
 ## [7.0.2](https://github.com/all-contributors/cli/compare/v7.0.1...v7.0.2) (2026-11-12)
 
 

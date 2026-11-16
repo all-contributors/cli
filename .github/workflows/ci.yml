@@ -85,7 +85,7 @@ jobs:
       - run: pnpm test
 
   test_os:
-    name: Test (${{ matrix.node-version }})
+    name: Test (${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false

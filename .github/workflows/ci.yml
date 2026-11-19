@@ -6,10 +6,14 @@ on:
     branches:
       - main
 
+permissions: {}
+
 jobs:
   dedupe_check:
     name: Dedupe Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: $/.github/actions/setup
       - run: pnpm dedupe --check
@@ -17,6 +21,8 @@ jobs:
   e2e:
     name: E2E Tests
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: $/.github/actions/setup
       - run: pnpm test:e2e
@@ -24,6 +30,8 @@ jobs:
   engines_check:
     name: Engines Check (Node.js ${{ matrix.node-version }})
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     strategy:
       fail-fast: false
       matrix:
@@ -46,6 +54,8 @@ jobs:
   format_check:
     name: Format Check
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: $/.github/actions/setup
       - run: pnpm format --list-different
@@ -53,6 +63,8 @@ jobs:
   knip:
     name: Knip
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: $/.github/actions/setup
       - run: pnpm knip
@@ -60,6 +72,8 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - uses: $/.github/actions/setup
       - run: pnpm lint
@@ -95,6 +109,7 @@ jobs:
           - ubuntu-latest
           - windows-latest
     permissions:
+      contents: read
       id-token: write
     steps:
       - uses: $/.github/actions/setup
@@ -105,3 +120,18 @@ jobs:
         with:
           fail_ci_if_error: false
           use_oidc: true
+
+  zizmor:
+    name: Run zizmor
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Run zizmor
+        uses: zizmorcore/zizmor-action@45d7276c9ca790aabd705e31ca99c6185c3e76dd # v0.8.1

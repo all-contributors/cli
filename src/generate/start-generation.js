@@ -1,6 +1,8 @@
 import { promises as fs } from 'fs';
 import path from 'path';
 
+import { spinner } from '@clack/prompts';
+
 import { UserError } from '../util/user-error.js';
 import { generate } from './index.js';
 
@@ -19,12 +21,21 @@ async function readFileToUpdate(file, cwd) {
 }
 
 export async function startGeneration(options, cwd = process.cwd()) {
-  await Promise.all(
-    options.files.map(async (file) => {
-      const fileContent = await readFileToUpdate(file, cwd);
-      const newFileContent = generate(options, options.contributors, fileContent);
+  const s = spinner();
+  s.start('Generating contributor list');
 
-      await fs.writeFile(path.join(cwd, file), newFileContent);
-    }),
-  );
+  try {
+    await Promise.all(
+      options.files.map(async (file) => {
+        const fileContent = await readFileToUpdate(file, cwd);
+        const newFileContent = generate(options, options.contributors, fileContent);
+
+        await fs.writeFile(path.join(cwd, file), newFileContent);
+      }),
+    );
+  } catch (error) {
+    s.error('Uh oh! Something went wrong.');
+    throw error;
+  }
+  s.stop('Generation complete');
 }

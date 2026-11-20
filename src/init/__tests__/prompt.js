@@ -4,15 +4,15 @@ import { createPrompts } from '../prompt.js';
 
 const prompts = vi.hoisted(() => ({
   confirm: vi.fn(),
-  input: vi.fn(),
+  text: vi.fn(),
   select: vi.fn(),
 }));
 
-vi.mock('@inquirer/prompts', () => prompts);
+vi.mock('@clack/prompts', () => prompts);
 
 describe('createPrompts', () => {
   it('creates init prompts and builds the config result', async () => {
-    prompts.input
+    prompts.text
       .mockReset()
       .mockResolvedValueOnce('all-contributors-cli')
       .mockResolvedValueOnce('all-contributors')
@@ -49,20 +49,20 @@ describe('createPrompts', () => {
       contributorFile: 'CONTRIBUTORS.md',
       badgeFile: 'BADGES.md',
     });
-    expect(prompts.input).toHaveBeenNthCalledWith(1, {
+    expect(prompts.text).toHaveBeenNthCalledWith(1, {
       message: "What's the name of the repository?",
-      default: 'default-project',
+      initialValue: 'default-project',
     });
-    expect(prompts.input).toHaveBeenNthCalledWith(2, {
+    expect(prompts.text).toHaveBeenNthCalledWith(2, {
       message: 'Who is the owner of the repository?',
-      default: 'default-owner',
+      initialValue: 'default-owner',
     });
     expect(prompts.confirm).toHaveBeenCalledTimes(3);
     expect(prompts.select).toHaveBeenCalledTimes(2);
   });
 
   it('omits the badge file when the badge prompt is declined', async () => {
-    prompts.input
+    prompts.text
       .mockReset()
       .mockResolvedValueOnce('project')
       .mockResolvedValueOnce('owner')

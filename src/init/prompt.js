@@ -1,4 +1,4 @@
-import { confirm, input, select } from '@inquirer/prompts';
+import { confirm, select, text } from '@clack/prompts';
 
 import { git } from '../util/index.js';
 import { conventions } from './commit-conventions.js';
@@ -8,58 +8,58 @@ function uniqueFiles(files) {
 }
 
 export async function createPrompts(repoInfo) {
-  const projectName = await input({
+  const projectName = await text({
     message: "What's the name of the repository?",
-    default: repoInfo?.projectName,
+    initialValue: repoInfo?.projectName,
   });
-  const projectOwner = await input({
+  const projectOwner = await text({
     message: 'Who is the owner of the repository?',
-    default: repoInfo?.projectOwner,
+    initialValue: repoInfo?.projectOwner,
   });
   const repoType = await select({
     message: 'What is the repository type?',
-    choices: [
-      { name: 'GitHub', value: 'github' },
-      { name: 'GitLab', value: 'gitlab' },
+    options: [
+      { label: 'GitHub', value: 'github' },
+      { label: 'GitLab', value: 'gitlab' },
     ],
-    default: 'github',
+    initialValue: 'github',
   });
-  const repoHost = await input({
+  const repoHost = await text({
     message: "Where is the repository hosted? Hit Enter if it's on GitHub or GitLab",
-    default: repoType === 'gitlab' ? 'https://gitlab.com' : 'https://github.com',
+    initialValue: repoType === 'gitlab' ? 'https://gitlab.com' : 'https://github.com',
   });
-  const contributorFile = await input({
+  const contributorFile = await text({
     message: 'In which file should contributors be listed?',
-    default: 'README.md',
+    initialValue: 'README.md',
   });
   const needBadge = await confirm({
     message: 'Do you want a badge tallying the number of contributors?',
   });
   const badgeFile = needBadge
-    ? await input({
+    ? await text({
         message: 'In which file should the badge be shown?',
-        default: contributorFile,
+        initialValue: contributorFile,
       })
     : undefined;
-  const imageSize = await input({
+  const imageSize = await text({
     message: 'How big should the avatars be? (in px)',
-    default: '100',
+    initialValue: '100',
   });
   const commit = await confirm({
     message: 'Do you want this badge to auto-commit when contributors are added?',
-    default: true,
+    initialValue: true,
   });
   const commitConvention = await select({
     message: 'What commit convention would you want it to use?',
-    choices: Object.entries(conventions).map(([value, convention]) => ({
-      name: convention.name,
+    options: Object.entries(conventions).map(([value, convention]) => ({
+      label: convention.name,
       value,
     })),
     default: 'angular',
   });
   const linkToUsage = await confirm({
     message: 'Do you want to add a footer with link to usage?',
-    default: true,
+    initialValue: true,
   });
 
   return {

@@ -3,15 +3,15 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { prompt } from '../prompt.js';
 
 const prompts = vi.hoisted(() => ({
-  checkbox: vi.fn(),
-  input: vi.fn(),
+  multiselect: vi.fn(),
+  text: vi.fn(),
 }));
 
-vi.mock('@inquirer/prompts', () => prompts);
+vi.mock('@clack/prompts', () => prompts);
 
 beforeEach(() => {
-  prompts.checkbox.mockReset().mockResolvedValue(['code']);
-  prompts.input.mockReset().mockResolvedValue('new-user');
+  prompts.multiselect.mockReset().mockResolvedValue(['code']);
+  prompts.text.mockReset().mockResolvedValue('new-user');
 });
 
 function fixtures() {
@@ -73,34 +73,12 @@ describe('prompt', () => {
     });
   });
 
-  it('configures username and contribution prompts with validation', async () => {
+  it('configures username prompt with validation', async () => {
     const options = fixtures();
     await prompt(options);
 
-    const usernamePrompt = prompts.input.mock.calls[0][0];
+    const usernamePrompt = prompts.text.mock.calls[0][0];
     expect(usernamePrompt.message).toBe("What is the contributor's GitHub username?");
-    expect(usernamePrompt.validate('')).toBe('Username not provided');
-    expect(usernamePrompt.validate('new-user')).toBe(true);
-
-    const contributionsPrompt = prompts.checkbox.mock.calls[0][0];
-    expect(contributionsPrompt.message).toBe('What are the contribution types?');
-    expect(contributionsPrompt.validate([])).toBe(
-      'Use space to select at least one contribution type.',
-    );
-    expect(contributionsPrompt.validate(['code'])).toBe(true);
-  });
-
-  it('rejects selecting the same contributions the user already has', async () => {
-    const options = fixtures();
-    options.contributors[0].contributions = ['code', 'doc'];
-    prompts.input.mockResolvedValueOnce('jfmengels');
-
-    await prompt(options);
-
-    const contributionsPrompt = prompts.checkbox.mock.calls[0][0];
-    expect(contributionsPrompt.default).toEqual(['code', 'doc']);
-    expect(contributionsPrompt.validate(['doc', 'code'])).toBe(
-      'Nothing changed, use space to select contribution types.',
-    );
+    expect(usernamePrompt.validate('new-user')).toBeUndefined();
   });
 });

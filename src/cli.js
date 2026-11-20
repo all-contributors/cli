@@ -2,7 +2,7 @@
 
 import path from 'path';
 
-import { select } from '@inquirer/prompts';
+import { cancel, intro, log, outro, select, spinner } from '@clack/prompts';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import * as YoctoColors from 'yoctocolors';
@@ -72,9 +72,14 @@ async function addContribution(argv) {
 }
 
 async function checkContributors(argv) {
+  const s = spinner();
+  s.start('Checking contributors');
+
   return repo
     .getContributors(argv.projectOwner, argv.projectName, argv.repoType, argv.repoHost)
     .then((repoContributors) => {
+      s.stop('Validation complete');
+
       const checkKey = repo.getCheckKey(argv.repoType);
       const knownContributions = argv.contributors.reduce((obj, item) => {
         obj[item[checkKey]] = item.contributions;
@@ -91,43 +96,40 @@ async function checkContributors(argv) {
       });
 
       if (missingInConfig.length) {
-        process.stdout.write(YoctoColors.bold('Missing contributors in .all-contributorsrc:\n'));
-        process.stdout.write(`${missingInConfig.join(', ')}\n`);
+        log.info(
+          YoctoColors.bold('Missing contributors in .all-contributorsrc:\n') +
+            `${missingInConfig.join(', ')}`,
+        );
       }
 
       if (missingFromRepo.length) {
-        process.stdout.write('\n');
-        process.stdout.write(
-          YoctoColors.bold('Unknown contributors found in .all-contributorsrc:\n'),
+        log.info(
+          YoctoColors.bold('Unknown contributors found in .all-contributorsrc:\n') +
+            `${missingFromRepo.join(', ')}\n`,
         );
-        process.stdout.write(`${missingFromRepo.join(', ')}\n`);
       }
     });
 }
 
-function promptForCommand(argv) {
-  const choices = [
+function promptForCommand() {
+  const options = [
     {
-      name: 'Add new contributor or edit contribution type',
+      label: 'Add new contributor or edit contribution type',
       value: 'add',
     },
     {
-      name: 'Re-generate the contributors list',
+      label: 'Re-generate the contributors list',
       value: 'generate',
     },
     {
-      name: 'Compare contributors from the repository with the credited ones',
+      label: 'Compare contributors from the repository with the credited ones',
       value: 'check',
     },
   ];
-  if (argv._[0]) {
-    return Promise.resolve(argv._[0]);
-  }
 
   return select({
     message: 'What do you want to do?',
-    choices,
-    default: choices[0].value,
+    options,
   });
 }
 
@@ -146,7 +148,12 @@ async function run() {
       // If default config file doesn't exist, that's okay
     }
 
-    const command = await promptForCommand(argv);
+    let command;
+    if (argv._[0]) {
+      command = argv._[0];
+    } else {
+      command = await promptForCommand();
+    }
 
     switch (command) {
       case 'init':
@@ -166,12 +173,18 @@ async function run() {
     }
   } catch (e) {
     if (e instanceof util.UserError) {
-      console.error(e.message);
+      log.error(e.message);
     } else {
-      console.error(e.stack || e.message || e);
+      log.error(e.stack || e.message || e);
     }
     process.exitCode = 1;
   }
 }
 
-run();
+intro('all-contributors-cli');
+await run();
+if (process.exitCode) {
+  cancel('Oops!  There was an error.');
+} else {
+  outro("You're all set!");
+}

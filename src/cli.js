@@ -2,7 +2,7 @@
 
 import path from 'path';
 
-import inquirer from 'inquirer';
+import { select } from '@inquirer/prompts';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import * as YoctoColors from 'yoctocolors';
@@ -120,19 +120,14 @@ function promptForCommand(argv) {
       value: 'check',
     },
   ];
-  const questions = [
-    {
-      type: 'select',
-      name: 'command',
-      message: 'What do you want to do?',
-      choices: choices,
-      when: !argv._[0],
-      default: choices[0].value,
-    },
-  ];
+  if (argv._[0]) {
+    return Promise.resolve(argv._[0]);
+  }
 
-  return inquirer.prompt(questions).then((answers) => {
-    return answers.command || argv._[0];
+  return select({
+    message: 'What do you want to do?',
+    choices,
+    default: choices[0].value,
   });
 }
 

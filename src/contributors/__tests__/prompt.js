@@ -1,6 +1,18 @@
-import { expect, test } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { getQuestions, prompt } from '../prompt.js';
+import { prompt } from '../prompt.js';
+
+const prompts = vi.hoisted(() => ({
+  checkbox: vi.fn(),
+  input: vi.fn(),
+}));
+
+vi.mock('@inquirer/prompts', () => prompts);
+
+beforeEach(() => {
+  prompts.checkbox.mockReset().mockResolvedValue(['code']);
+  prompts.input.mockReset().mockResolvedValue('new-user');
+});
 
 function fixtures() {
   const options = {
@@ -32,114 +44,63 @@ function fixtures() {
   return options;
 }
 
-test(`should throw error if all contribution types are invalid`, () => {
-  const options = fixtures();
-  const username = 'userName';
-  const contributions = 'invalidContributionType1,invalidContributionType2';
-  expect(() => prompt(options, username, contributions)).toThrow(
-    'invalidContributionType1,invalidContributionType2 is/are invalid contribution type(s)',
-  );
-});
-
-test(`should not throw error if atleast one of the contribution types is valid`, () => {
-  const options = fixtures();
-  const username = 'userName';
-  const contributions = 'wrongContributionType,code';
-  return prompt(options, username, contributions).then((answers) => {
-    expect(answers).toEqual({ username: 'userName', contributions: ['code'] });
+describe('prompt', () => {
+  it('should throw error if all contribution types are invalid', () => {
+    const options = fixtures();
+    const username = 'userName';
+    const contributions = 'invalidContributionType1,invalidContributionType2';
+    expect(() => prompt(options, username, contributions)).toThrow(
+      'invalidContributionType1,invalidContributionType2 is/are invalid contribution type(s)',
+    );
   });
-});
 
-test(`should filter valid contribution types from user inserted types`, () => {
-  const options = fixtures();
-  const username = 'userName';
-  const contributions = 'invalidContributionType1,code,invalidContributionType2,bug';
-  return prompt(options, username, contributions).then((answers) => {
-    expect(answers.contributions).toHaveLength(2);
-    expect(answers.contributions).toEqual(['code', 'bug']);
+  it('should not throw error if at least one of the contribution types is valid', () => {
+    const options = fixtures();
+    const username = 'userName';
+    const contributions = 'wrongContributionType,code';
+    return prompt(options, username, contributions).then((answers) => {
+      expect(answers).toEqual({ username: 'userName', contributions: ['code'] });
+    });
   });
-});
 
-test(`should prompt for contributions when username is provided but contributions are undefined`, () => {
-  const options = fixtures();
-  const username = 'userName';
-  const contributions = undefined;
-
-  const questions = getQuestions(options, username, contributions);
-  const contributionsQuestion = questions.find((q) => q.name === 'contributions');
-
-  expect(contributionsQuestion).toBeDefined();
-  expect(contributionsQuestion.message).toBe('What are the contribution types?');
-});
-
-test(`should return prompt with username message when username and contributions are not provided`, () => {
-  const options = fixtures();
-  const username = undefined;
-  const contributions = undefined;
-  const questions = getQuestions(options, username, contributions);
-  const usernameQuestion = questions.find((q) => q.name === 'username');
-  expect(usernameQuestion).toBeDefined();
-  expect(usernameQuestion.message).toBe("What is the contributor's GitHub username?");
-});
-
-test(`username validation should return error when input is empty`, () => {
-  const options = fixtures();
-  const questions = getQuestions(options, undefined, undefined);
-  const usernameQuestion = questions.find((q) => q.name === 'username');
-
-  const result = usernameQuestion.validate('');
-  expect(result).toBe('Username not provided');
-});
-
-test(`username validation should return true when input is provided`, () => {
-  const options = fixtures();
-  const questions = getQuestions(options, undefined, undefined);
-  const usernameQuestion = questions.find((q) => q.name === 'username');
-
-  const result = usernameQuestion.validate('lwasser');
-  expect(result).toBe(true);
-});
-
-test(`contributions validation should return error when no contributions selected`, () => {
-  const options = fixtures();
-  const questions = getQuestions(options, 'userName', undefined);
-  const contributionsQuestion = questions.find((q) => q.name === 'contributions');
-
-  // Simulate user selecting nothing (empty array)
-  const result = contributionsQuestion.validate([], { username: 'userName' });
-  expect(result).toBe('Use space to select at least one contribution type.');
-});
-
-test(`contributions validation should return error when selection matches previous contributions`, () => {
-  const options = {
-    repoType: 'github',
-    contributors: [
-      {
-        login: 'jfmengels',
-        name: 'Jeroen Engels',
-        contributions: ['code', 'doc'], // Existing contributions
-      },
-    ],
-  };
-
-  const questions = getQuestions(options, 'jfmengels', undefined);
-  const contributionsQuestion = questions.find((q) => q.name === 'contributions');
-
-  // The user's contrib types already existing in the all-contribs file
-  const result = contributionsQuestion.validate(['code', 'doc'], {
-    username: 'jfmengels',
+  it('should filter valid contribution types from user inserted types', () => {
+    const options = fixtures();
+    const username = 'userName';
+    const contributions = 'invalidContributionType1,code,invalidContributionType2,bug';
+    return prompt(options, username, contributions).then((answers) => {
+      expect(answers.contributions).toHaveLength(2);
+      expect(answers.contributions).toEqual(['code', 'bug']);
+    });
   });
-  expect(result).toBe('Nothing changed, use space to select contribution types.');
-});
 
-test(`contributions validation should return true when valid selection is made`, () => {
-  const options = fixtures();
-  const questions = getQuestions(options, 'userName', undefined);
-  const contributionsQuestion = questions.find((q) => q.name === 'contributions');
+  it('configures username and contribution prompts with validation', async () => {
+    const options = fixtures();
+    await prompt(options);
 
-  // Simulate user selecting valid contributions
-  const result = contributionsQuestion.validate(['code', 'doc'], {
-    username: 'userName',
+    const usernamePrompt = prompts.input.mock.calls[0][0];
+    expect(usernamePrompt.message).toBe("What is the contributor's GitHub username?");
+    expect(usernamePrompt.validate('')).toBe('Username not provided');
+    expect(usernamePrompt.validate('new-user')).toBe(true);
+
+    const contributionsPrompt = prompts.checkbox.mock.calls[0][0];
+    expect(contributionsPrompt.message).toBe('What are the contribution types?');
+    expect(contributionsPrompt.validate([])).toBe(
+      'Use space to select at least one contribution type.',
+    );
+    expect(contributionsPrompt.validate(['code'])).toBe(true);
   });
-  expect(result).toBe(true);
+
+  it('rejects selecting the same contributions the user already has', async () => {
+    const options = fixtures();
+    options.contributors[0].contributions = ['code', 'doc'];
+    prompts.input.mockResolvedValueOnce('jfmengels');
+
+    await prompt(options);
+
+    const contributionsPrompt = prompts.checkbox.mock.calls[0][0];
+    expect(contributionsPrompt.default).toEqual(['code', 'doc']);
+    expect(contributionsPrompt.validate(['doc', 'code'])).toBe(
+      'Nothing changed, use space to select contribution types.',
+    );
+  });
 });

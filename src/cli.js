@@ -184,7 +184,7 @@ async function run() {
 intro('all-contributors-cli');
 await run();
 if (process.exitCode) {
-  cancel('Oops!  There was an error.');
+  cancel('Oops! There was an error.');
 } else {
   outro("You're all set!");
 }

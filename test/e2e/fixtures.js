@@ -8,6 +8,7 @@ import { test } from 'vitest';
 import { runGit } from './run-cli.js';
 
 const config = {
+  commit: false,
   projectName: 'test-project',
   projectOwner: 'test-owner',
   files: ['README.md'],

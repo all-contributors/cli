@@ -16,19 +16,41 @@ import * as util from './util/index.js';
 const cwd = process.cwd();
 const defaultRCFile = path.join(cwd, '.all-contributorsrc');
 
-function getArgs() {
+const defaultOptions = {
+  contributors: [],
+  contributorsPerLine: 7,
+  contributorsSortAlphabetically: false,
+  files: ['README.md'],
+};
+
+function getCliArgs() {
   return yargs(hideBin(process.argv))
     .scriptName('all-contributors')
+    .option('commit', {
+      type: 'boolean',
+      description: 'Whether or not to automatically commit changes made by the cli',
+    })
     .option('config', {
       alias: 'c',
       type: 'string',
       default: defaultRCFile,
       description: 'Path to config file',
     })
+    .option('contributors', {
+      type: 'array',
+      description: 'List of contributors',
+    })
+    .option('contributorsPerLine', {
+      type: 'number',
+      description: 'The number of contributors in one row of the table',
+    })
     .option('contributorsSortAlphabetically', {
       type: 'boolean',
-      default: false,
       description: 'Sort the list of contributors alphabetically in the generated list',
+    })
+    .option('files', {
+      type: 'array',
+      description: 'The files that contain the table and the badge, at most 25',
     })
     .help('help')
     .alias('h', 'help')
@@ -47,11 +69,7 @@ function getArgs() {
     .command(
       'check',
       `Compare contributors from the repository with the ones credited in .all-contributorsrc'\n\nUSAGE: all-contributors check`,
-    )
-    .boolean('commit')
-    .default('files', ['README.md'])
-    .default('contributorsPerLine', 7)
-    .default('contributors', []).argv;
+    ).argv;
 }
 
 async function addContribution(argv) {
@@ -105,7 +123,7 @@ async function checkContributors(argv) {
     });
 }
 
-function promptForCommand(argv) {
+async function promptForCommand(argv) {
   const choices = [
     {
       name: 'Add new contributor or edit contribution type',
@@ -136,32 +154,40 @@ function promptForCommand(argv) {
   });
 }
 
+const getOptions = async () => {
+  const args = getCliArgs();
+
+  // Load and merge config file data into argv
+  try {
+    const configData = await util.configFile.readConfig(args.config);
+    return {
+      ...defaultOptions,
+      ...configData,
+      ...args,
+    };
+  } catch (error) {
+    if (args.config !== defaultRCFile || error.cause?.code !== 'ENOENT') {
+      throw error;
+    }
+  }
+  return { ...defaultOptions, ...args };
+};
+
 async function run() {
   try {
-    const argv = getArgs();
+    const options = await getOptions();
 
-    // Load and merge config file data into argv
-    try {
-      const configData = await util.configFile.readConfig(argv.config);
-      Object.assign(argv, configData);
-    } catch (error) {
-      if (argv.config !== defaultRCFile || error.cause?.code !== 'ENOENT') {
-        throw error;
-      }
-      // If default config file doesn't exist, that's okay
-    }
-
-    const command = await promptForCommand(argv);
+    const command = await promptForCommand(options);
 
     switch (command) {
       case 'init':
         return await init();
       case 'generate':
-        return await startGeneration(argv);
+        return await startGeneration(options);
       case 'add':
-        return await addContribution(argv);
+        return await addContribution(options);
       case 'check':
-        return await checkContributors(argv);
+        return await checkContributors(options);
       default:
         throw new util.UserError(
           `Unknown command: ${command}\n` +

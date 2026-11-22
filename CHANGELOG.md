@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.4](https://github.com/all-contributors/cli/compare/v7.0.3...v7.0.4) (2026-11-22)
+
+
+### 📖 Documentation
+
+* add andreww2012 as a contributor for bug ([#693](https://github.com/all-contributors/cli/issues/693)) ([f0c35e1](https://github.com/all-contributors/cli/commit/f0c35e1700de7be9fc49d7fee62834a9f8eb78c8))
+
 ## [7.0.3](https://github.com/all-contributors/cli/compare/v7.0.2...v7.0.3) (2026-11-15)
 
 

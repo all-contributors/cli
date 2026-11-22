@@ -3,7 +3,7 @@
     { "type": "feat", "section": "🚀 Features", "hidden": false },
     { "type": "fix", "section": "🩹 Bug Fixes", "hidden": false },
     { "type": "perf", "section": "🏁 Performance Improvements", "hidden": false },
-    { "type": "docs", "section": "📖 Documentation", "hidden": false },
+    { "type": "docs", "hidden": true },
     { "type": "build", "hidden": true },
     { "type": "chore", "hidden": true },
     { "type": "ci", "hidden": true },

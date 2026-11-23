@@ -25,19 +25,19 @@
     <caption>Read this documentation in the following languages</caption>
     <tbody>
         <tr>
-            <td><a href="https://allcontributors.org/docs/ko/cli/overview">한국어</a></td>
-            <td><a href="https://allcontributors.org/docs/zh-CN/cli/overview">中文</a></td>
-            <td><a href="https://allcontributors.org/docs/id/cli/overview">Bahasa Indonesia</a></td>
-            <td><a href="https://allcontributors.org/docs/de/cli/overview">Deutsch</a></td>
-            <td><a href="https://allcontributors.org/docs/pl/cli/overview">Polski</a></td>
+            <td><a href="https://allcontributors.org/ko/cli/">한국어</a></td>
+            <td><a href="https://allcontributors.org/zh/cli/">中文</a></td>
+            <td><a href="https://allcontributors.org/id/cli/">Bahasa Indonesia</a></td>
+            <td><a href="https://allcontributors.org/de/cli/">Deutsch</a></td>
+            <td><a href="https://allcontributors.org/pl/cli/">Polski</a></td>
         </tr>
         <tr>
-            <td><a href="https://allcontributors.org/docs/en/cli/overview">English</a></td>
-            <td><a href="https://allcontributors.org/docs/pt-BR/cli/overview">Português</a></td>
-            <td><a href="https://allcontributors.org/docs/es-ES/cli/overview">Español</a></td>
-            <td><a href="https://allcontributors.org/docs/fr/cli/overview">Français</a></td>
-            <td><a href="https://allcontributors.org/docs/ru/cli/overview">Русский</a></td>
-            <td><a href="https://allcontributors.org/docs/ja/cli/overview">日本語</a></td>
+            <td><a href="https://allcontributors.org/en/cli/">English</a></td>
+            <td><a href="https://allcontributors.org/pt/cli/">Português</a></td>
+            <td><a href="https://allcontributors.org/es/cli/">Español</a></td>
+            <td><a href="https://allcontributors.org/fr/cli/">Français</a></td>
+            <td><a href="https://allcontributors.org/ru/cli/">Русский</a></td>
+            <td><a href="https://allcontributors.org/ja/cli/">日本語</a></td>
         </tr>
     </tbody>
 </table>

@@ -25,19 +25,19 @@
     <caption>Read this documentation in the following languages</caption>
     <tbody>
         <tr>
-            <td><a href="https://allcontributors.org/docs/ko/cli/overview">한국어</a></td>
-            <td><a href="https://allcontributors.org/docs/zh-CN/cli/overview">中文</a></td>
-            <td><a href="https://allcontributors.org/docs/id/cli/overview">Bahasa Indonesia</a></td>
-            <td><a href="https://allcontributors.org/docs/de/cli/overview">Deutsch</a></td>
-            <td><a href="https://allcontributors.org/docs/pl/cli/overview">Polski</a></td>
+            <td><a href="https://allcontributors.org/ko/cli/">한국어</a></td>
+            <td><a href="https://allcontributors.org/zh/cli/">中文</a></td>
+            <td><a href="https://allcontributors.org/id/cli/">Bahasa Indonesia</a></td>
+            <td><a href="https://allcontributors.org/de/cli/">Deutsch</a></td>
+            <td><a href="https://allcontributors.org/pl/cli/">Polski</a></td>
         </tr>
         <tr>
-            <td><a href="https://allcontributors.org/docs/en/cli/overview">English</a></td>
-            <td><a href="https://allcontributors.org/docs/pt-BR/cli/overview">Português</a></td>
-            <td><a href="https://allcontributors.org/docs/es-ES/cli/overview">Español</a></td>
-            <td><a href="https://allcontributors.org/docs/fr/cli/overview">Français</a></td>
-            <td><a href="https://allcontributors.org/docs/ru/cli/overview">Русский</a></td>
-            <td><a href="https://allcontributors.org/docs/ja/cli/overview">日本語</a></td>
+            <td><a href="https://allcontributors.org/en/cli/">English</a></td>
+            <td><a href="https://allcontributors.org/pt/cli/">Português</a></td>
+            <td><a href="https://allcontributors.org/es/cli/">Español</a></td>
+            <td><a href="https://allcontributors.org/fr/cli/">Français</a></td>
+            <td><a href="https://allcontributors.org/ru/cli/">Русский</a></td>
+            <td><a href="https://allcontributors.org/ja/cli/">日本語</a></td>
         </tr>
     </tbody>
 </table>
@@ -176,7 +176,7 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/KibbeWater"><img src="https://avatars.githubusercontent.com/u/35224538?v=4&size=100" width="100px" height="100px" alt="Snow"/><br /><sub><b>Snow</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=KibbeWater" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/issues?q=author%3AKibbeWater" title="Bug reports">🐛</a></td>
     </tr>
     <tr>
-      <td align="center" valign="top" width="16.66%"><a href="https://github.com/michaelfaith"><img src="https://avatars.githubusercontent.com/u/8071845?v=4&size=100" width="100px" height="100px" alt="michael faith"/><br /><sub><b>michael faith</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Amichaelfaith" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3Amichaelfaith" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/all-contributors/cli/commits?author=michaelfaith" title="Code">💻</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/michaelfaith"><img src="https://avatars.githubusercontent.com/u/8071845?v=4&size=100" width="100px" height="100px" alt="michael faith"/><br /><sub><b>michael faith</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Amichaelfaith" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3Amichaelfaith" title="Reviewed Pull Requests">👀</a> <a href="https://github.com/all-contributors/cli/commits?author=michaelfaith" title="Code">💻</a> <a href="#maintenance-michaelfaith" title="Maintenance">🚧</a></td>
       <td align="center" valign="top" width="16.66%"><a href="http://brandonalenz.com"><img src="https://avatars.githubusercontent.com/u/15805554?v=4&size=100" width="100px" height="100px" alt="Brandon Lenz"/><br /><sub><b>Brandon Lenz</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Abrandonlenz" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/commits?author=brandonlenz" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/commits?author=brandonlenz" title="Documentation">📖</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/davidpavlovschi"><img src="https://avatars.githubusercontent.com/u/154081173?v=4&size=100" width="100px" height="100px" alt="David Pavlovschii"/><br /><sub><b>David Pavlovschii</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=davidpavlovschi" title="Code">💻</a></td>
       <td align="center" valign="top" width="16.66%"><a href="http://vincentborgers.nl"><img src="https://avatars.githubusercontent.com/u/88669109?v=4&size=100" width="100px" height="100px" alt="Vincent Borgers"/><br /><sub><b>Vincent Borgers</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=VincentBorgers" title="Code">💻</a> <a href="https://github.com/all-contributors/cli/issues?q=author%3AVincentBorgers" title="Bug reports">🐛</a></td>
@@ -186,6 +186,8 @@ Thanks goes to these wonderful people
     <tr>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/stchigel"><img src="https://avatars.githubusercontent.com/u/166736520?v=4&size=100" width="100px" height="100px" alt="Nico"/><br /><sub><b>Nico</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Astchigel" title="Bug reports">🐛</a> <a href="https://github.com/all-contributors/cli/commits?author=stchigel" title="Code">💻</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/nhktmdzhg"><img src="https://avatars.githubusercontent.com/u/57983253?v=4&size=100" width="100px" height="100px" alt="Nguyen Hoang Ky"/><br /><sub><b>Nguyen Hoang Ky</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Anhktmdzhg" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/andreww2012"><img src="https://avatars.githubusercontent.com/u/6554045?v=4&size=100" width="100px" height="100px" alt="Andrew Kazakov"/><br /><sub><b>Andrew Kazakov</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Aandreww2012" title="Bug reports">🐛</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://github.com/MaxonT"><img src="https://avatars.githubusercontent.com/u/173550318?v=4&size=100" width="100px" height="100px" alt="Ming "/><br /><sub><b>Ming </b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=MaxonT" title="Documentation">📖</a></td>
     </tr>
   </tbody>
 </table>

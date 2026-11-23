@@ -78,9 +78,36 @@ jobs:
       - uses: $/.github/actions/setup
       - run: pnpm lint
 
-  test:
-    name: Test
+  test_node:
+    name: Test (Node.js ${{ matrix.node-version }})
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 22.22.0
+          - 22
+          - 23
+          - 24.0.0
+          - 24
+          - 25
+          - 26.0.0
+          - 26
+    steps:
+      - uses: $/.github/actions/setup
+      - run: pnpm build
+      - run: pnpm test
+
+  test_os:
+    name: Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - macos-latest
+          - ubuntu-latest
+          - windows-latest
     permissions:
       contents: read
       id-token: write
@@ -89,6 +116,7 @@ jobs:
       - run: pnpm build
       - run: pnpm test --coverage
       - uses: codecov/codecov-action@303a32d7a59b442fa8d48b6a1cc6825c09c847a5 # v7.1.1
+        if: success() && (matrix.os == 'ubuntu-latest')
         with:
           fail_ci_if_error: false
           use_oidc: true

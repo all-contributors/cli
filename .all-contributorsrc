@@ -10,6 +10,7 @@
   ],
   "repoHost": "https://github.com",
   "commitConvention": "angular",
+  "commitType": "docs",
   "contributors": [
     {
       "login": "jfmengels",
@@ -716,7 +717,8 @@
       "contributions": [
         "bug",
         "review",
-        "code"
+        "code",
+        "maintenance"
       ]
     },
     {
@@ -787,8 +789,24 @@
       "contributions": [
         "bug"
       ]
+    },
+    {
+      "login": "andreww2012",
+      "name": "Andrew Kazakov",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6554045?v=4",
+      "profile": "https://github.com/andreww2012",
+      "contributions": [
+        "bug"
+      ]
+    },
+    {
+      "login": "MaxonT",
+      "name": "Ming ",
+      "avatar_url": "https://avatars.githubusercontent.com/u/173550318?v=4",
+      "profile": "https://github.com/MaxonT",
+      "contributions": [
+        "doc"
+      ]
     }
-  ],
-  "skipCi": true,
-  "commitType": "docs"
+  ]
 }

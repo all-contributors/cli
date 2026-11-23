@@ -7,6 +7,7 @@ import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import * as YoctoColors from 'yoctocolors';
 
+import packageJson from '../package.json' with { type: 'json' };
 import { addContributor } from './contributors/index.js';
 import { startGeneration } from './generate/start-generation.js';
 import { init } from './init/index.js';
@@ -33,7 +34,7 @@ function getArgs() {
     .help('help')
     .alias('h', 'help')
     .alias('v', 'version')
-    .version()
+    .version(packageJson.version)
     .recommendCommands()
     .command('generate', `Generate the list of contributors\n\nUSAGE: all-contributors generate`)
     .command(

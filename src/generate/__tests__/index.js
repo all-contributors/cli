@@ -66,6 +66,13 @@ test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of c
   expect(result).toMatchSnapshot();
 });
 
+test('the usage footer logo has alternative text', () => {
+  const { options, jfmengels, content } = fixtures();
+  const result = generate({ ...options, linkToUsage: true }, [jfmengels], content);
+
+  expect(result).toMatch(/<img src="[^"]*logo-small\.svg" alt="All Contributors">/);
+});
+
 test('replace the content between the ALL-CONTRIBUTORS-LIST tags by a table of contributors without linkToUsage', () => {
   const { kentcdodds, bogas04 } = contributors;
   const { options, jfmengels, content } = fixtures();

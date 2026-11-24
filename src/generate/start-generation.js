@@ -3,6 +3,7 @@ import path from 'path';
 
 import { spinner } from '@clack/prompts';
 
+import { cliStatuses } from '../util/cliStatuses.js';
 import { UserError } from '../util/user-error.js';
 import { generate } from './index.js';
 
@@ -38,4 +39,5 @@ export async function startGeneration(options, cwd = process.cwd()) {
     throw error;
   }
   s.stop('Generation complete');
+  return cliStatuses.success;
 }

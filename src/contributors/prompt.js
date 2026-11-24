@@ -1,4 +1,4 @@
-import { multiselect, text } from '@clack/prompts';
+import { isCancel, multiselect, text } from '@clack/prompts';
 
 import * as repo from '../repo/index.js';
 import * as util from '../util/index.js';
@@ -42,6 +42,9 @@ async function promptForAnswers(options, username, contributions, defaults) {
         }
       },
     });
+    if (isCancel(promptedUsername)) {
+      return undefined;
+    }
   }
 
   let promptedContributions = defaults.contributions;
@@ -58,6 +61,9 @@ async function promptForAnswers(options, username, contributions, defaults) {
       options: contributionOptions(options),
       required: true,
     });
+    if (isCancel(promptedContributions)) {
+      return undefined;
+    }
   }
 
   return { username: promptedUsername, contributions: promptedContributions };

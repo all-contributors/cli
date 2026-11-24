@@ -2,7 +2,7 @@
 
 import path from 'path';
 
-import { cancel, intro, log, outro, select, spinner } from '@clack/prompts';
+import { cancel, intro, isCancel, log, outro, select, spinner } from '@clack/prompts';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import * as YoctoColors from 'yoctocolors';
@@ -12,6 +12,7 @@ import { addContributor } from './contributors/index.js';
 import { startGeneration } from './generate/start-generation.js';
 import { init } from './init/index.js';
 import * as repo from './repo/index.js';
+import { cliStatuses } from './util/cliStatuses.js';
 import * as util from './util/index.js';
 
 const cwd = process.cwd();
@@ -61,6 +62,9 @@ async function addContribution(argv) {
 
   // Add or update contributor in the config file
   const data = await addContributor(argv, username, contributions);
+  if (data === undefined) {
+    return cliStatuses.cancelled;
+  }
 
   argv.contributors = data.contributors;
 
@@ -68,48 +72,48 @@ async function addContribution(argv) {
 
   // Commit if configured
   if (argv.commit) {
-    return util.git.commit(argv, data);
+    await util.git.commit(argv, data);
   }
+  return cliStatuses.success;
 }
 
 async function checkContributors(argv) {
   const s = spinner();
   s.start('Checking contributors');
 
-  return repo
-    .getContributors(argv.projectOwner, argv.projectName, argv.repoType, argv.repoHost)
-    .then((repoContributors) => {
-      s.stop('Validation complete');
+  const repoContributors = await repo;
 
-      const checkKey = repo.getCheckKey(argv.repoType);
-      const knownContributions = argv.contributors.reduce((obj, item) => {
-        obj[item[checkKey]] = item.contributions;
-        return obj;
-      }, {});
-      const knownContributors = argv.contributors.map((contributor) => contributor[checkKey]);
+  s.stop('Validation complete');
 
-      const missingInConfig = repoContributors.filter((key) => !knownContributors.includes(key));
-      const missingFromRepo = knownContributors.filter((key) => {
-        return (
-          !repoContributors.includes(key) &&
-          (knownContributions[key].includes('code') || knownContributions[key].includes('test'))
-        );
-      });
+  const checkKey = repo.getCheckKey(argv.repoType);
+  const knownContributions = argv.contributors.reduce((obj, item) => {
+    obj[item[checkKey]] = item.contributions;
+    return obj;
+  }, {});
+  const knownContributors = argv.contributors.map((contributor) => contributor[checkKey]);
 
-      if (missingInConfig.length) {
-        log.info(
-          YoctoColors.bold('Missing contributors in .all-contributorsrc:\n') +
-            `${missingInConfig.join(', ')}`,
-        );
-      }
+  const missingInConfig = repoContributors.filter((key) => !knownContributors.includes(key));
+  const missingFromRepo = knownContributors.filter((key) => {
+    return (
+      !repoContributors.includes(key) &&
+      (knownContributions[key].includes('code') || knownContributions[key].includes('test'))
+    );
+  });
 
-      if (missingFromRepo.length) {
-        log.info(
-          YoctoColors.bold('Unknown contributors found in .all-contributorsrc:\n') +
-            `${missingFromRepo.join(', ')}\n`,
-        );
-      }
-    });
+  if (missingInConfig.length) {
+    log.info(
+      YoctoColors.bold('Missing contributors in .all-contributorsrc:\n') +
+        `${missingInConfig.join(', ')}`,
+    );
+  }
+
+  if (missingFromRepo.length) {
+    log.info(
+      YoctoColors.bold('Unknown contributors found in .all-contributorsrc:\n') +
+        `${missingFromRepo.join(', ')}\n`,
+    );
+  }
+  return cliStatuses.success;
 }
 
 function promptForCommand() {
@@ -156,6 +160,10 @@ async function run() {
       command = await promptForCommand();
     }
 
+    if (isCancel(command)) {
+      return cliStatuses.cancelled;
+    }
+
     switch (command) {
       case 'init':
         return await init();
@@ -179,6 +187,7 @@ async function run() {
       log.error(e.stack || e.message || e);
     }
     process.exitCode = 1;
+    return cliStatuses.error;
   }
 }
 

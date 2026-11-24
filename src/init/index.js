@@ -1,5 +1,6 @@
 import { promises as fs } from 'fs';
 
+import { cliStatuses } from '../util/cliStatuses.js';
 import { configFile } from '../util/index.js';
 import { addBadge, addContributorsList } from './init-content.js';
 import { prompt } from './prompt.js';
@@ -23,6 +24,10 @@ async function injectInFile(file, fn) {
 export async function init() {
   const promptResult = await prompt();
 
+  if (promptResult === undefined) {
+    return cliStatuses.cancelled;
+  }
+
   await configFile.writeConfig('.all-contributorsrc', promptResult.config);
 
   await ensureFileExists(promptResult.contributorFile);
@@ -32,4 +37,5 @@ export async function init() {
   if (promptResult.badgeFile) {
     await injectInFile(promptResult.badgeFile, addBadge);
   }
+  return cliStatuses.success;
 }

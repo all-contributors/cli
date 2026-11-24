@@ -1,31 +1,40 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { createPrompts } from '../prompt.js';
 
 const prompts = vi.hoisted(() => ({
   confirm: vi.fn(),
+  isCancel: vi.fn(),
   text: vi.fn(),
   select: vi.fn(),
 }));
 
 vi.mock('@clack/prompts', () => prompts);
 
+const mockPrompts = () => {
+  prompts.text
+    .mockReset()
+    .mockResolvedValueOnce('all-contributors-cli')
+    .mockResolvedValueOnce('all-contributors')
+    .mockResolvedValueOnce('https://github.example.com')
+    .mockResolvedValueOnce('CONTRIBUTORS.md')
+    .mockResolvedValueOnce('BADGES.md')
+    .mockResolvedValueOnce('80');
+  prompts.confirm
+    .mockReset()
+    .mockResolvedValueOnce(true)
+    .mockResolvedValueOnce(true)
+    .mockResolvedValueOnce(true);
+  prompts.select.mockReset().mockResolvedValueOnce('gitlab').mockResolvedValueOnce('atom');
+};
+
 describe('createPrompts', () => {
+  beforeEach(() => {
+    prompts.isCancel.mockReset().mockReturnValue(false);
+  });
+
   it('creates init prompts and builds the config result', async () => {
-    prompts.text
-      .mockReset()
-      .mockResolvedValueOnce('all-contributors-cli')
-      .mockResolvedValueOnce('all-contributors')
-      .mockResolvedValueOnce('https://github.example.com')
-      .mockResolvedValueOnce('CONTRIBUTORS.md')
-      .mockResolvedValueOnce('BADGES.md')
-      .mockResolvedValueOnce('80');
-    prompts.confirm
-      .mockReset()
-      .mockResolvedValueOnce(true)
-      .mockResolvedValueOnce(true)
-      .mockResolvedValueOnce(true);
-    prompts.select.mockReset().mockResolvedValueOnce('gitlab').mockResolvedValueOnce('atom');
+    mockPrompts();
 
     const result = await createPrompts({
       projectName: 'default-project',
@@ -83,4 +92,23 @@ describe('createPrompts', () => {
     expect(result.config.commit).toBe(false);
     expect(result.config.linkToUsage).toBe(false);
   });
+
+  it.each(Array.from({ length: 11 }, (_, index) => index))(
+    'returns undefined when the user cancels prompt %s',
+    async (index) => {
+      mockPrompts();
+      prompts.isCancel.mockReset();
+      for (let i = 0; i < index; i++) {
+        prompts.isCancel.mockReturnValueOnce(false);
+      }
+      prompts.isCancel.mockReturnValue(true);
+
+      const result = await createPrompts({
+        projectName: 'default-project',
+        projectOwner: 'default-owner',
+      });
+
+      expect(result).toBeUndefined();
+    },
+  );
 });

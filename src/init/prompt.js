@@ -55,7 +55,7 @@ export async function createPrompts(repoInfo) {
       label: convention.name,
       value,
     })),
-    default: 'angular',
+    initialValue: 'angular',
   });
   const linkToUsage = await confirm({
     message: 'Do you want to add a footer with link to usage?',

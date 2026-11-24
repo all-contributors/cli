@@ -6,7 +6,7 @@ import contributors from './fixtures/contributors.json';
 function fixtures() {
   const options = {
     projectOwner: 'all-contributors',
-    projectName: 'all-contributors-cli',
+    projectName: 'cli',
     repoType: 'github',
     repoHost: 'https://github.com',
     imageSize: 150,
@@ -22,7 +22,7 @@ test('format a simple contributor', () => {
   const { options } = fixtures();
 
   const expected =
-    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684?size=150" width="150px" height="150px" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>';
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684?size=150" width="150px" height="150px" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>';
 
   expect(formatContributor(options, contributor)).toBe(expected);
 });
@@ -32,7 +32,7 @@ test('format contributor with complex contribution types', () => {
   const { options } = fixtures();
 
   const expected =
-    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684?size=150" width="150px" height="150px" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=kentcdodds" title="Documentation">📖</a> <a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a> <a href="#question-kentcdodds" title="Answering Questions">💬</a>';
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684?size=150" width="150px" height="150px" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=kentcdodds" title="Documentation">📖</a> <a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a> <a href="#question-kentcdodds" title="Answering Questions">💬</a>';
 
   expect(formatContributor(options, contributor)).toBe(expected);
 });
@@ -56,7 +56,7 @@ test('default image size to 100', () => {
   delete options.imageSize;
 
   const expected =
-    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684?size=100" width="100px" height="100px" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>';
+    '<a href="http://kentcdodds.com"><img src="https://avatars1.githubusercontent.com/u/1500684?size=100" width="100px" height="100px" alt="Kent C. Dodds"/><br /><sub><b>Kent C. Dodds</b></sub></a><br /><a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>';
 
   expect(formatContributor(options, contributor)).toBe(expected);
 });
@@ -66,7 +66,7 @@ test('format contributor with pipes in their name', () => {
   const { options } = fixtures();
 
   const expected =
-    '<a href="http://github.com/chrisinajar"><img src="https://avatars1.githubusercontent.com/u/1500684?size=150" width="150px" height="150px" alt="Who &#124; Needs &#124; Pipes?"/><br /><sub><b>Who &#124; Needs &#124; Pipes?</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=pipey" title="Documentation">📖</a>';
+    '<a href="http://github.com/chrisinajar"><img src="https://avatars1.githubusercontent.com/u/1500684?size=150" width="150px" height="150px" alt="Who &#124; Needs &#124; Pipes?"/><br /><sub><b>Who &#124; Needs &#124; Pipes?</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=pipey" title="Documentation">📖</a>';
 
   expect(formatContributor(options, contributor)).toBe(expected);
 });
@@ -96,7 +96,7 @@ test('format contributor with quotes in name', () => {
   const { options } = fixtures();
 
   const expected =
-    '<a href="http://github.com/namelastname"><img src="https://avatars1.githubusercontent.com/u/1500684?size=150" width="150px" height="150px" alt="Name &quot;Nickname&quot; Lastname"/><br /><sub><b>Name &quot;Nickname&quot; Lastname</b></sub></a><br /><a href="https://github.com/all-contributors/all-contributors-cli/commits?author=namelastname" title="Documentation">📖</a>';
+    '<a href="http://github.com/namelastname"><img src="https://avatars1.githubusercontent.com/u/1500684?size=150" width="150px" height="150px" alt="Name &quot;Nickname&quot; Lastname"/><br /><sub><b>Name &quot;Nickname&quot; Lastname</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=namelastname" title="Documentation">📖</a>';
   expect(formatContributor(options, contributor)).toBe(expected);
 });
 

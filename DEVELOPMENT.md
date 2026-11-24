@@ -26,7 +26,7 @@ These are the package scripts available when working on the CLI:
 
 ## All-contributors CLI commands
 
-When the CLI is installed (`all-contributors-cli`) or run via `pnpm dev`, these
+When the CLI is installed (`@all-contributors/cli`) or run via `pnpm dev`, these
 are the subcommands:
 
 | Command                                           | Description                                          |

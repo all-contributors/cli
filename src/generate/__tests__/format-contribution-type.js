@@ -6,7 +6,7 @@ import contributors from './fixtures/contributors.json';
 const fixtures = () => {
   const options = {
     projectOwner: 'all-contributors',
-    projectName: 'all-contributors-cli',
+    projectName: 'cli',
     repoType: 'github',
     repoHost: 'https://github.com',
     imageSize: 100,
@@ -29,8 +29,7 @@ test('return corresponding symbol', () => {
 test('return link to commits', () => {
   const contributor = contributors.kentcdodds;
   const { options } = fixtures();
-  const expectedLink =
-    'https://github.com/all-contributors/all-contributors-cli/commits?author=kentcdodds';
+  const expectedLink = 'https://github.com/all-contributors/cli/commits?author=kentcdodds';
 
   expect(formatContributionType(options, contributor, 'code')).toBe(
     `<a href="${expectedLink}" title="Code">💻</a>`,
@@ -47,7 +46,7 @@ test('return link to issues', () => {
   const contributor = contributors.kentcdodds;
   const { options } = fixtures();
   const expected =
-    '<a href="https://github.com/all-contributors/all-contributors-cli/issues?q=author%3Akentcdodds" title="Bug reports">🐛</a>';
+    '<a href="https://github.com/all-contributors/cli/issues?q=author%3Akentcdodds" title="Bug reports">🐛</a>';
 
   expect(formatContributionType(options, contributor, 'bug')).toBe(expected);
 });
@@ -56,7 +55,7 @@ test('return link to reviews', () => {
   const contributor = contributors.kentcdodds;
   const { options } = fixtures();
   const expected =
-    '<a href="https://github.com/all-contributors/all-contributors-cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>';
+    '<a href="https://github.com/all-contributors/cli/pulls?q=is%3Apr+reviewed-by%3Akentcdodds" title="Reviewed Pull Requests">👀</a>';
 
   expect(formatContributionType(options, contributor, 'review')).toBe(expected);
 });

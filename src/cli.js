@@ -179,12 +179,4 @@ async function run() {
   }
 }
 
-process.stdout.write(
-  YoctoColors.yellow(
-    `${YoctoColors.bold(
-      'WARNING',
-    )} :: This package has been renamed to @all-contributors/cli. Please replace your current usage with the new package to continue receiving updates.\n`,
-  ),
-);
-
 run();

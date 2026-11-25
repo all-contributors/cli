@@ -807,6 +807,16 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "alexwlchan",
+      "name": "Alex Chan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/301220?v=4",
+      "profile": "https://alexwlchan.net",
+      "contributions": [
+        "ideas",
+        "code"
+      ]
     }
   ]
 }

@@ -20,7 +20,8 @@
       "contributions": [
         "code",
         "doc",
-        "test"
+        "test",
+        "ideas"
       ]
     },
     {
@@ -177,7 +178,8 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/997157?v=4",
       "profile": "http://gantlaborde.com/",
       "contributions": [
-        "code"
+        "code",
+        "bug"
       ]
     },
     {
@@ -229,7 +231,8 @@
       "avatar_url": "https://avatars3.githubusercontent.com/u/1736154?v=4",
       "profile": "https://github.com/chinesedfan",
       "contributions": [
-        "doc"
+        "doc",
+        "code"
       ]
     },
     {
@@ -261,7 +264,8 @@
         "doc",
         "test",
         "review",
-        "question"
+        "question",
+        "ideas"
       ]
     },
     {
@@ -339,7 +343,8 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/22792183?v=4",
       "profile": "https://rachelcarmena.github.io",
       "contributions": [
-        "code"
+        "code",
+        "ideas"
       ]
     },
     {
@@ -434,7 +439,8 @@
       "avatar_url": "https://avatars0.githubusercontent.com/u/10098207?v=4",
       "profile": "https://github.com/ilai-deutel",
       "contributions": [
-        "platform"
+        "platform",
+        "doc"
       ]
     },
     {
@@ -719,7 +725,8 @@
         "bug",
         "review",
         "code",
-        "maintenance"
+        "maintenance",
+        "infra"
       ]
     },
     {

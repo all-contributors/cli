@@ -1,4 +1,4 @@
-import inquirer from 'inquirer';
+import { confirm, isCancel, select, text } from '@clack/prompts';
 
 import { git } from '../util/index.js';
 import { conventions } from './commit-conventions.js';
@@ -7,122 +7,124 @@ function uniqueFiles(files) {
   return [...new Set(files.filter(Boolean))];
 }
 
-export const questions = [
-  {
-    type: 'input',
-    name: 'projectName',
+export async function createPrompts(repoInfo) {
+  const projectName = await text({
     message: "What's the name of the repository?",
-  },
-  {
-    type: 'input',
-    name: 'projectOwner',
-    message: 'Who is the owner of the repository?',
-  },
-  {
-    type: 'select',
-    name: 'repoType',
-    message: 'What is the repository type?',
-    choices: [
-      {
-        value: 'github',
-        name: 'GitHub',
-      },
-      {
-        value: 'gitlab',
-        name: 'GitLab',
-      },
-    ],
-    default: 'github',
-  },
-  {
-    type: 'input',
-    name: 'repoHost',
-    message: "Where is the repository hosted? Hit Enter if it's on GitHub or GitLab",
-    default: function (answers) {
-      if (answers.repoType === 'github') {
-        return 'https://github.com';
-      } else if (answers.repoType === 'gitlab') {
-        return 'https://gitlab.com';
-      }
-    },
-  },
-  {
-    type: 'input',
-    name: 'contributorFile',
-    message: 'In which file should contributors be listed?',
-    default: 'README.md',
-  },
-  {
-    type: 'confirm',
-    name: 'needBadge',
-    message: 'Do you want a badge tallying the number of contributors?',
-  },
-  {
-    type: 'input',
-    name: 'badgeFile',
-    message: 'In which file should the badge be shown?',
-    when: function (answers) {
-      return answers.needBadge;
-    },
-    default: function (answers) {
-      return answers.contributorFile;
-    },
-  },
-  {
-    type: 'input',
-    name: 'imageSize',
-    message: 'How big should the avatars be? (in px)',
-    filter: parseInt,
-    default: 100,
-  },
-  {
-    type: 'confirm',
-    name: 'commit',
-    message: 'Do you want this badge to auto-commit when contributors are added?',
-    default: true,
-  },
-  {
-    type: 'select',
-    name: 'commitConvention',
-    message: 'What commit convention would you want it to use?',
-    choices: Object.values(conventions),
-    default: 'angular',
-  },
-  {
-    type: 'confirm',
-    name: 'linkToUsage',
-    message: 'Do you want to add a footer with link to usage?',
-    default: true,
-  },
-];
+    initialValue: repoInfo?.projectName,
+  });
+  if (isCancel(projectName)) {
+    return undefined;
+  }
 
-export function prompt() {
-  return git
-    .getRepoInfo()
-    .then((repoInfo) => {
-      if (repoInfo) {
-        questions[0].default = repoInfo.projectName;
-        questions[1].default = repoInfo.projectOwner;
-      }
-      return inquirer.prompt(questions);
-    })
-    .then((answers) => {
-      return {
-        config: {
-          projectName: answers.projectName,
-          projectOwner: answers.projectOwner,
-          repoType: answers.repoType,
-          repoHost: answers.repoHost,
-          files: uniqueFiles([answers.contributorFile, answers.badgeFile]),
-          imageSize: answers.imageSize,
-          commit: answers.commit,
-          commitConvention: answers.commitConvention,
-          contributors: [],
-          contributorsPerLine: 7,
-          linkToUsage: answers.linkToUsage,
-        },
-        contributorFile: answers.contributorFile,
-        badgeFile: answers.badgeFile,
-      };
-    });
+  const projectOwner = await text({
+    message: 'Who is the owner of the repository?',
+    initialValue: repoInfo?.projectOwner,
+  });
+  if (isCancel(projectOwner)) {
+    return undefined;
+  }
+
+  const repoType = await select({
+    message: 'What is the repository type?',
+    options: [
+      { label: 'GitHub', value: 'github' },
+      { label: 'GitLab', value: 'gitlab' },
+    ],
+    initialValue: 'github',
+  });
+  if (isCancel(repoType)) {
+    return undefined;
+  }
+
+  const repoHost = await text({
+    message: "Where is the repository hosted? Hit Enter if it's on GitHub or GitLab",
+    initialValue: repoType === 'gitlab' ? 'https://gitlab.com' : 'https://github.com',
+  });
+  if (isCancel(repoHost)) {
+    return undefined;
+  }
+
+  const contributorFile = await text({
+    message: 'In which file should contributors be listed?',
+    initialValue: 'README.md',
+  });
+  if (isCancel(contributorFile)) {
+    return undefined;
+  }
+
+  const needBadge = await confirm({
+    message: 'Do you want a badge tallying the number of contributors?',
+  });
+  if (isCancel(needBadge)) {
+    return undefined;
+  }
+
+  const badgeFile = needBadge
+    ? await text({
+        message: 'In which file should the badge be shown?',
+        initialValue: contributorFile,
+      })
+    : undefined;
+  if (isCancel(badgeFile)) {
+    return undefined;
+  }
+
+  const imageSize = await text({
+    message: 'How big should the avatars be? (in px)',
+    initialValue: '100',
+  });
+  if (isCancel(imageSize)) {
+    return undefined;
+  }
+
+  const commit = await confirm({
+    message: 'Do you want this badge to auto-commit when contributors are added?',
+    initialValue: true,
+  });
+  if (isCancel(commit)) {
+    return undefined;
+  }
+
+  const commitConvention = await select({
+    message: 'What commit convention would you want it to use?',
+    options: Object.entries(conventions).map(([value, convention]) => ({
+      label: convention.name,
+      value,
+    })),
+    initialValue: 'angular',
+  });
+  if (isCancel(commitConvention)) {
+    return undefined;
+  }
+
+  const linkToUsage = await confirm({
+    message: 'Do you want to add a footer with link to usage?',
+    initialValue: true,
+  });
+  if (isCancel(linkToUsage)) {
+    return undefined;
+  }
+
+  return {
+    config: {
+      projectName,
+      projectOwner,
+      repoType,
+      repoHost,
+      files: uniqueFiles([contributorFile, badgeFile]),
+      imageSize: parseInt(imageSize, 10),
+      commit,
+      commitConvention,
+      contributors: [],
+      contributorsPerLine: 7,
+      linkToUsage,
+    },
+    contributorFile,
+    badgeFile,
+  };
+}
+
+export async function prompt() {
+  const repoInfo = await git.getRepoInfo();
+  return createPrompts(repoInfo);
 }

@@ -1,64 +1,16 @@
-import inquirer from 'inquirer';
+import { isCancel, multiselect, text } from '@clack/prompts';
 
 import * as repo from '../repo/index.js';
 import * as util from '../util/index.js';
 
-function contributionChoices(options) {
+function contributionOptions(options) {
   const types = util.contributionTypes(options);
   const pairs = Object.entries(types);
   const sorted = pairs.sort((a, b) => a[1].description.localeCompare(b[1].description));
   return sorted.map((pair) => ({
-    name: `${pair[1].symbol}  ${pair[1].description}`,
+    label: `${pair[1].symbol}  ${pair[1].description}`,
     value: pair[0],
   }));
-}
-
-export function getQuestions(options, username, contributions) {
-  return [
-    {
-      type: 'input',
-      name: 'username',
-      message: `What is the contributor's ${repo.getTypeName(options.repoType)} username?`,
-      when: !username,
-      validate: function validate(input) {
-        if (!input) {
-          return 'Username not provided';
-        }
-        return true;
-      },
-    },
-    {
-      type: 'checkbox',
-      name: 'contributions',
-      message: 'What are the contribution types?',
-      when: !contributions,
-      default: function (answers) {
-        // default values for contributions when updating existing users
-        answers.username = answers.username || username;
-        return options.contributors
-          .filter(
-            (entry) => entry.login && entry.login.toLowerCase() === answers.username.toLowerCase(),
-          )
-          .reduce((allEntries, entry) => allEntries.concat(entry.contributions), []);
-      },
-      choices: contributionChoices(options),
-      validate: function (input, answers) {
-        answers.username = answers.username || username;
-        const previousContributions = options.contributors
-          .filter(
-            (entry) => entry.login && entry.login.toLowerCase() === answers.username.toLowerCase(),
-          )
-          .reduce((allEntries, entry) => allEntries.concat(entry.contributions), []);
-
-        if (!input.length) {
-          return 'Use space to select at least one contribution type.';
-        } else if (JSON.stringify(input.sort()) === JSON.stringify(previousContributions.sort())) {
-          return 'Nothing changed, use space to select contribution types.';
-        }
-        return true;
-      },
-    },
-  ];
 }
 
 function getValidUserContributions(options, contributions) {
@@ -79,12 +31,53 @@ function getValidUserContributions(options, contributions) {
   return validUserContributions;
 }
 
+async function promptForAnswers(options, username, contributions, defaults) {
+  let promptedUsername = username;
+  if (promptedUsername === undefined) {
+    promptedUsername = await text({
+      message: `What is the contributor's ${repo.getTypeName(options.repoType)} username?`,
+      validate(inputValue) {
+        if (!inputValue) {
+          return 'Username is required';
+        }
+      },
+    });
+    if (isCancel(promptedUsername)) {
+      return undefined;
+    }
+  }
+
+  let promptedContributions = defaults.contributions;
+  if (contributions === undefined) {
+    const previousContributions = options.contributors
+      .filter(
+        (entry) => entry.login && entry.login.toLowerCase() === promptedUsername.toLowerCase(),
+      )
+      .reduce((allEntries, entry) => allEntries.concat(entry.contributions), []);
+
+    promptedContributions = await multiselect({
+      message: 'What are the contribution types?',
+      initialValues: previousContributions,
+      options: contributionOptions(options),
+      required: true,
+    });
+    if (isCancel(promptedContributions)) {
+      return undefined;
+    }
+  }
+
+  return { username: promptedUsername, contributions: promptedContributions };
+}
+
 export function prompt(options, username, contributions) {
   const defaults = {
     username,
     contributions:
       contributions === undefined ? [] : getValidUserContributions(options, contributions),
   };
-  const questions = getQuestions(options, username, contributions);
-  return inquirer.prompt(questions).then((answers) => ({ ...defaults, ...answers }));
+  if (username !== undefined && contributions !== undefined) {
+    return Promise.resolve(defaults);
+  }
+
+  return promptForAnswers(options, username, contributions, defaults);
 }

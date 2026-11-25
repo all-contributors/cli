@@ -2,7 +2,7 @@
 
 import path from 'path';
 
-import inquirer from 'inquirer';
+import { cancel, intro, isCancel, log, outro, select, spinner } from '@clack/prompts';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import * as YoctoColors from 'yoctocolors';
@@ -12,6 +12,7 @@ import { addContributor } from './contributors/index.js';
 import { startGeneration } from './generate/start-generation.js';
 import { init } from './init/index.js';
 import * as repo from './repo/index.js';
+import { cliStatuses } from './util/cliStatuses.js';
 import * as util from './util/index.js';
 
 const cwd = process.cwd();
@@ -61,6 +62,9 @@ async function addContribution(argv) {
 
   // Add or update contributor in the config file
   const data = await addContributor(argv, username, contributions);
+  if (data === undefined) {
+    return cliStatuses.cancelled;
+  }
 
   argv.contributors = data.contributors;
 
@@ -68,72 +72,69 @@ async function addContribution(argv) {
 
   // Commit if configured
   if (argv.commit) {
-    return util.git.commit(argv, data);
+    await util.git.commit(argv, data);
   }
+  return cliStatuses.success;
 }
 
 async function checkContributors(argv) {
-  return repo
-    .getContributors(argv.projectOwner, argv.projectName, argv.repoType, argv.repoHost)
-    .then((repoContributors) => {
-      const checkKey = repo.getCheckKey(argv.repoType);
-      const knownContributions = argv.contributors.reduce((obj, item) => {
-        obj[item[checkKey]] = item.contributions;
-        return obj;
-      }, {});
-      const knownContributors = argv.contributors.map((contributor) => contributor[checkKey]);
+  const s = spinner();
+  s.start('Checking contributors');
 
-      const missingInConfig = repoContributors.filter((key) => !knownContributors.includes(key));
-      const missingFromRepo = knownContributors.filter((key) => {
-        return (
-          !repoContributors.includes(key) &&
-          (knownContributions[key].includes('code') || knownContributions[key].includes('test'))
-        );
-      });
+  const repoContributors = await repo;
 
-      if (missingInConfig.length) {
-        process.stdout.write(YoctoColors.bold('Missing contributors in .all-contributorsrc:\n'));
-        process.stdout.write(`${missingInConfig.join(', ')}\n`);
-      }
+  s.stop('Validation complete');
 
-      if (missingFromRepo.length) {
-        process.stdout.write('\n');
-        process.stdout.write(
-          YoctoColors.bold('Unknown contributors found in .all-contributorsrc:\n'),
-        );
-        process.stdout.write(`${missingFromRepo.join(', ')}\n`);
-      }
-    });
+  const checkKey = repo.getCheckKey(argv.repoType);
+  const knownContributions = argv.contributors.reduce((obj, item) => {
+    obj[item[checkKey]] = item.contributions;
+    return obj;
+  }, {});
+  const knownContributors = argv.contributors.map((contributor) => contributor[checkKey]);
+
+  const missingInConfig = repoContributors.filter((key) => !knownContributors.includes(key));
+  const missingFromRepo = knownContributors.filter((key) => {
+    return (
+      !repoContributors.includes(key) &&
+      (knownContributions[key].includes('code') || knownContributions[key].includes('test'))
+    );
+  });
+
+  if (missingInConfig.length) {
+    log.info(
+      YoctoColors.bold('Missing contributors in .all-contributorsrc:\n') +
+        `${missingInConfig.join(', ')}`,
+    );
+  }
+
+  if (missingFromRepo.length) {
+    log.info(
+      YoctoColors.bold('Unknown contributors found in .all-contributorsrc:\n') +
+        `${missingFromRepo.join(', ')}\n`,
+    );
+  }
+  return cliStatuses.success;
 }
 
-function promptForCommand(argv) {
-  const choices = [
+function promptForCommand() {
+  const options = [
     {
-      name: 'Add new contributor or edit contribution type',
+      label: 'Add new contributor or edit contribution type',
       value: 'add',
     },
     {
-      name: 'Re-generate the contributors list',
+      label: 'Re-generate the contributors list',
       value: 'generate',
     },
     {
-      name: 'Compare contributors from the repository with the credited ones',
+      label: 'Compare contributors from the repository with the credited ones',
       value: 'check',
     },
   ];
-  const questions = [
-    {
-      type: 'select',
-      name: 'command',
-      message: 'What do you want to do?',
-      choices: choices,
-      when: !argv._[0],
-      default: choices[0].value,
-    },
-  ];
 
-  return inquirer.prompt(questions).then((answers) => {
-    return answers.command || argv._[0];
+  return select({
+    message: 'What do you want to do?',
+    options,
   });
 }
 
@@ -152,17 +153,33 @@ async function run() {
       // If default config file doesn't exist, that's okay
     }
 
-    const command = await promptForCommand(argv);
+    let command;
+    if (argv._[0]) {
+      command = argv._[0];
+    } else {
+      command = await promptForCommand();
+    }
+
+    if (isCancel(command)) {
+      return;
+    }
+
+    intro('all-contributors-cli');
+    let status = cliStatuses.success;
 
     switch (command) {
       case 'init':
-        return await init();
+        status = await init();
+        break;
       case 'generate':
-        return await startGeneration(argv);
+        status = await startGeneration(argv);
+        break;
       case 'add':
-        return await addContribution(argv);
+        status = await addContribution(argv);
+        break;
       case 'check':
-        return await checkContributors(argv);
+        status = await checkContributors(argv);
+        break;
       default:
         throw new util.UserError(
           `Unknown command: ${command}\n` +
@@ -170,13 +187,20 @@ async function run() {
             'Run `all-contributors --help` for more details.',
         );
     }
+
+    if (status === cliStatuses.cancelled) {
+      return;
+    } else {
+      outro("You're all set!");
+    }
   } catch (e) {
     if (e instanceof util.UserError) {
-      console.error(e.message);
+      log.error(e.message);
     } else {
-      console.error(e.stack || e.message || e);
+      log.error(e.stack || e.message || e);
     }
     process.exitCode = 1;
+    cancel('Oops! There was an error.');
   }
 }
 

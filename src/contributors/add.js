@@ -53,7 +53,7 @@ function addNewContributor(options, username, contributions, infoFetcher) {
   });
 }
 
-export function add(options, username, contributions, infoFetcher) {
+export async function add(options, username, contributions, infoFetcher) {
   // case insensitive find
   const exists = options.contributors.find((contributor) => {
     return contributor.login && contributor.login.toLowerCase() === username.toLowerCase();

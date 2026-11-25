@@ -188,6 +188,7 @@ Thanks goes to these wonderful people
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/nhktmdzhg"><img src="https://avatars.githubusercontent.com/u/57983253?v=4&size=100" width="100px" height="100px" alt="Nguyen Hoang Ky"/><br /><sub><b>Nguyen Hoang Ky</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Anhktmdzhg" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/andreww2012"><img src="https://avatars.githubusercontent.com/u/6554045?v=4&size=100" width="100px" height="100px" alt="Andrew Kazakov"/><br /><sub><b>Andrew Kazakov</b></sub></a><br /><a href="https://github.com/all-contributors/cli/issues?q=author%3Aandreww2012" title="Bug reports">🐛</a></td>
       <td align="center" valign="top" width="16.66%"><a href="https://github.com/MaxonT"><img src="https://avatars.githubusercontent.com/u/173550318?v=4&size=100" width="100px" height="100px" alt="Ming "/><br /><sub><b>Ming </b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=MaxonT" title="Documentation">📖</a></td>
+      <td align="center" valign="top" width="16.66%"><a href="https://spencercorwin.com"><img src="https://avatars.githubusercontent.com/u/29364457?v=4&size=100" width="100px" height="100px" alt="Spencer Corwin"/><br /><sub><b>Spencer Corwin</b></sub></a><br /><a href="https://github.com/all-contributors/cli/commits?author=spencercorwin" title="Code">💻</a></td>
     </tr>
   </tbody>
 </table>

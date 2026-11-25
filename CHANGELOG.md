@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.5](https://github.com/all-contributors/cli/compare/v7.0.4...v7.0.5) (2026-11-25)
+
+
+### 🩹 Bug Fixes
+
+* ensure `--version` prints the CLI's own version ([#698](https://github.com/all-contributors/cli/issues/698)) ([3808ad4](https://github.com/all-contributors/cli/commit/3808ad40f7cfd54f1fb600c30354b4f85845cd42))
+
 ## [7.0.4](https://github.com/all-contributors/cli/compare/v7.0.3...v7.0.4) (2026-11-25)
 
 

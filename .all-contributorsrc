@@ -718,7 +718,8 @@
         "bug",
         "review",
         "code",
-        "maintenance"
+        "maintenance",
+        "infra"
       ]
     },
     {

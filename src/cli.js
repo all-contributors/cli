@@ -161,24 +161,37 @@ async function run() {
     }
 
     if (isCancel(command)) {
-      return cliStatuses.cancelled;
+      return;
     }
+
+    intro('all-contributors-cli');
+    let status = cliStatuses.success;
 
     switch (command) {
       case 'init':
-        return await init();
+        status = await init();
+        break;
       case 'generate':
-        return await startGeneration(argv);
+        status = await startGeneration(argv);
+        break;
       case 'add':
-        return await addContribution(argv);
+        status = await addContribution(argv);
+        break;
       case 'check':
-        return await checkContributors(argv);
+        status = await checkContributors(argv);
+        break;
       default:
         throw new util.UserError(
           `Unknown command: ${command}\n` +
             'Valid commands are init, generate, add, and check.\n' +
             'Run `all-contributors --help` for more details.',
         );
+    }
+
+    if (status === cliStatuses.cancelled) {
+      return;
+    } else {
+      outro("You're all set!");
     }
   } catch (e) {
     if (e instanceof util.UserError) {
@@ -187,7 +200,7 @@ async function run() {
       log.error(e.stack || e.message || e);
     }
     process.exitCode = 1;
-    return cliStatuses.error;
+    cancel('Oops! There was an error.');
   }
 }
 

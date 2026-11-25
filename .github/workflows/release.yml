@@ -23,7 +23,6 @@ jobs:
           client-id: ${{ vars.RELEASEBOT_APP_CLIENT_ID }}
           private-key: ${{ secrets.RELEASEBOT_APP_PRIVATE_KEY }}
           permission-contents: write
-          permission-issues: write
           permission-pull-requests: write
       - name: Release Please
         id: release

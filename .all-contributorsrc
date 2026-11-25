@@ -447,7 +447,8 @@
         "test",
         "security",
         "bug",
-        "review"
+        "review",
+        "maintenance"
       ]
     },
     {

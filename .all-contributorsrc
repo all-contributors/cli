@@ -807,6 +807,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "tunnckocore",
+      "name": "Charlike Mike Reagent",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5038030?v=4",
+      "profile": "https://calldata.space",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

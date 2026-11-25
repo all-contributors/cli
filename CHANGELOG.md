@@ -1,5 +1,17 @@
 # Changelog
 
+## [7.1.0](https://github.com/all-contributors/cli/compare/v7.0.4...v7.1.0) (2026-11-25)
+
+
+### 🚀 Features
+
+* rename the package to `@all-contributors/cli` ([#703](https://github.com/all-contributors/cli/issues/703)) ([0055e94](https://github.com/all-contributors/cli/commit/0055e94f2dbb39520d6624c2b97de8fde4dd7455))
+
+
+### 🩹 Bug Fixes
+
+* ensure `--version` prints the CLI's own version ([#698](https://github.com/all-contributors/cli/issues/698)) ([3808ad4](https://github.com/all-contributors/cli/commit/3808ad40f7cfd54f1fb600c30354b4f85845cd42))
+
 ## [7.0.4](https://github.com/all-contributors/cli/compare/v7.0.3...v7.0.4) (2026-11-25)
 
 

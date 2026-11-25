@@ -10,7 +10,7 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 > [!IMPORTANT]
-> This package has been renamed to @all-contributors/cli. Please replace your current usage with the new package to continue receiving updates.
+> This package has been renamed to @all-contributors/cli. Please update your current workflow to use the new package to continue receiving updates.
 
 <h1 align="center">
   all-contributors-cli

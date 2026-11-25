@@ -807,6 +807,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "jamesplease",
+      "name": "James Please",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2322305?v=4",
+      "profile": "https://github.com/jamesplease",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }

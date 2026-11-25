@@ -12,7 +12,7 @@ const absentConfigFileExpected = `Configuration file not found: ${absentFile}`;
 const incompleteConfigFilePath = './.all-contributorsrc';
 const NoOwnerConfigFile = {
   projectOwner: '',
-  projectName: 'all-contributors-cli',
+  projectName: 'cli',
   imageSize: 100,
   commit: false,
   contributorsPerLine: 6,
@@ -28,7 +28,7 @@ const NoNameConfigFile = {
 };
 const NoFilesConfigFile = {
   projectOwner: 'all-contributors',
-  projectName: 'all-contributors-cli',
+  projectName: 'cli',
   imageSize: 100,
   commit: false,
   contributorsPerLine: 6,
@@ -80,7 +80,7 @@ async function createConfigFile(content) {
 
 const MinimalConfigFile = {
   projectOwner: 'all-contributors',
-  projectName: 'all-contributors-cli',
+  projectName: 'cli',
   contributors: [],
 };
 

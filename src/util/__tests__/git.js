@@ -22,7 +22,7 @@ describe('getRepoInfo', () => {
 
   test('should parse GitHub SSH URLs correctly', async () => {
     const mockExecAsync = vi.fn().mockResolvedValue({
-      stdout: 'git@github.com:all-contributors/all-contributors-cli.git\n',
+      stdout: 'git@github.com:all-contributors/cli.git\n',
       stderr: '',
     });
 
@@ -32,13 +32,13 @@ describe('getRepoInfo', () => {
 
     expect(result).toEqual({
       projectOwner: 'all-contributors',
-      projectName: 'all-contributors-cli',
+      projectName: 'cli',
     });
   });
 
   test('should parse GitHub HTTPS URLs correctly', async () => {
     const mockExecAsync = vi.fn().mockResolvedValue({
-      stdout: 'https://github.com/all-contributors/all-contributors-cli.git\n',
+      stdout: 'https://github.com/all-contributors/cli.git\n',
       stderr: '',
     });
 
@@ -48,7 +48,7 @@ describe('getRepoInfo', () => {
 
     expect(result).toEqual({
       projectOwner: 'all-contributors',
-      projectName: 'all-contributors-cli',
+      projectName: 'cli',
     });
   });
 

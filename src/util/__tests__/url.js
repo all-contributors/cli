@@ -16,9 +16,7 @@ test(`Result of url validation should be true`, () => {
 });
 
 test(`Result of url validation should be false when url uses wrong protocol`, () => {
-  expect(isValidHttpUrl('git://git@github.com:all-contributors/all-contributors-cli.git')).toBe(
-    false,
-  );
+  expect(isValidHttpUrl('git://git@github.com:all-contributors/cli.git')).toBe(false);
 });
 
 test(`Result of url validation should be false when input isn't url`, () => {

@@ -34,6 +34,16 @@ it('--help does not create any files', async ({ tmpDir }) => {
   expect(await readdir(tmpDir)).toEqual([]);
 });
 
+it("--version prints the version from the CLI's own package.json", async ({
+  installedCli,
+  tmpDir,
+}) => {
+  const result = await runCli(['--version'], { cliPath: installedCli.path, cwd: tmpDir });
+
+  expect(result.code).toBe(0);
+  expect(result.stdout.trim()).toBe(installedCli.version);
+});
+
 it('generate adds contributors to the README', async ({ project }) => {
   const result = await runCli(['generate'], { cwd: project });
   const newReadme = await readFile(path.join(project, 'README.md'), 'utf8');

@@ -1,5 +1,5 @@
 // Fixtures for the CLI E2E tests.
-import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdir, mkdtemp, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 
@@ -40,6 +40,30 @@ export const it = test.extend({
     const dir = await mkdtemp(path.join(tmpdir(), 'ac-e2e-'));
     await use(dir);
     await rm(dir, { recursive: true, force: true });
+  },
+
+  installedCli: async ({ tmpDir }, use) => {
+    const srcPath = path.join(import.meta.dirname, '../../src');
+    const nodeModulesPath = path.join(import.meta.dirname, '../../node_modules');
+    const cliCopyPath = path.join(tmpDir, 'cli');
+
+    const version = '1.2.3-e2e';
+
+    // `yargs` looks for `package.json` from where it's installed, not from the
+    // current directory. In this repo it finds the CLI's own one, so tests can't
+    // tell where the version comes from. This copy has a different one. It
+    // also can't be a symlink, as Node would resolve it back to this repo
+    await cp(srcPath, path.join(cliCopyPath, 'src'), { recursive: true });
+    await writeFile(
+      path.join(cliCopyPath, 'package.json'),
+      JSON.stringify({ type: 'module', version }),
+    );
+    await symlink(nodeModulesPath, path.join(cliCopyPath, 'node_modules'), 'junction');
+
+    await use({
+      path: path.join(cliCopyPath, 'src', 'cli.js'),
+      version,
+    });
   },
 
   project: async ({ tmpDir }, use) => {

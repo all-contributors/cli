@@ -13,7 +13,7 @@ process.stdout.write(
   YoctoColors.yellow(
     `${YoctoColors.bold(
       'WARNING',
-    )} :: Using the all-contributors node-api comes with zero guarantees of stability and may contain breaking changes without warning\n`,
+    )} :: This package has been renamed to @all-contributors/cli. Please update your workflow to use the new package to continue receiving updates.\n`,
   ),
 );
 

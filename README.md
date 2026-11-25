@@ -9,10 +9,8 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-> [There is now a GitHub Bot](https://github.com/all-contributors/all-contributors-bot)
-> for automating the maintenance of your contributors table ✨<br />Say goodbye
-> to command line tool dependencies and hello to the
-> [@all-contributors bot 🤖](https://github.com/all-contributors/all-contributors-bot)
+> [!IMPORTANT]
+> This package has been renamed to @all-contributors/cli. Please update your current workflow to use the new package to continue receiving updates.
 
 <h1 align="center">
   all-contributors-cli

@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.0.4](https://github.com/all-contributors/cli/compare/v7.0.3...v7.0.4) (2026-11-25)
+
+
+### 🩹 Bug Fixes
+
+* add warning messages about package name change ([#702](https://github.com/all-contributors/cli/issues/702)) ([702f701](https://github.com/all-contributors/cli/commit/702f70116bcfff1d2716036f5fefa97783ebab4d))
+
 ## [7.0.3](https://github.com/all-contributors/cli/compare/v7.0.2...v7.0.3) (2026-11-15)
 
 

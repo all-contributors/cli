@@ -1,5 +1,12 @@
 # Changelog
 
+## [7.2.0](https://github.com/all-contributors/cli/compare/v7.1.0...v7.2.0) (2026-11-28)
+
+
+### 🚀 Features
+
+* improve cli interface ([#684](https://github.com/all-contributors/cli/issues/684)) ([898346d](https://github.com/all-contributors/cli/commit/898346dc18d0fd40fc5269c36e8e2ba8c1138cd0)), closes [#612](https://github.com/all-contributors/cli/issues/612)
+
 ## [7.1.0](https://github.com/all-contributors/cli/compare/v7.0.4...v7.1.0) (2026-11-25)
 
 
